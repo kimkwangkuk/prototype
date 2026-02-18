@@ -45,42 +45,28 @@ export default function TimePopup({ visible, onClose }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
-  // 로컬 상태 - 체크 버튼 누를 때만 store에 반영
-  const [localTime, setLocalTime] = useState(() => timeStrToPicker(data.time));
-  const [localDur, setLocalDur] = useState(() => durationToPicker(data.duration));
-  const [initialTime, setInitialTime] = useState(() => timeStrToPicker(data.time));
-  const [initialDur, setInitialDur] = useState(() => durationToPicker(data.duration));
+  const [timeValue, setTimeValue] = useState(() => timeStrToPicker(data.time));
+  const [durValue, setDurValue] = useState(() => durationToPicker(data.duration));
 
+  // 팝업 열릴 때 store의 현재 값을 즉시 반영
   useEffect(() => {
     if (visible) {
-      const t = timeStrToPicker(data.time);
-      const d = durationToPicker(data.duration);
-      setLocalTime(t);
-      setLocalDur(d);
-      setInitialTime(t);
-      setInitialDur(d);
+      setTimeValue(timeStrToPicker(data.time));
+      setDurValue(durationToPicker(data.duration));
     }
   }, [visible]);
 
-  const hasChanges =
-    localTime.ampm !== initialTime.ampm ||
-    localTime.hour !== initialTime.hour ||
-    localTime.minute !== initialTime.minute ||
-    localDur.dHour !== initialDur.dHour ||
-    localDur.dMinute !== initialDur.dMinute;
-
   if (!visible) return null;
 
-  const handleConfirm = () => {
-    const total = pickerToDuration(localDur);
-    updateBottomSheetField('time', pickerToTimeStr(localTime));
-    updateBottomSheetField('duration', total > 0 ? total : null);
-    onClose();
+  const handleTimeChange = (val) => {
+    setTimeValue(val);
+    updateBottomSheetField('time', pickerToTimeStr(val));
   };
 
-  const handleCancel = () => {
-    // 로컬 변경사항 버리고 닫기
-    onClose();
+  const handleDurChange = (val) => {
+    setDurValue(val);
+    const total = pickerToDuration(val);
+    updateBottomSheetField('duration', total > 0 ? total : null);
   };
 
   const handleClearTime = () => {
@@ -91,27 +77,13 @@ export default function TimePopup({ visible, onClose }) {
 
   return (
     <>
-      <div className="popup-overlay" onClick={handleCancel}></div>
+      <div className="popup-overlay" onClick={onClose}></div>
       <div className="context-popup" data-popup="time">
-        <div className="popup-header">
-          <button className="popup-icon-btn" onClick={handleCancel}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18"/>
-              <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
-          <h4 className="popup-title">시간 설정</h4>
-          <button className="popup-icon-btn popup-icon-btn--confirm" onClick={handleConfirm} disabled={!hasChanges}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-          </button>
-        </div>
         <div className="popup-content popup-content-row">
           <div className="time-popup-col">
             <div className="popup-col-label">시작 시간</div>
             <div className="drum-picker-wrapper">
-              <Picker value={localTime} onChange={setLocalTime} wheelMode="natural" height={180} itemHeight={44}>
+              <Picker value={timeValue} onChange={handleTimeChange} wheelMode="natural" height={180} itemHeight={44}>
                 <Picker.Column name="ampm">
                   {ampm.map(v => (
                     <Picker.Item key={v} value={v}>
@@ -140,7 +112,7 @@ export default function TimePopup({ visible, onClose }) {
           <div className="time-popup-col">
             <div className="popup-col-label">소요 시간</div>
             <div className="drum-picker-wrapper">
-              <Picker value={localDur} onChange={setLocalDur} wheelMode="natural" height={180} itemHeight={44}>
+              <Picker value={durValue} onChange={handleDurChange} wheelMode="natural" height={180} itemHeight={44}>
                 <Picker.Column name="dHour">
                   {durationHours.map(v => (
                     <Picker.Item key={v} value={v}>
