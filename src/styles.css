@@ -1176,6 +1176,48 @@ textarea {
   height: 18px;
 }
 
+.popup-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fill-quaternary);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--label-secondary);
+  flex-shrink: 0;
+}
+
+.popup-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.popup-icon-btn--confirm {
+  background: var(--blue-500);
+  color: #fff;
+}
+
+.popup-footer {
+  padding: 8px 16px 12px;
+  border-top: 1px solid var(--border-quinary);
+  display: flex;
+  justify-content: center;
+}
+
+.popup-clear-btn {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-tertiary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-family: inherit;
+}
+
 .popup-content {
   padding: 12px 20px 20px;
   overflow-y: auto;

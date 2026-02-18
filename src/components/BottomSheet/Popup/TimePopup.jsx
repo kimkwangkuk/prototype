@@ -68,16 +68,31 @@ export default function TimePopup({ visible, onClose }) {
     if (total > 0) updateBottomSheetField('duration', total);
   };
 
+  const handleClearTime = () => {
+    updateBottomSheetField('time', '');
+    updateBottomSheetField('duration', null);
+    onClose();
+  };
+
+  const handleConfirm = () => {
+    onClose();
+  };
+
   return (
     <>
       <div className="popup-overlay" onClick={onClose}></div>
       <div className="context-popup" data-popup="time">
         <div className="popup-header">
-          <h4 className="popup-title">시간 설정</h4>
-          <button className="popup-close" onClick={onClose}>
+          <button className="popup-icon-btn" onClick={onClose}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="18" y1="6" x2="6" y2="18"/>
               <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+          <h4 className="popup-title">시간 설정</h4>
+          <button className="popup-icon-btn popup-icon-btn--confirm" onClick={handleConfirm}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="20 6 9 17 4 12"/>
             </svg>
           </button>
         </div>
@@ -132,6 +147,11 @@ export default function TimePopup({ visible, onClose }) {
               </Picker>
             </div>
           </div>
+        </div>
+        <div className="popup-footer">
+          <button className="popup-clear-btn" onClick={handleClearTime}>
+            시간 설정 없음
+          </button>
         </div>
       </div>
     </>
