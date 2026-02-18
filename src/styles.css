@@ -1247,6 +1247,47 @@ textarea {
   letter-spacing: -0.03px;
 }
 
+/* ─── Time Popup 좌우 레이아웃 ─── */
+.context-popup[data-popup="time"] {
+  max-height: 360px;
+}
+
+.popup-content-row {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  overflow: hidden;
+}
+
+.time-popup-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-col-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--label-tertiary);
+  text-align: center;
+  padding: 12px 0 6px;
+  letter-spacing: -0.03px;
+}
+
+.time-popup-divider {
+  width: 1px;
+  background: var(--border-quinary);
+  margin: 12px 0;
+  flex-shrink: 0;
+}
+
+.time-popup-duration-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 4px 8px;
+}
+
 /* ─── Drum Picker ─── */
 .drum-picker-wrapper {
   position: relative;

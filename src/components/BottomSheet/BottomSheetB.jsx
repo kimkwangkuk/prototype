@@ -33,7 +33,17 @@ export default function BottomSheetB() {
   const categoryName = selectedSubject?.name || '과목';
   const categoryColor = selectedSubject?.color || null;
 
-  const timeText = data.time ? formatTime(data.time) : '시작 시간';
+  const timeText = (() => {
+    if (!data.time) return '시작 시간';
+    const start = formatTime(data.time);
+    if (!data.duration) return start;
+    const [h, m] = data.time.split(':').map(Number);
+    const totalMins = h * 60 + m + data.duration;
+    const endH = Math.floor(totalMins / 60) % 24;
+    const endM = totalMins % 60;
+    const endStr = `${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')}`;
+    return `${start} ~ ${formatTime(endStr)}`;
+  })();
 
   const isSaveDisabled = !textInput.trim();
 

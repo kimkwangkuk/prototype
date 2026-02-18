@@ -69,59 +69,67 @@ export default function TimePopup({ visible, onClose }) {
             </svg>
           </button>
         </div>
-        <div className="popup-content">
-          <div className="drum-picker-wrapper">
-            <Picker
-              value={pickerValue}
-              onChange={handlePickerChange}
-              wheelMode="natural"
-              height={180}
-              itemHeight={44}
-            >
-              <Picker.Column name="ampm">
-                {ampm.map(v => (
-                  <Picker.Item key={v} value={v}>
-                    {({ selected }) => (
-                      <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
-                    )}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-              <Picker.Column name="hour">
-                {hours.map(v => (
-                  <Picker.Item key={v} value={v}>
-                    {({ selected }) => (
-                      <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
-                    )}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-              <Picker.Column name="minute">
-                {minutes.map(v => (
-                  <Picker.Item key={v} value={v}>
-                    {({ selected }) => (
-                      <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
-                    )}
-                  </Picker.Item>
-                ))}
-              </Picker.Column>
-            </Picker>
+        <div className="popup-content popup-content-row">
+          <div className="time-popup-col">
+            <div className="popup-col-label">시작 시간</div>
+            <div className="drum-picker-wrapper">
+              <Picker
+                value={pickerValue}
+                onChange={handlePickerChange}
+                wheelMode="natural"
+                height={180}
+                itemHeight={44}
+              >
+                <Picker.Column name="ampm">
+                  {ampm.map(v => (
+                    <Picker.Item key={v} value={v}>
+                      {({ selected }) => (
+                        <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
+                      )}
+                    </Picker.Item>
+                  ))}
+                </Picker.Column>
+                <Picker.Column name="hour">
+                  {hours.map(v => (
+                    <Picker.Item key={v} value={v}>
+                      {({ selected }) => (
+                        <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
+                      )}
+                    </Picker.Item>
+                  ))}
+                </Picker.Column>
+                <Picker.Column name="minute">
+                  {minutes.map(v => (
+                    <Picker.Item key={v} value={v}>
+                      {({ selected }) => (
+                        <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
+                      )}
+                    </Picker.Item>
+                  ))}
+                </Picker.Column>
+              </Picker>
+            </div>
           </div>
-          <div className="popup-section-label">지속 시간</div>
-          {durations.map(d => (
-            <button
-              key={d.value}
-              className="popup-item"
-              onClick={() => handleDurationSelect(d.value)}
-            >
-              <span>{d.label}</span>
-              {data.duration === d.value && (
-                <svg className="popup-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              )}
-            </button>
-          ))}
+          <div className="time-popup-divider" />
+          <div className="time-popup-col">
+            <div className="popup-col-label">소요 시간</div>
+            <div className="time-popup-duration-list">
+              {durations.map(d => (
+                <button
+                  key={d.value}
+                  className="popup-item"
+                  onClick={() => handleDurationSelect(d.value)}
+                >
+                  <span>{d.label}</span>
+                  {data.duration === d.value && (
+                    <svg className="popup-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>
