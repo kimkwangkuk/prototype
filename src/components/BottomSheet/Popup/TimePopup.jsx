@@ -9,7 +9,7 @@ const durationHours = ['0','1','2','3','4'];
 const durationMins = ['00','15','30','45'];
 
 function timeStrToPicker(timeStr) {
-  if (!timeStr) return { ampm: '오전', hour: '8', minute: '00' };
+  if (!timeStr || timeStr === 'none') return { ampm: '오전', hour: '8', minute: '00' };
   const [h, m] = timeStr.split(':').map(Number);
   const isPM = h >= 12;
   const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
@@ -45,45 +45,43 @@ export default function TimePopup({ visible, onClose }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
-  const [timeValue, setTimeValue] = useState(() => timeStrToPicker(data.time));
-  const [durValue, setDurValue] = useState(() => durationToPicker(data.duration));
+  // 로컬 상태 - 체크 버튼 누를 때만 store에 반영
+  const [localTime, setLocalTime] = useState(() => timeStrToPicker(data.time));
+  const [localDur, setLocalDur] = useState(() => durationToPicker(data.duration));
 
   useEffect(() => {
     if (visible) {
-      setTimeValue(timeStrToPicker(data.time));
-      setDurValue(durationToPicker(data.duration));
+      setLocalTime(timeStrToPicker(data.time));
+      setLocalDur(durationToPicker(data.duration));
     }
   }, [visible]);
 
   if (!visible) return null;
 
-  const handleTimeChange = (newValue) => {
-    setTimeValue(newValue);
-    updateBottomSheetField('time', pickerToTimeStr(newValue));
-  };
-
-  const handleDurChange = (newValue) => {
-    setDurValue(newValue);
-    const total = pickerToDuration(newValue);
-    if (total > 0) updateBottomSheetField('duration', total);
-  };
-
-  const handleClearTime = () => {
-    updateBottomSheetField('time', '');
-    updateBottomSheetField('duration', null);
+  const handleConfirm = () => {
+    const total = pickerToDuration(localDur);
+    updateBottomSheetField('time', pickerToTimeStr(localTime));
+    updateBottomSheetField('duration', total > 0 ? total : null);
     onClose();
   };
 
-  const handleConfirm = () => {
+  const handleCancel = () => {
+    // 로컬 변경사항 버리고 닫기
+    onClose();
+  };
+
+  const handleClearTime = () => {
+    updateBottomSheetField('time', 'none');
+    updateBottomSheetField('duration', null);
     onClose();
   };
 
   return (
     <>
-      <div className="popup-overlay" onClick={onClose}></div>
+      <div className="popup-overlay" onClick={handleCancel}></div>
       <div className="context-popup" data-popup="time">
         <div className="popup-header">
-          <button className="popup-icon-btn" onClick={onClose}>
+          <button className="popup-icon-btn" onClick={handleCancel}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="18" y1="6" x2="6" y2="18"/>
               <line x1="6" y1="6" x2="18" y2="18"/>
@@ -100,7 +98,7 @@ export default function TimePopup({ visible, onClose }) {
           <div className="time-popup-col">
             <div className="popup-col-label">시작 시간</div>
             <div className="drum-picker-wrapper">
-              <Picker value={timeValue} onChange={handleTimeChange} wheelMode="natural" height={180} itemHeight={44}>
+              <Picker value={localTime} onChange={setLocalTime} wheelMode="natural" height={180} itemHeight={44}>
                 <Picker.Column name="ampm">
                   {ampm.map(v => (
                     <Picker.Item key={v} value={v}>
@@ -129,7 +127,7 @@ export default function TimePopup({ visible, onClose }) {
           <div className="time-popup-col">
             <div className="popup-col-label">소요 시간</div>
             <div className="drum-picker-wrapper">
-              <Picker value={durValue} onChange={handleDurChange} wheelMode="natural" height={180} itemHeight={44}>
+              <Picker value={localDur} onChange={setLocalDur} wheelMode="natural" height={180} itemHeight={44}>
                 <Picker.Column name="dHour">
                   {durationHours.map(v => (
                     <Picker.Item key={v} value={v}>

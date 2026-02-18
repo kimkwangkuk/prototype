@@ -34,7 +34,8 @@ export default function BottomSheetB() {
   const categoryColor = selectedSubject?.color || null;
 
   const timeText = (() => {
-    if (!data.time) return '시작 시간';
+    if (data.time === 'none') return '시간 없음';
+    if (!data.time) return '시간';
     const start = formatTime(data.time);
     if (!data.duration) return start;
     const [h, m] = data.time.split(':').map(Number);
