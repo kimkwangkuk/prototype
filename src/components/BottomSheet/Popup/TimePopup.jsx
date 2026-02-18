@@ -48,13 +48,26 @@ export default function TimePopup({ visible, onClose }) {
   // 로컬 상태 - 체크 버튼 누를 때만 store에 반영
   const [localTime, setLocalTime] = useState(() => timeStrToPicker(data.time));
   const [localDur, setLocalDur] = useState(() => durationToPicker(data.duration));
+  const [initialTime, setInitialTime] = useState(() => timeStrToPicker(data.time));
+  const [initialDur, setInitialDur] = useState(() => durationToPicker(data.duration));
 
   useEffect(() => {
     if (visible) {
-      setLocalTime(timeStrToPicker(data.time));
-      setLocalDur(durationToPicker(data.duration));
+      const t = timeStrToPicker(data.time);
+      const d = durationToPicker(data.duration);
+      setLocalTime(t);
+      setLocalDur(d);
+      setInitialTime(t);
+      setInitialDur(d);
     }
   }, [visible]);
+
+  const hasChanges =
+    localTime.ampm !== initialTime.ampm ||
+    localTime.hour !== initialTime.hour ||
+    localTime.minute !== initialTime.minute ||
+    localDur.dHour !== initialDur.dHour ||
+    localDur.dMinute !== initialDur.dMinute;
 
   if (!visible) return null;
 
@@ -88,7 +101,7 @@ export default function TimePopup({ visible, onClose }) {
             </svg>
           </button>
           <h4 className="popup-title">시간 설정</h4>
-          <button className="popup-icon-btn popup-icon-btn--confirm" onClick={handleConfirm}>
+          <button className="popup-icon-btn popup-icon-btn--confirm" onClick={handleConfirm} disabled={!hasChanges}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <polyline points="20 6 9 17 4 12"/>
             </svg>

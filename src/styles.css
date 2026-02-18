@@ -1200,6 +1200,12 @@ textarea {
   color: #fff;
 }
 
+.popup-icon-btn--confirm:disabled {
+  background: var(--fill-quaternary);
+  color: var(--label-quaternary);
+  cursor: default;
+}
+
 .popup-footer {
   padding: 8px 16px 12px;
   border-top: 1px solid var(--border-quinary);
