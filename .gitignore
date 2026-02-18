@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Backup
+*.backup
+index.html.backup
+
+# Figma MCP (기존 프로젝트)
+figma-mcp/
+
+# Claude AI / MCP 로컬 설정
+.claude/
+.mcp.json
