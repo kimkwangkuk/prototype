@@ -10,6 +10,7 @@ export default function BottomSheet() {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const closeBottomSheet = useTodoStore(state => state.closeBottomSheet);
   const [animate, setAnimate] = useState(false);
+  const [activePopup, setActivePopup] = useState(null);
 
   useEffect(() => {
     if (visible) {
@@ -38,10 +39,19 @@ export default function BottomSheet() {
     }
   }, [visible, editingTodoId, mode]);
 
+  // 바텀시트가 닫힐 때 팝업 상태도 초기화
+  useEffect(() => {
+    if (!visible) setActivePopup(null);
+  }, [visible]);
+
   if (!visible) return null;
 
   const handleOverlayClick = () => {
-    closeBottomSheet();
+    if (activePopup) {
+      setActivePopup(null);
+    } else {
+      closeBottomSheet();
+    }
   };
 
   return (
@@ -66,7 +76,7 @@ export default function BottomSheet() {
             <StatusSection />
           </div>
         ) : (
-          <BottomSheetB />
+          <BottomSheetB activePopup={activePopup} setActivePopup={setActivePopup} />
         )}
       </div>
     </>

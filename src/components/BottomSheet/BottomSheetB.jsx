@@ -7,14 +7,13 @@ import { CornerDownLeft, Clock, Pencil } from 'lucide-react';
 import CategoryPopup from './Popup/CategoryPopup';
 import TimePopup from './Popup/TimePopup';
 
-export default function BottomSheetB() {
+export default function BottomSheetB({ activePopup, setActivePopup }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const originalData = useTodoStore(state => state.originalBottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveBottomSheet = useTodoStore(state => state.saveBottomSheet);
 
   const [textInput, setTextInput] = useState(data.text);
-  const [activePopup, setActivePopup] = useState(null);
 
   // Debounce: 300ms 후 store 업데이트
   const debouncedText = useDebounce(textInput, 300);
