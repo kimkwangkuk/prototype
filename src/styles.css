@@ -349,6 +349,13 @@ textarea {
   align-items: center;
   gap: 8px;
   padding: 4px 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.todo-item.mounted {
+  opacity: 1;
+  transform: translateY(0);
 }
 .todo-item.editing {
   background: rgba(0,0,0,0.02);
@@ -1058,6 +1065,11 @@ textarea {
   flex-shrink: 0;
 }
 
+.toolbar-btn-icon {
+  flex-shrink: 0;
+  color: var(--label-tertiary);
+}
+
 .toolbar-btn svg {
   width: 14px;
   height: 14px;
@@ -1108,12 +1120,6 @@ textarea {
   opacity: 1;
 }
 
-.toolbar-save-btn.with-text {
-  width: auto;
-  min-width: 64px;
-  padding: 0 16px;
-  border-radius: 100px;
-}
 
 /* ─── Context Popup ─── */
 .popup-overlay {
@@ -1231,4 +1237,12 @@ textarea {
   font-family: inherit;
   outline: none;
   text-align: center;
+}
+
+.popup-section-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--label-tertiary);
+  margin: 16px 12px 4px;
+  letter-spacing: -0.03px;
 }

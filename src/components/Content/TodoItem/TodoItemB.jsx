@@ -7,6 +7,12 @@ export default function TodoItemB({ todo, subjectColor }) {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const [pulseAnimation, setPulseAnimation] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMounted(true), 10);
+    return () => clearTimeout(t);
+  }, []);
 
   const isEditing = editingTodoId === todo.id;
   const isCompleted = todo.status === 'done' || todo.status === 'skip' || todo.status === 'cancel';
@@ -44,7 +50,7 @@ export default function TodoItemB({ todo, subjectColor }) {
 
   return (
     <div
-      className={`todo-item${isEditing ? ' editing' : ''}${pulseAnimation ? ' pulse-in' : ''}`}
+      className={`todo-item${isEditing ? ' editing' : ''}${pulseAnimation ? ' pulse-in' : ''}${mounted ? ' mounted' : ''}`}
       data-todo-id={todo.id}
     >
       <div className="todo-checkbox" onClick={handleCheckboxClick}>
