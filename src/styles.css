@@ -1246,3 +1246,46 @@ textarea {
   margin: 16px 12px 4px;
   letter-spacing: -0.03px;
 }
+
+/* ─── Drum Picker ─── */
+.drum-picker-wrapper {
+  position: relative;
+  padding: 0 4px;
+}
+
+.drum-picker-wrapper::before,
+.drum-picker-wrapper::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 60px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.drum-picker-wrapper::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
+}
+
+.drum-picker-wrapper::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
+}
+
+.drum-item {
+  display: block;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--label-quaternary);
+  text-align: center;
+  line-height: 44px;
+  transition: color 0.15s, font-weight 0.15s;
+}
+
+.drum-item.selected {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--label-primary);
+}

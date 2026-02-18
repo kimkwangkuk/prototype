@@ -1,4 +1,10 @@
+import { useState, useEffect } from 'react';
+import Picker from 'react-mobile-picker';
 import useTodoStore from '../../../store/useTodoStore';
+
+const hours = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+const minutes = ['00','05','10','15','20','25','30','35','40','45','50','55'];
+const ampm = ['오전','오후'];
 
 const durations = [
   { value: 30, label: '30분' },
@@ -7,14 +13,42 @@ const durations = [
   { value: 120, label: '2시간' },
 ];
 
+function timeStrToPicker(timeStr) {
+  if (!timeStr) return { ampm: '오전', hour: '8', minute: '00' };
+  const [h, m] = timeStr.split(':').map(Number);
+  const isPM = h >= 12;
+  const hour12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  const minStr = String(m).padStart(2, '0');
+  const snapMin = minutes.reduce((prev, cur) =>
+    Math.abs(Number(cur) - m) < Math.abs(Number(prev) - m) ? cur : prev
+  );
+  return { ampm: isPM ? '오후' : '오전', hour: String(hour12), minute: snapMin };
+}
+
+function pickerToTimeStr({ ampm: ap, hour, minute }) {
+  let h = Number(hour);
+  if (ap === '오전' && h === 12) h = 0;
+  if (ap === '오후' && h !== 12) h += 12;
+  return `${String(h).padStart(2, '0')}:${minute}`;
+}
+
 export default function TimePopup({ visible, onClose }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
+  const [pickerValue, setPickerValue] = useState(() => timeStrToPicker(data.time));
+
+  useEffect(() => {
+    if (visible) {
+      setPickerValue(timeStrToPicker(data.time));
+    }
+  }, [visible]);
+
   if (!visible) return null;
 
-  const handleTimeChange = (e) => {
-    updateBottomSheetField('time', e.target.value);
+  const handlePickerChange = (newValue) => {
+    setPickerValue(newValue);
+    updateBottomSheetField('time', pickerToTimeStr(newValue));
   };
 
   const handleDurationSelect = (duration) => {
@@ -36,13 +70,43 @@ export default function TimePopup({ visible, onClose }) {
           </button>
         </div>
         <div className="popup-content">
-          <input
-            type="time"
-            className="popup-time-input"
-            value={data.time || ''}
-            onChange={handleTimeChange}
-            autoFocus
-          />
+          <div className="drum-picker-wrapper">
+            <Picker
+              value={pickerValue}
+              onChange={handlePickerChange}
+              wheelMode="natural"
+              height={180}
+              itemHeight={44}
+            >
+              <Picker.Column name="ampm">
+                {ampm.map(v => (
+                  <Picker.Item key={v} value={v}>
+                    {({ selected }) => (
+                      <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
+                    )}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+              <Picker.Column name="hour">
+                {hours.map(v => (
+                  <Picker.Item key={v} value={v}>
+                    {({ selected }) => (
+                      <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
+                    )}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+              <Picker.Column name="minute">
+                {minutes.map(v => (
+                  <Picker.Item key={v} value={v}>
+                    {({ selected }) => (
+                      <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}</span>
+                    )}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+            </Picker>
+          </div>
           <div className="popup-section-label">지속 시간</div>
           {durations.map(d => (
             <button
