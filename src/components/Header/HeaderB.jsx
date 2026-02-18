@@ -6,11 +6,8 @@ import WeekDayBar from './WeekDayBar';
 
 export default function HeaderB() {
   const selectedDate = useTodoStore(state => state.selectedDate);
-  const currentVariant = useTodoStore(state => state.currentVariant);
   const goToday = useTodoStore(state => state.goToday);
-  const setVariant = useTodoStore(state => state.setVariant);
   const [showGoToday, setShowGoToday] = useState(false);
-  const [showVariantMenu, setShowVariantMenu] = useState(false);
 
   const d = new Date(selectedDate + 'T00:00:00');
   const displayDate = formatDisplayDate(selectedDate);
@@ -38,49 +35,13 @@ export default function HeaderB() {
             )}
           </div>
           <div className="toolbar-right">
-            <button className="btn-icon" aria-label="메뉴" onClick={() => setShowVariantMenu(!showVariantMenu)}>
+            <button className="btn-icon" aria-label="메뉴">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <line x1="4" y1="5" x2="20" y2="5"/>
                 <line x1="4" y1="12" x2="20" y2="12"/>
                 <line x1="4" y1="19" x2="20" y2="19"/>
               </svg>
             </button>
-            {showVariantMenu && (
-              <>
-                <div className="variant-menu-overlay" onClick={() => setShowVariantMenu(false)}></div>
-                <div className="variant-menu">
-                  <div className="variant-menu-header">UI 타입 선택</div>
-                  <button
-                    className={`variant-menu-item${currentVariant === 'a' ? ' active' : ''}`}
-                    onClick={() => {
-                      setVariant('a');
-                      setShowVariantMenu(false);
-                    }}
-                  >
-                    <span>A 타입</span>
-                    {currentVariant === 'a' && (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
-                    )}
-                  </button>
-                  <button
-                    className={`variant-menu-item${currentVariant === 'b' ? ' active' : ''}`}
-                    onClick={() => {
-                      setVariant('b');
-                      setShowVariantMenu(false);
-                    }}
-                  >
-                    <span>B 타입</span>
-                    {currentVariant === 'b' && (
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              </>
-            )}
           </div>
         </div>
         <WeekDayBar />

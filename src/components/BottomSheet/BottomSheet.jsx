@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import useTodoStore from '../../store/useTodoStore';
-import BottomSheetA from './BottomSheetA';
 import BottomSheetB from './BottomSheetB';
 import StatusSection from './StatusSection';
 
@@ -9,7 +8,6 @@ export default function BottomSheet() {
   const mode = useTodoStore(state => state.bottomSheetMode);
   const data = useTodoStore(state => state.bottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
-  const currentVariant = useTodoStore(state => state.currentVariant);
   const closeBottomSheet = useTodoStore(state => state.closeBottomSheet);
   const [animate, setAnimate] = useState(false);
 
@@ -67,8 +65,6 @@ export default function BottomSheet() {
             </div>
             <StatusSection />
           </div>
-        ) : currentVariant === 'a' ? (
-          <BottomSheetA />
         ) : (
           <BottomSheetB />
         )}
