@@ -56,6 +56,20 @@ export default function Tabbar() {
         <div className="tabbar-view-area">
               <div className={`view-speed-dial${viewMenuOpen ? ' open' : ''}`}>
               <button
+                className={`view-dial-btn${currentView === 'month' ? ' active' : ''}`}
+                onClick={() => handleViewSelect('month')}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2.5"/>
+                  <line x1="3" y1="8.5" x2="21" y2="8.5"/>
+                  <line x1="9" y1="8.5" x2="9" y2="21"/>
+                  <line x1="15" y1="8.5" x2="15" y2="21"/>
+                  <line x1="3" y1="13.5" x2="21" y2="13.5"/>
+                  <line x1="3" y1="18.5" x2="21" y2="18.5"/>
+                </svg>
+                <span>월</span>
+              </button>
+              <button
                 className={`view-dial-btn${currentView === 'week' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('week')}
               >
@@ -87,6 +101,18 @@ export default function Tabbar() {
                 <line x1="5" y1="5" x2="19" y2="19"/>
                 <line x1="19" y1="5" x2="5" y2="19"/>
               </svg>
+            ) : currentView === 'month' ? (
+              <>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2.5"/>
+                  <line x1="3" y1="8.5" x2="21" y2="8.5"/>
+                  <line x1="9" y1="8.5" x2="9" y2="21"/>
+                  <line x1="15" y1="8.5" x2="15" y2="21"/>
+                  <line x1="3" y1="13.5" x2="21" y2="13.5"/>
+                  <line x1="3" y1="18.5" x2="21" y2="18.5"/>
+                </svg>
+                <span className="tabbar-add-label">월</span>
+              </>
             ) : currentView === 'week' ? (
               <>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -2,6 +2,7 @@ import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import SubjectSection from './SubjectSection';
 import WeeklyContent from './WeeklyContent';
+import MonthlyContent from './MonthlyContent';
 
 export default function Content() {
   const todos = useTodoStore(state => state.todos);
@@ -10,6 +11,10 @@ export default function Content() {
 
   if (currentView === 'week') {
     return <WeeklyContent />;
+  }
+
+  if (currentView === 'month') {
+    return <MonthlyContent />;
   }
 
   const list = todos[selectedDate] || [];
