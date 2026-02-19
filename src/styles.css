@@ -631,6 +631,8 @@ textarea {
   border: none;
   background: transparent;
   display: flex;
+  flex-direction: column;
+  gap: 2px;
   align-items: center;
   justify-content: center;
 }
@@ -644,9 +646,17 @@ textarea {
   border-radius: 70px;
 }
 .tabbar-add svg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   color: var(--label-primary);
+  position: relative;
+}
+.tabbar-add-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--label-primary);
+  line-height: 1.4;
+  letter-spacing: -0.03px;
   position: relative;
 }
 .tabbar-indicator {

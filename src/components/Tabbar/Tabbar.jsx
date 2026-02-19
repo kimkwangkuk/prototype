@@ -60,25 +60,20 @@ export default function Tabbar() {
                 className={`view-dial-btn${currentView === 'week' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('week')}
               >
-                {/* 주간뷰 아이콘: 헤더+격자 테이블 */}
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="1.67" y="2.08" width="16.67" height="15.83" rx="0.83"/>
-                  <line x1="1.67" y1="7.08" x2="18.33" y2="7.08"/>
-                  <line x1="10" y1="7.08" x2="10" y2="17.92"/>
-                  <line x1="1.67" y1="12.5" x2="18.33" y2="12.5"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725V13.9M2 7.725H12M22 7.725V13.9M22 7.725H12M22 13.9V17.5C22 19.7091 20.2091 21.5 18 21.5H12M22 13.9H2M2 13.9V17.5C2 19.7091 3.79086 21.5 6 21.5H12M12 7.725V21.5"/>
                 </svg>
-                <span>Week</span>
+                <span>주</span>
               </button>
               <button
                 className={`view-dial-btn${currentView === 'day' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('day')}
               >
-                {/* 일간뷰 아이콘: 두 개의 가로 직사각형 */}
-                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="1.67" y="1.67" width="16.67" height="6.67" rx="0.42"/>
-                  <rect x="1.67" y="11.67" width="16.67" height="6.67" rx="0.42"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2.5"/>
+                  <rect x="2" y="14" width="20" height="8" rx="2.5"/>
                 </svg>
-                <span>Day</span>
+                <span>일</span>
               </button>
             </div>
           )}
@@ -95,19 +90,20 @@ export default function Tabbar() {
                 <line x1="19" y1="5" x2="5" y2="19"/>
               </svg>
             ) : currentView === 'week' ? (
-              /* 주간뷰 활성 상태 아이콘 */
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="1.67" y="2.08" width="16.67" height="15.83" rx="0.83"/>
-                <line x1="1.67" y1="7.08" x2="18.33" y2="7.08"/>
-                <line x1="10" y1="7.08" x2="10" y2="17.92"/>
-                <line x1="1.67" y1="12.5" x2="18.33" y2="12.5"/>
-              </svg>
+              <>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725V13.9M2 7.725H12M22 7.725V13.9M22 7.725H12M22 13.9V17.5C22 19.7091 20.2091 21.5 18 21.5H12M22 13.9H2M2 13.9V17.5C2 19.7091 3.79086 21.5 6 21.5H12M12 7.725V21.5"/>
+                </svg>
+                <span className="tabbar-add-label">주</span>
+              </>
             ) : (
-              /* 일간뷰 활성 상태 아이콘 */
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="1.67" y="1.67" width="16.67" height="6.67" rx="0.42"/>
-                <rect x="1.67" y="11.67" width="16.67" height="6.67" rx="0.42"/>
-              </svg>
+              <>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2.5"/>
+                  <rect x="2" y="14" width="20" height="8" rx="2.5"/>
+                </svg>
+                <span className="tabbar-add-label">일</span>
+              </>
             )}
           </button>
         </div>
