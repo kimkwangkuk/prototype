@@ -143,7 +143,7 @@ export default function WeeklyContent() {
             const today = isToday(ds);
 
             return (
-              <div key={ds} className="week-day-col">
+              <div key={ds} className="week-day-col" onClick={() => handleAdd(ds)}>
                 <div className="week-day-col-header">
                   <span className={`week-day-col-num${today ? ' today' : ''}`}>
                     {date.getDate()}.
@@ -158,7 +158,7 @@ export default function WeeklyContent() {
                       <button
                         key={todo.id}
                         className="week-todo-item"
-                        onClick={() => handleTodoClick(todo)}
+                        onClick={(e) => { e.stopPropagation(); handleTodoClick(todo); }}
                       >
                         <div className="week-todo-check" onClick={(e) => handleCheckboxClick(e, todo)}>
                           <Checkbox status={todo.status} color={subj?.color} />
@@ -170,12 +170,6 @@ export default function WeeklyContent() {
                     );
                   })}
                 </div>
-                <button className="week-add-btn" onClick={() => handleAdd(ds)}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-                    <line x1="12" y1="5" x2="12" y2="19" />
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                  </svg>
-                </button>
               </div>
             );
           })}

@@ -1416,6 +1416,7 @@ textarea {
   flex: 1;
   padding: 0 12px 10px;
   display: flex;
+  cursor: pointer;
   flex-direction: column;
   border-left: 1px solid rgba(0,0,0,0.03);
 }
@@ -1593,25 +1594,6 @@ textarea {
   text-decoration: line-through;
 }
 
-.week-add-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  background: transparent;
-  border: 1.4px solid var(--border-secondary);
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 4px;
-  flex-shrink: 0;
-}
-
-.week-add-btn svg {
-  width: 11px;
-  height: 11px;
-  color: var(--label-tertiary);
-}
 
 /* ─── Tabbar View Switcher ─── */
 .tabbar-overlay {
