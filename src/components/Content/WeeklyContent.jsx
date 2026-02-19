@@ -7,8 +7,8 @@ import Checkbox from './TodoItem/Checkbox';
 const DAY_LABELS = ['월', '화', '수', '목', '금', '토', '일'];
 const PAIRS = [['nav', 0], [1, 2], [3, 4], [5, 6]];
 const SWIPE_THRESHOLD = 55;
-const SNAP_MS = 300;
-const NAV_ROW_H = 22; // .week-nav-row: 14px height + 4px*2 padding
+const FADE_OUT_MS = 160;
+const NAV_ROW_H = 22;
 
 function getMonthCalendar(baseDate) {
   const year = baseDate.getFullYear();
@@ -52,7 +52,6 @@ function WeekNavCell({ baseDate, currentWeekStrs, onWeekClick }) {
         ))}
       </div>
       <div className="week-nav-rows">
-        {/* Sliding week indicator */}
         {currentRowIdx >= 0 && (
           <div
             className="week-nav-indicator"
@@ -104,34 +103,18 @@ export default function WeeklyContent() {
   const weekDates = useMemo(() => getWeekDates(baseDate), [baseDate]);
   const currentWeekStrs = useMemo(() => new Set(weekDates.map(d => formatDate(d))), [weekDates]);
 
-  const prevBase = useMemo(() => { const d = new Date(baseDate); d.setDate(d.getDate() - 7); return d; }, [baseDate]);
-  const nextBase = useMemo(() => { const d = new Date(baseDate); d.setDate(d.getDate() + 7); return d; }, [baseDate]);
-  const prevWeekDates = useMemo(() => getWeekDates(prevBase), [prevBase]);
-  const nextWeekDates = useMemo(() => getWeekDates(nextBase), [nextBase]);
-  const prevWeekStrs = useMemo(() => new Set(prevWeekDates.map(d => formatDate(d))), [prevWeekDates]);
-  const nextWeekStrs = useMemo(() => new Set(nextWeekDates.map(d => formatDate(d))), [nextWeekDates]);
-
   const containerRef = useRef(null);
-  const [swipeX, setSwipeX] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
-
-  // Refs so touch handlers (created once) can access latest values
-  const containerWRef = useRef(window.innerWidth);
+  const [fading, setFading] = useState(false);
   const transitioningRef = useRef(false);
-  const nextWeekRef = useRef(nextWeekAction);
-  const prevWeekRef = useRef(prevWeekAction);
   const activeSwipeRef = useRef(false);
 
+  // Stable refs for store actions
+  const nextWeekRef = useRef(nextWeekAction);
+  const prevWeekRef = useRef(prevWeekAction);
   useEffect(() => { nextWeekRef.current = nextWeekAction; }, [nextWeekAction]);
   useEffect(() => { prevWeekRef.current = prevWeekAction; }, [prevWeekAction]);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      containerWRef.current = containerRef.current.offsetWidth;
-    }
-  }, []);
-
-  // Attach touch events once with passive:false on touchmove
+  // Touch swipe → fade transition
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -139,6 +122,22 @@ export default function WeeklyContent() {
     let startX = 0, startY = 0;
     let isHorizontal = null;
     let swipeDelta = 0;
+
+    const triggerChange = (direction) => {
+      if (transitioningRef.current) return;
+      transitioningRef.current = true;
+      setFading(true);
+      setTimeout(() => {
+        if (direction === 'next') nextWeekRef.current();
+        else prevWeekRef.current();
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setFading(false);
+            setTimeout(() => { transitioningRef.current = false; }, 280);
+          });
+        });
+      }, FADE_OUT_MS);
+    };
 
     const onStart = (e) => {
       if (transitioningRef.current) return;
@@ -165,46 +164,17 @@ export default function WeeklyContent() {
       e.preventDefault();
       activeSwipeRef.current = true;
       swipeDelta = dx;
-      setSwipeX(dx);
     };
 
     const onEnd = () => {
       if (!activeSwipeRef.current) return;
-
-      const W = containerWRef.current;
-      const dx = swipeDelta;
-
-      if (dx < -SWIPE_THRESHOLD) {
-        transitioningRef.current = true;
-        setTransitioning(true);
-        setSwipeX(-W);
-        setTimeout(() => {
-          nextWeekRef.current();
-          setSwipeX(0);
-          setTransitioning(false);
-          transitioningRef.current = false;
-        }, SNAP_MS);
-      } else if (dx > SWIPE_THRESHOLD) {
-        transitioningRef.current = true;
-        setTransitioning(true);
-        setSwipeX(W);
-        setTimeout(() => {
-          prevWeekRef.current();
-          setSwipeX(0);
-          setTransitioning(false);
-          transitioningRef.current = false;
-        }, SNAP_MS);
-      } else {
-        transitioningRef.current = true;
-        setTransitioning(true);
-        setSwipeX(0);
-        setTimeout(() => {
-          setTransitioning(false);
-          transitioningRef.current = false;
-        }, SNAP_MS);
-      }
-
       activeSwipeRef.current = false;
+
+      if (swipeDelta < -SWIPE_THRESHOLD) {
+        triggerChange('next');
+      } else if (swipeDelta > SWIPE_THRESHOLD) {
+        triggerChange('prev');
+      }
     };
 
     el.addEventListener('touchstart', onStart, { passive: true });
@@ -250,7 +220,7 @@ export default function WeeklyContent() {
     });
   };
 
-  const renderPanel = (panelDates, panelBase, panelWeekStrs) => (
+  const renderGrid = () => (
     <>
       {PAIRS.map(([leftIdx, rightIdx], rowIdx) => (
         <div key={rowIdx} className="week-row">
@@ -259,14 +229,14 @@ export default function WeeklyContent() {
               return (
                 <WeekNavCell
                   key="nav"
-                  baseDate={panelBase}
-                  currentWeekStrs={panelWeekStrs}
+                  baseDate={baseDate}
+                  currentWeekStrs={currentWeekStrs}
                   onWeekClick={setBaseDate}
                 />
               );
             }
 
-            const date = panelDates[idx];
+            const date = weekDates[idx];
             const ds = formatDate(date);
             const dayTodos = todos[ds] || [];
             const today = isToday(ds);
@@ -307,31 +277,19 @@ export default function WeeklyContent() {
     </>
   );
 
-  const W = containerWRef.current;
-  const trackStyle = {
-    display: 'flex',
-    flexDirection: 'row',
-    width: `${W * 3}px`,
-    transform: `translateX(${-W + swipeX}px)`,
-    transition: transitioning
-      ? `transform ${SNAP_MS}ms cubic-bezier(0.25, 0.46, 0.45, 0.94)`
-      : 'none',
-    willChange: 'transform',
-  };
-
-  const panelStyle = {
-    width: `${W}px`,
-    flexShrink: 0,
-    display: 'flex',
-    flexDirection: 'column',
-  };
-
   return (
-    <div className="weekly-content" ref={containerRef} style={{ overflow: 'hidden' }}>
-      <div style={trackStyle}>
-        <div style={panelStyle}>{renderPanel(prevWeekDates, prevBase, prevWeekStrs)}</div>
-        <div style={panelStyle}>{renderPanel(weekDates, baseDate, currentWeekStrs)}</div>
-        <div style={panelStyle}>{renderPanel(nextWeekDates, nextBase, nextWeekStrs)}</div>
+    <div className="weekly-content" ref={containerRef}>
+      <div
+        className="weekly-content-inner"
+        style={{
+          opacity: fading ? 0 : 1,
+          transition: fading
+            ? 'opacity 0.16s ease-out'
+            : 'opacity 0.26s ease-in',
+          pointerEvents: fading ? 'none' : 'auto',
+        }}
+      >
+        {renderGrid()}
       </div>
     </div>
   );

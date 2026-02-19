@@ -5,6 +5,7 @@ import { getTodoCount, hasCheckIcon } from '../../utils/todoUtils';
 import { useSwipe } from '../../hooks/useSwipe';
 
 const todayStr = formatDate(new Date());
+const INDICATOR_W = 14;
 
 export default function WeekDayBar() {
   const baseDate = useTodoStore(state => state.baseDate);
@@ -17,12 +18,27 @@ export default function WeekDayBar() {
   const dates = getWeekDates(baseDate);
   const swipeHandlers = useSwipe(nextWeek, prevWeek);
 
+  // 슬라이딩 인디케이터
+  const containerRef = useRef(null);
+  const dayRefs = useRef([]);
+  const [sliderLeft, setSliderLeft] = useState(null);
+
+  useEffect(() => {
+    const selectedIdx = dates.findIndex(d => formatDate(d) === selectedDate);
+    if (selectedIdx < 0) return;
+    const dayEl = dayRefs.current[selectedIdx];
+    const containerEl = containerRef.current;
+    if (!dayEl || !containerEl) return;
+    const dayRect = dayEl.getBoundingClientRect();
+    const containerRect = containerEl.getBoundingClientRect();
+    setSliderLeft(dayRect.left - containerRect.left + (dayRect.width - INDICATOR_W) / 2);
+  }, [selectedDate, baseDate]);
+
   // 전환 애니메이션: 이탈하는 숫자 보관
   const [exitingCounts, setExitingCounts] = useState({});
   const prevAllDoneRef = useRef({});
-  const prevCountRef = useRef({}); // allDone 직전 마지막 숫자
+  const prevCountRef = useRef({});
 
-  // 렌더 중 카운트 캡처 (0이 되기 전 값 보존)
   dates.forEach(d => {
     const ds = formatDate(d);
     const c = getTodoCount(todos, ds);
@@ -59,8 +75,8 @@ export default function WeekDayBar() {
   }, [todos]);
 
   return (
-    <div className="week-day-bar" {...swipeHandlers}>
-      {dates.map(d => {
+    <div className="week-day-bar" ref={containerRef} {...swipeHandlers}>
+      {dates.map((d, i) => {
         const ds = formatDate(d);
         const isToday = ds === todayStr;
         const isActive = ds === selectedDate;
@@ -77,6 +93,7 @@ export default function WeekDayBar() {
         return (
           <div
             key={ds}
+            ref={el => dayRefs.current[i] = el}
             className={`day-date${isActive ? ' selected' : ''}`}
             onClick={() => selectDate(ds)}
           >
@@ -84,13 +101,11 @@ export default function WeekDayBar() {
               {d.getDate()}.{getDayOfWeekKR(d)}
             </span>
             <div className={boardClass}>
-              {/* 이탈하는 숫자 (위로 사라짐) */}
               {exitingCount && !isToday && (
                 <span className="day-todo-board-count board-count-exit">
                   {exitingCount}
                 </span>
               )}
-              {/* 메인 콘텐츠 */}
               {allDone ? (
                 <svg
                   className={`day-todo-board-icon${!isToday ? ' board-icon-enter' : ''}`}
@@ -109,10 +124,16 @@ export default function WeekDayBar() {
                 <span className="day-todo-board-count">0</span>
               ) : null}
             </div>
-            <div className={`day-select-indicator${isActive ? ' visible' : ''}`} />
           </div>
         );
       })}
+
+      {sliderLeft !== null && (
+        <div
+          className="week-day-bar-slider"
+          style={{ left: sliderLeft, width: INDICATOR_W }}
+        />
+      )}
     </div>
   );
 }

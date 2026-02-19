@@ -299,19 +299,16 @@ textarea {
   75%  { transform: translateY(1px) scale(0.93); }
   100% { opacity: 1; transform: translateY(0) scale(1); }
 }
-/* 선택 indicator: 하단 라인 */
-.day-select-indicator {
-  width: 14px;
+/* 선택 indicator: 하단 슬라이딩 바 (단일 절대 위치) */
+.week-day-bar-slider {
+  position: absolute;
+  bottom: 0;
   height: 2.5px;
   border-radius: 2px;
   background: var(--fill-primary);
-  opacity: 0;
-  transform: scaleX(0);
-  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.day-select-indicator.visible {
-  opacity: 1;
-  transform: scaleX(1);
+  pointer-events: none;
+  transition: left 0.36s cubic-bezier(0.4, 0, 0.2, 1), width 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: left, width;
 }
 
 /* ─── Content ─── */
@@ -734,17 +731,18 @@ textarea {
 .tabbar-indicator {
   height: 34px;
   width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
   position: relative;
   pointer-events: auto;
 }
 .tabbar-indicator-bar {
-  position: absolute;
-  bottom: 8px;
+  width: 144px;
   height: 5px;
   background: var(--gray-black);
   border-radius: 100px;
-  transition: left 0.38s cubic-bezier(0.4, 0, 0.2, 1), width 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: left, width;
 }
 
 .btn-go-today.hidden {
