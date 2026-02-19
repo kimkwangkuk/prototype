@@ -60,12 +60,12 @@ export default function Tabbar() {
                 className={`view-dial-btn${currentView === 'week' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('week')}
               >
-                {/* 주간뷰 아이콘: 2열 그리드 */}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="7" height="7" rx="1"/>
-                  <rect x="14" y="3" width="7" height="7" rx="1"/>
-                  <rect x="3" y="14" width="7" height="7" rx="1"/>
-                  <rect x="14" y="14" width="7" height="7" rx="1"/>
+                {/* 주간뷰 아이콘: 헤더+격자 테이블 */}
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1.67" y="2.08" width="16.67" height="15.83" rx="0.83"/>
+                  <line x1="1.67" y1="7.08" x2="18.33" y2="7.08"/>
+                  <line x1="10" y1="7.08" x2="10" y2="17.92"/>
+                  <line x1="1.67" y1="12.5" x2="18.33" y2="12.5"/>
                 </svg>
                 <span>Week</span>
               </button>
@@ -73,11 +73,10 @@ export default function Tabbar() {
                 className={`view-dial-btn${currentView === 'day' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('day')}
               >
-                {/* 일간뷰 아이콘: 목록 */}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
-                  <line x1="4" y1="7" x2="20" y2="7"/>
-                  <line x1="4" y1="12" x2="20" y2="12"/>
-                  <line x1="4" y1="17" x2="20" y2="17"/>
+                {/* 일간뷰 아이콘: 두 개의 가로 직사각형 */}
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="1.67" y="1.67" width="16.67" height="6.67" rx="0.42"/>
+                  <rect x="1.67" y="11.67" width="16.67" height="6.67" rx="0.42"/>
                 </svg>
                 <span>Day</span>
               </button>
@@ -97,17 +96,17 @@ export default function Tabbar() {
               </svg>
             ) : currentView === 'week' ? (
               /* 주간뷰 활성 상태 아이콘 */
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" rx="1"/>
-                <rect x="14" y="3" width="7" height="7" rx="1"/>
-                <rect x="3" y="14" width="7" height="7" rx="1"/>
-                <rect x="14" y="14" width="7" height="7" rx="1"/>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="1.67" y="2.08" width="16.67" height="15.83" rx="0.83"/>
+                <line x1="1.67" y1="7.08" x2="18.33" y2="7.08"/>
+                <line x1="10" y1="7.08" x2="10" y2="17.92"/>
+                <line x1="1.67" y1="12.5" x2="18.33" y2="12.5"/>
               </svg>
             ) : (
               /* 일간뷰 활성 상태 아이콘 */
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <line x1="5" y1="12" x2="19" y2="12"/>
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="1.67" y="1.67" width="16.67" height="6.67" rx="0.42"/>
+                <rect x="1.67" y="11.67" width="16.67" height="6.67" rx="0.42"/>
               </svg>
             )}
           </button>
