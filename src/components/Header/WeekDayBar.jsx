@@ -5,7 +5,7 @@ import { getTodoCount, hasCheckIcon } from '../../utils/todoUtils';
 import { useSwipe } from '../../hooks/useSwipe';
 
 const todayStr = formatDate(new Date());
-const INDICATOR_W = 14;
+const INDICATOR_W = 26; // day-todo-board 너비와 동일
 
 export default function WeekDayBar() {
   const baseDate = useTodoStore(state => state.baseDate);
@@ -34,8 +34,9 @@ export default function WeekDayBar() {
     setSliderLeft(dayRect.left - containerRect.left + (dayRect.width - INDICATOR_W) / 2);
   }, [selectedDate, baseDate]);
 
-  // 전환 애니메이션: 이탈하는 숫자 보관
+  // 전환 애니메이션: 이탈하는 숫자 보관 + allDone 진입 추적
   const [exitingCounts, setExitingCounts] = useState({});
+  const [enteringDates, setEnteringDates] = useState(new Set());
   const prevAllDoneRef = useRef({});
   const prevCountRef = useRef({});
 
@@ -47,31 +48,45 @@ export default function WeekDayBar() {
 
   useEffect(() => {
     const newExiting = {};
-    let hasNew = false;
+    const newEntering = [];
 
     dates.forEach(d => {
       const ds = formatDate(d);
       const wasAllDone = prevAllDoneRef.current[ds] ?? false;
       const isNowAllDone = hasCheckIcon(todos, ds);
 
-      if (!wasAllDone && isNowAllDone && prevCountRef.current[ds]) {
-        newExiting[ds] = prevCountRef.current[ds];
-        hasNew = true;
+      if (!wasAllDone && isNowAllDone) {
+        if (prevCountRef.current[ds]) newExiting[ds] = prevCountRef.current[ds];
+        newEntering.push(ds);
       }
       prevAllDoneRef.current[ds] = isNowAllDone;
     });
 
-    if (hasNew) {
+    const timers = [];
+
+    if (Object.keys(newExiting).length > 0) {
       setExitingCounts(prev => ({ ...prev, ...newExiting }));
-      const t = setTimeout(() => {
+      timers.push(setTimeout(() => {
         setExitingCounts(prev => {
           const next = { ...prev };
           Object.keys(newExiting).forEach(ds => delete next[ds]);
           return next;
         });
-      }, 520);
-      return () => clearTimeout(t);
+      }, 520));
     }
+
+    if (newEntering.length > 0) {
+      setEnteringDates(prev => new Set([...prev, ...newEntering]));
+      timers.push(setTimeout(() => {
+        setEnteringDates(prev => {
+          const next = new Set(prev);
+          newEntering.forEach(ds => next.delete(ds));
+          return next;
+        });
+      }, 600));
+    }
+
+    return () => timers.forEach(clearTimeout);
   }, [todos]);
 
   return (
@@ -83,6 +98,7 @@ export default function WeekDayBar() {
         const count = getTodoCount(todos, ds);
         const allDone = hasCheckIcon(todos, ds);
         const exitingCount = exitingCounts[ds];
+        const isEntering = enteringDates.has(ds);
 
         const boardClass = [
           'day-todo-board',
@@ -108,7 +124,7 @@ export default function WeekDayBar() {
               )}
               {allDone ? (
                 <svg
-                  className={`day-todo-board-icon${!isToday ? ' board-icon-enter' : ''}`}
+                  className={`day-todo-board-icon${isEntering && !isToday ? ' board-icon-enter' : ''}`}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"

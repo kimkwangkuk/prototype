@@ -243,31 +243,43 @@ export default function WeeklyContent() {
 
             return (
               <div key={ds} className="week-day-col" onClick={() => handleAdd(ds)}>
-                <div className="week-day-col-header">
-                  <span className={`week-day-col-num${today ? ' today' : ''}`}>
-                    {date.getDate()}.
-                  </span>
-                  <span className="week-day-col-name">{getDayOfWeekKR(date)}</span>
-                </div>
-                <div className="week-day-col-todos">
-                  {dayTodos.map(todo => {
-                    const subj = subjects.find(s => s.id === todo.subjectId);
-                    const completed = ['done', 'skip', 'cancel'].includes(todo.status);
-                    return (
-                      <button
-                        key={todo.id}
-                        className="week-todo-item"
-                        onClick={(e) => { e.stopPropagation(); handleTodoClick(todo); }}
-                      >
-                        <div className="week-todo-check" onClick={(e) => handleCheckboxClick(e, todo)}>
-                          <Checkbox status={todo.status} color={subj?.color} />
-                        </div>
-                        <span className={`week-todo-text${completed ? ' completed' : ''}`}>
-                          {todo.text || '할 일...'}
-                        </span>
-                      </button>
-                    );
-                  })}
+                {/* 선과 레이아웃은 유지, 내용만 페이드 */}
+                <div
+                  style={{
+                    opacity: fading ? 0 : 1,
+                    transition: fading ? 'opacity 0.14s ease-out' : 'opacity 0.22s ease-in',
+                    pointerEvents: fading ? 'none' : 'auto',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1,
+                  }}
+                >
+                  <div className="week-day-col-header">
+                    <span className={`week-day-col-num${today ? ' today' : ''}`}>
+                      {date.getDate()}.
+                    </span>
+                    <span className="week-day-col-name">{getDayOfWeekKR(date)}</span>
+                  </div>
+                  <div className="week-day-col-todos">
+                    {dayTodos.map(todo => {
+                      const subj = subjects.find(s => s.id === todo.subjectId);
+                      const completed = ['done', 'skip', 'cancel'].includes(todo.status);
+                      return (
+                        <button
+                          key={todo.id}
+                          className="week-todo-item"
+                          onClick={(e) => { e.stopPropagation(); handleTodoClick(todo); }}
+                        >
+                          <div className="week-todo-check" onClick={(e) => handleCheckboxClick(e, todo)}>
+                            <Checkbox status={todo.status} color={subj?.color} />
+                          </div>
+                          <span className={`week-todo-text${completed ? ' completed' : ''}`}>
+                            {todo.text || '할 일...'}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             );
@@ -278,19 +290,8 @@ export default function WeeklyContent() {
   );
 
   return (
-    <div className="weekly-content" ref={containerRef}>
-      <div
-        className="weekly-content-inner"
-        style={{
-          opacity: fading ? 0 : 1,
-          transition: fading
-            ? 'opacity 0.16s ease-out'
-            : 'opacity 0.26s ease-in',
-          pointerEvents: fading ? 'none' : 'auto',
-        }}
-      >
-        {renderGrid()}
-      </div>
+    <div className="weekly-content" ref={containerRef} style={{ pointerEvents: fading ? 'none' : 'auto' }}>
+      {renderGrid()}
     </div>
   );
 }

@@ -307,8 +307,12 @@ textarea {
   border-radius: 2px;
   background: var(--fill-primary);
   pointer-events: none;
-  transition: left 0.36s cubic-bezier(0.4, 0, 0.2, 1), width 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: left, width;
+}
+/* 선택된 날짜의 할일 숫자 → primary 컬러 */
+.day-date.selected .day-todo-board:not(.today) .day-todo-board-count {
+  color: var(--fill-primary);
 }
 
 /* ─── Content ─── */
