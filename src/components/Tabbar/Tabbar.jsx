@@ -54,8 +54,7 @@ export default function Tabbar() {
 
         {/* 뷰 전환 영역 */}
         <div className="tabbar-view-area">
-          {viewMenuOpen && (
-            <div className="view-speed-dial">
+              <div className={`view-speed-dial${viewMenuOpen ? ' open' : ''}`}>
               <button
                 className={`view-dial-btn${currentView === 'week' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('week')}
@@ -76,7 +75,6 @@ export default function Tabbar() {
                 <span>일</span>
               </button>
             </div>
-          )}
           <button
             className="tabbar-add"
             onClick={() => setViewMenuOpen(!viewMenuOpen)}
