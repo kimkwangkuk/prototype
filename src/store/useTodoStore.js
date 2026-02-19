@@ -10,6 +10,7 @@ const useTodoStore = create((set, get) => ({
   selectedDate: formatDate(new Date()),
   editingTodoId: null,
   currentVariant: 'b', // 'a' or 'b'
+  currentView: 'day', // 'day' | 'week'
 
   bottomSheetVisible: false,
   bottomSheetMode: 'full',
@@ -222,6 +223,8 @@ const useTodoStore = create((set, get) => ({
   },
 
   setVariant: (variant) => set({ currentVariant: variant }),
+  setView: (view) => set({ currentView: view }),
+  setBaseDate: (date) => set({ baseDate: date }),
 }));
 
 export default useTodoStore;
