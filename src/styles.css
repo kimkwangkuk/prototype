@@ -1324,35 +1324,37 @@ textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-}
-
-/* 좌측 고정: 미니 캘린더 네비게이션 */
-.week-nav-col {
-  flex-shrink: 0;
-  width: 116px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  border-right: 1px solid rgba(0,0,0,0.05);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
 }
-.week-nav-col::-webkit-scrollbar { display: none; }
+.weekly-content::-webkit-scrollbar { display: none; }
+
+.week-row {
+  display: flex;
+  border-bottom: 1px solid var(--border-quinary);
+}
+
+/* 미니 캘린더 네비 셀 (그리드 첫 번째 칸) */
+.week-nav-cell {
+  flex: 1;
+  padding: 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-right: 1px solid var(--border-quinary);
+}
 
 .week-nav-day-labels {
   display: flex;
   justify-content: space-between;
-  padding: 0 2px;
+  padding: 0 1px;
+  margin-bottom: 2px;
 }
 
 .week-nav-day-label {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1370,8 +1372,8 @@ textarea {
 .week-nav-row {
   display: flex;
   justify-content: space-between;
-  padding: 6px 2px;
-  border-radius: 10px;
+  padding: 4px 0;
+  border-radius: 8px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -1383,8 +1385,8 @@ textarea {
 }
 
 .week-nav-date {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1409,24 +1411,13 @@ textarea {
   color: rgba(0,0,0,0.28);
 }
 
-/* 우측 스크롤: 7개 요일 컬럼 */
-.week-days-scroll {
-  flex: 1;
-  display: flex;
-  overflow-x: auto;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.week-days-scroll::-webkit-scrollbar { display: none; }
-
+/* 요일 셀 */
 .week-day-col {
-  flex-shrink: 0;
-  width: 120px;
-  border-left: 1px solid rgba(0,0,0,0.03);
+  flex: 1;
   padding: 0 12px 10px;
   display: flex;
   flex-direction: column;
+  border-left: 1px solid rgba(0,0,0,0.03);
 }
 
 .week-day-col-header {
@@ -1461,9 +1452,6 @@ textarea {
   flex-direction: column;
   flex: 1;
 }
-
-/* 더미: 이전 레이아웃 클래스 제거됨 */
-.week-day-cell { display: none; }
 
 .popup-col-label {
   font-size: 12px;
