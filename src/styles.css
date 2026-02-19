@@ -35,8 +35,7 @@ body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-primary);
   color: var(--label-primary);
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: var(--app-height, 100dvh);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   position: relative;
@@ -1321,31 +1320,150 @@ textarea {
 /* ─── Weekly View ─── */
 .weekly-content {
   position: absolute;
-  top: 56px; /* 헤더(48px) + 약간의 여백 (WeekDayBar 없음) */
+  top: 56px;
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+/* 좌측 고정: 미니 캘린더 네비게이션 */
+.week-nav-col {
+  flex-shrink: 0;
+  width: 116px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-right: 1px solid rgba(0,0,0,0.05);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  -ms-overflow-style: none;
 }
-.weekly-content::-webkit-scrollbar {
-  display: none;
-}
+.week-nav-col::-webkit-scrollbar { display: none; }
 
-.week-row {
+.week-nav-day-labels {
   display: flex;
-  border-bottom: 1px solid var(--border-quinary);
+  justify-content: space-between;
+  padding: 0 2px;
 }
 
-.week-day-cell {
-  flex: 1;
-  padding: 10px 12px 8px;
-  min-width: 0;
+.week-nav-day-label {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.week-nav-rows {
   display: flex;
   flex-direction: column;
 }
+
+.week-nav-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 2px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.week-nav-row.current {
+  background: rgba(0,0,0,0.06);
+}
+
+.week-nav-date {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.5);
+  text-align: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.week-nav-date.today {
+  background: #3a3a3a;
+  color: white;
+}
+
+.week-nav-date.out-of-month {
+  color: rgba(0,0,0,0.18);
+}
+
+.week-nav-date.weekend {
+  color: rgba(0,0,0,0.28);
+}
+
+/* 우측 스크롤: 7개 요일 컬럼 */
+.week-days-scroll {
+  flex: 1;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.week-days-scroll::-webkit-scrollbar { display: none; }
+
+.week-day-col {
+  flex-shrink: 0;
+  width: 120px;
+  border-left: 1px solid rgba(0,0,0,0.03);
+  padding: 0 12px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.week-day-col-header {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 10px 0 4px;
+  flex-shrink: 0;
+}
+
+.week-day-col-num {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.77);
+  letter-spacing: -0.042px;
+  line-height: 22px;
+}
+
+.week-day-col-num.today {
+  color: var(--fill-primary);
+}
+
+.week-day-col-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.77);
+  letter-spacing: -0.036px;
+}
+
+.week-day-col-todos {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* 더미: 이전 레이아웃 클래스 제거됨 */
+.week-day-cell { display: none; }
 
 .popup-col-label {
   font-size: 12px;
@@ -1412,65 +1530,12 @@ textarea {
   color: var(--label-primary);
 }
 
-.week-day-cell:first-child {
-  border-right: 1px solid var(--border-quinary);
-}
-
-.week-day-cell-empty {
-  flex: 1;
-}
-
-.week-day-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.week-day-label {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--label-tertiary);
-  letter-spacing: -0.03px;
-}
-
-.week-day-num {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--label-primary);
-  letter-spacing: -0.04px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.week-day-num.today {
-  background: var(--fill-primary);
-  color: var(--gray-white);
-}
-
-.week-cell-divider {
-  height: 1px;
-  background: var(--border-quinary);
-  margin-bottom: 6px;
-}
-
-.week-todos {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-}
 
 .week-todo-item {
   display: flex;
   align-items: flex-start;
   gap: 4px;
-  padding: 2px 0;
+  padding: 4px 0;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -1523,14 +1588,16 @@ textarea {
 }
 
 .week-todo-text {
-  font-size: 12px;
-  font-weight: 400;
-  color: var(--label-primary);
-  letter-spacing: -0.03px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.77);
+  letter-spacing: -0.039px;
   line-height: 1.4;
   flex: 1;
   min-width: 0;
-  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .week-todo-text.completed {

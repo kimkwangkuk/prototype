@@ -224,6 +224,7 @@ const useTodoStore = create((set, get) => ({
 
   setVariant: (variant) => set({ currentVariant: variant }),
   setView: (view) => set({ currentView: view }),
+  setBaseDate: (date) => set({ baseDate: date }),
 }));
 
 export default useTodoStore;
