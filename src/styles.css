@@ -734,18 +734,17 @@ textarea {
 .tabbar-indicator {
   height: 34px;
   width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 8px;
   position: relative;
   pointer-events: auto;
 }
 .tabbar-indicator-bar {
-  width: 144px;
+  position: absolute;
+  bottom: 8px;
   height: 5px;
   background: var(--gray-black);
   border-radius: 100px;
+  transition: left 0.38s cubic-bezier(0.4, 0, 0.2, 1), width 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: left, width;
 }
 
 .btn-go-today.hidden {
@@ -1508,6 +1507,7 @@ textarea {
   cursor: pointer;
   flex-direction: column;
   border-left: 1px solid rgba(0,0,0,0.03);
+  min-height: 50vw;
 }
 
 .week-day-col-header {
@@ -1826,14 +1826,9 @@ textarea {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid var(--border-quinary);
   overflow: hidden;
   padding: 3px 2px 2px;
   min-width: 0;
-}
-
-.monthly-day-cell:last-child {
-  border-right: none;
 }
 
 .monthly-day-cell.out-of-month {

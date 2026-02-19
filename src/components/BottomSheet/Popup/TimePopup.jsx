@@ -51,8 +51,13 @@ export default function TimePopup({ visible, onClose }) {
   // 팝업 열릴 때 store의 현재 값을 즉시 반영
   useEffect(() => {
     if (visible) {
-      setTimeValue(timeStrToPicker(data.time));
+      const initialPicker = timeStrToPicker(data.time);
+      setTimeValue(initialPicker);
       setDurValue(durationToPicker(data.duration));
+      // 시간 미설정 상태이면 기본 피커값을 즉시 레이블에 반영
+      if (!data.time || data.time === '') {
+        updateBottomSheetField('time', pickerToTimeStr(initialPicker));
+      }
     }
   }, [visible]);
 
