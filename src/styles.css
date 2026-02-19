@@ -443,6 +443,11 @@ textarea {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  transition: transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.todo-checkbox:active {
+  transform: scale(0.78);
 }
 .todo-checkbox *,
 .todo-checkbox *::before,
@@ -454,6 +459,17 @@ textarea {
   outline: none;
   caret-color: transparent;
 }
+/* Checkbox 아이콘 진입 애니메이션 */
+.cb-icon-enter {
+  animation: cbIconPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes cbIconPop {
+  0%   { opacity: 0; transform: scale(0.4); }
+  60%  { opacity: 1; transform: scale(1.2); }
+  80%  { transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* Checkbox icons - shared styles */
 .cb-empty {
   width: 20px;
@@ -476,6 +492,12 @@ textarea {
   right: 10%;
   top: 50%;
   border-radius: 0 0 2.25px 2.25px;
+  transform-origin: bottom center;
+  animation: progressFillIn 0.28s 0.1s ease-out both;
+}
+@keyframes progressFillIn {
+  from { opacity: 0.4; transform: scaleY(0); }
+  to   { opacity: 1;   transform: scaleY(1); }
 }
 .cb-done {
   width: 22px;
@@ -529,6 +551,7 @@ textarea {
   width: 100%;
   padding: 0;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 .todo-item.editing .todo-title {
   cursor: text;
