@@ -102,8 +102,7 @@ export default function WeekDayBar() {
 
         const boardClass = [
           'day-todo-board',
-          isToday ? 'today' : '',
-          allDone && !isToday ? 'all-done' : '',
+          allDone ? 'all-done' : '',
         ].filter(Boolean).join(' ');
 
         return (
@@ -113,18 +112,18 @@ export default function WeekDayBar() {
             className={`day-date${isActive ? ' selected' : ''}`}
             onClick={() => selectDate(ds)}
           >
-            <span className={`day-date-label${isActive ? ' active' : ''}`}>
+            <span className={`day-date-label${isActive ? ' active' : ''}${isToday ? ' today' : ''}`}>
               {d.getDate()}.{getDayOfWeekKR(d)}
             </span>
             <div className={boardClass}>
-              {exitingCount && !isToday && (
+              {exitingCount && (
                 <span className="day-todo-board-count board-count-exit">
                   {exitingCount}
                 </span>
               )}
               {allDone ? (
                 <svg
-                  className={`day-todo-board-icon${isEntering && !isToday ? ' board-icon-enter' : ''}`}
+                  className={`day-todo-board-icon${isEntering ? ' board-icon-enter' : ''}`}
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -136,8 +135,6 @@ export default function WeekDayBar() {
                 </svg>
               ) : count > 0 ? (
                 <span className="day-todo-board-count">{count}</span>
-              ) : isToday ? (
-                <span className="day-todo-board-count">0</span>
               ) : (
                 <span className="day-todo-board-dash" />
               )}

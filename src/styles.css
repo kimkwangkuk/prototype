@@ -234,6 +234,10 @@ textarea {
   font-weight: 600;
   color: var(--label-primary);
 }
+.day-date-label.today {
+  font-weight: 600;
+  color: var(--fill-primary);
+}
 .day-todo-board {
   width: 26px;
   height: 26px;
@@ -248,14 +252,6 @@ textarea {
 }
 .day-date:active .day-todo-board {
   transform: scale(0.85);
-}
-/* 오늘: 검정 fill */
-.day-todo-board.today {
-  background: var(--fill-primary);
-}
-.day-todo-board.today .day-todo-board-count,
-.day-todo-board.today .day-todo-board-icon {
-  color: var(--gray-white);
 }
 /* 전체 완료: 틴트 스타일 (연한 배경 + 진한 아이콘) */
 .day-todo-board.all-done {
@@ -317,11 +313,6 @@ textarea {
   transition: left 0.2s cubic-bezier(0.4, 0, 0.2, 1), width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: left, width;
 }
-/* 선택된 날짜의 할일 숫자 → primary 컬러 */
-.day-date.selected .day-todo-board:not(.today) .day-todo-board-count {
-  color: var(--fill-primary);
-}
-
 /* ─── Content ─── */
 .content {
   position: absolute;
