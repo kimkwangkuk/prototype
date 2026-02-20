@@ -1,6 +1,38 @@
 import { useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 
+const CalOutline = () => (
+  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
+);
+
+const IconMonth = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <CalOutline/>
+    <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
+    <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
+  </svg>
+);
+
+const IconWeek = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <CalOutline/>
+    <path d="M6 12H18"/>
+    <path d="M6 15.5H18"/>
+    <path d="M6 19H14"/>
+  </svg>
+);
+
+const IconDay = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <CalOutline/>
+    <path d="M6 13.5H18"/>
+    <path d="M6 17.5H12"/>
+  </svg>
+);
+
+const VIEW_ICONS = { month: IconMonth, week: IconWeek, day: IconDay };
+const VIEW_LABELS = { month: '월', week: '주', day: '일' };
+
 export default function Tabbar() {
   const currentView = useTodoStore(state => state.currentView);
   const setView = useTodoStore(state => state.setView);
@@ -10,6 +42,8 @@ export default function Tabbar() {
     setView(view);
     setViewMenuOpen(false);
   };
+
+  const CurrentIcon = VIEW_ICONS[currentView];
 
   return (
     <div className="tabbar">
@@ -54,41 +88,21 @@ export default function Tabbar() {
 
         {/* 뷰 전환 영역 */}
         <div className="tabbar-view-area">
-              <div className={`view-speed-dial${viewMenuOpen ? ' open' : ''}`}>
-              <button
-                className={`view-dial-btn${currentView === 'month' ? ' active' : ''}`}
-                onClick={() => handleViewSelect('month')}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
-                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
-                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
-                </svg>
-                <span>월</span>
-              </button>
-              <button
-                className={`view-dial-btn${currentView === 'week' ? ' active' : ''}`}
-                onClick={() => handleViewSelect('week')}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
-                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
-                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
-                </svg>
-                <span>주</span>
-              </button>
-              <button
-                className={`view-dial-btn${currentView === 'day' ? ' active' : ''}`}
-                onClick={() => handleViewSelect('day')}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
-                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
-                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
-                </svg>
-                <span>일</span>
-              </button>
-            </div>
+          <div className={`view-speed-dial${viewMenuOpen ? ' open' : ''}`}>
+            {['month', 'week', 'day'].map(view => {
+              const Icon = VIEW_ICONS[view];
+              return (
+                <button
+                  key={view}
+                  className={`view-dial-btn${currentView === view ? ' active' : ''}`}
+                  onClick={() => handleViewSelect(view)}
+                >
+                  <Icon/>
+                  <span>{VIEW_LABELS[view]}</span>
+                </button>
+              );
+            })}
+          </div>
           <button
             className="tabbar-add"
             onClick={() => setViewMenuOpen(!viewMenuOpen)}
@@ -96,21 +110,14 @@ export default function Tabbar() {
           >
             <div className="tabbar-add-bg"></div>
             {viewMenuOpen ? (
-              /* X 아이콘 */
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <line x1="5" y1="5" x2="19" y2="19"/>
                 <line x1="19" y1="5" x2="5" y2="19"/>
               </svg>
             ) : (
               <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
-                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
-                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
-                </svg>
-                <span className="tabbar-add-label">
-                  {currentView === 'month' ? '월' : currentView === 'week' ? '주' : '일'}
-                </span>
+                <CurrentIcon/>
+                <span className="tabbar-add-label">{VIEW_LABELS[currentView]}</span>
               </>
             )}
           </button>
