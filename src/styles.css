@@ -300,7 +300,7 @@ textarea {
 .week-day-bar-slider {
   position: absolute;
   bottom: 0;
-  height: 2.5px;
+  height: 3px;
   border-radius: 2px;
   background: var(--fill-primary);
   pointer-events: none;
