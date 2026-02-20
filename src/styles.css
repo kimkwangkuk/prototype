@@ -1748,22 +1748,21 @@ textarea {
 .view-dial-btn svg {
   width: 20px;
   height: 20px;
-  color: var(--label-secondary);
+  color: var(--label-primary);
   position: relative;
 }
 
 .view-dial-btn span {
   font-size: 10px;
   font-weight: 600;
-  color: var(--label-secondary);
+  color: var(--label-primary);
   letter-spacing: -0.03px;
   line-height: 1.4;
   position: relative;
 }
 
-.view-dial-btn.active svg,
-.view-dial-btn.active span {
-  color: var(--label-primary);
+.view-dial-btn.active {
+  opacity: 0.28;
 }
 
 /* ─── Monthly View ─── */

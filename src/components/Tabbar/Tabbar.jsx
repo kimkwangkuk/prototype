@@ -59,13 +59,10 @@ export default function Tabbar() {
                 className={`view-dial-btn${currentView === 'month' ? ' active' : ''}`}
                 onClick={() => handleViewSelect('month')}
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2.5"/>
-                  <line x1="3" y1="8.5" x2="21" y2="8.5"/>
-                  <line x1="9" y1="8.5" x2="9" y2="21"/>
-                  <line x1="15" y1="8.5" x2="15" y2="21"/>
-                  <line x1="3" y1="13.5" x2="21" y2="13.5"/>
-                  <line x1="3" y1="18.5" x2="21" y2="18.5"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
+                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
+                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
                 </svg>
                 <span>월</span>
               </button>
@@ -74,7 +71,9 @@ export default function Tabbar() {
                 onClick={() => handleViewSelect('week')}
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725V13.9M2 7.725H12M22 7.725V13.9M22 7.725H12M22 13.9V17.5C22 19.7091 20.2091 21.5 18 21.5H12M22 13.9H2M2 13.9V17.5C2 19.7091 3.79086 21.5 6 21.5H12M12 7.725V21.5"/>
+                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
+                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
+                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
                 </svg>
                 <span>주</span>
               </button>
@@ -83,8 +82,9 @@ export default function Tabbar() {
                 onClick={() => handleViewSelect('day')}
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="8" rx="2.5"/>
-                  <rect x="2" y="14" width="20" height="8" rx="2.5"/>
+                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
+                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
+                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
                 </svg>
                 <span>일</span>
               </button>
@@ -101,32 +101,16 @@ export default function Tabbar() {
                 <line x1="5" y1="5" x2="19" y2="19"/>
                 <line x1="19" y1="5" x2="5" y2="19"/>
               </svg>
-            ) : currentView === 'month' ? (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2.5"/>
-                  <line x1="3" y1="8.5" x2="21" y2="8.5"/>
-                  <line x1="9" y1="8.5" x2="9" y2="21"/>
-                  <line x1="15" y1="8.5" x2="15" y2="21"/>
-                  <line x1="3" y1="13.5" x2="21" y2="13.5"/>
-                  <line x1="3" y1="18.5" x2="21" y2="18.5"/>
-                </svg>
-                <span className="tabbar-add-label">월</span>
-              </>
-            ) : currentView === 'week' ? (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725V13.9M2 7.725H12M22 7.725V13.9M22 7.725H12M22 13.9V17.5C22 19.7091 20.2091 21.5 18 21.5H12M22 13.9H2M2 13.9V17.5C2 19.7091 3.79086 21.5 6 21.5H12M12 7.725V21.5"/>
-                </svg>
-                <span className="tabbar-add-label">주</span>
-              </>
             ) : (
               <>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="8" rx="2.5"/>
-                  <rect x="2" y="14" width="20" height="8" rx="2.5"/>
+                  <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
+                  <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
+                  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
                 </svg>
-                <span className="tabbar-add-label">일</span>
+                <span className="tabbar-add-label">
+                  {currentView === 'month' ? '월' : currentView === 'week' ? '주' : '일'}
+                </span>
               </>
             )}
           </button>
