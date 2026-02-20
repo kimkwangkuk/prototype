@@ -5,7 +5,7 @@ import { getTodoCount, hasCheckIcon } from '../../utils/todoUtils';
 import { useSwipe } from '../../hooks/useSwipe';
 
 const todayStr = formatDate(new Date());
-const INDICATOR_W = 26; // day-todo-board 너비와 동일
+const INDICATOR_W = 28; // day-todo-board 너비와 동일
 
 export default function WeekDayBar() {
   const baseDate = useTodoStore(state => state.baseDate);
@@ -112,7 +112,7 @@ export default function WeekDayBar() {
             className={`day-date${isActive ? ' selected' : ''}`}
             onClick={() => selectDate(ds)}
           >
-            <span className={`day-date-label${isActive ? ' active' : ''}${isToday ? ' today' : ''}`}>
+            <span className={`day-date-label${isToday ? ' today' : ''}`}>
               {d.getDate()}.{getDayOfWeekKR(d)}
             </span>
             <div className={boardClass}>

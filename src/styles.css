@@ -222,27 +222,22 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 .day-date-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
-  color: var(--label-tertiary);
+  color: rgba(0, 0, 0, 0.5);
   text-align: center;
-  letter-spacing: -0.03px;
+  letter-spacing: -0.033px;
   line-height: 1.4;
-  transition: color 0.2s ease, font-weight 0.2s ease;
-}
-.day-date-label.active {
-  font-weight: 600;
-  color: var(--label-primary);
 }
 .day-date-label.today {
   font-weight: 600;
-  color: var(--fill-primary);
+  color: rgba(0, 0, 0, 0.77);
 }
 .day-todo-board {
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 6px;
-  background: var(--fill-quaternary);
+  background: rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -253,26 +248,25 @@ textarea {
 .day-date:active .day-todo-board {
   transform: scale(0.85);
 }
-/* 전체 완료: 틴트 스타일 (연한 배경 + 진한 아이콘) */
+/* 전체 완료: 오렌지 틴트 스타일 */
 .day-todo-board.all-done {
-  background: rgba(34, 197, 94, 0.14);
+  background: rgba(255, 115, 0, 0.18);
 }
 .day-todo-board.all-done .day-todo-board-icon {
-  color: var(--green-500);
+  color: rgba(255, 115, 0, 1);
 }
 .day-todo-board-count {
   font-size: 14px;
   font-weight: 500;
-  color: var(--label-quaternary);
+  color: rgba(0, 0, 0, 0.38);
   text-align: center;
   letter-spacing: -0.042px;
 }
 .day-todo-board-dash {
-  width: 8px;
-  height: 2px;
+  width: 6px;
+  height: 1.5px;
   border-radius: 1px;
-  background: var(--label-quaternary);
-  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.18);
 }
 .day-todo-board .day-todo-board-icon {
   width: 16px;
