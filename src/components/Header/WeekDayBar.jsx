@@ -138,7 +138,9 @@ export default function WeekDayBar() {
                 <span className="day-todo-board-count">{count}</span>
               ) : isToday ? (
                 <span className="day-todo-board-count">0</span>
-              ) : null}
+              ) : (
+                <span className="day-todo-board-dash" />
+              )}
             </div>
           </div>
         );

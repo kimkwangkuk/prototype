@@ -271,6 +271,13 @@ textarea {
   text-align: center;
   letter-spacing: -0.042px;
 }
+.day-todo-board-dash {
+  width: 8px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--label-quaternary);
+  opacity: 0.5;
+}
 .day-todo-board .day-todo-board-icon {
   width: 16px;
   height: 16px;
