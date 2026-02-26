@@ -1903,3 +1903,192 @@ textarea {
   color: var(--label-tertiary);
   text-decoration: line-through;
 }
+
+/* ─── Calendar Screen ─── */
+.cal-screen {
+  position: absolute;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* 요일 헤더 */
+.cal-day-labels {
+  display: flex;
+  flex-shrink: 0;
+  padding: 0 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cal-day-label {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.86);
+  padding: 4px;
+  letter-spacing: -0.033px;
+  line-height: 1.4;
+}
+
+.cal-day-label.weekend {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* 그리드 */
+.cal-grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* 주 행 */
+.cal-week-row {
+  flex: 1;
+  display: flex;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 날짜 셀 */
+.cal-day-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0 2px;
+  min-width: 0;
+}
+
+.cal-day-cell.out-month {
+  opacity: 0.2;
+}
+
+/* 날짜 헤더 영역 */
+.cal-date-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 2px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cal-date-num-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 날짜 숫자 */
+.cal-date-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  min-height: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.86);
+  letter-spacing: -0.039px;
+  border-radius: 100px;
+  line-height: 1;
+}
+
+.cal-date-num.today {
+  background: rgba(0, 0, 0, 0.86);
+  color: #fff;
+  padding: 2px 4px;
+}
+
+.cal-date-num.weekend {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* OFF 배지 */
+.cal-dayoff-badge {
+  position: absolute;
+  top: -2px;
+  right: -12px;
+  font-size: 7px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+
+/* 이벤트 영역 */
+.cal-day-events {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  overflow: hidden;
+  padding-bottom: 8px;
+  min-height: 0;
+}
+
+/* 이벤트 칩 */
+.cal-chip {
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cal-chip-text {
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  letter-spacing: -0.033px;
+}
+
+/* 투두 칩 (오렌지) */
+.cal-chip-todo {
+  background: rgba(255, 115, 0, 0.12);
+}
+
+.cal-chip-todo .cal-chip-text {
+  color: #ff7300;
+}
+
+/* 일정 칩 - 퍼플 */
+.cal-chip-purple {
+  background: rgba(168, 85, 247, 0.12);
+}
+
+.cal-chip-purple .cal-chip-text {
+  color: #a855f7;
+}
+
+/* 일정 칩 - 블루 */
+.cal-chip-blue {
+  background: #ebeeff;
+}
+
+.cal-chip-blue .cal-chip-text {
+  color: #5570f7;
+}
+
+/* 일정 칩 - 오렌지 (공휴일) */
+.cal-chip-orange {
+  background: rgba(255, 115, 0, 0.12);
+}
+
+.cal-chip-orange .cal-chip-text {
+  color: #ff7300;
+}

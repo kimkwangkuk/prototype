@@ -11,6 +11,7 @@ const useTodoStore = create((set, get) => ({
   editingTodoId: null,
   currentVariant: 'b', // 'a' or 'b'
   currentView: 'day', // 'day' | 'week'
+  currentTab: 'todo', // 'todo' | 'calendar'
 
   bottomSheetVisible: false,
   bottomSheetMode: 'full',
@@ -224,6 +225,7 @@ const useTodoStore = create((set, get) => ({
 
   setVariant: (variant) => set({ currentVariant: variant }),
   setView: (view) => set({ currentView: view }),
+  setTab: (tab) => set({ currentTab: tab }),
   setBaseDate: (date) => set({ baseDate: date }),
 }));
 

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import './styles.css';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
+import CalendarContent from './components/Content/CalendarContent';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Tabbar from './components/Tabbar/Tabbar';
 import useTodoStore from './store/useTodoStore';
@@ -11,6 +12,7 @@ import { formatTime, formatDuration } from './utils/timeUtils';
 export default function App() {
   const todos = useTodoStore(state => state.todos);
   const nextId = useTodoStore(state => state.nextId);
+  const currentTab = useTodoStore(state => state.currentTab);
 
   // 샘플 데이터 로드 (최초 1회)
   useEffect(() => {
@@ -96,9 +98,9 @@ export default function App() {
   return (
     <>
       <Header />
-      <Content />
+      {currentTab === 'calendar' ? <CalendarContent /> : <Content />}
       <Tabbar />
-      <BottomSheet />
+      {currentTab !== 'calendar' && <BottomSheet />}
     </>
   );
 }

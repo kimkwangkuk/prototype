@@ -9,6 +9,7 @@ export default function HeaderB() {
   const baseDate = useTodoStore(state => state.baseDate);
   const currentVariant = useTodoStore(state => state.currentVariant);
   const currentView = useTodoStore(state => state.currentView);
+  const currentTab = useTodoStore(state => state.currentTab);
   const goToday = useTodoStore(state => state.goToday);
   const [showGoToday, setShowGoToday] = useState(false);
 
@@ -68,7 +69,7 @@ export default function HeaderB() {
             </button>
           </div>
         </div>
-        {currentView === 'day' && <WeekDayBar />}
+        {currentView === 'day' && currentTab !== 'calendar' && <WeekDayBar />}
       </div>
     </div>
   );

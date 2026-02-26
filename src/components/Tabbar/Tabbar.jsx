@@ -36,6 +36,8 @@ const VIEW_LABELS = { month: '월', week: '주', day: '일' };
 export default function Tabbar() {
   const currentView = useTodoStore(state => state.currentView);
   const setView = useTodoStore(state => state.setView);
+  const currentTab = useTodoStore(state => state.currentTab);
+  const setTab = useTodoStore(state => state.setTab);
   const [viewMenuOpen, setViewMenuOpen] = useState(false);
 
   const handleViewSelect = (view) => {
@@ -60,13 +62,13 @@ export default function Tabbar() {
             </svg>
             <span className="tab-btn-label">홈</span>
           </button>
-          <button className="tab-btn active">
+          <button className={`tab-btn${currentTab === 'todo' ? ' active' : ''}`} onClick={() => setTab('todo')}>
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M4 5a2 2 0 012-2h12a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 3a1 1 0 000 2h4a1 1 0 100-2H7zm0 4a1 1 0 100 2h8a1 1 0 100-2H7zm0 4a1 1 0 100 2h6a1 1 0 100-2H7z"/>
             </svg>
             <span className="tab-btn-label">할일</span>
           </button>
-          <button className="tab-btn">
+          <button className={`tab-btn${currentTab === 'calendar' ? ' active' : ''}`} onClick={() => setTab('calendar')}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2"/>
               <line x1="16" y1="2" x2="16" y2="6"/>
