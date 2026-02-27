@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { getWeekDates, formatDate, getDayOfWeekKR, isToday } from '../../utils/dateUtils';
@@ -7,8 +7,8 @@ import Checkbox from './TodoItem/Checkbox';
 const DAY_LABELS = ['월', '화', '수', '목', '금', '토', '일'];
 const PAIRS = [['nav', 0], [1, 2], [3, 4], [5, 6]];
 const SWIPE_THRESHOLD = 55;
-const FADE_OUT_MS = 160;
-const NAV_ROW_H = 22;
+const FADE_DISTANCE   = 120;
+const NAV_ROW_H       = 22;
 
 function getMonthCalendar(baseDate) {
   const year = baseDate.getFullYear();
@@ -91,107 +91,136 @@ function WeekNavCell({ baseDate, currentWeekStrs, onWeekClick }) {
 }
 
 export default function WeeklyContent() {
-  const baseDate = useTodoStore(state => state.baseDate);
-  const todos = useTodoStore(state => state.todos);
-  const selectDate = useTodoStore(state => state.selectDate);
-  const setBaseDate = useTodoStore(state => state.setBaseDate);
-  const addTodo = useTodoStore(state => state.addTodo);
+  const baseDate        = useTodoStore(state => state.baseDate);
+  const todos           = useTodoStore(state => state.todos);
+  const selectDate      = useTodoStore(state => state.selectDate);
+  const setBaseDate     = useTodoStore(state => state.setBaseDate);
+  const addTodo         = useTodoStore(state => state.addTodo);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
-  const nextWeekAction = useTodoStore(state => state.nextWeek);
-  const prevWeekAction = useTodoStore(state => state.prevWeek);
+  const nextWeekAction  = useTodoStore(state => state.nextWeek);
+  const prevWeekAction  = useTodoStore(state => state.prevWeek);
 
-  const weekDates = useMemo(() => getWeekDates(baseDate), [baseDate]);
+  const weekDates       = useMemo(() => getWeekDates(baseDate), [baseDate]);
   const currentWeekStrs = useMemo(() => new Set(weekDates.map(d => formatDate(d))), [weekDates]);
 
   const containerRef = useRef(null);
-  const [fading, setFading] = useState(false);
-  const transitioningRef = useRef(false);
-  const activeSwipeRef = useRef(false);
+  // 모든 변경 가능 상태를 ref 하나로 관리 (React 렌더 루프 밖에서 동작)
+  const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false });
+  const actionsRef = useRef({ nextWeek: nextWeekAction, prevWeek: prevWeekAction });
+  useEffect(() => { actionsRef.current = { nextWeek: nextWeekAction, prevWeek: prevWeekAction }; });
 
-  // Stable refs for store actions
-  const nextWeekRef = useRef(nextWeekAction);
-  const prevWeekRef = useRef(prevWeekAction);
-  useEffect(() => { nextWeekRef.current = nextWeekAction; }, [nextWeekAction]);
-  useEffect(() => { prevWeekRef.current = prevWeekAction; }, [prevWeekAction]);
-
-  // Touch swipe → fade transition
+  // ─── 터치 스와이프 ────────────────────────────────────────────────────────
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const s = stateRef.current;
 
-    let startX = 0, startY = 0;
-    let isHorizontal = null;
-    let swipeDelta = 0;
+    // 각 날짜 블록의 내부 컨텐츠 wrapper들 (블록 테두리/배경은 그대로, 텍스트만 페이드)
+    const getInners = () => container.querySelectorAll('.week-cell-content');
 
-    const triggerChange = (direction) => {
-      if (transitioningRef.current) return;
-      transitioningRef.current = true;
-      setFading(true);
-      setTimeout(() => {
-        if (direction === 'next') nextWeekRef.current();
-        else prevWeekRef.current();
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            setFading(false);
-            setTimeout(() => { transitioningRef.current = false; }, 280);
-          });
-        });
-      }, FADE_OUT_MS);
+    const setOpacity = (opacity, transition = 'none') => {
+      getInners().forEach(el => {
+        el.style.transition = transition;
+        el.style.opacity    = String(opacity);
+      });
     };
 
-    const onStart = (e) => {
-      if (transitioningRef.current) return;
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      isHorizontal = null;
-      swipeDelta = 0;
-      activeSwipeRef.current = false;
-    };
+    function onStart(e) {
+      s.direction = null;                 // 항상 방향 리셋
+      if (s.animating) return;
+      s.startX = e.touches[0].clientX;
+      s.startY = e.touches[0].clientY;
+    }
 
-    const onMove = (e) => {
-      if (transitioningRef.current) return;
-      const dx = e.touches[0].clientX - startX;
-      const dy = e.touches[0].clientY - startY;
+    function onMove(e) {
+      if (s.animating) return;
+      const dx  = e.touches[0].clientX - s.startX;
+      const dy  = e.touches[0].clientY - s.startY;
+      const adx = Math.abs(dx);
+      const ady = Math.abs(dy);
 
-      if (isHorizontal === null) {
-        if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
-          isHorizontal = Math.abs(dx) > Math.abs(dy);
-        }
+      // 10px 미만은 방향 결정 보류
+      if (s.direction === null) {
+        if (adx < 10 && ady < 10) return;
+        // 가로가 세로의 2배 이상일 때만 수평으로 확정 → 세로 스크롤 오판 방지
+        s.direction = adx >= ady * 2 ? 'h' : 'v';
+      }
+      if (s.direction !== 'h') return;
+
+      // 수평 확정 후에만 스크롤 차단 (passive:false 이므로 실제 작동)
+      e.preventDefault();
+
+      // 드래그 거리에 비례해 실시간 페이드 (직접 DOM 조작 → 60fps)
+      const progress = Math.min(adx / FADE_DISTANCE, 1);
+      getInners().forEach(el => {
+        el.style.transition = 'none';
+        el.style.opacity    = String(1 - progress * 0.85);
+      });
+    }
+
+    function onEnd(e) {
+      if (s.animating) return;
+      if (s.direction !== 'h') return;   // 수직이거나 탭이면 무시
+
+      const dx     = e.changedTouches[0].clientX - s.startX;
+      const goLeft = dx < 0;
+
+      if (Math.abs(dx) < SWIPE_THRESHOLD) {
+        // 임계값 미달 → 스냅백
+        setOpacity(1, 'opacity 0.2s ease');
         return;
       }
-      if (!isHorizontal) return;
 
-      e.preventDefault();
-      activeSwipeRef.current = true;
-      swipeDelta = dx;
-    };
+      // ── 주 전환 애니메이션 ──────────────────────────────
+      s.animating = true;
+      container.style.pointerEvents = 'none';    // 전환 중 터치 차단
 
-    const onEnd = () => {
-      if (!activeSwipeRef.current) return;
-      activeSwipeRef.current = false;
+      // 1) 완전 페이드 아웃
+      setOpacity(0, 'opacity 0.12s ease-out');
 
-      if (swipeDelta < -SWIPE_THRESHOLD) {
-        triggerChange('next');
-      } else if (swipeDelta > SWIPE_THRESHOLD) {
-        triggerChange('prev');
-      }
-    };
+      setTimeout(() => {
+        // 2) 주 변경 (Zustand store 업데이트 → React 리렌더)
+        goLeft ? actionsRef.current.nextWeek() : actionsRef.current.prevWeek();
 
-    el.addEventListener('touchstart', onStart, { passive: true });
-    el.addEventListener('touchmove', onMove, { passive: false });
-    el.addEventListener('touchend', onEnd, { passive: true });
-    el.addEventListener('touchcancel', onEnd, { passive: true });
+        // 3) 두 프레임 대기 후 페이드 인 (새 컨텐츠가 DOM에 반영된 뒤)
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setOpacity(1, 'opacity 0.22s ease-in');
+            setTimeout(() => {
+              // 인라인 스타일 초기화 (CSS가 다시 주도)
+              getInners().forEach(el => {
+                el.style.transition = '';
+                el.style.opacity    = '';
+              });
+              container.style.pointerEvents = '';
+              s.animating = false;
+            }, 240);
+          });
+        });
+      }, 130);
+    }
+
+    function onCancel() {
+      s.direction = null;
+      if (!s.animating) setOpacity(1, 'opacity 0.15s ease');
+    }
+
+    container.addEventListener('touchstart',  onStart,  { passive: true  });
+    container.addEventListener('touchmove',   onMove,   { passive: false }); // ← preventDefault 가능
+    container.addEventListener('touchend',    onEnd,    { passive: true  });
+    container.addEventListener('touchcancel', onCancel, { passive: true  });
 
     return () => {
-      el.removeEventListener('touchstart', onStart);
-      el.removeEventListener('touchmove', onMove);
-      el.removeEventListener('touchend', onEnd);
-      el.removeEventListener('touchcancel', onEnd);
+      container.removeEventListener('touchstart',  onStart);
+      container.removeEventListener('touchmove',   onMove);
+      container.removeEventListener('touchend',    onEnd);
+      container.removeEventListener('touchcancel', onCancel);
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
+  // ─── 핸들러 ────────────────────────────────────────────────────────────────
   const handleAdd = (dateStr) => {
-    if (activeSwipeRef.current || transitioningRef.current) return;
+    if (stateRef.current.animating) return;
     selectDate(dateStr);
     const randomSubject = subjects[Math.floor(Math.random() * subjects.length)].id;
     addTodo(randomSubject);
@@ -199,11 +228,11 @@ export default function WeeklyContent() {
 
   const handleTodoClick = (todo) => {
     openBottomSheet('edit', {
-      todoId: todo.id,
+      todoId:   todo.id,
       category: todo.subjectId,
-      status: todo.status,
-      text: todo.text,
-      time: todo.time || '',
+      status:   todo.status,
+      text:     todo.text,
+      time:     todo.time || '',
       duration: todo.duration,
     });
   };
@@ -211,20 +240,22 @@ export default function WeeklyContent() {
   const handleCheckboxClick = (e, todo) => {
     e.stopPropagation();
     openBottomSheet('status-only', {
-      todoId: todo.id,
+      todoId:   todo.id,
       category: todo.subjectId,
-      status: todo.status,
-      text: todo.text,
-      time: todo.time || '',
+      status:   todo.status,
+      text:     todo.text,
+      time:     todo.time || '',
       duration: todo.duration,
     });
   };
 
+  // ─── 그리드 렌더 ────────────────────────────────────────────────────────────
   const renderGrid = () => (
     <>
       {PAIRS.map(([leftIdx, rightIdx], rowIdx) => (
         <div key={rowIdx} className="week-row">
           {[leftIdx, rightIdx].map((idx) => {
+            // 캘린더(nav) 블록: 구조·배경 완전 고정, 페이드 없음
             if (idx === 'nav') {
               return (
                 <WeekNavCell
@@ -236,23 +267,18 @@ export default function WeeklyContent() {
               );
             }
 
-            const date = weekDates[idx];
-            const ds = formatDate(date);
+            const date     = weekDates[idx];
+            const ds       = formatDate(date);
             const dayTodos = todos[ds] || [];
-            const today = isToday(ds);
+            const today    = isToday(ds);
 
             return (
+              // 외부 블록(.week-day-col): 테두리·배경 고정
               <div key={ds} className="week-day-col" onClick={() => handleAdd(ds)}>
-                {/* 선과 레이아웃은 유지, 내용만 페이드 */}
+                {/* 내부 컨텐츠(.week-cell-content): 텍스트·할일만 페이드 대상 */}
                 <div
-                  style={{
-                    opacity: fading ? 0 : 1,
-                    transition: fading ? 'opacity 0.14s ease-out' : 'opacity 0.22s ease-in',
-                    pointerEvents: fading ? 'none' : 'auto',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    flex: 1,
-                  }}
+                  className="week-cell-content"
+                  style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
                 >
                   <div className="week-day-col-header">
                     <span className={`week-day-col-num${today ? ' today' : ''}`}>
@@ -262,7 +288,7 @@ export default function WeeklyContent() {
                   </div>
                   <div className="week-day-col-todos">
                     {dayTodos.map(todo => {
-                      const subj = subjects.find(s => s.id === todo.subjectId);
+                      const subj      = subjects.find(s => s.id === todo.subjectId);
                       const completed = ['done', 'skip', 'cancel'].includes(todo.status);
                       return (
                         <button
@@ -290,7 +316,7 @@ export default function WeeklyContent() {
   );
 
   return (
-    <div className="weekly-content" ref={containerRef} style={{ pointerEvents: fading ? 'none' : 'auto' }}>
+    <div className="weekly-content" ref={containerRef}>
       {renderGrid()}
     </div>
   );
