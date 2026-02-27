@@ -51,6 +51,20 @@ const useTodoStore = create((set, get) => ({
     set({ baseDate: prev });
   },
 
+  nextDay: () => {
+    const { selectedDate } = get();
+    const d = new Date(selectedDate);
+    d.setDate(d.getDate() + 1);
+    set({ selectedDate: formatDate(d) });
+  },
+
+  prevDay: () => {
+    const { selectedDate } = get();
+    const d = new Date(selectedDate);
+    d.setDate(d.getDate() - 1);
+    set({ selectedDate: formatDate(d) });
+  },
+
   // ===== Todo Actions =====
   addTodo: (subjectId) => {
     const { selectedDate, nextId, editingTodoId, todos } = get();
