@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
-import { useDebounce } from '../../hooks/useDebounce';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
 import { CornerDownLeft, Clock, Pencil } from 'lucide-react';
 import CategoryPopup from './Popup/CategoryPopup';
@@ -10,21 +8,7 @@ import TimePopup from './Popup/TimePopup';
 export default function BottomSheetB({ activePopup, setActivePopup }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const originalData = useTodoStore(state => state.originalBottomSheetData);
-  const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveBottomSheet = useTodoStore(state => state.saveBottomSheet);
-
-  const [textInput, setTextInput] = useState(data.text);
-
-  // Debounce: 300ms 후 store 업데이트
-  const debouncedText = useDebounce(textInput, 300);
-
-  useEffect(() => {
-    updateBottomSheetField('text', debouncedText);
-  }, [debouncedText]);
-
-  const handleTextChange = (e) => {
-    setTextInput(e.target.value);
-  };
 
   const selectedSubject = data.category
     ? subjects.find(s => s.id === data.category)
@@ -45,24 +29,13 @@ export default function BottomSheetB({ activePopup, setActivePopup }) {
     return `${start} ~ ${formatTime(endStr)}`;
   })();
 
-  const isSaveDisabled = !textInput.trim();
+  const isSaveDisabled = !data.text.trim();
 
   // 최초 생성인지 수정인지 판단
   const isNewTodo = originalData && !originalData.text.trim();
 
   return (
     <>
-      <div className="bottom-sheet-text-input-wrapper">
-        <input
-          type="text"
-          className="bottom-sheet-text-input"
-          placeholder="할 일 입력..."
-          value={textInput}
-          onChange={handleTextChange}
-          autoFocus
-        />
-      </div>
-
       <div className="bottom-sheet-toolbar">
         <div className="toolbar-left">
           <button className="toolbar-btn" onClick={() => setActivePopup('category')}>

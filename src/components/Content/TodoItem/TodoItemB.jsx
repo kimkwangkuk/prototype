@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useTodoStore from '../../../store/useTodoStore';
 import { formatTime, formatDuration } from '../../../utils/timeUtils';
 import Checkbox from './Checkbox';
@@ -6,6 +6,8 @@ import Checkbox from './Checkbox';
 export default function TodoItemB({ todo, subjectColor }) {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
+  const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
+  const inputRef = useRef(null);
   const [pulseAnimation, setPulseAnimation] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -19,6 +21,12 @@ export default function TodoItemB({ todo, subjectColor }) {
 
   useEffect(() => {
     setPulseAnimation(isEditing);
+  }, [isEditing]);
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+    }
   }, [isEditing]);
 
   const handleCheckboxClick = (e) => {
@@ -58,10 +66,12 @@ export default function TodoItemB({ todo, subjectColor }) {
       </div>
       <div className="todo-info" onClick={handleItemClick}>
         <input
+          ref={inputRef}
           type="text"
           className={titleClass}
           value={todo.text}
-          readOnly
+          readOnly={!isEditing}
+          onChange={isEditing ? (e) => updateBottomSheetField('text', e.target.value) : undefined}
           placeholder="할 일 입력..."
         />
         {(todo.time || todo.duration) && (

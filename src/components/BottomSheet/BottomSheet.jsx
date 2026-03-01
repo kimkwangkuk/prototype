@@ -58,8 +58,8 @@ export default function BottomSheet() {
     <>
       <div
         className="bottom-sheet-overlay"
-        onClick={handleOverlayClick}
-        style={{ pointerEvents: 'auto' }}
+        onClick={mode === 'status-only' ? handleOverlayClick : undefined}
+        style={{ pointerEvents: mode === 'status-only' ? 'auto' : 'none' }}
       ></div>
       <div className={`bottom-sheet${animate ? ' visible' : ''}`}>
         {mode === 'status-only' ? (
