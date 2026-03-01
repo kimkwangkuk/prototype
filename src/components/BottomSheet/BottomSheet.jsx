@@ -75,6 +75,8 @@ export default function BottomSheet() {
   const handleGrabTouchEnd = () => {
     isDraggingRef.current = false;
     if (dragY > 80) {
+      // 인풋 포커스 해제 → 키보드 즉시 내림
+      document.activeElement?.blur();
       // 임계값 초과: 화면 아래로 슬라이드 후 닫기
       setDragY(window.innerHeight);
       setTimeout(() => closeBottomSheet(), 280);
