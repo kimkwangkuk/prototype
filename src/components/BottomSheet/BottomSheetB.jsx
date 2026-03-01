@@ -3,6 +3,7 @@ import { subjects } from '../../config';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
 import CategoryPopup from './Popup/CategoryPopup';
 import TimePopup from './Popup/TimePopup';
+import DurationPopup from './Popup/DurationPopup';
 
 export default function BottomSheetB({
   activePopup,
@@ -54,12 +55,8 @@ export default function BottomSheetB({
         </div>
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" onClick={() => setActivePopup('category')}>
-            <div className="toolbar-icon" style={{ backgroundColor: categoryColor }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <line x1="5" y1="5" x2="19" y2="5"/>
-                <line x1="5" y1="19" x2="19" y2="19"/>
-              </svg>
+            <div className="toolbar-icon">
+              <div className="toolbar-category-square" style={{ backgroundColor: categoryColor }} />
             </div>
             <span className="toolbar-icon-text">{categoryName}</span>
           </button>
@@ -88,14 +85,15 @@ export default function BottomSheetB({
             <span className="toolbar-icon-text">{timeText}</span>
           </button>
 
-          <button className="toolbar-icon-btn">
-            <div className="toolbar-icon toolbar-icon-disabled">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
+          <button className="toolbar-icon-btn" onClick={() => setActivePopup('duration')}>
+            <div className={`toolbar-icon${!data.duration ? ' toolbar-icon-disabled' : ''}`}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="10" x2="14" y1="2" y2="2"/>
+                <line x1="12" x2="15" y1="14" y2="11"/>
+                <circle cx="12" cy="14" r="8"/>
               </svg>
             </div>
-            <span className="toolbar-icon-text toolbar-icon-text-disabled">{durationText}</span>
+            <span className={`toolbar-icon-text${!data.duration ? ' toolbar-icon-text-disabled' : ''}`}>{durationText}</span>
           </button>
         </div>
       </div>
@@ -107,6 +105,11 @@ export default function BottomSheetB({
 
       <TimePopup
         visible={activePopup === 'time'}
+        onClose={() => setActivePopup(null)}
+      />
+
+      <DurationPopup
+        visible={activePopup === 'duration'}
         onClose={() => setActivePopup(null)}
       />
     </>
