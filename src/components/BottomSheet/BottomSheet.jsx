@@ -10,6 +10,7 @@ export default function BottomSheet() {
   const originalData = useTodoStore(state => state.originalBottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const closeBottomSheet = useTodoStore(state => state.closeBottomSheet);
+  const closeBottomSheetWithSave = useTodoStore(state => state.closeBottomSheetWithSave);
   const [animate, setAnimate] = useState(false);
   const [activePopup, setActivePopup] = useState(null);
 
@@ -76,9 +77,9 @@ export default function BottomSheet() {
     if (dragY > 80) {
       // 인풋 포커스 해제 → 키보드 즉시 내림
       document.activeElement?.blur();
-      // 임계값 초과: 화면 아래로 슬라이드 후 닫기
+      // 임계값 초과: 화면 아래로 슬라이드 후 저장하며 닫기
       setDragY(window.innerHeight);
-      setTimeout(() => closeBottomSheet(), 280);
+      setTimeout(() => closeBottomSheetWithSave(), 280);
     } else {
       // 임계값 미달: 원위치로 스냅
       setDragY(0);

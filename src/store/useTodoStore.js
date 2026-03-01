@@ -207,6 +207,48 @@ const useTodoStore = create((set, get) => ({
     });
   },
 
+  // 그래버로 닫을 때: 변경사항 저장
+  closeBottomSheetWithSave: () => {
+    const { bottomSheetData, editingTodoId, originalBottomSheetData } = get();
+
+    if (editingTodoId !== null && originalBottomSheetData) {
+      const currentText = bottomSheetData.text.trim();
+      const originalText = originalBottomSheetData.text.trim();
+
+      // 현재 텍스트가 비어있는 경우
+      if (!currentText) {
+        // 원본도 비어있었다면 (신규 생성) → 삭제
+        if (!originalText) {
+          get().deleteTodo(editingTodoId);
+        } else {
+          // 원본에 텍스트가 있었다면 → 원본으로 복원
+          get().updateTodo(editingTodoId, {
+            text: originalBottomSheetData.text,
+            subjectId: originalBottomSheetData.category,
+            status: originalBottomSheetData.status,
+            time: originalBottomSheetData.time === 'none' ? null : originalBottomSheetData.time,
+            duration: originalBottomSheetData.duration,
+          });
+        }
+      } else {
+        // 텍스트가 있으면 → 변경사항 저장
+        get().updateTodo(editingTodoId, {
+          text: bottomSheetData.text,
+          subjectId: bottomSheetData.category,
+          status: bottomSheetData.status,
+          time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
+          duration: bottomSheetData.duration,
+        });
+      }
+    }
+
+    set({
+      bottomSheetVisible: false,
+      editingTodoId: null,
+      originalBottomSheetData: null,
+    });
+  },
+
   updateBottomSheetField: (field, value) => {
     const { bottomSheetData, editingTodoId } = get();
 
