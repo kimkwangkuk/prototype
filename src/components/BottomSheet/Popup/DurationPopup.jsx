@@ -18,19 +18,15 @@ export default function DurationPopup({ visible, onClose, style }) {
     onClose();
   };
 
+  const handleClear = () => {
+    updateBottomSheetField('duration', null);
+    onClose();
+  };
+
   return (
     <>
       <div className="popup-overlay" onClick={onClose}></div>
       <div className="context-popup" data-popup="duration" style={style}>
-        <div className="popup-header">
-          <h4 className="popup-title">지속 시간</h4>
-          <button className="popup-close" onClick={onClose}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18"/>
-              <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
-        </div>
         <div className="popup-content">
           {durations.map(d => (
             <button
@@ -46,6 +42,11 @@ export default function DurationPopup({ visible, onClose, style }) {
               )}
             </button>
           ))}
+        </div>
+        <div className="popup-footer">
+          <button className="popup-clear-btn" onClick={handleClear}>
+            지속시간 없음
+          </button>
         </div>
       </div>
     </>
