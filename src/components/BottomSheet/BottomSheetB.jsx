@@ -22,8 +22,10 @@ export default function BottomSheetB({
 
   const openPopup = (e, name) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const vvHeight = window.visualViewport?.height ?? window.innerHeight;
-    const bottom = vvHeight - rect.top + 8;
+    // position:fixed의 bottom은 레이아웃 뷰포트 기준,
+    // getBoundingClientRect는 비주얼 뷰포트 기준 → offsetTop으로 변환
+    const offsetTop = window.visualViewport?.offsetTop ?? 0;
+    const bottom = window.innerHeight - (offsetTop + rect.top) + 8;
     setPopupStyle({ bottom: `${bottom}px` });
     setActivePopup(name);
   };
