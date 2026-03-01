@@ -35,6 +35,38 @@ function getMonthCalendar(baseDate) {
   return weeks;
 }
 
+function WeekTodoEditInput({ text }) {
+  const inputRef = useRef(null);
+  const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
+  const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
+
+  useEffect(() => {
+    const el = inputRef.current;
+    if (el) {
+      el.removeAttribute('readonly');
+      el.focus();
+    }
+  }, []);
+
+  return (
+    <input
+      ref={inputRef}
+      type="text"
+      readOnly
+      className="week-todo-text week-todo-edit-input"
+      value={text}
+      onChange={(e) => updateBottomSheetField('text', e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          saveAndAddNewTodo();
+        }
+      }}
+      placeholder="할 일 입력..."
+    />
+  );
+}
+
 function WeekNavCell({ baseDate, currentWeekStrs, onWeekClick }) {
   const monthCalendar = useMemo(() => getMonthCalendar(baseDate), [baseDate]);
   const month = baseDate.getMonth();
@@ -99,6 +131,7 @@ export default function WeeklyContent() {
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const nextWeekAction  = useTodoStore(state => state.nextWeek);
   const prevWeekAction  = useTodoStore(state => state.prevWeek);
+  const editingTodoId   = useTodoStore(state => state.editingTodoId);
 
   const weekDates       = useMemo(() => getWeekDates(baseDate), [baseDate]);
   const currentWeekStrs = useMemo(() => new Set(weekDates.map(d => formatDate(d))), [weekDates]);
@@ -228,8 +261,7 @@ export default function WeeklyContent() {
   const handleAdd = (dateStr) => {
     if (stateRef.current.animating) return;
     selectDate(dateStr);
-    const randomSubject = subjects[Math.floor(Math.random() * subjects.length)].id;
-    addTodo(randomSubject);
+    addTodo(subjects[0].id);
   };
 
   const handleTodoClick = (todo) => {
@@ -240,6 +272,7 @@ export default function WeeklyContent() {
       text:     todo.text,
       time:     todo.time || '',
       duration: todo.duration,
+      date:     todo.date || 'today',
     });
   };
 
@@ -252,6 +285,7 @@ export default function WeeklyContent() {
       text:     todo.text,
       time:     todo.time || '',
       duration: todo.duration,
+      date:     todo.date || 'today',
     });
   };
 
@@ -296,6 +330,23 @@ export default function WeeklyContent() {
                     {dayTodos.map(todo => {
                       const subj      = subjects.find(s => s.id === todo.subjectId);
                       const completed = ['done', 'skip', 'cancel'].includes(todo.status);
+                      const isEditing = editingTodoId === todo.id;
+
+                      if (isEditing) {
+                        return (
+                          <div
+                            key={todo.id}
+                            className="week-todo-item editing"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <div className="week-todo-check" onClick={(e) => handleCheckboxClick(e, todo)}>
+                              <Checkbox status={todo.status} color={subj?.color} />
+                            </div>
+                            <WeekTodoEditInput text={todo.text} />
+                          </div>
+                        );
+                      }
+
                       return (
                         <button
                           key={todo.id}
