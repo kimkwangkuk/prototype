@@ -20,7 +20,8 @@ function updateViewportOffset() {
   document.documentElement.style.setProperty('--vv-offset-bottom', `${offsetBottom}px`);
 }
 if (window.visualViewport) {
-  window.visualViewport.addEventListener('scroll', updateViewportOffset);
+  // scroll 이벤트 제거: 스크롤마다 CSS 변수 업데이트 시 fixed 요소와 충돌 → 더럭거림
+  // resize만 사용: 키보드 열기/닫기 시에만 업데이트, 스크롤 중엔 iOS 네이티브 동작에 위임
   window.visualViewport.addEventListener('resize', updateViewportOffset);
 }
 
