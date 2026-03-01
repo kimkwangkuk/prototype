@@ -762,7 +762,7 @@ textarea {
 
 .bottom-sheet {
   position: fixed;
-  bottom: calc(var(--vv-offset-bottom, 0px) + 12px);
+  bottom: calc(var(--vv-offset-bottom, 0px) + env(safe-area-inset-bottom, 0px) + 12px);
   left: 50%;
   transform: translateX(-50%) translateY(calc(100% + 12px));
   width: calc(100% - 32px);
@@ -2131,7 +2131,7 @@ textarea {
 /* ─── New Bottom Sheet Toolbar (Figma Design) ─── */
 .bottom-sheet-toolbar-new {
   position: relative;
-  padding: 0 16px calc(8px + env(safe-area-inset-bottom));
+  padding: 4px 16px 4px; /* Figma py-[4px] — safe-area는 .bottom-sheet bottom 위치에서 처리 */
   display: flex;
   flex-direction: column;
   gap: 2px;
