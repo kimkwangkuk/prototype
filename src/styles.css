@@ -393,6 +393,7 @@ textarea {
 
 /* Todo Item */
 .todo-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -411,26 +412,19 @@ textarea {
   border-radius: 8px;
   margin: 0 -8px;
 }
-.todo-item.pulse-in {
-  padding: 4px 8px;
+.todo-item.pulse-in::before {
+  content: '';
+  position: absolute;
+  inset: 0 -8px;
   border-radius: 8px;
-  margin: 0 -8px;
+  pointer-events: none;
   animation: pulseBackground 1s ease-in-out 1;
 }
 
 @keyframes pulseBackground {
-  0%, 100% {
-    background: rgba(0,0,0,0.02);
-  }
-  25% {
-    background: rgba(0,0,0,0.08);
-  }
-  50% {
-    background: rgba(0,0,0,0.02);
-  }
-  75% {
-    background: rgba(0,0,0,0.08);
-  }
+  0%   { background: rgba(0,0,0,0.02); }
+  50%  { background: rgba(0,0,0,0.08); }
+  100% { background: rgba(0,0,0,0.02); }
 }
 .todo-checkbox {
   width: 24px;
