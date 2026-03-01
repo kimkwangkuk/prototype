@@ -2224,6 +2224,11 @@ textarea {
   opacity: 0.3;
 }
 
+.toolbar-icon-text-none {
+  font-size: 13px;
+  font-weight: 500;
+}
+
 .toolbar-category-square {
   width: 20px;
   height: 20px;

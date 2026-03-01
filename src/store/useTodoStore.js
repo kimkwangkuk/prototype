@@ -202,7 +202,7 @@ const useTodoStore = create((set, get) => ({
           subjectId: originalBottomSheetData.category,
           status: originalBottomSheetData.status,
           time: originalBottomSheetData.time === 'none' ? null : originalBottomSheetData.time,
-          duration: originalBottomSheetData.duration,
+          duration: originalBottomSheetData.duration === 'none' ? null : originalBottomSheetData.duration,
         });
       }
     }
@@ -234,7 +234,7 @@ const useTodoStore = create((set, get) => ({
             subjectId: originalBottomSheetData.category,
             status: originalBottomSheetData.status,
             time: originalBottomSheetData.time === 'none' ? null : originalBottomSheetData.time,
-            duration: originalBottomSheetData.duration,
+            duration: originalBottomSheetData.duration === 'none' ? null : originalBottomSheetData.duration,
           });
         }
       } else {
@@ -244,7 +244,7 @@ const useTodoStore = create((set, get) => ({
           subjectId: bottomSheetData.category,
           status: bottomSheetData.status,
           time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
-          duration: bottomSheetData.duration,
+          duration: bottomSheetData.duration === 'none' ? null : bottomSheetData.duration,
         });
       }
     }
@@ -272,6 +272,7 @@ const useTodoStore = create((set, get) => ({
       const updateData = {};
       if (field === 'category') updateData.subjectId = value;
       else if (field === 'time') updateData.time = value === 'none' ? null : value;
+      else if (field === 'duration') updateData.duration = value === 'none' ? null : value;
       else updateData[field] = value;
 
       get().updateTodo(editingTodoId, updateData);
@@ -287,7 +288,7 @@ const useTodoStore = create((set, get) => ({
         subjectId: bottomSheetData.category,
         status: bottomSheetData.status,
         time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
-        duration: bottomSheetData.duration,
+        duration: bottomSheetData.duration === 'none' ? null : bottomSheetData.duration,
       });
     }
 
@@ -315,7 +316,7 @@ const useTodoStore = create((set, get) => ({
         subjectId: bottomSheetData.category,
         status: bottomSheetData.status,
         time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
-        duration: bottomSheetData.duration,
+        duration: bottomSheetData.duration === 'none' ? null : bottomSheetData.duration,
       });
     }
 

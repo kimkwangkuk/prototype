@@ -50,10 +50,13 @@ export default function BottomSheetB({
   const dateText = dateLabels[data.date] || '오늘';
   const dateDisabled = false;
 
-  const timeDisabled = !data.time || data.time === 'none';
-  const timeText = timeDisabled ? '시작 시간' : formatTime(data.time);
+  const timeNone = data.time === 'none';
+  const timeDisabled = !data.time;
+  const timeText = timeNone ? '없음' : (timeDisabled ? '시작 시간' : formatTime(data.time));
 
-  const durationText = data.duration ? formatDuration(data.duration) : '지속시간';
+  const durationNone = data.duration === 'none';
+  const durationDisabled = !data.duration && !durationNone;
+  const durationText = durationNone ? '없음' : (durationDisabled ? '지속시간' : formatDuration(data.duration));
 
   const sheetStyle = dragY > 0 ? {
     transform: `translateX(-50%) translateY(${dragY}px)`,
@@ -104,18 +107,18 @@ export default function BottomSheetB({
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
             </div>
-            <span className={`toolbar-icon-text${timeDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{timeText}</span>
+            <span className={`toolbar-icon-text${timeDisabled ? ' toolbar-icon-text-disabled' : ''}${timeNone ? ' toolbar-icon-text-none' : ''}`}>{timeText}</span>
           </button>
 
           <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'duration')}>
-            <div className={`toolbar-icon${!data.duration ? ' toolbar-icon-disabled' : ''}`}>
+            <div className={`toolbar-icon${durationDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="10" x2="14" y1="2" y2="2"/>
                 <line x1="12" x2="15" y1="14" y2="11"/>
                 <circle cx="12" cy="14" r="8"/>
               </svg>
             </div>
-            <span className={`toolbar-icon-text${!data.duration ? ' toolbar-icon-text-disabled' : ''}`}>{durationText}</span>
+            <span className={`toolbar-icon-text${durationDisabled ? ' toolbar-icon-text-disabled' : ''}${durationNone || timeNone ? ' toolbar-icon-text-none' : ''}`}>{durationText}</span>
           </button>
         </div>
       </div>
