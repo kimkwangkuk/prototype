@@ -7,6 +7,7 @@ export default function BottomSheet() {
   const visible = useTodoStore(state => state.bottomSheetVisible);
   const mode = useTodoStore(state => state.bottomSheetMode);
   const data = useTodoStore(state => state.bottomSheetData);
+  const originalData = useTodoStore(state => state.originalBottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const closeBottomSheet = useTodoStore(state => state.closeBottomSheet);
   const [animate, setAnimate] = useState(false);
@@ -22,28 +23,26 @@ export default function BottomSheet() {
       // 10ms 후 애니메이션 시작 (CSS transition을 위해)
       setTimeout(() => setAnimate(true), 10);
 
-      // 편집 중인 할일을 바텀시트 위쪽으로 스크롤 (원본과 동일한 타이밍)
-      if (editingTodoId && mode !== 'status-only') {
+      // 신규 할일(빈 텍스트)만 스크롤: 기존 할일 편집 시 스크롤하면 iOS 키보드가 닫힘
+      const isNewTodo = originalData && !originalData.text.trim();
+      if (editingTodoId && mode !== 'status-only' && isNewTodo) {
         setTimeout(() => {
           const todoItem = document.querySelector(`[data-todo-id="${editingTodoId}"]`);
           if (todoItem) {
             const rect = todoItem.getBoundingClientRect();
-            const offset = window.innerHeight * 0.25; // 상단 25% 위치
+            const offset = window.innerHeight * 0.4;
             const contentEl = document.getElementById('content');
-            if (contentEl) {
-              contentEl.scrollBy({
-                top: rect.top - offset,
-                behavior: 'smooth'
-              });
+            if (contentEl && rect.top > offset) {
+              contentEl.scrollBy({ top: rect.top - offset, behavior: 'smooth' });
             }
           }
-        }, 10);
+        }, 150);
       }
     } else {
       setAnimate(false);
       setDragY(0);
     }
-  }, [visible, editingTodoId, mode]);
+  }, [visible]);
 
   // 바텀시트가 닫힐 때 팝업 상태도 초기화
   useEffect(() => {

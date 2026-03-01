@@ -144,7 +144,7 @@ export default function DayView() {
   return (
     <div
       ref={wrapRef}
-      style={{ willChange: 'opacity, transform', touchAction: 'pan-y' }}
+      style={{ position: 'relative', height: '100%', willChange: 'opacity, transform', touchAction: 'pan-y' }}
     >
       <div className="content" id="content">
         {subjects.map(subj => (

@@ -249,6 +249,60 @@ const useTodoStore = create((set, get) => ({
     });
   },
 
+  // Enter 키: 현재 할일 저장 후 같은 과목에 빈 할일 추가
+  saveAndAddNewTodo: () => {
+    const { bottomSheetData, editingTodoId, selectedDate, nextId } = get();
+
+    // 빈 텍스트면 그냥 닫기
+    if (!bottomSheetData.text.trim()) {
+      get().closeBottomSheet();
+      return;
+    }
+
+    // 현재 할일 저장
+    if (editingTodoId !== null) {
+      get().updateTodo(editingTodoId, {
+        text: bottomSheetData.text,
+        subjectId: bottomSheetData.category,
+        status: bottomSheetData.status,
+        time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
+        duration: bottomSheetData.duration,
+      });
+    }
+
+    // 새 빈 할일 추가
+    const newTodo = {
+      id: nextId,
+      subjectId: bottomSheetData.category,
+      text: '',
+      status: 'empty',
+      time: null,
+      duration: null,
+      overdue: false,
+    };
+
+    const newBottomSheetData = {
+      todoId: nextId,
+      category: bottomSheetData.category,
+      status: 'empty',
+      text: '',
+      time: '',
+      duration: null,
+    };
+
+    const currentTodos = get().todos;
+    set({
+      todos: {
+        ...currentTodos,
+        [selectedDate]: [...(currentTodos[selectedDate] || []), newTodo],
+      },
+      nextId: nextId + 1,
+      editingTodoId: nextId,
+      bottomSheetData: newBottomSheetData,
+      originalBottomSheetData: { ...newBottomSheetData },
+    });
+  },
+
   setVariant: (variant) => set({ currentVariant: variant }),
   setView: (view) => set({ currentView: view }),
   setTab: (tab) => set({ currentTab: tab }),

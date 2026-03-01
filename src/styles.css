@@ -31,6 +31,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+#root {
+  height: 100%;
+}
+
 body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-primary);
@@ -314,7 +318,7 @@ textarea {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0 16px 400px;
+  padding: 0 16px 160px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */

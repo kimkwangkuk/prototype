@@ -7,6 +7,7 @@ export default function TodoItemB({ todo, subjectColor }) {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
+  const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const inputRef = useRef(null);
   const [pulseAnimation, setPulseAnimation] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -25,9 +26,17 @@ export default function TodoItemB({ todo, subjectColor }) {
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
+      inputRef.current.removeAttribute('readonly');
       inputRef.current.focus();
     }
   }, [isEditing]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      saveAndAddNewTodo();
+    }
+  };
 
   const handleCheckboxClick = (e) => {
     e.stopPropagation();
@@ -78,6 +87,7 @@ export default function TodoItemB({ todo, subjectColor }) {
           value={todo.text}
           readOnly={!isEditing}
           onChange={isEditing ? (e) => updateBottomSheetField('text', e.target.value) : undefined}
+          onKeyDown={isEditing ? handleKeyDown : undefined}
           placeholder="할 일 입력..."
         />
         {(todo.time || todo.duration) && (
