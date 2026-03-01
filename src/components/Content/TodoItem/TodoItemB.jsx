@@ -86,6 +86,7 @@ export default function TodoItemB({ todo, subjectColor }) {
           className={titleClass}
           value={todo.text}
           readOnly={!isEditing}
+          style={isEditing ? undefined : { pointerEvents: 'none' }}
           onChange={isEditing ? (e) => updateBottomSheetField('text', e.target.value) : undefined}
           onKeyDown={isEditing ? handleKeyDown : undefined}
           placeholder="할 일 입력..."
