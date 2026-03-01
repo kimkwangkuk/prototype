@@ -127,7 +127,7 @@ const useTodoStore = create((set, get) => ({
       overdue: false,
     };
 
-    const bottomSheetData = {
+    const newSheetData = {
       todoId: currentNextId,
       category: subjectId,
       status: 'empty',
@@ -146,9 +146,8 @@ const useTodoStore = create((set, get) => ({
       editingTodoId: currentNextId,
       bottomSheetVisible: true,
       bottomSheetMode: 'full',
-      bottomSheetData: bottomSheetData,
-      // 취소 시 복원용 (새 항목은 빈 텍스트이므로 취소 시 삭제됨)
-      originalBottomSheetData: { ...bottomSheetData },
+      bottomSheetData: newSheetData,
+      originalBottomSheetData: { ...newSheetData },
     });
   },
 
