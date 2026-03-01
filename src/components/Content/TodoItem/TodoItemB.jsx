@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import useTodoStore from '../../../store/useTodoStore';
 import { formatTime, formatDuration } from '../../../utils/timeUtils';
 import Checkbox from './Checkbox';
 
 const moveCursorToEnd = (el) => {
+  if (!el) return;
   const range = document.createRange();
   const sel = window.getSelection();
   range.selectNodeContents(el);
@@ -33,23 +34,27 @@ export default function TodoItemB({ todo, subjectColor }) {
     setPulseAnimation(isEditing);
   }, [isEditing]);
 
-  // 마운트 시 초기 텍스트 세팅
-  useEffect(() => {
+  // 페인트 전에 텍스트 세팅 → 빈 화면 플래시 없음
+  useLayoutEffect(() => {
     if (divRef.current) {
       divRef.current.innerText = todo.text || '';
     }
   }, []);
 
-  // 편집 종료 시 DOM을 store 값으로 동기화
+  // 편집 상태 전환 처리
   useEffect(() => {
-    if (!isEditing && divRef.current) {
-      divRef.current.innerText = todo.text || '';
+    if (!divRef.current) return;
+    if (isEditing) {
+      // React 리렌더 후 커서 맨 뒤로
+      moveCursorToEnd(divRef.current);
+    } else {
+      // 편집 종료: contentEditable 해제 + store 값으로 동기화
       divRef.current.contentEditable = 'false';
+      divRef.current.innerText = todo.text || '';
     }
   }, [isEditing]);
 
   const handleInput = (e) => {
-    if (!isEditing) return;
     const text = e.currentTarget.innerText.replace(/\n/g, '');
     updateBottomSheetField('text', text);
   };
@@ -82,11 +87,10 @@ export default function TodoItemB({ todo, subjectColor }) {
       time: todo.time || '',
       duration: todo.duration,
     });
-    // iOS: 유저 제스처 컨텍스트 안에서 contentEditable + focus() 해야 키보드 올라옴
+    // iOS: 유저 제스처 안에서 contentEditable 활성화 + focus() 해야 키보드 올라옴
     if (divRef.current) {
       divRef.current.contentEditable = 'true';
       divRef.current.focus();
-      moveCursorToEnd(divRef.current);
     }
   };
 
@@ -105,10 +109,10 @@ export default function TodoItemB({ todo, subjectColor }) {
       <div className="todo-info" onClick={handleItemClick}>
         <div
           ref={divRef}
-          contentEditable="false"
+          contentEditable={isEditing ? 'true' : 'false'}
           suppressContentEditableWarning
           className={titleClass}
-          onInput={handleInput}
+          onInput={isEditing ? handleInput : undefined}
           onKeyDown={isEditing ? handleKeyDown : undefined}
           style={!isEditing ? { pointerEvents: 'none' } : undefined}
           data-placeholder="할 일 입력..."
