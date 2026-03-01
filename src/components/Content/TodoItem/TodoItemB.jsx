@@ -47,6 +47,7 @@ export default function TodoItemB({ todo, subjectColor }) {
       text: todo.text,
       time: todo.time || '',
       duration: todo.duration,
+      date: todo.date || 'today',
     });
   };
 
@@ -58,6 +59,7 @@ export default function TodoItemB({ todo, subjectColor }) {
       text: todo.text,
       time: todo.time || '',
       duration: todo.duration,
+      date: todo.date || 'today',
     });
     // iOS는 readOnly 상태의 input에 focus()를 무시함.
     // removeAttribute로 readOnly를 동기 제거 후 focus() → iOS 키보드 표시

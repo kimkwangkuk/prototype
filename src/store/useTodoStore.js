@@ -22,6 +22,7 @@ const useTodoStore = create((set, get) => ({
     text: '',
     time: '',
     duration: null,
+    date: 'today',
   },
   // 취소 시 복원용 원본 데이터
   originalBottomSheetData: null,
@@ -115,6 +116,7 @@ const useTodoStore = create((set, get) => ({
       text: '',
       time: '',
       duration: null,
+      date: 'today',
     };
 
     set({
@@ -335,6 +337,7 @@ const useTodoStore = create((set, get) => ({
       text: '',
       time: '',
       duration: null,
+      date: 'today',
     };
 
     const currentTodos = get().todos;

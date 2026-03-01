@@ -3,6 +3,7 @@ import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
 import CategoryPopup from './Popup/CategoryPopup';
+import DatePopup from './Popup/DatePopup';
 import TimePopup from './Popup/TimePopup';
 import DurationPopup from './Popup/DurationPopup';
 
@@ -45,8 +46,9 @@ export default function BottomSheetB({
   const categoryColor = selectedSubject?.color;
   const categoryDisabled = !data.category;
 
-  const dateText = '날짜';
-  const dateDisabled = true;
+  const dateLabels = { today: '오늘', repeat: '반복', date: '날짜' };
+  const dateText = dateLabels[data.date] || '오늘';
+  const dateDisabled = false;
 
   const timeDisabled = !data.time || data.time === 'none';
   const timeText = timeDisabled ? '시간' : formatTime(data.time);
@@ -81,7 +83,7 @@ export default function BottomSheetB({
             <span className={`toolbar-icon-text${categoryDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{categoryName}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'time')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'date')}>
             <div className={`toolbar-icon${dateDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -120,6 +122,12 @@ export default function BottomSheetB({
 
       <CategoryPopup
         visible={activePopup === 'category'}
+        onClose={closePopup}
+        style={popupStyle}
+      />
+
+      <DatePopup
+        visible={activePopup === 'date'}
         onClose={closePopup}
         style={popupStyle}
       />
