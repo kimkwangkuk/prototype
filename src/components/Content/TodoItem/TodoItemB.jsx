@@ -1,24 +1,14 @@
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useTodoStore from '../../../store/useTodoStore';
 import { formatTime, formatDuration } from '../../../utils/timeUtils';
 import Checkbox from './Checkbox';
-
-const moveCursorToEnd = (el) => {
-  if (!el) return;
-  const range = document.createRange();
-  const sel = window.getSelection();
-  range.selectNodeContents(el);
-  range.collapse(false);
-  sel.removeAllRanges();
-  sel.addRange(range);
-};
 
 export default function TodoItemB({ todo, subjectColor }) {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
-  const divRef = useRef(null);
+  const inputRef = useRef(null);
   const [pulseAnimation, setPulseAnimation] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -34,30 +24,12 @@ export default function TodoItemB({ todo, subjectColor }) {
     setPulseAnimation(isEditing);
   }, [isEditing]);
 
-  // 페인트 전에 텍스트 세팅 → 빈 화면 플래시 없음
-  useLayoutEffect(() => {
-    if (divRef.current) {
-      divRef.current.innerText = todo.text || '';
-    }
-  }, []);
-
-  // 편집 상태 전환 처리
   useEffect(() => {
-    if (!divRef.current) return;
-    if (isEditing) {
-      // React 리렌더 후 커서 맨 뒤로
-      moveCursorToEnd(divRef.current);
-    } else {
-      // 편집 종료: contentEditable 해제 + store 값으로 동기화
-      divRef.current.contentEditable = 'false';
-      divRef.current.innerText = todo.text || '';
+    if (isEditing && inputRef.current) {
+      inputRef.current.removeAttribute('readonly');
+      inputRef.current.focus();
     }
   }, [isEditing]);
-
-  const handleInput = (e) => {
-    const text = e.currentTarget.innerText.replace(/\n/g, '');
-    updateBottomSheetField('text', text);
-  };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -87,10 +59,11 @@ export default function TodoItemB({ todo, subjectColor }) {
       time: todo.time || '',
       duration: todo.duration,
     });
-    // iOS: 유저 제스처 안에서 contentEditable 활성화 + focus() 해야 키보드 올라옴
-    if (divRef.current) {
-      divRef.current.contentEditable = 'true';
-      divRef.current.focus();
+    // iOS는 readOnly 상태의 input에 focus()를 무시함.
+    // removeAttribute로 readOnly를 동기 제거 후 focus() → iOS 키보드 표시
+    if (inputRef.current) {
+      inputRef.current.removeAttribute('readonly');
+      inputRef.current.focus();
     }
   };
 
@@ -107,15 +80,16 @@ export default function TodoItemB({ todo, subjectColor }) {
         <Checkbox status={todo.status} color={subjectColor} />
       </div>
       <div className="todo-info" onClick={handleItemClick}>
-        <div
-          ref={divRef}
-          contentEditable={isEditing ? 'true' : 'false'}
-          suppressContentEditableWarning
+        <input
+          ref={inputRef}
+          type="text"
           className={titleClass}
-          onInput={isEditing ? handleInput : undefined}
+          value={todo.text}
+          readOnly={!isEditing}
+          style={isEditing ? undefined : { pointerEvents: 'none' }}
+          onChange={isEditing ? (e) => updateBottomSheetField('text', e.target.value) : undefined}
           onKeyDown={isEditing ? handleKeyDown : undefined}
-          style={!isEditing ? { pointerEvents: 'none' } : undefined}
-          data-placeholder="할 일 입력..."
+          placeholder="할 일 입력..."
         />
         {(todo.time || todo.duration) && (
           <div className="todo-meta">

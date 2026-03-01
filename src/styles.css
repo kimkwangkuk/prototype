@@ -552,15 +552,16 @@ textarea {
 .todo-item.editing .todo-title {
   cursor: text;
 }
-.todo-title[contenteditable="false"] {
+.todo-title[readonly] {
   cursor: pointer;
   caret-color: transparent;
-  user-select: none;
 }
-.todo-title[contenteditable="true"]:empty::before {
-  content: attr(data-placeholder);
+.todo-title[readonly]:focus {
+  outline: none;
+  caret-color: transparent;
+}
+.todo-title::placeholder {
   color: var(--label-quaternary);
-  pointer-events: none;
 }
 .todo-title.completed {
   text-decoration: line-through;
@@ -1226,8 +1227,8 @@ textarea {
 }
 
 .context-popup {
-  position: absolute;
-  bottom: 80px;
+  position: fixed;
+  bottom: calc(var(--vv-offset-bottom, 0px) + 80px);
   left: 20px;
   right: 20px;
   background: var(--bg-primary);
