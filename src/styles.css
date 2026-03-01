@@ -2123,3 +2123,87 @@ textarea {
 .cal-chip-orange .cal-chip-text {
   color: #ff7300;
 }
+
+/* ─── New Bottom Sheet Toolbar (Figma Design) ─── */
+.bottom-sheet-toolbar-new {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.toolbar-grabber {
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.toolbar-grabber-bar {
+  width: 39px;
+  height: 4px;
+  background: #d9d9d9;
+  border-radius: 12px;
+}
+
+.toolbar-glass-container {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 1);
+  border-radius: 20px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toolbar-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  min-width: 49px;
+}
+
+.toolbar-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.toolbar-icon svg {
+  width: 16px;
+  height: 16px;
+  color: #000;
+  stroke-width: 2;
+}
+
+.toolbar-icon-disabled {
+  opacity: 0.3;
+}
+
+.toolbar-icon-text {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.036px;
+  color: #000;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.toolbar-icon-text-disabled {
+  opacity: 0.3;
+}
