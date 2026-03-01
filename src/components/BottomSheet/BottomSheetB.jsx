@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
@@ -16,6 +17,24 @@ export default function BottomSheetB({
   handleGrabTouchEnd
 }) {
   const data = useTodoStore(state => state.bottomSheetData);
+  const editingTodoId = useTodoStore(state => state.editingTodoId);
+  const [popupStyle, setPopupStyle] = useState({});
+
+  const openPopup = (e, name) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const vvHeight = window.visualViewport?.height ?? window.innerHeight;
+    const bottom = vvHeight - rect.top + 8;
+    setPopupStyle({ bottom: `${bottom}px` });
+    setActivePopup(name);
+  };
+
+  const closePopup = () => {
+    setActivePopup(null);
+    if (editingTodoId) {
+      const input = document.querySelector(`[data-todo-id="${editingTodoId}"] input`);
+      input?.focus();
+    }
+  };
 
   const selectedSubject = data.category
     ? subjects.find(s => s.id === data.category)
@@ -54,14 +73,14 @@ export default function BottomSheetB({
           <div className="toolbar-grabber-bar" />
         </div>
         <div className="toolbar-buttons-container">
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('category')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'category')}>
             <div className="toolbar-icon">
               <div className="toolbar-category-square" style={{ backgroundColor: categoryColor }} />
             </div>
             <span className="toolbar-icon-text">{categoryName}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('time')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'time')}>
             <div className="toolbar-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -75,7 +94,7 @@ export default function BottomSheetB({
             <span className="toolbar-icon-text">{dateText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('time')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'time')}>
             <div className="toolbar-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
@@ -85,7 +104,7 @@ export default function BottomSheetB({
             <span className="toolbar-icon-text">{timeText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('duration')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'duration')}>
             <div className={`toolbar-icon${!data.duration ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="10" x2="14" y1="2" y2="2"/>
@@ -100,17 +119,20 @@ export default function BottomSheetB({
 
       <CategoryPopup
         visible={activePopup === 'category'}
-        onClose={() => setActivePopup(null)}
+        onClose={closePopup}
+        style={popupStyle}
       />
 
       <TimePopup
         visible={activePopup === 'time'}
-        onClose={() => setActivePopup(null)}
+        onClose={closePopup}
+        style={popupStyle}
       />
 
       <DurationPopup
         visible={activePopup === 'duration'}
-        onClose={() => setActivePopup(null)}
+        onClose={closePopup}
+        style={popupStyle}
       />
     </>
   );

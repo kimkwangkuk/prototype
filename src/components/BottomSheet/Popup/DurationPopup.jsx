@@ -1,6 +1,6 @@
 import useTodoStore from '../../../store/useTodoStore';
 
-export default function DurationPopup({ visible, onClose }) {
+export default function DurationPopup({ visible, onClose, style }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
@@ -21,7 +21,7 @@ export default function DurationPopup({ visible, onClose }) {
   return (
     <>
       <div className="popup-overlay" onClick={onClose}></div>
-      <div className="context-popup" data-popup="duration">
+      <div className="context-popup" data-popup="duration" style={style}>
         <div className="popup-header">
           <h4 className="popup-title">지속 시간</h4>
           <button className="popup-close" onClick={onClose}>

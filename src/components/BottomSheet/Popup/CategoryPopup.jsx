@@ -1,7 +1,7 @@
 import useTodoStore from '../../../store/useTodoStore';
 import { subjects } from '../../../config';
 
-export default function CategoryPopup({ visible, onClose }) {
+export default function CategoryPopup({ visible, onClose, style }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
@@ -15,7 +15,7 @@ export default function CategoryPopup({ visible, onClose }) {
   return (
     <>
       <div className="popup-overlay" onClick={onClose}></div>
-      <div className="context-popup" data-popup="category">
+      <div className="context-popup" data-popup="category" style={style}>
         <div className="popup-header">
           <h4 className="popup-title">과목 선택</h4>
           <button className="popup-close" onClick={onClose}>

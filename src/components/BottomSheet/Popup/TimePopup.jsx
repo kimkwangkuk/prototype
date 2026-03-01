@@ -24,7 +24,7 @@ function pickerToTimeStr({ ampm: ap, hour, minute }) {
   return `${String(h).padStart(2, '0')}:${minute}`;
 }
 
-export default function TimePopup({ visible, onClose }) {
+export default function TimePopup({ visible, onClose, style }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
@@ -57,7 +57,7 @@ export default function TimePopup({ visible, onClose }) {
   return (
     <>
       <div className="popup-overlay" onClick={onClose}></div>
-      <div className="context-popup" data-popup="time">
+      <div className="context-popup" data-popup="time" style={style}>
         <div className="popup-content">
           <div className="drum-picker-wrapper">
             <Picker value={timeValue} onChange={handleTimeChange} wheelMode="natural" height={180} itemHeight={44}>
