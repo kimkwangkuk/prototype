@@ -552,16 +552,15 @@ textarea {
 .todo-item.editing .todo-title {
   cursor: text;
 }
-.todo-title[readonly] {
+.todo-title[contenteditable="false"] {
   cursor: pointer;
   caret-color: transparent;
+  user-select: none;
 }
-.todo-title[readonly]:focus {
-  outline: none;
-  caret-color: transparent;
-}
-.todo-title::placeholder {
+.todo-title[contenteditable="true"]:empty::before {
+  content: attr(data-placeholder);
   color: var(--label-quaternary);
+  pointer-events: none;
 }
 .todo-title.completed {
   text-decoration: line-through;

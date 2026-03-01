@@ -3,12 +3,21 @@ import useTodoStore from '../../../store/useTodoStore';
 import { formatTime, formatDuration } from '../../../utils/timeUtils';
 import Checkbox from './Checkbox';
 
+const moveCursorToEnd = (el) => {
+  const range = document.createRange();
+  const sel = window.getSelection();
+  range.selectNodeContents(el);
+  range.collapse(false);
+  sel.removeAllRanges();
+  sel.addRange(range);
+};
+
 export default function TodoItemB({ todo, subjectColor }) {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
-  const inputRef = useRef(null);
+  const divRef = useRef(null);
   const [pulseAnimation, setPulseAnimation] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -24,12 +33,26 @@ export default function TodoItemB({ todo, subjectColor }) {
     setPulseAnimation(isEditing);
   }, [isEditing]);
 
+  // 마운트 시 초기 텍스트 세팅
   useEffect(() => {
-    if (isEditing && inputRef.current) {
-      inputRef.current.removeAttribute('readonly');
-      inputRef.current.focus();
+    if (divRef.current) {
+      divRef.current.innerText = todo.text || '';
+    }
+  }, []);
+
+  // 편집 종료 시 DOM을 store 값으로 동기화
+  useEffect(() => {
+    if (!isEditing && divRef.current) {
+      divRef.current.innerText = todo.text || '';
+      divRef.current.contentEditable = 'false';
     }
   }, [isEditing]);
+
+  const handleInput = (e) => {
+    if (!isEditing) return;
+    const text = e.currentTarget.innerText.replace(/\n/g, '');
+    updateBottomSheetField('text', text);
+  };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -59,11 +82,11 @@ export default function TodoItemB({ todo, subjectColor }) {
       time: todo.time || '',
       duration: todo.duration,
     });
-    // iOS는 readOnly 상태의 input에 focus()를 무시함.
-    // removeAttribute로 readOnly를 동기 제거 후 focus() → iOS 키보드 표시
-    if (inputRef.current) {
-      inputRef.current.removeAttribute('readonly');
-      inputRef.current.focus();
+    // iOS: 유저 제스처 컨텍스트 안에서 contentEditable + focus() 해야 키보드 올라옴
+    if (divRef.current) {
+      divRef.current.contentEditable = 'true';
+      divRef.current.focus();
+      moveCursorToEnd(divRef.current);
     }
   };
 
@@ -80,16 +103,15 @@ export default function TodoItemB({ todo, subjectColor }) {
         <Checkbox status={todo.status} color={subjectColor} />
       </div>
       <div className="todo-info" onClick={handleItemClick}>
-        <input
-          ref={inputRef}
-          type="text"
+        <div
+          ref={divRef}
+          contentEditable="false"
+          suppressContentEditableWarning
           className={titleClass}
-          value={todo.text}
-          readOnly={!isEditing}
-          style={isEditing ? undefined : { pointerEvents: 'none' }}
-          onChange={isEditing ? (e) => updateBottomSheetField('text', e.target.value) : undefined}
+          onInput={handleInput}
           onKeyDown={isEditing ? handleKeyDown : undefined}
-          placeholder="할 일 입력..."
+          style={!isEditing ? { pointerEvents: 'none' } : undefined}
+          data-placeholder="할 일 입력..."
         />
         {(todo.time || todo.duration) && (
           <div className="todo-meta">
