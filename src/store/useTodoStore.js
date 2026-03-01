@@ -13,6 +13,7 @@ const useTodoStore = create((set, get) => ({
   currentView: 'day', // 'day' | 'week'
   currentTab: 'todo', // 'todo' | 'calendar'
 
+  newlySavedTodoId: null,
   bottomSheetVisible: false,
   bottomSheetMode: 'full',
   bottomSheetData: {
@@ -249,10 +250,18 @@ const useTodoStore = create((set, get) => ({
       }
     }
 
+    // 신규 생성(원본 빈 텍스트)이고 저장된 경우 → 펄스 트리거
+    const isNewlySaved =
+      editingTodoId !== null &&
+      originalBottomSheetData &&
+      !originalBottomSheetData.text.trim() &&
+      bottomSheetData.text.trim();
+
     set({
       bottomSheetVisible: false,
       editingTodoId: null,
       originalBottomSheetData: null,
+      newlySavedTodoId: isNewlySaved ? editingTodoId : null,
     });
   },
 
@@ -341,6 +350,7 @@ const useTodoStore = create((set, get) => ({
       date: 'today',
     };
 
+    const savedTodoId = editingTodoId;
     const currentTodos = get().todos;
     set({
       todos: {
@@ -351,8 +361,11 @@ const useTodoStore = create((set, get) => ({
       editingTodoId: nextId,
       bottomSheetData: newBottomSheetData,
       originalBottomSheetData: { ...newBottomSheetData },
+      newlySavedTodoId: savedTodoId,
     });
   },
+
+  clearNewlySavedTodo: () => set({ newlySavedTodoId: null }),
 
   setVariant: (variant) => set({ currentVariant: variant }),
   setView: (view) => set({ currentView: view }),

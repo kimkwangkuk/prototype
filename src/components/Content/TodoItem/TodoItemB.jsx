@@ -5,22 +5,30 @@ import Checkbox from './Checkbox';
 
 export default function TodoItemB({ todo, subjectColor }) {
   const editingTodoId = useTodoStore(state => state.editingTodoId);
+  const newlySavedTodoId = useTodoStore(state => state.newlySavedTodoId);
+  const clearNewlySavedTodo = useTodoStore(state => state.clearNewlySavedTodo);
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const inputRef = useRef(null);
   const [mounted, setMounted] = useState(false);
+  const [pulseAnimation, setPulseAnimation] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 10);
     return () => clearTimeout(t);
   }, []);
 
+  // 저장 완료된 할일에만 펄스 1회
+  useEffect(() => {
+    if (newlySavedTodoId === todo.id) {
+      setPulseAnimation(true);
+      clearNewlySavedTodo();
+    }
+  }, [newlySavedTodoId]);
+
   const isEditing = editingTodoId === todo.id;
   const isCompleted = todo.status === 'done' || todo.status === 'skip' || todo.status === 'cancel';
-
-  // 생성 직후(마운트 시 isEditing = true)에만 펄스, 2번 후 제거
-  const [pulseAnimation, setPulseAnimation] = useState(() => isEditing);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
