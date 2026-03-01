@@ -93,8 +93,13 @@ const useTodoStore = create((set, get) => ({
       }
     }
 
+    // 삭제 후 최신 상태 가져오기
+    const currentState = get();
+    const currentTodos = currentState.todos;
+    const currentNextId = currentState.nextId;
+
     const newTodo = {
-      id: nextId,
+      id: currentNextId,
       subjectId,
       text: '',
       status: 'empty',
@@ -104,7 +109,7 @@ const useTodoStore = create((set, get) => ({
     };
 
     const bottomSheetData = {
-      todoId: nextId,
+      todoId: currentNextId,
       category: subjectId,
       status: 'empty',
       text: '',
@@ -114,11 +119,11 @@ const useTodoStore = create((set, get) => ({
 
     set({
       todos: {
-        ...todos,
-        [selectedDate]: [...(todos[selectedDate] || []), newTodo],
+        ...currentTodos,
+        [selectedDate]: [...(currentTodos[selectedDate] || []), newTodo],
       },
-      nextId: nextId + 1,
-      editingTodoId: nextId,
+      nextId: currentNextId + 1,
+      editingTodoId: currentNextId,
       bottomSheetVisible: true,
       bottomSheetMode: 'full',
       bottomSheetData: bottomSheetData,
