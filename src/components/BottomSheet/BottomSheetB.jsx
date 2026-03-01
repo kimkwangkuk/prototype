@@ -41,16 +41,15 @@ export default function BottomSheetB({
   const selectedSubject = data.category
     ? subjects.find(s => s.id === data.category)
     : null;
-  const categoryName = selectedSubject?.name || '할일';
-  const categoryColor = selectedSubject?.color || '#ff7300';
+  const categoryName = selectedSubject?.name || '과목';
+  const categoryColor = selectedSubject?.color;
+  const categoryDisabled = !data.category;
 
-  const dateText = '02.28';
+  const dateText = '날짜';
+  const dateDisabled = true;
 
-  const timeText = (() => {
-    if (data.time === 'none') return '시간 없음';
-    if (!data.time) return '오후 3:00';
-    return formatTime(data.time);
-  })();
+  const timeDisabled = !data.time || data.time === 'none';
+  const timeText = timeDisabled ? '시간' : formatTime(data.time);
 
   const durationText = data.duration ? formatDuration(data.duration) : '지속시간';
 
@@ -76,14 +75,14 @@ export default function BottomSheetB({
         </div>
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'category')}>
-            <div className="toolbar-icon">
-              <div className="toolbar-category-square" style={{ backgroundColor: categoryColor }} />
+            <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>
+              <div className="toolbar-category-square" style={{ backgroundColor: categoryDisabled ? undefined : categoryColor }} />
             </div>
-            <span className="toolbar-icon-text">{categoryName}</span>
+            <span className={`toolbar-icon-text${categoryDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{categoryName}</span>
           </button>
 
           <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'time')}>
-            <div className="toolbar-icon">
+            <div className={`toolbar-icon${dateDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                 <line x1="16" y1="2" x2="16" y2="6"/>
@@ -93,17 +92,17 @@ export default function BottomSheetB({
                 <line x1="12" y1="14" x2="12" y2="18"/>
               </svg>
             </div>
-            <span className="toolbar-icon-text">{dateText}</span>
+            <span className={`toolbar-icon-text${dateDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{dateText}</span>
           </button>
 
           <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'time')}>
-            <div className="toolbar-icon">
+            <div className={`toolbar-icon${timeDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
             </div>
-            <span className="toolbar-icon-text">{timeText}</span>
+            <span className={`toolbar-icon-text${timeDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{timeText}</span>
           </button>
 
           <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'duration')}>

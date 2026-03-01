@@ -2229,4 +2229,5 @@ textarea {
   height: 20px;
   border-radius: 5px;
   flex-shrink: 0;
+  background-color: currentColor;
 }
