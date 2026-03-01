@@ -43,6 +43,7 @@ export default function BottomSheetB({
         className={`bottom-sheet bottom-sheet-toolbar-new${animate ? ' visible' : ''}`}
         style={sheetStyle}
       >
+        <div className="toolbar-surface" />
         <div
           className="toolbar-grabber"
           onTouchStart={handleGrabTouchStart}
@@ -51,7 +52,7 @@ export default function BottomSheetB({
         >
           <div className="toolbar-grabber-bar" />
         </div>
-        <div className="toolbar-glass-container">
+        <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" onClick={() => setActivePopup('category')}>
             <div className="toolbar-icon" style={{ backgroundColor: categoryColor }}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

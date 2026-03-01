@@ -2126,21 +2126,34 @@ textarea {
 
 /* ─── New Bottom Sheet Toolbar (Figma Design) ─── */
 .bottom-sheet-toolbar-new {
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
-  padding: 4px 16px calc(4px + env(safe-area-inset-bottom));
+  position: relative;
+  padding: 0 16px calc(8px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   gap: 2px;
   border-radius: 20px;
-  overflow: hidden;
+  overflow: clip;
+}
+
+.toolbar-surface {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  border-radius: 70px;
+  z-index: 0;
 }
 
 .toolbar-grabber {
+  position: relative;
   height: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
+  z-index: 1;
 }
 
 .toolbar-grabber-bar {
@@ -2150,17 +2163,12 @@ textarea {
   border-radius: 12px;
 }
 
-.toolbar-glass-container {
+.toolbar-buttons-container {
   position: relative;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid white;
-  border-radius: 70px;
-  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1;
 }
 
 .toolbar-icon-btn {
