@@ -1409,7 +1409,8 @@ textarea {
 
 /* 미니 캘린더 네비 셀 (그리드 첫 번째 칸) */
 .week-nav-cell {
-  flex: 1;
+  flex: 0 0 50%;
+  min-width: 0;
   padding: 10px 10px 10px;
   display: flex;
   flex-direction: column;
@@ -1495,13 +1496,15 @@ textarea {
 
 /* 요일 셀 */
 .week-day-col {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
   padding: 0 12px 10px;
   display: flex;
   cursor: pointer;
   flex-direction: column;
   border-left: 1px solid rgba(0,0,0,0.03);
   min-height: 50vw;
+  overflow: hidden;
 }
 
 .week-day-col-header {
@@ -1772,11 +1775,14 @@ textarea {
   top: 56px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 72px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.monthly-content::-webkit-scrollbar { display: none; }
 
 .monthly-day-labels {
   display: flex;
@@ -1910,11 +1916,14 @@ textarea {
   top: 56px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 72px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.cal-screen::-webkit-scrollbar { display: none; }
 
 /* 요일 헤더 */
 .cal-day-labels {

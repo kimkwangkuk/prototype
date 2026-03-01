@@ -115,13 +115,14 @@ export default function WeeklyContent() {
     if (!container) return;
     const s = stateRef.current;
 
-    // 각 날짜 블록의 내부 컨텐츠 wrapper들 (블록 테두리/배경은 그대로, 텍스트만 페이드)
+    // 각 날짜 블록의 내부 컨텐츠 wrapper들 (블록 테두리/배경은 그대로, 텍스트만 페이드+이동)
     const getInners = () => container.querySelectorAll('.week-cell-content');
 
-    const setOpacity = (opacity, transition = 'none') => {
+    const setStyle = (opacity, tx, transition = 'none') => {
       getInners().forEach(el => {
         el.style.transition = transition;
         el.style.opacity    = String(opacity);
+        el.style.transform  = `translateX(${tx}px)`;
       });
     };
 
@@ -150,11 +151,12 @@ export default function WeeklyContent() {
       // 수평 확정 후에만 스크롤 차단 (passive:false 이므로 실제 작동)
       e.preventDefault();
 
-      // 드래그 거리에 비례해 실시간 페이드 (직접 DOM 조작 → 60fps)
+      // 드래그 거리에 비례해 실시간 페이드 + 드래그 방향으로 이동 (직접 DOM 조작 → 60fps)
       const progress = Math.min(adx / FADE_DISTANCE, 1);
       getInners().forEach(el => {
         el.style.transition = 'none';
         el.style.opacity    = String(1 - progress * 0.85);
+        el.style.transform  = `translateX(${dx * 0.18}px)`;  // 블록 내에서 드래그 방향으로 이동
       });
     }
 
@@ -166,8 +168,8 @@ export default function WeeklyContent() {
       const goLeft = dx < 0;
 
       if (Math.abs(dx) < SWIPE_THRESHOLD) {
-        // 임계값 미달 → 스냅백
-        setOpacity(1, 'opacity 0.2s ease');
+        // 임계값 미달 → 스냅백 (원위치로)
+        setStyle(1, 0, 'opacity 0.2s ease, transform 0.2s ease');
         return;
       }
 
@@ -175,22 +177,26 @@ export default function WeeklyContent() {
       s.animating = true;
       container.style.pointerEvents = 'none';    // 전환 중 터치 차단
 
-      // 1) 완전 페이드 아웃
-      setOpacity(0, 'opacity 0.12s ease-out');
+      // 1) 슬라이드 아웃 (드래그 방향으로 날아가듯)
+      setStyle(0, goLeft ? -28 : 28, 'opacity 0.12s ease-out, transform 0.12s ease-out');
 
       setTimeout(() => {
         // 2) 주 변경 (Zustand store 업데이트 → React 리렌더)
         goLeft ? actionsRef.current.nextWeek() : actionsRef.current.prevWeek();
 
-        // 3) 두 프레임 대기 후 페이드 인 (새 컨텐츠가 DOM에 반영된 뒤)
+        // 3) 반대편 대기 위치로 순간 이동 (transition 없이)
+        setStyle(0, goLeft ? 28 : -28, 'none');
+
+        // 4) 두 프레임 대기 후 슬라이드 인 (새 컨텐츠가 DOM에 반영된 뒤)
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            setOpacity(1, 'opacity 0.22s ease-in');
+            setStyle(1, 0, 'opacity 0.22s ease-in, transform 0.22s ease-in');
             setTimeout(() => {
               // 인라인 스타일 초기화 (CSS가 다시 주도)
               getInners().forEach(el => {
                 el.style.transition = '';
                 el.style.opacity    = '';
+                el.style.transform  = '';
               });
               container.style.pointerEvents = '';
               s.animating = false;
@@ -202,7 +208,7 @@ export default function WeeklyContent() {
 
     function onCancel() {
       s.direction = null;
-      if (!s.animating) setOpacity(1, 'opacity 0.15s ease');
+      if (!s.animating) setStyle(1, 0, 'opacity 0.15s ease, transform 0.15s ease');
     }
 
     container.addEventListener('touchstart',  onStart,  { passive: true  });

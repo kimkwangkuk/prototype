@@ -51,6 +51,18 @@ const useTodoStore = create((set, get) => ({
     set({ baseDate: prev });
   },
 
+  nextMonth: () => {
+    const base = get().baseDate;
+    const next = new Date(base.getFullYear(), base.getMonth() + 1, 1);
+    set({ baseDate: next });
+  },
+
+  prevMonth: () => {
+    const base = get().baseDate;
+    const prev = new Date(base.getFullYear(), base.getMonth() - 1, 1);
+    set({ baseDate: prev });
+  },
+
   nextDay: () => {
     const { selectedDate } = get();
     const d = new Date(selectedDate);
