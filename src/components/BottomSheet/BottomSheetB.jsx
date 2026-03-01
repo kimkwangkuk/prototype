@@ -23,10 +23,13 @@ export default function BottomSheetB({
 
   const openPopup = (e, name) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    // position:fixed의 bottom은 레이아웃 뷰포트 기준,
-    // getBoundingClientRect는 비주얼 뷰포트 기준 → offsetTop으로 변환
+    // --app-height: 시작 시 설정된 고정 레이아웃 뷰포트 높이 (키보드 열려도 불변)
+    // iOS에서 window.innerHeight는 키보드 시 줄어들어 사용 불가
+    const appHeight = parseFloat(
+      document.documentElement.style.getPropertyValue('--app-height')
+    ) || window.innerHeight;
     const offsetTop = window.visualViewport?.offsetTop ?? 0;
-    const bottom = window.innerHeight - (offsetTop + rect.top) + 8;
+    const bottom = appHeight - (offsetTop + rect.top) + 8;
     setPopupStyle({ bottom: `${bottom}px` });
     setActivePopup(name);
   };
