@@ -99,19 +99,8 @@ export default function BottomSheet() {
         onClick={mode === 'status-only' ? handleOverlayClick : undefined}
         style={{ pointerEvents: mode === 'status-only' ? 'auto' : 'none' }}
       ></div>
-      <div
-        className={`bottom-sheet${animate ? ' visible' : ''}`}
-        style={sheetStyle}
-      >
-        <div
-          className="bottom-sheet-grabber-area"
-          onTouchStart={handleGrabTouchStart}
-          onTouchMove={handleGrabTouchMove}
-          onTouchEnd={handleGrabTouchEnd}
-        >
-          <div className="bottom-sheet-grabber" />
-        </div>
-        {mode === 'status-only' ? (
+      {mode === 'status-only' ? (
+        <div className={`bottom-sheet${animate ? ' visible' : ''}`} style={sheetStyle}>
           <div className="bottom-sheet-status-only">
             <div className="bottom-sheet-header">
               <h3 className="bottom-sheet-title">상태 변경</h3>
@@ -124,10 +113,19 @@ export default function BottomSheet() {
             </div>
             <StatusSection />
           </div>
-        ) : (
-          <BottomSheetB activePopup={activePopup} setActivePopup={setActivePopup} />
-        )}
-      </div>
+        </div>
+      ) : (
+        <BottomSheetB
+          activePopup={activePopup}
+          setActivePopup={setActivePopup}
+          animate={animate}
+          dragY={dragY}
+          isDraggingRef={isDraggingRef}
+          handleGrabTouchStart={handleGrabTouchStart}
+          handleGrabTouchMove={handleGrabTouchMove}
+          handleGrabTouchEnd={handleGrabTouchEnd}
+        />
+      )}
     </>
   );
 }

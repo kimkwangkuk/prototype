@@ -4,7 +4,16 @@ import { formatTime, formatDuration } from '../../utils/timeUtils';
 import CategoryPopup from './Popup/CategoryPopup';
 import TimePopup from './Popup/TimePopup';
 
-export default function BottomSheetB({ activePopup, setActivePopup }) {
+export default function BottomSheetB({
+  activePopup,
+  setActivePopup,
+  animate,
+  dragY,
+  isDraggingRef,
+  handleGrabTouchStart,
+  handleGrabTouchMove,
+  handleGrabTouchEnd
+}) {
   const data = useTodoStore(state => state.bottomSheetData);
 
   const selectedSubject = data.category
@@ -23,10 +32,23 @@ export default function BottomSheetB({ activePopup, setActivePopup }) {
 
   const durationText = data.duration ? formatDuration(data.duration) : '지속시간';
 
+  const sheetStyle = dragY > 0 ? {
+    transform: `translateX(-50%) translateY(${dragY}px)`,
+    transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  } : undefined;
+
   return (
     <>
-      <div className="bottom-sheet-toolbar-new">
-        <div className="toolbar-grabber">
+      <div
+        className={`bottom-sheet bottom-sheet-toolbar-new${animate ? ' visible' : ''}`}
+        style={sheetStyle}
+      >
+        <div
+          className="toolbar-grabber"
+          onTouchStart={handleGrabTouchStart}
+          onTouchMove={handleGrabTouchMove}
+          onTouchEnd={handleGrabTouchEnd}
+        >
           <div className="toolbar-grabber-bar" />
         </div>
         <div className="toolbar-glass-container">
