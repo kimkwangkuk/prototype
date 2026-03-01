@@ -20,6 +20,8 @@ function updateViewportOffset() {
   const offsetBottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
   document.documentElement.style.setProperty('--vv-offset-top', `${offsetTop}px`);
   document.documentElement.style.setProperty('--vv-offset-bottom', `${offsetBottom}px`);
+  // 팝업이 키보드(악세사리 포함) 위에 정확히 뜨도록 vv.height 직접 노출
+  document.documentElement.style.setProperty('--vv-height', `${vv.height}px`);
 }
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', updateViewportOffset);

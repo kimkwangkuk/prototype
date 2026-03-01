@@ -1230,8 +1230,9 @@ textarea {
 
 .context-popup {
   position: fixed;
-  /* toolbar 높이(~68px) + bottom-sheet margin(12px) + 여유 = 96px */
-  bottom: calc(var(--vv-offset-bottom, 0px) + 96px);
+  /* 앱 전체 높이 - 비주얼 뷰포트 높이 = 키보드 전체(악세사리 포함) 높이
+     여기에 96px를 더해 악세사리 바 위에 확실히 표시 */
+  bottom: calc(var(--app-height, 100svh) - var(--vv-height, var(--app-height, 100svh)) + 96px);
   left: 20px;
   right: 20px;
   background: var(--bg-primary);
