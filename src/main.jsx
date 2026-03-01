@@ -11,17 +11,24 @@ setAppHeight();
 window.addEventListener('orientationchange', () => setTimeout(setAppHeight, 150));
 
 // 키보드 등장 시 fixed 요소(네비바, 바텀시트)가 밀리지 않도록 visualViewport 보정
+// rAF로 프레임당 1회만 업데이트 → scroll 이벤트가 연속 발생해도 CSS 변수 갱신은 한 번만
+let vvTicking = false;
 function updateViewportOffset() {
-  const vv = window.visualViewport;
-  if (!vv) return;
-  const offsetTop = vv.offsetTop;
-  const offsetBottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
-  document.documentElement.style.setProperty('--vv-offset-top', `${offsetTop}px`);
-  document.documentElement.style.setProperty('--vv-offset-bottom', `${offsetBottom}px`);
+  if (vvTicking) return;
+  vvTicking = true;
+  requestAnimationFrame(() => {
+    const vv = window.visualViewport;
+    if (vv) {
+      const offsetTop = vv.offsetTop;
+      const offsetBottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop);
+      document.documentElement.style.setProperty('--vv-offset-top', `${offsetTop}px`);
+      document.documentElement.style.setProperty('--vv-offset-bottom', `${offsetBottom}px`);
+    }
+    vvTicking = false;
+  });
 }
 if (window.visualViewport) {
-  // scroll 이벤트 제거: 스크롤마다 CSS 변수 업데이트 시 fixed 요소와 충돌 → 더럭거림
-  // resize만 사용: 키보드 열기/닫기 시에만 업데이트, 스크롤 중엔 iOS 네이티브 동작에 위임
+  window.visualViewport.addEventListener('scroll', updateViewportOffset);
   window.visualViewport.addEventListener('resize', updateViewportOffset);
 }
 
