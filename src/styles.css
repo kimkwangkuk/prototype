@@ -1231,8 +1231,8 @@ textarea {
 .context-popup {
   position: fixed;
   /* 앱 전체 높이 - 비주얼 뷰포트 높이 = 키보드 전체(악세사리 포함) 높이
-     여기에 120px를 더해 악세사리 바 위에 확실히 표시 */
-  bottom: calc(var(--app-height, 100svh) - var(--vv-height, var(--app-height, 100svh)) + 120px);
+     여기에 160px를 더해 악세사리 바 위에 확실히 표시 */
+  bottom: calc(var(--app-height, 100svh) - var(--vv-height, var(--app-height, 100svh)) + 160px);
   left: 20px;
   right: 20px;
   background: var(--bg-primary);
@@ -2131,7 +2131,7 @@ textarea {
 /* ─── New Bottom Sheet Toolbar (Figma Design) ─── */
 .bottom-sheet-toolbar-new {
   position: relative;
-  padding: 4px 16px 4px; /* Figma py-[4px] — safe-area는 .bottom-sheet bottom 위치에서 처리 */
+  padding: 4px 16px 8px; /* safe-area는 .bottom-sheet bottom 위치에서 처리 */
   display: flex;
   flex-direction: column;
   gap: 2px;

@@ -54,14 +54,14 @@ export default function BottomSheetB({
           <div className="toolbar-grabber-bar" />
         </div>
         <div className="toolbar-buttons-container">
-          <button className="toolbar-icon-btn" onClick={() => setActivePopup('category')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('category')}>
             <div className="toolbar-icon">
               <div className="toolbar-category-square" style={{ backgroundColor: categoryColor }} />
             </div>
             <span className="toolbar-icon-text">{categoryName}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onClick={() => setActivePopup('time')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('time')}>
             <div className="toolbar-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -75,7 +75,7 @@ export default function BottomSheetB({
             <span className="toolbar-icon-text">{dateText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onClick={() => setActivePopup('time')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('time')}>
             <div className="toolbar-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
@@ -85,7 +85,7 @@ export default function BottomSheetB({
             <span className="toolbar-icon-text">{timeText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onClick={() => setActivePopup('duration')}>
+          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={() => setActivePopup('duration')}>
             <div className={`toolbar-icon${!data.duration ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="10" x2="14" y1="2" y2="2"/>
