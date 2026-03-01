@@ -317,7 +317,9 @@ textarea {
   top: 108px;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* 키보드가 열리면 --vv-offset-bottom만큼 올라가서 키보드 위까지만 차지 */
+  /* iOS가 visualViewport를 스크롤시킬 필요가 없어져 더럭거림 방지 */
+  bottom: var(--vv-offset-bottom, 0px);
   padding: 0 16px 160px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1228,7 +1230,8 @@ textarea {
 
 .context-popup {
   position: fixed;
-  bottom: calc(var(--vv-offset-bottom, 0px) + 80px);
+  /* toolbar 높이(~68px) + bottom-sheet margin(12px) + 여유 = 96px */
+  bottom: calc(var(--vv-offset-bottom, 0px) + 96px);
   left: 20px;
   right: 20px;
   background: var(--bg-primary);
