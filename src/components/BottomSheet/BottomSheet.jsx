@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import BottomSheetB from './BottomSheetB';
 import StatusSection from './StatusSection';
@@ -11,6 +11,11 @@ export default function BottomSheet() {
   const closeBottomSheet = useTodoStore(state => state.closeBottomSheet);
   const [animate, setAnimate] = useState(false);
   const [activePopup, setActivePopup] = useState(null);
+
+  // 그래버 드래그 상태
+  const [dragY, setDragY] = useState(0);
+  const isDraggingRef = useRef(false);
+  const touchStartYRef = useRef(0);
 
   useEffect(() => {
     if (visible) {
@@ -36,6 +41,7 @@ export default function BottomSheet() {
       }
     } else {
       setAnimate(false);
+      setDragY(0);
     }
   }, [visible, editingTodoId, mode]);
 
@@ -54,6 +60,36 @@ export default function BottomSheet() {
     }
   };
 
+  // 그래버 터치 핸들러
+  const handleGrabTouchStart = (e) => {
+    isDraggingRef.current = true;
+    touchStartYRef.current = e.touches[0].clientY;
+  };
+
+  const handleGrabTouchMove = (e) => {
+    if (!isDraggingRef.current) return;
+    const dy = Math.max(0, e.touches[0].clientY - touchStartYRef.current);
+    setDragY(dy);
+  };
+
+  const handleGrabTouchEnd = () => {
+    isDraggingRef.current = false;
+    if (dragY > 80) {
+      // 임계값 초과: 화면 아래로 슬라이드 후 닫기
+      setDragY(window.innerHeight);
+      setTimeout(() => closeBottomSheet(), 280);
+    } else {
+      // 임계값 미달: 원위치로 스냅
+      setDragY(0);
+    }
+  };
+
+  // 드래그 중 인라인 스타일로 transform 오버라이드
+  const sheetStyle = dragY > 0 ? {
+    transform: `translateX(-50%) translateY(${dragY}px)`,
+    transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  } : undefined;
+
   return (
     <>
       <div
@@ -61,7 +97,18 @@ export default function BottomSheet() {
         onClick={mode === 'status-only' ? handleOverlayClick : undefined}
         style={{ pointerEvents: mode === 'status-only' ? 'auto' : 'none' }}
       ></div>
-      <div className={`bottom-sheet${animate ? ' visible' : ''}`}>
+      <div
+        className={`bottom-sheet${animate ? ' visible' : ''}`}
+        style={sheetStyle}
+      >
+        <div
+          className="bottom-sheet-grabber-area"
+          onTouchStart={handleGrabTouchStart}
+          onTouchMove={handleGrabTouchMove}
+          onTouchEnd={handleGrabTouchEnd}
+        >
+          <div className="bottom-sheet-grabber" />
+        </div>
         {mode === 'status-only' ? (
           <div className="bottom-sheet-status-only">
             <div className="bottom-sheet-header">

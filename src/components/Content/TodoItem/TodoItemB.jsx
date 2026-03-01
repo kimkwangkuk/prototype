@@ -50,6 +50,12 @@ export default function TodoItemB({ todo, subjectColor }) {
       time: todo.time || '',
       duration: todo.duration,
     });
+    // iOS는 readOnly 상태의 input에 focus()를 무시함.
+    // removeAttribute로 readOnly를 동기 제거 후 focus() → iOS 키보드 표시
+    if (inputRef.current) {
+      inputRef.current.removeAttribute('readonly');
+      inputRef.current.focus();
+    }
   };
 
   const titleClass = isCompleted ? 'todo-title completed' : 'todo-title';

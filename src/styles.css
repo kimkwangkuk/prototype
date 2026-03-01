@@ -1066,6 +1066,24 @@ textarea {
   border-top: 1px solid var(--border-quinary);
 }
 
+/* ─── Bottom Sheet Grabber ─── */
+.bottom-sheet-grabber-area {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 14px;
+  margin: -12px -20px 0;
+  touch-action: none;
+  cursor: grab;
+}
+
+.bottom-sheet-grabber {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-secondary);
+  margin-top: 10px;
+}
+
 /* ─── Bottom Sheet B Variant (Toolbar Style) ─── */
 .bottom-sheet-text-input-wrapper {
   margin-bottom: 16px;
