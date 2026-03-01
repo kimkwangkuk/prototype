@@ -1231,8 +1231,8 @@ textarea {
 .context-popup {
   position: fixed;
   /* 앱 전체 높이 - 비주얼 뷰포트 높이 = 키보드 전체(악세사리 포함) 높이
-     여기에 96px를 더해 악세사리 바 위에 확실히 표시 */
-  bottom: calc(var(--app-height, 100svh) - var(--vv-height, var(--app-height, 100svh)) + 96px);
+     여기에 120px를 더해 악세사리 바 위에 확실히 표시 */
+  bottom: calc(var(--app-height, 100svh) - var(--vv-height, var(--app-height, 100svh)) + 120px);
   left: 20px;
   right: 20px;
   background: var(--bg-primary);
@@ -2199,8 +2199,8 @@ textarea {
 }
 
 .toolbar-icon svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   color: #000;
   stroke-width: 2;
 }
