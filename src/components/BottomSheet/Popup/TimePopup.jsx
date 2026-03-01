@@ -87,7 +87,7 @@ export default function TimePopup({ visible, onClose, style }) {
         </div>
         <div className="popup-footer">
           <button className="popup-clear-btn" onClick={handleClearTime}>
-            시간 설정 없음
+            없음
           </button>
         </div>
       </div>

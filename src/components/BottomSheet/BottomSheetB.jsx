@@ -51,7 +51,7 @@ export default function BottomSheetB({
   const dateDisabled = false;
 
   const timeDisabled = !data.time || data.time === 'none';
-  const timeText = timeDisabled ? '시간' : formatTime(data.time);
+  const timeText = timeDisabled ? '시작 시간' : formatTime(data.time);
 
   const durationText = data.duration ? formatDuration(data.duration) : '지속시간';
 

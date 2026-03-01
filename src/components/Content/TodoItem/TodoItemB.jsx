@@ -9,7 +9,6 @@ export default function TodoItemB({ todo, subjectColor }) {
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const inputRef = useRef(null);
-  const [pulseAnimation, setPulseAnimation] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -20,9 +19,8 @@ export default function TodoItemB({ todo, subjectColor }) {
   const isEditing = editingTodoId === todo.id;
   const isCompleted = todo.status === 'done' || todo.status === 'skip' || todo.status === 'cancel';
 
-  useEffect(() => {
-    setPulseAnimation(isEditing);
-  }, [isEditing]);
+  // 생성 직후(마운트 시 isEditing = true)에만 펄스, 2번 후 제거
+  const [pulseAnimation, setPulseAnimation] = useState(() => isEditing);
 
   useEffect(() => {
     if (isEditing && inputRef.current) {
@@ -77,6 +75,7 @@ export default function TodoItemB({ todo, subjectColor }) {
     <div
       className={`todo-item${isEditing ? ' editing' : ''}${pulseAnimation ? ' pulse-in' : ''}${mounted ? ' mounted' : ''}`}
       data-todo-id={todo.id}
+      onAnimationEnd={() => setPulseAnimation(false)}
     >
       <div className="todo-checkbox" onClick={handleCheckboxClick}>
         <Checkbox status={todo.status} color={subjectColor} />

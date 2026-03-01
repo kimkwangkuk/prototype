@@ -412,7 +412,7 @@ textarea {
   margin: 0 -8px;
 }
 .todo-item.pulse-in {
-  animation: pulseBackground 2s ease-in-out infinite;
+  animation: pulseBackground 1s ease-in-out 2;
 }
 
 @keyframes pulseBackground {

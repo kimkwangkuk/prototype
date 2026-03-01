@@ -1,21 +1,47 @@
+import { useState, useEffect } from 'react';
+import Picker from 'react-mobile-picker';
 import useTodoStore from '../../../store/useTodoStore';
+
+const durationHours = ['0', '1', '2', '3', '4'];
+const durationMins = ['00', '15', '30', '45'];
+
+function durationToPicker(totalMins) {
+  if (!totalMins) return { dHour: '0', dMinute: '30' };
+  const h = Math.min(Math.floor(totalMins / 60), 4);
+  const m = totalMins % 60;
+  const snapM = durationMins.reduce((prev, cur) =>
+    Math.abs(Number(cur) - m) < Math.abs(Number(prev) - m) ? cur : prev
+  );
+  return { dHour: String(h), dMinute: snapM };
+}
+
+function pickerToDuration({ dHour, dMinute }) {
+  return Number(dHour) * 60 + Number(dMinute);
+}
 
 export default function DurationPopup({ visible, onClose, style }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
 
+  const [durValue, setDurValue] = useState(() => durationToPicker(data.duration));
+
+  useEffect(() => {
+    if (visible) {
+      const initial = durationToPicker(data.duration);
+      setDurValue(initial);
+      // 미설정 상태면 기본값 즉시 반영
+      if (!data.duration) {
+        updateBottomSheetField('duration', pickerToDuration(initial));
+      }
+    }
+  }, [visible]);
+
   if (!visible) return null;
 
-  const durations = [
-    { value: 30, label: '30분' },
-    { value: 60, label: '1시간' },
-    { value: 90, label: '1시간 30분' },
-    { value: 120, label: '2시간' },
-  ];
-
-  const handleSelect = (duration) => {
-    updateBottomSheetField('duration', duration);
-    onClose();
+  const handleChange = (val) => {
+    setDurValue(val);
+    const total = pickerToDuration(val);
+    updateBottomSheetField('duration', total > 0 ? total : null);
   };
 
   const handleClear = () => {
@@ -28,24 +54,28 @@ export default function DurationPopup({ visible, onClose, style }) {
       <div className="popup-overlay" onClick={onClose}></div>
       <div className="context-popup" data-popup="duration" style={style}>
         <div className="popup-content">
-          {durations.map(d => (
-            <button
-              key={d.value}
-              className="popup-item"
-              onClick={() => handleSelect(d.value)}
-            >
-              <span>{d.label}</span>
-              {data.duration === d.value && (
-                <svg className="popup-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
-              )}
-            </button>
-          ))}
+          <div className="drum-picker-wrapper">
+            <Picker value={durValue} onChange={handleChange} wheelMode="natural" height={180} itemHeight={44}>
+              <Picker.Column name="dHour">
+                {durationHours.map(v => (
+                  <Picker.Item key={v} value={v}>
+                    {({ selected }) => <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}시간</span>}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+              <Picker.Column name="dMinute">
+                {durationMins.map(v => (
+                  <Picker.Item key={v} value={v}>
+                    {({ selected }) => <span className={selected ? 'drum-item selected' : 'drum-item'}>{v}분</span>}
+                  </Picker.Item>
+                ))}
+              </Picker.Column>
+            </Picker>
+          </div>
         </div>
         <div className="popup-footer">
           <button className="popup-clear-btn" onClick={handleClear}>
-            지속시간 없음
+            없음
           </button>
         </div>
       </div>
