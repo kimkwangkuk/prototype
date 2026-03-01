@@ -81,21 +81,38 @@ const useTodoStore = create((set, get) => ({
 
   // ===== Todo Actions =====
   addTodo: (subjectId) => {
-    const { selectedDate, nextId, editingTodoId, todos } = get();
+    const { selectedDate, nextId, editingTodoId, todos, bottomSheetData, originalBottomSheetData } = get();
 
-    // 기존 편집 중인 항목 처리
+    // 편집 중인 항목 처리: 변경사항 있으면 저장, 없으면 초기화
     if (editingTodoId !== null) {
-      const result = findTodoById(todos, editingTodoId);
-      if (result) {
-        const { todo } = result;
-        // 같은 과목이면 무시
-        if (todo.subjectId === subjectId) return;
-        // 다른 과목이면 삭제
+      const currentText = bottomSheetData.text.trim();
+      const originalText = originalBottomSheetData?.text?.trim() ?? '';
+
+      if (currentText) {
+        // 변경사항 있음 → 저장
+        get().updateTodo(editingTodoId, {
+          text: bottomSheetData.text,
+          subjectId: bottomSheetData.category,
+          status: bottomSheetData.status,
+          time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
+          duration: bottomSheetData.duration === 'none' ? null : bottomSheetData.duration,
+        });
+      } else if (!originalText) {
+        // 신규 생성이었는데 텍스트 없음 → 삭제
         get().deleteTodo(editingTodoId);
+      } else {
+        // 기존 할일인데 변경사항 없음 → 원본으로 복원
+        get().updateTodo(editingTodoId, {
+          text: originalBottomSheetData.text,
+          subjectId: originalBottomSheetData.category,
+          status: originalBottomSheetData.status,
+          time: originalBottomSheetData.time === 'none' ? null : originalBottomSheetData.time,
+          duration: originalBottomSheetData.duration === 'none' ? null : originalBottomSheetData.duration,
+        });
       }
     }
 
-    // 삭제 후 최신 상태 가져오기
+    // 처리 후 최신 상태 가져오기
     const currentState = get();
     const currentTodos = currentState.todos;
     const currentNextId = currentState.nextId;
