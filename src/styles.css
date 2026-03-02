@@ -31,6 +31,10 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html {
+  overscroll-behavior: none;
+}
+
 #root {
   height: 100%;
 }
@@ -42,6 +46,7 @@ body {
   height: var(--app-height, 100dvh);
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  overscroll-behavior: none;
   position: relative;
   margin: 0 auto;
   user-select: none;
