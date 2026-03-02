@@ -63,9 +63,16 @@ export default function Tabbar() {
             <span className="tab-btn-label">홈</span>
           </button>
           <button className={`tab-btn${currentTab === 'todo' ? ' active' : ''}`} onClick={() => setTab('todo')}>
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M4 5a2 2 0 012-2h12a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 3a1 1 0 000 2h4a1 1 0 100-2H7zm0 4a1 1 0 100 2h8a1 1 0 100-2H7zm0 4a1 1 0 100 2h6a1 1 0 100-2H7z"/>
-            </svg>
+            {currentTab === 'todo' ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 1C20.3137 1 23 3.68629 23 7V17C23 20.3137 20.3137 23 17 23H7C3.68629 23 1 20.3137 1 17V7C1 3.68629 3.68629 1 7 1H17ZM17.207 8.29297C16.8165 7.90244 16.1835 7.90244 15.793 8.29297L10.5 13.5859L8.20703 11.293C7.81651 10.9024 7.18349 10.9024 6.79297 11.293C6.40245 11.6835 6.40245 12.3165 6.79297 12.707L9.79297 15.707C9.9805 15.8946 10.2348 16 10.5 16C10.7652 16 11.0195 15.8946 11.207 15.707L17.207 9.70703C17.5976 9.31651 17.5976 8.68349 17.207 8.29297Z" fill="currentColor"/>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="2" width="20" height="20" rx="3.75" stroke="currentColor" strokeWidth="1.5"/>
+                <path d="M7.5 12L10.5 15L16.5 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            )}
             <span className="tab-btn-label">할일</span>
           </button>
           <button className={`tab-btn${currentTab === 'calendar' ? ' active' : ''}`} onClick={() => setTab('calendar')}>
