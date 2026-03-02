@@ -2138,7 +2138,6 @@ textarea {
 
 /* ─── New Bottom Sheet Toolbar (Figma Design) ─── */
 .bottom-sheet-toolbar-new {
-  position: relative;
   padding: 4px 16px 8px; /* safe-area는 .bottom-sheet bottom 위치에서 처리 */
   display: flex;
   flex-direction: column;
