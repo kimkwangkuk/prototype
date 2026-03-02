@@ -2354,7 +2354,7 @@ textarea {
   position: fixed;
   top: calc(env(safe-area-inset-top) + 12px);
   right: 16px;
-  z-index: 9000;
+  z-index: 100001;
 }
 
 .versions-pill-btn {
