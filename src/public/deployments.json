@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-9olsw12ku-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탭바 할일 아이콘 strokeWidth 1.5 → 2",
+    "createdAt": 1772467762763,
+    "sha": "40a0260"
+  },
+  {
+    "url": "https://prototype-lp2lghnhu-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772467594298,
+    "sha": "b8932d5"
+  },
+  {
     "url": "https://prototype-id5d7569x-kimkwangkuks-projects.vercel.app",
     "message": "feat: 탭바 캘린더 아이콘에 오늘 날짜 표시",
     "createdAt": 1772467523754,
@@ -280,17 +292,5 @@
     "message": "fix: 기존 할일 편집 중 엔터 시 새 할일 생성 대신 저장 후 닫기",
     "createdAt": 1772452846952,
     "sha": "1e91049"
-  },
-  {
-    "url": "https://prototype-9a3jco1ga-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 상태 변경 팝업 열릴 때 키패드 내려가도록 blur 처리",
-    "createdAt": 1772452618680,
-    "sha": "62c59cb"
-  },
-  {
-    "url": "https://prototype-qsfia61ma-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 주뷰 할일 클릭 시 상세 바텀시트 표시 (일뷰와 동일)",
-    "createdAt": 1772452483805,
-    "sha": "f898fe4"
   }
 ]
