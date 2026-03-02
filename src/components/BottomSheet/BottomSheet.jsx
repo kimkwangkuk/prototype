@@ -77,10 +77,14 @@ export default function BottomSheet() {
 
   const handleGrabTouchEnd = () => {
     isDraggingRef.current = false;
-    if (dragY > 80) {
-      // 인풋 포커스 해제 → 키보드 즉시 내림
+    if (dragY < 5) {
+      // 탭: 키보드 + 바텀시트 모두 닫기
       document.activeElement?.blur();
-      // 임계값 초과: 화면 아래로 슬라이드 후 저장하며 닫기
+      setDragY(window.innerHeight);
+      setTimeout(() => closeBottomSheetWithSave(), 280);
+    } else if (dragY > 80) {
+      // 드래그 임계값 초과: 화면 아래로 슬라이드 후 저장하며 닫기
+      document.activeElement?.blur();
       setDragY(window.innerHeight);
       setTimeout(() => closeBottomSheetWithSave(), 280);
     } else {

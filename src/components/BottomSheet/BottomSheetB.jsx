@@ -88,7 +88,9 @@ export default function BottomSheetB({
           onTouchMove={handleGrabTouchMove}
           onTouchEnd={handleGrabTouchEnd}
         >
-          <div className="toolbar-grabber-bar" />
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.66675 5.5L8.00008 10.8333L13.3334 5.5" stroke="black" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
         </div>
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
