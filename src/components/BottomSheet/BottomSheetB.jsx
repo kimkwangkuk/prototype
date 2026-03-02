@@ -21,6 +21,15 @@ export default function BottomSheetB({
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const [popupStyle, setPopupStyle] = useState({});
 
+  // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
+  // Desktop: mousedown preventDefault → blur 방지, click에서 처리
+  const toolbarBtnProps = (name) => ({
+    onMouseDown: (e) => e.preventDefault(),
+    onTouchStart: (e) => e.preventDefault(),
+    onTouchEnd: (e) => { e.preventDefault(); openPopup(e, name); },
+    onClick: (e) => openPopup(e, name),
+  });
+
   const openPopup = (e, name) => {
     const rect = e.currentTarget.getBoundingClientRect();
     // --app-height: 시작 시 설정된 고정 레이아웃 뷰포트 높이 (키보드 열려도 불변)
@@ -82,14 +91,14 @@ export default function BottomSheetB({
           <div className="toolbar-grabber-bar" />
         </div>
         <div className="toolbar-buttons-container">
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'category')}>
+          <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
             <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <div className="toolbar-category-square" style={{ backgroundColor: categoryDisabled ? undefined : categoryColor }} />
             </div>
             <span className={`toolbar-icon-text${categoryDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{categoryName}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'date')}>
+          <button className="toolbar-icon-btn" {...toolbarBtnProps('date')}>
             <div className={`toolbar-icon${dateDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -103,7 +112,7 @@ export default function BottomSheetB({
             <span className={`toolbar-icon-text${dateDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{dateText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'time')}>
+          <button className="toolbar-icon-btn" {...toolbarBtnProps('time')}>
             <div className={`toolbar-icon${timeDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
@@ -113,7 +122,7 @@ export default function BottomSheetB({
             <span className={`toolbar-icon-text${timeDisabled ? ' toolbar-icon-text-disabled' : ''}${timeNone ? ' toolbar-icon-text-none' : ''}`}>{timeText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" onMouseDown={(e) => e.preventDefault()} onClick={(e) => openPopup(e, 'duration')}>
+          <button className="toolbar-icon-btn" {...toolbarBtnProps('duration')}>
             <div className={`toolbar-icon${durationDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="10" x2="14" y1="2" y2="2"/>
