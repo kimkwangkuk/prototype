@@ -2473,3 +2473,113 @@ textarea {
   margin-left: 10px;
   flex-shrink: 0;
 }
+
+/* ===== Versions Button ===== */
+.versions-btn-wrap {
+  position: relative;
+}
+
+.versions-pill-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: rgba(0,0,0,0.07);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+}
+
+.versions-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34c759;
+  flex-shrink: 0;
+}
+
+.versions-pill-sha {
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: rgba(0,0,0,0.55);
+  letter-spacing: 0;
+}
+
+.versions-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 280px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+  overflow: hidden;
+  z-index: 9999;
+  max-height: 60vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.versions-dropdown-header {
+  padding: 12px 16px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+}
+
+.versions-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: inherit;
+  border-top: 0.5px solid rgba(0,0,0,0.08);
+}
+
+.versions-dropdown-item:active {
+  background: rgba(0,0,0,0.05);
+}
+
+.versions-dropdown-item-latest .versions-dropdown-msg::before {
+  content: '● ';
+  color: #34c759;
+  font-size: 8px;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+.versions-dropdown-msg {
+  font-size: 13px;
+  font-weight: 500;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+}
+
+.versions-dropdown-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.versions-dropdown-sha {
+  font-size: 11px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.versions-dropdown-date {
+  font-size: 11px;
+  color: rgba(0,0,0,0.38);
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+}

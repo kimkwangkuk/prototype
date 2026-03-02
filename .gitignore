@@ -33,3 +33,4 @@ figma-mcp/
 # Claude AI / MCP 로컬 설정
 .claude/
 .mcp.json
+.vercel
