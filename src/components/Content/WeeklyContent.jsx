@@ -149,6 +149,19 @@ export default function WeeklyContent() {
   const actionsRef = useRef({ nextWeek: nextWeekAction, prevWeek: prevWeekAction });
   useEffect(() => { actionsRef.current = { nextWeek: nextWeekAction, prevWeek: prevWeekAction }; });
 
+  // 편집 중일 때 padding-bottom 추가 → 하단 행도 스크롤 가능하게
+  // (콘텐츠 높이 < 컨테이너 높이면 scrollTo 불가 → 패딩으로 스크롤 영역 확보)
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    if (editingTodoId !== null) {
+      el.style.paddingBottom = `${window.innerHeight * 0.55}px`;
+    } else {
+      el.style.paddingBottom = '';
+      el.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [editingTodoId]);
+
   // ─── 터치 스와이프 ────────────────────────────────────────────────────────
   useEffect(() => {
     const container = containerRef.current;
