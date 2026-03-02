@@ -2444,6 +2444,12 @@ textarea {
   flex-shrink: 0;
 }
 
+.versions-dropdown-back {
+  font-size: 11px;
+  color: #007aff;
+  flex-shrink: 0;
+}
+
 .versions-dropdown-msg {
   font-size: 13px;
   font-weight: 500;
@@ -2480,29 +2486,14 @@ textarea {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: #000;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
 .versions-iframe {
   width: 100%;
-  height: 100%;
+  flex: 1;
   border: none;
-}
-
-.versions-iframe-close {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  z-index: 100000;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 }

@@ -15,12 +15,19 @@ export default function VersionsButton() {
   const [iframeUrl, setIframeUrl] = useState(null);
   const ref = useRef(null);
 
-  useEffect(() => {
-    fetch('/deployments.json')
+  const fetchDeployments = () => {
+    fetch('/deployments.json?t=' + Date.now())
       .then(r => r.json())
       .then(setDeployments)
       .catch(() => {});
-  }, []);
+  };
+
+  useEffect(() => { fetchDeployments(); }, []);
+
+  // 드롭다운 열 때마다 최신 목록 재fetch
+  useEffect(() => {
+    if (open) fetchDeployments();
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -35,12 +42,27 @@ export default function VersionsButton() {
     };
   }, [open]);
 
+  // 현재 실제 호스트에 해당하는 배포 URL
   const currentHostname = window.location.hostname;
-  const currentUrl = deployments.find(d => {
+  const hostUrl = deployments.find(d => {
     try { return new URL(d.url).hostname === currentHostname; } catch { return false; }
   })?.url;
 
+  // 체크 기준: iframe 열려있으면 iframe URL, 아니면 호스트 URL
+  const checkedUrl = iframeUrl ?? hostUrl;
+
   const latest = deployments[0];
+
+  const handleItemClick = (e, depUrl) => {
+    e.preventDefault();
+    setOpen(false);
+    if (iframeUrl && depUrl === hostUrl) {
+      // 현재 실제 버전 선택 → iframe 닫기
+      setIframeUrl(null);
+    } else {
+      setIframeUrl(depUrl);
+    }
+  };
 
   return (
     <>
@@ -57,13 +79,14 @@ export default function VersionsButton() {
           <div className="versions-dropdown">
             <div className="versions-dropdown-header">버전 목록</div>
             {deployments.map((dep) => {
-              const isCurrent = dep.url === currentUrl;
+              const isCurrent = dep.url === checkedUrl;
+              const isHost = dep.url === hostUrl;
               return (
                 <a
                   key={dep.url}
                   href={dep.url}
                   className={`versions-dropdown-item${isCurrent ? ' versions-dropdown-item-current' : ''}`}
-                  onClick={(e) => { e.preventDefault(); setIframeUrl(dep.url); setOpen(false); }}
+                  onClick={(e) => handleItemClick(e, dep.url)}
                 >
                   <div className="versions-dropdown-item-left">
                     <span className="versions-dropdown-msg">{dep.message || '(메시지 없음)'}</span>
@@ -77,6 +100,9 @@ export default function VersionsButton() {
                       <polyline points="20 6 9 17 4 12"/>
                     </svg>
                   )}
+                  {!isCurrent && isHost && iframeUrl && (
+                    <span className="versions-dropdown-back">돌아가기</span>
+                  )}
                 </a>
               );
             })}
@@ -86,7 +112,6 @@ export default function VersionsButton() {
 
       {iframeUrl && (
         <div className="versions-iframe-overlay">
-          <button className="versions-iframe-close" onClick={() => setIframeUrl(null)}>✕</button>
           <iframe src={iframeUrl} className="versions-iframe" />
         </div>
       )}
