@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-id5d7569x-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 탭바 캘린더 아이콘에 오늘 날짜 표시",
+    "createdAt": 1772467523754,
+    "sha": "6573d47"
+  },
+  {
+    "url": "https://prototype-7d7fkel6v-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772467076194,
+    "sha": "e4fd999"
+  },
+  {
     "url": "https://prototype-659wkq51o-kimkwangkuks-projects.vercel.app",
     "message": "feat: 탭바 할일 아이콘 교체 (선택/비선택 구분)",
     "createdAt": 1772467007359,
@@ -280,17 +292,5 @@
     "message": "feat: 주뷰 할일 클릭 시 상세 바텀시트 표시 (일뷰와 동일)",
     "createdAt": 1772452483805,
     "sha": "f898fe4"
-  },
-  {
-    "url": "https://prototype-rg15vmdhm-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 디테일 바텀시트 흰색 배경, 탭바 덮는 위치로 변경",
-    "createdAt": 1772452421493,
-    "sha": "83ee393"
-  },
-  {
-    "url": "https://prototype-35w1roylj-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 할일 클릭 시 상세 바텀시트 표시 (삭제/편집 버튼, dim 20%)",
-    "createdAt": 1772452159047,
-    "sha": "f98e8e5"
   }
 ]
