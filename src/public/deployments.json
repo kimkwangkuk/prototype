@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-9l1vcpb9y-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 시간 피커를 단일 컬럼 10분 단위로 변경",
+    "createdAt": 1772466704709,
+    "sha": "410de17"
+  },
+  {
+    "url": "https://prototype-p391415y3-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772466251649,
+    "sha": "dfb4617"
+  },
+  {
     "url": "https://prototype-qm4npexbi-kimkwangkuks-projects.vercel.app",
     "message": "docs: 아이콘 SVG 사이즈 스펙 메모 추가",
     "createdAt": 1772466183828,
@@ -73,7 +85,7 @@
   },
   {
     "url": "https://prototype-2d3xbylbs-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 버전 버튼 우상단 원형 햄버거 버튼으로 변경",
+    "message": "feat: ���전 버튼 우상단 원형 햄버거 버튼으로 변경",
     "createdAt": 1772463707429,
     "sha": "8975063"
   },
@@ -280,17 +292,5 @@
     "message": "fix: 주뷰 할일 추가 시 레이아웃 틀어지는 문제 수정",
     "createdAt": 1772437715802,
     "sha": "3587a44"
-  },
-  {
-    "url": "https://prototype-oc1ronxzc-kimkwangkuks-projects.vercel.app",
-    "message": "refactor: 네비바-컨텐츠 레이아웃 완전 분리",
-    "createdAt": 1772437458322,
-    "sha": "7b96bfe"
-  },
-  {
-    "url": "https://prototype-cema23mld-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 상단 네비바 드래그 스크롤 방지 및 배경 불투명화",
-    "createdAt": 1772437123606,
-    "sha": "8930d5c"
   }
 ]
