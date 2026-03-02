@@ -14,7 +14,7 @@
   --border-secondary: rgba(0,0,0,0.18);
   --border-quinary: rgba(0,0,0,0.03);
   /* Glass */
-  --glass-surface-navbar: rgba(255,255,255,0.7);
+  --glass-surface-navbar: rgba(255,255,255,1);
   --glass-surface-20: rgba(255,255,255,0.2);
   --glass-border: white;
   --glass-menu-selected: rgba(49,49,49,0.15);
@@ -220,6 +220,7 @@ textarea {
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border-quinary);
   position: relative;
+  touch-action: pan-x;
 }
 .day-date {
   flex: 1;
