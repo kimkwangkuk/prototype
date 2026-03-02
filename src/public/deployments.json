@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-659wkq51o-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 탭바 할일 아이콘 교체 (선택/비선택 구분)",
+    "createdAt": 1772467007359,
+    "sha": "6d291cb"
+  },
+  {
+    "url": "https://prototype-kzcagr630-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772466998683,
+    "sha": "2c4bbb1"
+  },
+  {
     "url": "https://prototype-f3fm5dn6j-kimkwangkuks-projects.vercel.app",
     "message": "fix: 날짜 이동 시 바텀시트 자동 닫기",
     "createdAt": 1772466930613,
@@ -175,7 +187,7 @@
   },
   {
     "url": "https://prototype-fn036m83e-kimkwangkuks-projects.vercel.app",
-    "message": "feat: X-Frame-Options ��제 (iframe 버전 뷰어 지원)",
+    "message": "feat: X-Frame-Options 해제 (iframe 버전 뷰어 지원)",
     "createdAt": 1772459731467,
     "sha": "2fa7c6a"
   },
@@ -280,17 +292,5 @@
     "message": "feat: 할일 클릭 시 상세 바텀시트 표시 (삭제/편집 버튼, dim 20%)",
     "createdAt": 1772452159047,
     "sha": "f98e8e5"
-  },
-  {
-    "url": "https://prototype-2gtkdaqbr-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 포커스 아이템 중앙 스크롤, 미설정 opacity 0.4, 바텀시트 쉐도우 0.15",
-    "createdAt": 1772451660230,
-    "sha": "83ec904"
-  },
-  {
-    "url": "https://prototype-l69biulv9-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 인풋 포커스 시 iOS가 window 스크롤해 레이아웃 밀리는 문제 수정",
-    "createdAt": 1772450542585,
-    "sha": "1da4c02"
   }
 ]
