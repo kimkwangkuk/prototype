@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-49kgiqgi0-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 탭바 일/주/월 뷰 아이콘 교체",
+    "createdAt": 1772468041285,
+    "sha": "7a4df20"
+  },
+  {
+    "url": "https://prototype-k8aj0okzb-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772467833134,
+    "sha": "cb5389d"
+  },
+  {
     "url": "https://prototype-9olsw12ku-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탭바 할일 아이콘 strokeWidth 1.5 → 2",
     "createdAt": 1772467762763,
@@ -280,17 +292,5 @@
     "message": "fix: 주뷰 할일 추가 시 편집 아이템을 weekly-content 중앙으로 스크롤",
     "createdAt": 1772453958653,
     "sha": "17fa712"
-  },
-  {
-    "url": "https://prototype-kc72mdmer-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 바텀시트 날짜 버튼 아이콘을 피그마 체크리스트 아이콘으로 교체",
-    "createdAt": 1772453208919,
-    "sha": "ef9b7cf"
-  },
-  {
-    "url": "https://prototype-6q24yh2y7-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 기존 할일 편집 중 엔터 시 새 할일 생성 대신 저장 후 닫기",
-    "createdAt": 1772452846952,
-    "sha": "1e91049"
   }
 ]
