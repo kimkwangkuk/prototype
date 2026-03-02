@@ -2350,8 +2350,11 @@ textarea {
 }
 
 /* ===== Versions Button ===== */
-.versions-btn-wrap {
-  position: relative;
+.versions-float-wrap {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 12px);
+  right: 16px;
+  z-index: 9000;
 }
 
 .versions-pill-btn {
@@ -2359,7 +2362,9 @@ textarea {
   align-items: center;
   gap: 5px;
   padding: 5px 10px;
-  background: rgba(0,0,0,0.07);
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: none;
   border-radius: 20px;
   cursor: pointer;
@@ -2377,7 +2382,7 @@ textarea {
 .versions-pill-sha {
   font-size: 12px;
   font-family: 'SF Mono', 'Fira Code', monospace;
-  color: rgba(0,0,0,0.55);
+  color: rgba(255,255,255,0.8);
   letter-spacing: 0;
 }
 
@@ -2408,8 +2413,8 @@ textarea {
 
 .versions-dropdown-item {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  gap: 8px;
   padding: 10px 16px;
   text-decoration: none;
   color: inherit;
@@ -2420,12 +2425,23 @@ textarea {
   background: rgba(0,0,0,0.05);
 }
 
-.versions-dropdown-item-latest .versions-dropdown-msg::before {
-  content: '● ';
-  color: #34c759;
-  font-size: 8px;
-  vertical-align: middle;
-  margin-right: 2px;
+.versions-dropdown-item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.versions-dropdown-item-current .versions-dropdown-msg {
+  color: #007aff;
+}
+
+.versions-dropdown-check {
+  width: 16px;
+  height: 16px;
+  color: #007aff;
+  flex-shrink: 0;
 }
 
 .versions-dropdown-msg {

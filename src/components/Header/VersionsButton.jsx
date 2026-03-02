@@ -35,46 +35,61 @@ export default function VersionsButton() {
     };
   }, [open]);
 
+  const currentHostname = window.location.hostname;
+  const currentUrl = deployments.find(d => {
+    try { return new URL(d.url).hostname === currentHostname; } catch { return false; }
+  })?.url;
+
   const latest = deployments[0];
 
   return (
     <>
-    <div className="versions-btn-wrap" ref={ref}>
-      <button
-        className="versions-pill-btn"
-        onClick={() => setOpen(v => !v)}
-      >
-        <span className="versions-pill-dot" />
-        <span className="versions-pill-sha">{latest?.sha || '···'}</span>
-      </button>
+      <div className="versions-float-wrap" ref={ref}>
+        <button
+          className="versions-pill-btn"
+          onClick={() => setOpen(v => !v)}
+        >
+          <span className="versions-pill-dot" />
+          <span className="versions-pill-sha">{latest?.sha || '···'}</span>
+        </button>
 
-      {open && (
-        <div className="versions-dropdown">
-          <div className="versions-dropdown-header">버전 목록</div>
-          {deployments.map((dep, i) => (
-            <a
-              key={dep.url}
-              href={dep.url}
-              className={`versions-dropdown-item${i === 0 ? ' versions-dropdown-item-latest' : ''}`}
-              onClick={(e) => { e.preventDefault(); setIframeUrl(dep.url); setOpen(false); }}
-            >
-              <span className="versions-dropdown-msg">{dep.message || '(메시지 없음)'}</span>
-              <span className="versions-dropdown-meta">
-                {dep.sha && <span className="versions-dropdown-sha">{dep.sha}</span>}
-                <span className="versions-dropdown-date">{formatDate(dep.createdAt)}</span>
-              </span>
-            </a>
-          ))}
+        {open && (
+          <div className="versions-dropdown">
+            <div className="versions-dropdown-header">버전 목록</div>
+            {deployments.map((dep) => {
+              const isCurrent = dep.url === currentUrl;
+              return (
+                <a
+                  key={dep.url}
+                  href={dep.url}
+                  className={`versions-dropdown-item${isCurrent ? ' versions-dropdown-item-current' : ''}`}
+                  onClick={(e) => { e.preventDefault(); setIframeUrl(dep.url); setOpen(false); }}
+                >
+                  <div className="versions-dropdown-item-left">
+                    <span className="versions-dropdown-msg">{dep.message || '(메시지 없음)'}</span>
+                    <span className="versions-dropdown-meta">
+                      {dep.sha && <span className="versions-dropdown-sha">{dep.sha}</span>}
+                      <span className="versions-dropdown-date">{formatDate(dep.createdAt)}</span>
+                    </span>
+                  </div>
+                  {isCurrent && (
+                    <svg className="versions-dropdown-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  )}
+                </a>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {iframeUrl && (
+        <div className="versions-iframe-overlay">
+          <button className="versions-iframe-close" onClick={() => setIframeUrl(null)}>✕</button>
+          <iframe src={iframeUrl} className="versions-iframe" />
         </div>
       )}
-    </div>
-
-    {iframeUrl && (
-      <div className="versions-iframe-overlay">
-        <button className="versions-iframe-close" onClick={() => setIframeUrl(null)}>✕</button>
-        <iframe src={iframeUrl} className="versions-iframe" />
-      </div>
-    )}
     </>
   );
 }

@@ -5,6 +5,7 @@ import Content from './components/Content/Content';
 import CalendarContent from './components/Content/CalendarContent';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Tabbar from './components/Tabbar/Tabbar';
+import VersionsButton from './components/Header/VersionsButton';
 import useTodoStore from './store/useTodoStore';
 import { formatDate, getWeekDates } from './utils/dateUtils';
 import { formatTime, formatDuration } from './utils/timeUtils';
@@ -97,6 +98,7 @@ export default function App() {
 
   return (
     <>
+      <VersionsButton />
       <div className="app-layout">
         <Header />
         <div className="app-body">

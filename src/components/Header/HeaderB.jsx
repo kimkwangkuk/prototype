@@ -3,7 +3,6 @@ import useTodoStore from '../../store/useTodoStore';
 import { formatDisplayDate, getDayOfWeekKR, isToday, getWeekDates, formatDate } from '../../utils/dateUtils';
 import { Redo2 } from 'lucide-react';
 import WeekDayBar from './WeekDayBar';
-import VersionsButton from './VersionsButton';
 
 export default function HeaderB() {
   const selectedDate = useTodoStore(state => state.selectedDate);
@@ -61,7 +60,13 @@ export default function HeaderB() {
             )}
           </div>
           <div className="toolbar-right">
-            <VersionsButton />
+            <button className="btn-icon" aria-label="메뉴">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="4" y1="5" x2="20" y2="5"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="19" x2="20" y2="19"/>
+              </svg>
+            </button>
           </div>
         </div>
         {currentView === 'day' && currentTab !== 'calendar' && <WeekDayBar />}
