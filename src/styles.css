@@ -769,7 +769,7 @@ textarea {
 /* ─── Bottom Sheet ─── */
 .bottom-sheet-bg-gradient {
   position: fixed;
-  bottom: 0;
+  bottom: var(--vv-offset-bottom, 0px);
   left: 0;
   right: 0;
   height: 160px;

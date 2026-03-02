@@ -105,7 +105,7 @@ export default function BottomSheet() {
           backgroundColor: mode === 'detail' ? 'rgba(0,0,0,0.2)' : undefined,
         }}
       ></div>
-      <div className="bottom-sheet-bg-gradient" />
+      {mode === 'full' && <div className="bottom-sheet-bg-gradient" />}
       {mode === 'detail' ? (
         <DetailSheet
           animate={animate}
