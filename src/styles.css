@@ -2197,7 +2197,7 @@ textarea {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 8px;
   z-index: 1;
 }
 
@@ -2210,7 +2210,7 @@ textarea {
   border: none;
   cursor: pointer;
   padding: 0;
-  min-width: 49px;
+  flex: 1;
 }
 
 .toolbar-icon {
