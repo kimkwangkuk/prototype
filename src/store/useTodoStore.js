@@ -340,13 +340,19 @@ const useTodoStore = create((set, get) => ({
     });
   },
 
-  // Enter 키: 현재 할일 저장 후 같은 과목에 빈 할일 추가
+  // Enter 키: 신규 할일이면 저장 후 새 할일 추가, 기존 할일 편집이면 저장 후 닫기
   saveAndAddNewTodo: () => {
-    const { bottomSheetData, editingTodoId, selectedDate, nextId } = get();
+    const { bottomSheetData, editingTodoId, selectedDate, nextId, originalBottomSheetData } = get();
 
     // 빈 텍스트면 그냥 닫기
     if (!bottomSheetData.text.trim()) {
       get().closeBottomSheet();
+      return;
+    }
+
+    // 기존 할일 편집 중(원본 텍스트가 있음) → 저장 후 닫기
+    if (originalBottomSheetData?.text?.trim()) {
+      get().closeBottomSheetWithSave();
       return;
     }
 
