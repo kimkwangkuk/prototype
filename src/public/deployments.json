@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1geulwaja-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀 팝업 그랩-버튼 영역 간격 0으로",
+    "createdAt": 1772465396960,
+    "sha": "8411eaf"
+  },
+  {
+    "url": "https://prototype-765zlulef-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772464275555,
+    "sha": "2c04707"
+  },
+  {
     "url": "https://prototype-4zj7d9v1n-kimkwangkuks-projects.vercel.app",
     "message": "fix: 버전 버튼 16px 배경 추가, 아이콘 10px로 작게",
     "createdAt": 1772464205724,
@@ -280,17 +292,5 @@
     "message": "fix: 주뷰 날짜블럭 탭 시 화면 쏠림 및 탭바 노출 문제 수정",
     "createdAt": 1772435111702,
     "sha": "25e18a4"
-  },
-  {
-    "url": "https://prototype-dj6ec5tf2-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 팝업 닫을 때 키패드 내려가는 문제 수정",
-    "createdAt": 1772434377948,
-    "sha": "9710b3f"
-  },
-  {
-    "url": "https://prototype-i8ubpsoe8-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 툴바 버튼 탭 시 iOS 키패드 내려가는 문제 수정",
-    "createdAt": 1772434042278,
-    "sha": "6d2a20b"
   }
 ]
