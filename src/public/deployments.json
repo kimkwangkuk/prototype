@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-f3fm5dn6j-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 날짜 이동 시 바텀시트 자동 닫기",
+    "createdAt": 1772466930613,
+    "sha": "21c702c"
+  },
+  {
+    "url": "https://prototype-hthcz3gad-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772466774441,
+    "sha": "938279e"
+  },
+  {
     "url": "https://prototype-9l1vcpb9y-kimkwangkuks-projects.vercel.app",
     "message": "feat: 시간 피커를 단일 컬럼 10분 단위로 변경",
     "createdAt": 1772466704709,
@@ -85,7 +97,7 @@
   },
   {
     "url": "https://prototype-2d3xbylbs-kimkwangkuks-projects.vercel.app",
-    "message": "feat: ���전 버튼 우상단 원형 햄버거 버튼으로 변경",
+    "message": "feat: 버전 버튼 우상단 원형 햄버거 버튼으로 변경",
     "createdAt": 1772463707429,
     "sha": "8975063"
   },
@@ -163,7 +175,7 @@
   },
   {
     "url": "https://prototype-fn036m83e-kimkwangkuks-projects.vercel.app",
-    "message": "feat: X-Frame-Options 해제 (iframe 버전 뷰어 지원)",
+    "message": "feat: X-Frame-Options ��제 (iframe 버전 뷰어 지원)",
     "createdAt": 1772459731467,
     "sha": "2fa7c6a"
   },
@@ -280,17 +292,5 @@
     "message": "fix: 인풋 포커스 시 iOS가 window 스크롤해 레이아웃 밀리는 문제 수정",
     "createdAt": 1772450542585,
     "sha": "1da4c02"
-  },
-  {
-    "url": "https://prototype-6izf1gyts-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 인풋 포커스 시 iOS가 window 스크롤해 레이아웃 밀리는 문제 수정",
-    "createdAt": 1772438425847,
-    "sha": "1da4c02"
-  },
-  {
-    "url": "https://prototype-ikgclm6t6-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 할일 추가 시 레이아웃 틀어지는 문제 수정",
-    "createdAt": 1772437715802,
-    "sha": "3587a44"
   }
 ]
