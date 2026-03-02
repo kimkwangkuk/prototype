@@ -274,7 +274,7 @@ export default function WeeklyContent() {
   };
 
   const handleTodoClick = (todo) => {
-    openBottomSheet('edit', {
+    openBottomSheet('detail', {
       todoId:   todo.id,
       category: todo.subjectId,
       status:   todo.status,
