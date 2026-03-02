@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-2d3xbylbs-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 버전 버튼 우상단 원형 햄버거 버튼으로 변경",
+    "createdAt": 1772463707429,
+    "sha": "8975063"
+  },
+  {
+    "url": "https://prototype-6ne1gu1vp-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772463224478,
+    "sha": "cddff43"
+  },
+  {
     "url": "https://prototype-58a9fqbc7-kimkwangkuks-projects.vercel.app",
     "message": "fix: 버전 버튼 z-index 100001로 올려 iframe 위에 표시",
     "createdAt": 1772463154328,
@@ -280,17 +292,5 @@
     "message": "fix: 주뷰 키패드 열릴 때 바텀시트 위치 이상 현상 수정",
     "createdAt": 1772432266083,
     "sha": "760f579"
-  },
-  {
-    "url": "https://prototype-capr5mg8r-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 팝업 위치 계산 오류 수정 (--app-height 사용)",
-    "createdAt": 1772431809811,
-    "sha": "81dd43d"
-  },
-  {
-    "url": "https://prototype-665vupamn-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 팝업 위치 계산 오류 수정 (--app-height 사용)",
-    "createdAt": 1772384986969,
-    "sha": "81dd43d"
   }
 ]
