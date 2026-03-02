@@ -1,32 +1,38 @@
 import { useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 
-const CalOutline = () => (
-  <path d="M2 7.725V17.5C2 19.7091 3.79086 21.5 6 21.5H18C20.2091 21.5 22 19.7091 22 17.5V7.725M2 7.725V6.5C2 4.29086 3.79086 2.5 6 2.5H18C20.2091 2.5 22 4.29086 22 6.5V7.725M2 7.725H22"/>
+const IconBase = () => (
+  <path d="M18.2568 1.00684C20.8989 1.14053 23 3.32472 23 6V18L22.9932 18.2568C22.8638 20.8138 20.8138 22.8638 18.2568 22.9932L18 23H6C3.32472 23 1.14053 20.8989 1.00684 18.2568L1 18V6C1 3.23858 3.23858 1 6 1H18L18.2568 1.00684ZM5 6C3.89543 6 3 6.89543 3 8V18C3 19.6569 4.34315 21 6 21H18C19.6569 21 21 19.6569 21 18V8C21 6.89543 20.1046 6 19 6H5Z" fill="currentColor"/>
 );
 
-const IconMonth = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <CalOutline/>
-    <path d="M6 12.5H6.01"/><path d="M9.99658 12.5H10.0066"/><path d="M13.9934 12.5H14.0034"/><path d="M17.99 12.5H18"/>
-    <path d="M6 16.5H6.01"/><path d="M9.99658 16.5H10.0066"/><path d="M13.9934 16.5H14.0034"/>
+const IconDay = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <IconBase/>
+    <rect x="6" y="9" width="2" height="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
 const IconWeek = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <CalOutline/>
-    <path d="M6 12H18"/>
-    <path d="M6 15.5H18"/>
-    <path d="M6 19H14"/>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <IconBase/>
+    <rect x="6" y="9" width="2" height="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
-const IconDay = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <CalOutline/>
-    <path d="M6 13.5H18"/>
-    <path d="M6 17.5H12"/>
+const IconMonth = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <IconBase/>
+    <path d="M6 9.5H6.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9.99658 9.5H10.0066" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M13.9934 9.5H14.0034" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M17.99 9.5H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M6 13.5H6.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9.99658 13.5H10.0066" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M13.9934 13.5H14.0034" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M17.99 13.5H18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M6 17.5H6.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M9.99658 17.5H10.0066" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M13.9934 17.5H14.0034" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
