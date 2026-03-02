@@ -38,6 +38,7 @@ export default function VersionsButton() {
   const latest = deployments[0];
 
   return (
+    <>
     <div className="versions-btn-wrap" ref={ref}>
       <button
         className="versions-pill-btn"
@@ -74,5 +75,6 @@ export default function VersionsButton() {
         <iframe src={iframeUrl} className="versions-iframe" />
       </div>
     )}
+    </>
   );
 }
