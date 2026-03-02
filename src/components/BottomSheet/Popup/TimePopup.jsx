@@ -56,7 +56,7 @@ export default function TimePopup({ visible, onClose, style }) {
 
   return (
     <>
-      <div className="popup-overlay" onClick={onClose}></div>
+      <div className="popup-overlay" onMouseDown={(e) => e.preventDefault()} onTouchStart={(e) => e.preventDefault()} onTouchEnd={(e) => { e.preventDefault(); onClose(); }} onClick={onClose}></div>
       <div className="context-popup" data-popup="time" style={style}>
         <div className="popup-content">
           <div className="drum-picker-wrapper">
@@ -86,7 +86,7 @@ export default function TimePopup({ visible, onClose, style }) {
           </div>
         </div>
         <div className="popup-footer">
-          <button className="popup-clear-btn" onClick={handleClearTime}>
+          <button className="popup-clear-btn" onMouseDown={(e) => e.preventDefault()} onTouchStart={(e) => e.preventDefault()} onTouchEnd={(e) => { e.preventDefault(); handleClearTime(); }} onClick={handleClearTime}>
             없음
           </button>
         </div>

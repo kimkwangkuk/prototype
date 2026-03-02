@@ -14,13 +14,16 @@ export default function CategoryPopup({ visible, onClose, style }) {
 
   return (
     <>
-      <div className="popup-overlay" onClick={onClose}></div>
+      <div className="popup-overlay" onMouseDown={(e) => e.preventDefault()} onTouchStart={(e) => e.preventDefault()} onTouchEnd={(e) => { e.preventDefault(); onClose(); }} onClick={onClose}></div>
       <div className="context-popup" data-popup="category" style={style}>
         <div className="popup-content">
           {subjects.map(s => (
             <button
               key={s.id}
               className="popup-item"
+              onMouseDown={(e) => e.preventDefault()}
+              onTouchStart={(e) => e.preventDefault()}
+              onTouchEnd={(e) => { e.preventDefault(); handleSelect(s.id); }}
               onClick={() => handleSelect(s.id)}
             >
               <div className="popup-item-color" style={{ background: s.color }}></div>

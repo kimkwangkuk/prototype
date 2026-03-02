@@ -19,13 +19,16 @@ export default function DatePopup({ visible, onClose, style }) {
 
   return (
     <>
-      <div className="popup-overlay" onClick={onClose}></div>
+      <div className="popup-overlay" onMouseDown={(e) => e.preventDefault()} onTouchStart={(e) => e.preventDefault()} onTouchEnd={(e) => { e.preventDefault(); onClose(); }} onClick={onClose}></div>
       <div className="context-popup" data-popup="date" style={style}>
         <div className="popup-content">
           {DATE_OPTIONS.map(opt => (
             <button
               key={opt.value}
               className="popup-item"
+              onMouseDown={(e) => e.preventDefault()}
+              onTouchStart={(e) => e.preventDefault()}
+              onTouchEnd={(e) => { e.preventDefault(); handleSelect(opt.value); }}
               onClick={() => handleSelect(opt.value)}
             >
               <span>{opt.label}</span>

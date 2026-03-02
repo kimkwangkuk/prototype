@@ -53,7 +53,7 @@ export default function DurationPopup({ visible, onClose, style }) {
 
   return (
     <>
-      <div className="popup-overlay" onClick={onClose}></div>
+      <div className="popup-overlay" onMouseDown={(e) => e.preventDefault()} onTouchStart={(e) => e.preventDefault()} onTouchEnd={(e) => { e.preventDefault(); onClose(); }} onClick={onClose}></div>
       <div className="context-popup" data-popup="duration" style={style}>
         <div className="popup-content">
           <div className="drum-picker-wrapper">
@@ -69,7 +69,7 @@ export default function DurationPopup({ visible, onClose, style }) {
           </div>
         </div>
         <div className="popup-footer">
-          <button className="popup-clear-btn" onClick={handleClear}>없음</button>
+          <button className="popup-clear-btn" onMouseDown={(e) => e.preventDefault()} onTouchStart={(e) => e.preventDefault()} onTouchEnd={(e) => { e.preventDefault(); handleClear(); }} onClick={handleClear}>없음</button>
         </div>
       </div>
     </>
