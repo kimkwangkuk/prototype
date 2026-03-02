@@ -1,0 +1,58 @@
+name: Update Deployments
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for Vercel deployment
+        run: sleep 60
+
+      - name: Fetch deployments and update JSON
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: prj_ZmliNK7RZtBXJq6Ls9PPWNyxc25k
+          VERCEL_TEAM_ID: team_UgaaAppZtuh1s6V5tjKCaSvp
+        run: |
+          node -e "
+          const https = require('https');
+          const fs = require('fs');
+
+          const options = {
+            hostname: 'api.vercel.com',
+            path: '/v6/deployments?projectId=' + process.env.VERCEL_PROJECT_ID + '&teamId=' + process.env.VERCEL_TEAM_ID + '&limit=50',
+            headers: { 'Authorization': 'Bearer ' + process.env.VERCEL_TOKEN }
+          };
+
+          https.get(options, (res) => {
+            let data = '';
+            res.on('data', c => data += c);
+            res.on('end', () => {
+              const { deployments } = JSON.parse(data);
+              const result = deployments
+                .filter(d => d.state === 'READY')
+                .map(d => ({
+                  url: 'https://' + d.url,
+                  message: (d.meta?.githubCommitMessage || '').split('\n')[0].trim(),
+                  createdAt: d.createdAt,
+                  sha: (d.meta?.githubCommitSha || '').slice(0, 7)
+                }));
+              fs.writeFileSync('src/public/deployments.json', JSON.stringify(result, null, 2));
+              console.log('Updated', result.length, 'deployments');
+            });
+          });
+          "
+
+      - name: Commit updated deployments
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/public/deployments.json
+          git diff --staged --quiet || git commit -m "chore: update deployments.json [skip ci]"
+          git push

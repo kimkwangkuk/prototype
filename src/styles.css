@@ -2348,3 +2348,128 @@ textarea {
   background-color: rgba(0,0,0,0.06);
   color: #000;
 }
+
+/* ===== Versions Page ===== */
+.versions-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #f2f2f7;
+  font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+}
+
+.versions-header {
+  padding: 60px 20px 20px;
+  background: #f2f2f7;
+}
+
+.versions-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 4px;
+  letter-spacing: -0.5px;
+}
+
+.versions-subtitle {
+  font-size: 14px;
+  color: rgba(0,0,0,0.45);
+  margin: 0;
+}
+
+.versions-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 40px;
+  gap: 1px;
+}
+
+.versions-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: rgba(0,0,0,0.4);
+  font-size: 15px;
+}
+
+.version-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.1s;
+}
+
+.version-item:first-child {
+  border-radius: 12px 12px 0 0;
+}
+
+.version-item:last-child {
+  border-radius: 0 0 12px 12px;
+}
+
+.version-item:only-child {
+  border-radius: 12px;
+}
+
+.version-item:not(:last-child) {
+  border-bottom: 0.5px solid rgba(0,0,0,0.1);
+}
+
+.version-item:active {
+  background: rgba(0,0,0,0.05);
+}
+
+.version-item-latest {
+  background: #fff;
+}
+
+.version-item-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.version-message {
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.version-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.version-sha {
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.06);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.version-date {
+  font-size: 12px;
+  color: rgba(0,0,0,0.4);
+}
+
+.version-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #007aff;
+  background: rgba(0, 122, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 20px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}

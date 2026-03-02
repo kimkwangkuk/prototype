@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import VersionsPage from './components/VersionsPage.jsx';
 
 // 키보드가 열려도 앱 레이아웃 높이가 변하지 않도록 고정
 // orientation 변경 시에만 업데이트
@@ -50,8 +51,19 @@ document.addEventListener('focusin', (e) => {
   }
 });
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const isApp = window.location.hash === '#/app';
+
+if (!isApp) {
+  // 버전 목록 페이지: viewport 설정만 적용
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <VersionsPage />
+    </React.StrictMode>
+  );
+} else {
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+}

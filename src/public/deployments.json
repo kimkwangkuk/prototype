@@ -1,0 +1,290 @@
+[
+  {
+    "url": "https://prototype-o3soai4mw-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 그래버를 쉐브론 아이콘으로 교체, 탭 시 키패드+바텀시트 닫기",
+    "createdAt": 1772456527955,
+    "sha": "825ddff"
+  },
+  {
+    "url": "https://prototype-1xl66hlx2-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트 그라데이션 컬러 화이트로 변경",
+    "createdAt": 1772456162047,
+    "sha": "838d277"
+  },
+  {
+    "url": "https://prototype-m9b0kz0qg-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트 그라데이션 위치를 vv-offset-bottom 기준으로 수정, edit 모드만 표시",
+    "createdAt": 1772455983194,
+    "sha": "d67b5ea"
+  },
+  {
+    "url": "https://prototype-plifxy74s-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 바텀시트 뒤에 탭바와 동일한 그라데이션 배경 추가",
+    "createdAt": 1772455531407,
+    "sha": "94f953d"
+  },
+  {
+    "url": "https://prototype-kk0xmq2bw-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 편집 시 padding-bottom 동적 추가로 하단 행 스크롤 가능하게",
+    "createdAt": 1772455146832,
+    "sha": "a61fd4d"
+  },
+  {
+    "url": "https://prototype-f30xn4o7l-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 중앙 스크롤 - visualViewport.height 사용 및 타이밍 350ms로 수정",
+    "createdAt": 1772454469716,
+    "sha": "be84297"
+  },
+  {
+    "url": "https://prototype-ou96vg90l-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 할일 추가 시 편집 아이템을 weekly-content 중앙으로 스크롤",
+    "createdAt": 1772453958653,
+    "sha": "17fa712"
+  },
+  {
+    "url": "https://prototype-kc72mdmer-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 바텀시트 날짜 버튼 아이콘을 피그마 체크리스트 아이콘으로 교체",
+    "createdAt": 1772453208919,
+    "sha": "ef9b7cf"
+  },
+  {
+    "url": "https://prototype-6q24yh2y7-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 기존 할일 편집 중 엔터 시 새 할일 생성 대신 저장 후 닫기",
+    "createdAt": 1772452846952,
+    "sha": "1e91049"
+  },
+  {
+    "url": "https://prototype-9a3jco1ga-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 상태 변경 팝업 열릴 때 키패드 내려가도록 blur 처리",
+    "createdAt": 1772452618680,
+    "sha": "62c59cb"
+  },
+  {
+    "url": "https://prototype-qsfia61ma-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 주뷰 할일 클릭 시 상세 바텀시트 표시 (일뷰와 동일)",
+    "createdAt": 1772452483805,
+    "sha": "f898fe4"
+  },
+  {
+    "url": "https://prototype-rg15vmdhm-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 디테일 바텀시트 흰색 배경, 탭바 덮는 위치로 변경",
+    "createdAt": 1772452421493,
+    "sha": "83ee393"
+  },
+  {
+    "url": "https://prototype-35w1roylj-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 할일 클릭 시 상세 바텀시트 표시 (삭제/편집 버튼, dim 20%)",
+    "createdAt": 1772452159047,
+    "sha": "f98e8e5"
+  },
+  {
+    "url": "https://prototype-2gtkdaqbr-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 포커스 아이템 중앙 스크롤, 미설정 opacity 0.4, 바텀시트 쉐도우 0.15",
+    "createdAt": 1772451660230,
+    "sha": "83ec904"
+  },
+  {
+    "url": "https://prototype-l69biulv9-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 인풋 포커스 시 iOS가 window 스크롤해 레이아웃 밀리는 문제 수정",
+    "createdAt": 1772450542585,
+    "sha": "1da4c02"
+  },
+  {
+    "url": "https://prototype-6izf1gyts-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 인풋 포커스 시 iOS가 window 스크롤해 레이아웃 밀리는 문제 수정",
+    "createdAt": 1772438425847,
+    "sha": "1da4c02"
+  },
+  {
+    "url": "https://prototype-ikgclm6t6-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 할일 추가 시 레이아웃 틀어지는 문제 수정",
+    "createdAt": 1772437715802,
+    "sha": "3587a44"
+  },
+  {
+    "url": "https://prototype-oc1ronxzc-kimkwangkuks-projects.vercel.app",
+    "message": "refactor: 네비바-컨텐츠 레이아웃 완전 분리",
+    "createdAt": 1772437458322,
+    "sha": "7b96bfe"
+  },
+  {
+    "url": "https://prototype-cema23mld-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 상단 네비바 드래그 스크롤 방지 및 배경 불투명화",
+    "createdAt": 1772437123606,
+    "sha": "8930d5c"
+  },
+  {
+    "url": "https://prototype-5xtveq5sg-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탭바 드래그 시 외부 스크롤 방지",
+    "createdAt": 1772436646430,
+    "sha": "674d1d2"
+  },
+  {
+    "url": "https://prototype-9dxopp0zv-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 외곽 스크롤 영역 rubber-band 방지",
+    "createdAt": 1772436283802,
+    "sha": "ce53697"
+  },
+  {
+    "url": "https://prototype-qwdo4d9u1-kimkwangkuks-projects.vercel.app",
+    "message": "fix: vv.offsetTop 오계산으로 탭바 노출 및 팝업 악세사리 가려짐 수정",
+    "createdAt": 1772436168331,
+    "sha": "b2a5ff8"
+  },
+  {
+    "url": "https://prototype-fzvhc30ab-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 날짜블럭 탭 시 화면 쏠림 및 탭바 노출 문제 수정",
+    "createdAt": 1772435111702,
+    "sha": "25e18a4"
+  },
+  {
+    "url": "https://prototype-dj6ec5tf2-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 팝업 닫을 때 키패드 내려가는 문제 수정",
+    "createdAt": 1772434377948,
+    "sha": "9710b3f"
+  },
+  {
+    "url": "https://prototype-i8ubpsoe8-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 툴바 버튼 탭 시 iOS 키패드 내려가는 문제 수정",
+    "createdAt": 1772434042278,
+    "sha": "6d2a20b"
+  },
+  {
+    "url": "https://prototype-mvss637u4-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 하단 셀 터치 시 탭바 즉시 숨김",
+    "createdAt": 1772433856093,
+    "sha": "a154bb3"
+  },
+  {
+    "url": "https://prototype-lj6zidt14-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트 위치 너무 높은 문제 수정 (safe-area 이중 계산 제거)",
+    "createdAt": 1772433607577,
+    "sha": "7d8282f"
+  },
+  {
+    "url": "https://prototype-e7zad7z8n-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 키패드 열릴 때 탭바 자동 숨김",
+    "createdAt": 1772433291947,
+    "sha": "c7dff6d"
+  },
+  {
+    "url": "https://prototype-ae09oxa5n-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트가 탭바와 겹치는 문제 수정",
+    "createdAt": 1772433005260,
+    "sha": "337a05b"
+  },
+  {
+    "url": "https://prototype-d8p0y4ksv-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트 position: relative가 fixed를 덮어쓰는 버그 수정",
+    "createdAt": 1772432495136,
+    "sha": "d155f4a"
+  },
+  {
+    "url": "https://prototype-2oo3xcscp-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 키패드 열릴 때 바텀시트 위치 이상 현상 수정",
+    "createdAt": 1772432266083,
+    "sha": "760f579"
+  },
+  {
+    "url": "https://prototype-capr5mg8r-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 팝업 위치 계산 오류 수정 (--app-height 사용)",
+    "createdAt": 1772431809811,
+    "sha": "81dd43d"
+  },
+  {
+    "url": "https://prototype-665vupamn-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 팝업 위치 계산 오류 수정 (--app-height 사용)",
+    "createdAt": 1772384986969,
+    "sha": "81dd43d"
+  },
+  {
+    "url": "https://prototype-o8k4oth22-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 주간뷰 날짜 블럭 클릭 시 할일 생성 모드 (키패드 오픈)",
+    "createdAt": 1772384295580,
+    "sha": "26c8104"
+  },
+  {
+    "url": "https://prototype-4vgirn6ab-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 펄스 애니메이션 클리핑 해결 (::before 가상 요소 방식)",
+    "createdAt": 1772381021524,
+    "sha": "925f3aa"
+  },
+  {
+    "url": "https://prototype-jli5x69jh-kimkwangkuks-projects.vercel.app",
+    "message": "fix: addTodo 변수명 충돌 수정 (bottomSheetData 재선언 오류)",
+    "createdAt": 1772380387665,
+    "sha": "a68e48a"
+  },
+  {
+    "url": "https://prototype-1dk5ivsfx-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 펄스 애니메이션을 저장 완료 후 1회로 변경",
+    "createdAt": 1772379886617,
+    "sha": "8e11083"
+  },
+  {
+    "url": "https://prototype-hwzh6wwd9-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 없음 표시, 지속시간 프리셋 피커, 없음 텍스트 스타일",
+    "createdAt": 1772379495710,
+    "sha": "c36e503"
+  },
+  {
+    "url": "https://prototype-6teywe8za-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 펄스 2회, 시작 시간 레이블, 없음 버튼, 지속시간 피커 전환",
+    "createdAt": 1772378251091,
+    "sha": "a4ffd2e"
+  },
+  {
+    "url": "https://prototype-2qc8w2mpj-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 팝업 헤더 제거, 지속시간 없음 추가",
+    "createdAt": 1772376825173,
+    "sha": "5481b79"
+  },
+  {
+    "url": "https://prototype-7idnx4wt0-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 날짜 팝업 추가 (오늘/반복/날짜), 기본값 오늘",
+    "createdAt": 1772376490650,
+    "sha": "ebb02cf"
+  },
+  {
+    "url": "https://prototype-4lpdydmtm-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 미설정 툴바 항목 회색 표시",
+    "createdAt": 1772374469717,
+    "sha": "bf58556"
+  },
+  {
+    "url": "https://prototype-mvtcf3xxk-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 팝업 위치 좌표계 오류 수정 (레이아웃 vs 비주얼 뷰포트)",
+    "createdAt": 1772374019091,
+    "sha": "d7ee551"
+  },
+  {
+    "url": "https://prototype-fre0v4g74-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 팝업을 버튼 위치 기준으로 표시, 팝업 닫힌 후 키보드 유지",
+    "createdAt": 1772373829926,
+    "sha": "ec66cfc"
+  },
+  {
+    "url": "https://prototype-b2ep0g66z-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 팝업 Y 오프셋 상향, 키보드 유지, TimePopup 소요시간 제거, 툴바 패딩 조정",
+    "createdAt": 1772373368666,
+    "sha": "4af07b6"
+  },
+  {
+    "url": "https://prototype-7ifthwvt0-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 툴바 아이콘 크기 16px→20px, 팝업 Y 오프셋 96→120px",
+    "createdAt": 1772371387908,
+    "sha": "0272136"
+  },
+  {
+    "url": "https://prototype-fex77lyk8-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트 툴바 높이 Figma 디자인과 일치 (68px)",
+    "createdAt": 1772370406773,
+    "sha": "fceb273"
+  },
+  {
+    "url": "https://prototype-6yc9tleln-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 팝업이 키보드 악세사리 바 위에 표시되도록 수정",
+    "createdAt": 1772369829443,
+    "sha": "a2413c8"
+  }
+]
