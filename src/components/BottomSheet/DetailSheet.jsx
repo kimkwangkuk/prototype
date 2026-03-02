@@ -33,7 +33,6 @@ export default function DetailSheet({ animate, dragY, isDraggingRef, handleGrabT
 
   return (
     <div className={`bottom-sheet detail-sheet${animate ? ' visible' : ''}`} style={sheetStyle}>
-      <div className="toolbar-surface" />
       <div
         className="toolbar-grabber"
         onTouchStart={handleGrabTouchStart}
