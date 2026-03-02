@@ -271,6 +271,18 @@ export default function WeeklyContent() {
     document.body.classList.add('keyboard-open');
     selectDate(dateStr);
     addTodo(subjects[0].id);
+
+    // 새 할일 아이템을 weekly-content 중앙에 스크롤
+    setTimeout(() => {
+      const contentEl = containerRef.current;
+      const editingItem = contentEl?.querySelector('.week-todo-item.editing');
+      if (editingItem && contentEl) {
+        const itemRect = editingItem.getBoundingClientRect();
+        const contentRect = contentEl.getBoundingClientRect();
+        const scrollTarget = contentEl.scrollTop + (itemRect.top - contentRect.top) - (contentRect.height / 2) + (itemRect.height / 2);
+        contentEl.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+      }
+    }, 150);
   };
 
   const handleTodoClick = (todo) => {
