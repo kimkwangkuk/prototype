@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-58a9fqbc7-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 버전 버튼 z-index 100001로 올려 iframe 위에 표시",
+    "createdAt": 1772463154328,
+    "sha": "b0d8c79"
+  },
+  {
+    "url": "https://prototype-do36z6u1w-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772462699348,
+    "sha": "13fd16c"
+  },
+  {
     "url": "https://prototype-ctp8qc61y-kimkwangkuks-projects.vercel.app",
     "message": "fix: 버전 체크 표시 수정, 상태바 배경 흰색, X버튼 제거 및 목록으로 이탈",
     "createdAt": 1772462629597,
@@ -280,17 +292,5 @@
     "message": "fix: 주뷰 팝업 위치 계산 오류 수정 (--app-height 사용)",
     "createdAt": 1772384986969,
     "sha": "81dd43d"
-  },
-  {
-    "url": "https://prototype-o8k4oth22-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 주간뷰 날짜 블럭 클릭 시 할일 생성 모드 (키패드 오픈)",
-    "createdAt": 1772384295580,
-    "sha": "26c8104"
-  },
-  {
-    "url": "https://prototype-4vgirn6ab-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 펄스 애니메이션 클리핑 해결 (::before 가상 요소 방식)",
-    "createdAt": 1772381021524,
-    "sha": "925f3aa"
   }
 ]
