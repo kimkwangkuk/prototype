@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-4zj7d9v1n-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 버전 버튼 16px 배경 추가, 아이콘 10px로 작게",
+    "createdAt": 1772464205724,
+    "sha": "34df1f5"
+  },
+  {
+    "url": "https://prototype-fc9fsypfb-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772464153548,
+    "sha": "8d0c17a"
+  },
+  {
     "url": "https://prototype-d433kbi6z-kimkwangkuks-projects.vercel.app",
     "message": "fix: 버전 버튼 아이콘 색상 어둡게 변경",
     "createdAt": 1772464082667,
@@ -280,17 +292,5 @@
     "message": "fix: 툴바 버튼 탭 시 iOS 키패드 내려가는 문제 수정",
     "createdAt": 1772434042278,
     "sha": "6d2a20b"
-  },
-  {
-    "url": "https://prototype-mvss637u4-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 하단 셀 터치 시 탭바 즉시 숨김",
-    "createdAt": 1772433856093,
-    "sha": "a154bb3"
-  },
-  {
-    "url": "https://prototype-lj6zidt14-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시트 위치 너무 높은 문제 수정 (safe-area 이중 계산 제거)",
-    "createdAt": 1772433607577,
-    "sha": "7d8282f"
   }
 ]
