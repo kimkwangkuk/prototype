@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-doe82daxc-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 툴바 아이콘 SVG 24px로 수정 (서클 20px 표시), 그래버 20px",
+    "createdAt": 1772465924272,
+    "sha": "9070453"
+  },
+  {
+    "url": "https://prototype-fuv2x7i4b-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772465466958,
+    "sha": "b4ef544"
+  },
+  {
     "url": "https://prototype-1geulwaja-kimkwangkuks-projects.vercel.app",
     "message": "fix: 바텀 팝업 그랩-버튼 영역 간격 0으로",
     "createdAt": 1772465396960,
@@ -280,17 +292,5 @@
     "message": "fix: 외곽 스크롤 영역 rubber-band 방지",
     "createdAt": 1772436283802,
     "sha": "ce53697"
-  },
-  {
-    "url": "https://prototype-qwdo4d9u1-kimkwangkuks-projects.vercel.app",
-    "message": "fix: vv.offsetTop 오계산으로 탭바 노출 및 팝업 악세사리 가려짐 수정",
-    "createdAt": 1772436168331,
-    "sha": "b2a5ff8"
-  },
-  {
-    "url": "https://prototype-fzvhc30ab-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 날짜블럭 탭 시 화면 쏠림 및 탭바 노출 문제 수정",
-    "createdAt": 1772435111702,
-    "sha": "25e18a4"
   }
 ]
