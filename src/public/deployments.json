@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ge9v13plk-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 바텀시트 툴바 버튼 FILL + gap 8px",
+    "createdAt": 1772468165011,
+    "sha": "aee764e"
+  },
+  {
+    "url": "https://prototype-41lwptr87-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772468111521,
+    "sha": "424a9d7"
+  },
+  {
     "url": "https://prototype-49kgiqgi0-kimkwangkuks-projects.vercel.app",
     "message": "feat: 탭바 일/주/월 뷰 아이콘 교체",
     "createdAt": 1772468041285,
@@ -280,17 +292,5 @@
     "message": "fix: 주뷰 편집 시 padding-bottom 동적 추가로 하단 행 스크롤 가능하게",
     "createdAt": 1772455146832,
     "sha": "a61fd4d"
-  },
-  {
-    "url": "https://prototype-f30xn4o7l-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 중앙 스크롤 - visualViewport.height 사용 및 타이밍 350ms로 수정",
-    "createdAt": 1772454469716,
-    "sha": "be84297"
-  },
-  {
-    "url": "https://prototype-ou96vg90l-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 할일 추가 시 편집 아이템을 weekly-content 중앙으로 스크롤",
-    "createdAt": 1772453958653,
-    "sha": "17fa712"
   }
 ]
