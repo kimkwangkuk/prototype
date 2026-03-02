@@ -13,9 +13,12 @@ const IconDay = () => (
 );
 
 const IconWeek = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <IconBase/>
-    <rect x="6" y="9" width="2" height="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.2139 0.838949C17.4157 0.950359 19.1666 2.77052 19.1666 4.99992V14.9999L19.1609 15.2139C19.0531 17.3448 17.3448 19.0531 15.2139 19.1609L14.9999 19.1666H4.99992C2.77052 19.1666 0.950359 17.4157 0.838949 15.2139L0.833252 14.9999V4.99992C0.833252 2.69873 2.69873 0.833252 4.99992 0.833252H14.9999L15.2139 0.838949ZM4.16659 4.99992C3.24611 4.99992 2.49992 5.74611 2.49992 6.66659V14.9999C2.49992 16.3806 3.61921 17.4999 4.99992 17.4999H14.9999C16.3806 17.4999 17.4999 16.3806 17.4999 14.9999V6.66659C17.4999 5.74611 16.7537 4.99992 15.8333 4.99992H4.16659Z" fill="currentColor"/>
+    <path d="M5 7.91675H5.00833" stroke="currentColor" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M8.33057 7.91675H8.3389" stroke="currentColor" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M11.6611 7.91675H11.6695" stroke="currentColor" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M14.9917 7.91675H15" stroke="currentColor" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
