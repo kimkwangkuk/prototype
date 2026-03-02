@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ctp8qc61y-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 버전 체크 표시 수정, 상태바 배경 흰색, X버튼 제거 및 목록으로 이탈",
+    "createdAt": 1772462629597,
+    "sha": "5100ca4"
+  },
+  {
+    "url": "https://prototype-d98zq9w3b-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772461484127,
+    "sha": "6604cf0"
+  },
+  {
     "url": "https://prototype-zhbvsxi4n-kimkwangkuks-projects.vercel.app",
     "message": "feat: 버전 버튼 플로팅으로 변경, 현재 버전 체크 표시",
     "createdAt": 1772461417082,
@@ -247,7 +259,7 @@
   },
   {
     "url": "https://prototype-d8p0y4ksv-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시�� position: relative가 fixed를 덮어쓰는 버그 수정",
+    "message": "fix: 바텀시트 position: relative가 fixed를 덮어쓰는 버그 수정",
     "createdAt": 1772432495136,
     "sha": "d155f4a"
   },
@@ -280,11 +292,5 @@
     "message": "fix: 펄스 애니메이션 클리핑 해결 (::before 가상 요소 방식)",
     "createdAt": 1772381021524,
     "sha": "925f3aa"
-  },
-  {
-    "url": "https://prototype-jli5x69jh-kimkwangkuks-projects.vercel.app",
-    "message": "fix: addTodo 변수명 충돌 수정 (bottomSheetData 재선언 오류)",
-    "createdAt": 1772380387665,
-    "sha": "a68e48a"
   }
 ]
