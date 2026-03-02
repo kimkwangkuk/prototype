@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-d433kbi6z-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 버전 버튼 아이콘 색상 어둡게 변경",
+    "createdAt": 1772464082667,
+    "sha": "6f7b7b7"
+  },
+  {
+    "url": "https://prototype-1tu3o8m5k-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772464005093,
+    "sha": "ebb8621"
+  },
+  {
     "url": "https://prototype-jmzxahyjn-kimkwangkuks-projects.vercel.app",
     "message": "fix: 버전 버튼 16x16 사이즈로 변경, 배경 제거",
     "createdAt": 1772463936812,
@@ -280,17 +292,5 @@
     "message": "fix: 바텀시트 위치 너무 높은 문제 수정 (safe-area 이중 계산 제거)",
     "createdAt": 1772433607577,
     "sha": "7d8282f"
-  },
-  {
-    "url": "https://prototype-e7zad7z8n-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 키패드 열릴 때 탭바 자동 숨김",
-    "createdAt": 1772433291947,
-    "sha": "c7dff6d"
-  },
-  {
-    "url": "https://prototype-ae09oxa5n-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시트가 탭바와 겹치는 문제 수정",
-    "createdAt": 1772433005260,
-    "sha": "337a05b"
   }
 ]
