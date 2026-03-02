@@ -602,6 +602,9 @@ textarea {
 }
 
 /* ─── Tab Bar ─── */
+.keyboard-open .tabbar {
+  display: none;
+}
 .tabbar {
   position: fixed;
   bottom: 0;

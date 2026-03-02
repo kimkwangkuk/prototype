@@ -22,6 +22,8 @@ function updateViewportOffset() {
   document.documentElement.style.setProperty('--vv-offset-bottom', `${offsetBottom}px`);
   // 팝업이 키보드(악세사리 포함) 위에 정확히 뜨도록 vv.height 직접 노출
   document.documentElement.style.setProperty('--vv-height', `${vv.height}px`);
+  // 키패드 열림 여부를 body 클래스로 노출 → CSS에서 탭바 숨김 처리
+  document.body.classList.toggle('keyboard-open', offsetBottom > 0);
 }
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', updateViewportOffset);
