@@ -32,7 +32,16 @@ function updateViewportOffset() {
 }
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', updateViewportOffset);
+  window.visualViewport.addEventListener('scroll', updateViewportOffset);
 }
+
+// iOS Safari는 overflow:hidden 상태에서도 인풋 포커스 시 window를 강제 스크롤함.
+// vv.offsetTop이 커져 앱 레이아웃 전체가 위로 밀리는 현상 → 즉시 (0,0)으로 복구.
+window.addEventListener('scroll', () => {
+  if (window.scrollX !== 0 || window.scrollY !== 0) {
+    window.scrollTo(0, 0);
+  }
+}, { passive: true });
 
 // 인풋 포커스 즉시 탭바 숨김 (resize 이벤트보다 빠르게 반응)
 document.addEventListener('focusin', (e) => {
