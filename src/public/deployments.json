@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1cjcu1scd-kimkwangkuks-projects.vercel.app",
+    "message": "chore: 불필요한 코드 제거 (VersionsPage CSS, sharp 패키지)",
+    "createdAt": 1772460689625,
+    "sha": "db8bf58"
+  },
+  {
+    "url": "https://prototype-axlcllzj3-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772460380083,
+    "sha": "e637007"
+  },
+  {
     "url": "https://prototype-nnzg6piza-kimkwangkuks-projects.vercel.app",
     "message": "fix: CSP frame-ancestors * 로 iframe 허용",
     "createdAt": 1772460311065,
@@ -268,17 +280,5 @@
     "message": "fix: 펄스 애니메이션을 저장 완료 후 1회로 변경",
     "createdAt": 1772379886617,
     "sha": "8e11083"
-  },
-  {
-    "url": "https://prototype-hwzh6wwd9-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 없음 표시, 지속시간 프리셋 피커, 없음 텍스트 스타일",
-    "createdAt": 1772379495710,
-    "sha": "c36e503"
-  },
-  {
-    "url": "https://prototype-6teywe8za-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 펄스 2회, 시작 시간 레이블, 없음 버튼, 지속시간 피커 전환",
-    "createdAt": 1772378251091,
-    "sha": "a4ffd2e"
   }
 ]
