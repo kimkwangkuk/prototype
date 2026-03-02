@@ -767,6 +767,17 @@ textarea {
 }
 
 /* ─── Bottom Sheet ─── */
+.bottom-sheet-bg-gradient {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to top, #f7f7f7, rgba(247,247,247,0));
+  pointer-events: none;
+  z-index: 1000;
+}
+
 .bottom-sheet-overlay {
   position: fixed;
   inset: 0;
