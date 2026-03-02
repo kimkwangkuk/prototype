@@ -29,7 +29,7 @@ const useTodoStore = create((set, get) => ({
   originalBottomSheetData: null,
 
   // ===== Date Actions =====
-  selectDate: (dateStr) => set({ selectedDate: dateStr }),
+  selectDate: (dateStr) => set({ selectedDate: dateStr, bottomSheetVisible: false, originalBottomSheetData: null }),
 
   goToday: () => {
     const today = new Date();
