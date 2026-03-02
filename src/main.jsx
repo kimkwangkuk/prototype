@@ -22,12 +22,19 @@ function updateViewportOffset() {
   document.documentElement.style.setProperty('--vv-offset-bottom', `${offsetBottom}px`);
   // 팝업이 키보드(악세사리 포함) 위에 정확히 뜨도록 vv.height 직접 노출
   document.documentElement.style.setProperty('--vv-height', `${vv.height}px`);
-  // 키패드 열림 여부를 body 클래스로 노출 → CSS에서 탭바 숨김 처리
-  document.body.classList.toggle('keyboard-open', offsetBottom > 0);
+  // 키패드 닫힘 시 body 클래스 제거 (열림은 focusin에서 즉시 처리)
+  if (offsetBottom === 0) document.body.classList.remove('keyboard-open');
 }
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', updateViewportOffset);
 }
+
+// 인풋 포커스 즉시 탭바 숨김 (resize 이벤트보다 빠르게 반응)
+document.addEventListener('focusin', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+    document.body.classList.add('keyboard-open');
+  }
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
