@@ -11,6 +11,7 @@ export default function TodoItemB({ todo, subjectColor }) {
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const inputRef = useRef(null);
+  const itemRef = useRef(null);
   const [mounted, setMounted] = useState(false);
   const [pulseAnimation, setPulseAnimation] = useState(false);
 
@@ -34,6 +35,15 @@ export default function TodoItemB({ todo, subjectColor }) {
     if (isEditing && inputRef.current) {
       inputRef.current.removeAttribute('readonly');
       inputRef.current.focus();
+
+      const itemEl = itemRef.current;
+      const contentEl = document.getElementById('content');
+      if (itemEl && contentEl) {
+        const itemRect = itemEl.getBoundingClientRect();
+        const contentRect = contentEl.getBoundingClientRect();
+        const scrollTarget = contentEl.scrollTop + (itemRect.top - contentRect.top) - (contentRect.height / 2) + (itemRect.height / 2);
+        contentEl.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+      }
     }
   }, [isEditing]);
 
@@ -81,6 +91,7 @@ export default function TodoItemB({ todo, subjectColor }) {
 
   return (
     <div
+      ref={itemRef}
       className={`todo-item${isEditing ? ' editing' : ''}${pulseAnimation ? ' pulse-in' : ''}${mounted ? ' mounted' : ''}`}
       data-todo-id={todo.id}
       onAnimationEnd={() => setPulseAnimation(false)}
