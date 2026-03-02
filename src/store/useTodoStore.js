@@ -200,8 +200,24 @@ const useTodoStore = create((set, get) => ({
       bottomSheetMode: mode,
       bottomSheetData: data,
       originalBottomSheetData: { ...data },
-      editingTodoId: data.todoId,
+      editingTodoId: mode === 'detail' ? null : data.todoId,
     });
+  },
+
+  // detail → edit 전환 (편집 버튼)
+  openEditFromDetail: () => {
+    const { bottomSheetData } = get();
+    set({
+      bottomSheetMode: 'full',
+      editingTodoId: bottomSheetData.todoId,
+      originalBottomSheetData: { ...bottomSheetData },
+    });
+  },
+
+  // detail 모드에서 삭제
+  deleteTodoFromDetail: (id) => {
+    get().deleteTodo(id);
+    set({ bottomSheetVisible: false, originalBottomSheetData: null });
   },
 
   closeBottomSheet: () => {

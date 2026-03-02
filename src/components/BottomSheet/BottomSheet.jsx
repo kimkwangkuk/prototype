@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import BottomSheetB from './BottomSheetB';
+import DetailSheet from './DetailSheet';
 import StatusSection from './StatusSection';
 
 export default function BottomSheet() {
@@ -55,6 +56,8 @@ export default function BottomSheet() {
   const handleOverlayClick = () => {
     if (activePopup) {
       setActivePopup(null);
+    } else if (mode === 'detail') {
+      closeBottomSheet();
     } else {
       closeBottomSheet();
     }
@@ -96,10 +99,22 @@ export default function BottomSheet() {
     <>
       <div
         className="bottom-sheet-overlay"
-        onClick={mode === 'status-only' ? handleOverlayClick : undefined}
-        style={{ pointerEvents: mode === 'status-only' ? 'auto' : 'none' }}
+        onClick={mode === 'status-only' || mode === 'detail' ? handleOverlayClick : undefined}
+        style={{
+          pointerEvents: mode === 'status-only' || mode === 'detail' ? 'auto' : 'none',
+          backgroundColor: mode === 'detail' ? 'rgba(0,0,0,0.2)' : undefined,
+        }}
       ></div>
-      {mode === 'status-only' ? (
+      {mode === 'detail' ? (
+        <DetailSheet
+          animate={animate}
+          dragY={dragY}
+          isDraggingRef={isDraggingRef}
+          handleGrabTouchStart={handleGrabTouchStart}
+          handleGrabTouchMove={handleGrabTouchMove}
+          handleGrabTouchEnd={handleGrabTouchEnd}
+        />
+      ) : mode === 'status-only' ? (
         <div className={`bottom-sheet${animate ? ' visible' : ''}`} style={sheetStyle}>
           <div className="bottom-sheet-status-only">
             <div className="bottom-sheet-header">

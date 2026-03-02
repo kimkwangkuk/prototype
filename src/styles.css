@@ -2255,3 +2255,85 @@ textarea {
   flex-shrink: 0;
   background-color: currentColor;
 }
+
+/* ─── Detail Sheet ─── */
+.detail-sheet {
+  padding: 4px 20px 16px;
+  min-width: 280px;
+}
+
+.detail-sheet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 4px;
+}
+
+.detail-sheet-text {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #000;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.detail-sheet-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-sheet-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-meta-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.detail-meta-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+.detail-meta-label {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.6);
+}
+
+.detail-sheet-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.detail-action-btn {
+  flex: 1;
+  height: 44px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.detail-action-delete {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+}
+
+.detail-action-edit {
+  background-color: rgba(0,0,0,0.06);
+  color: #000;
+}
