@@ -1418,7 +1418,7 @@ textarea {
   top: 56px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: var(--vv-offset-bottom, 0px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
