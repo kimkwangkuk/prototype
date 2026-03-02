@@ -42,9 +42,16 @@ function WeekTodoEditInput({ text }) {
 
   useEffect(() => {
     const el = inputRef.current;
-    if (el) {
-      el.removeAttribute('readonly');
-      el.focus();
+    if (!el) return;
+    // iOS는 focus 시 overflow-y:auto 컨테이너를 자동 스크롤해 화면이 아래로 쏠림.
+    // scroll 위치를 저장 후 복원해 점프 방지.
+    const container = document.querySelector('.weekly-content');
+    const savedScroll = container?.scrollTop ?? 0;
+    el.removeAttribute('readonly');
+    el.focus();
+    if (container) {
+      container.scrollTop = savedScroll;
+      requestAnimationFrame(() => { container.scrollTop = savedScroll; });
     }
   }, []);
 
@@ -260,6 +267,8 @@ export default function WeeklyContent() {
   // ─── 핸들러 ────────────────────────────────────────────────────────────────
   const handleAdd = (dateStr) => {
     if (stateRef.current.animating) return;
+    // 리렌더 전에 미리 keyboard-open 추가 → 탭바 플래시 방지
+    document.body.classList.add('keyboard-open');
     selectDate(dateStr);
     addTodo(subjects[0].id);
   };
