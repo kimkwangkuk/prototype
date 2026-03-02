@@ -56,6 +56,7 @@ export default function TodoItemB({ todo, subjectColor }) {
 
   const handleCheckboxClick = (e) => {
     e.stopPropagation();
+    document.activeElement?.blur();
     openBottomSheet('status-only', {
       todoId: todo.id,
       category: todo.subjectId,

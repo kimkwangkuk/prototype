@@ -287,6 +287,7 @@ export default function WeeklyContent() {
 
   const handleCheckboxClick = (e, todo) => {
     e.stopPropagation();
+    document.activeElement?.blur();
     openBottomSheet('status-only', {
       todoId:   todo.id,
       category: todo.subjectId,
