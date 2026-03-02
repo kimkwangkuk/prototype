@@ -332,7 +332,8 @@ textarea {
 }
 /* ─── Content ─── */
 .content {
-  height: 100%;
+  position: absolute;
+  inset: 0;
   padding: 0 16px 160px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1434,7 +1435,8 @@ textarea {
 
 /* ─── Weekly View ─── */
 .weekly-content {
-  height: 100%;
+  position: absolute;
+  inset: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -1821,7 +1823,8 @@ textarea {
 
 /* ─── Monthly View ─── */
 .monthly-content {
-  height: 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -1958,7 +1961,8 @@ textarea {
 
 /* ─── Calendar Screen ─── */
 .cal-screen {
-  height: 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
