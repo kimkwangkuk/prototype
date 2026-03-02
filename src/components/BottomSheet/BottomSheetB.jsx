@@ -100,13 +100,17 @@ export default function BottomSheetB({
 
           <button className="toolbar-icon-btn" {...toolbarBtnProps('date')}>
             <div className={`toolbar-icon${dateDisabled ? ' toolbar-icon-disabled' : ''}`}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                <line x1="16" y1="2" x2="16" y2="6"/>
-                <line x1="8" y1="2" x2="8" y2="6"/>
-                <line x1="3" y1="10" x2="21" y2="10"/>
-                <line x1="10" y1="16" x2="14" y2="16"/>
-                <line x1="12" y1="14" x2="12" y2="18"/>
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g transform="translate(1, 1.5)">
+                  <path d="M17 0C19.7614 0 22 2.23858 22 5V16C22 18.7614 19.7614 21 17 21H5C2.23858 21 0 18.7614 0 16V5C0 2.23858 2.23858 0 5 0H17ZM2 16C2 17.6569 3.34315 19 5 19H17C18.6569 19 20 17.6569 20 16V7.22461H2V16ZM5 2C3.34315 2 2 3.34315 2 5V5.22461H20V5C20 3.34315 18.6569 2 17 2H5Z" fill="currentColor" fillOpacity="0.86"/>
+                </g>
+                <line x1="6" y1="12.5" x2="6.01" y2="12.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="10" y1="12.5" x2="10.01" y2="12.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="14" y1="12.5" x2="14.01" y2="12.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="18" y1="12.5" x2="18.01" y2="12.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="6" y1="16.5" x2="6.01" y2="16.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="10" y1="16.5" x2="10.01" y2="16.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
+                <line x1="14" y1="16.5" x2="14.01" y2="16.5" stroke="currentColor" strokeOpacity="0.86" strokeWidth="2" strokeLinecap="round"/>
               </svg>
             </div>
             <span className={`toolbar-icon-text${dateDisabled ? ' toolbar-icon-text-disabled' : ''}`}>{dateText}</span>
