@@ -12,6 +12,7 @@ function formatDate(ts) {
 export default function VersionsButton() {
   const [open, setOpen] = useState(false);
   const [deployments, setDeployments] = useState([]);
+  const [iframeUrl, setIframeUrl] = useState(null);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -53,10 +54,8 @@ export default function VersionsButton() {
             <a
               key={dep.url}
               href={dep.url}
-              target="_blank"
-              rel="noreferrer"
               className={`versions-dropdown-item${i === 0 ? ' versions-dropdown-item-latest' : ''}`}
-              onClick={() => setOpen(false)}
+              onClick={(e) => { e.preventDefault(); setIframeUrl(dep.url); setOpen(false); }}
             >
               <span className="versions-dropdown-msg">{dep.message || '(메시지 없음)'}</span>
               <span className="versions-dropdown-meta">
@@ -68,5 +67,12 @@ export default function VersionsButton() {
         </div>
       )}
     </div>
+
+    {iframeUrl && (
+      <div className="versions-iframe-overlay">
+        <button className="versions-iframe-close" onClick={() => setIframeUrl(null)}>✕</button>
+        <iframe src={iframeUrl} className="versions-iframe" />
+      </div>
+    )}
   );
 }
