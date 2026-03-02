@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-zhbvsxi4n-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 버전 버튼 플로팅으로 변경, 현재 버전 체크 표시",
+    "createdAt": 1772461417082,
+    "sha": "01f467a"
+  },
+  {
+    "url": "https://prototype-5r128cx6o-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772460758648,
+    "sha": "6c1bbbe"
+  },
+  {
     "url": "https://prototype-1cjcu1scd-kimkwangkuks-projects.vercel.app",
     "message": "chore: 불필요한 코드 제거 (VersionsPage CSS, sharp 패키지)",
     "createdAt": 1772460689625,
@@ -235,7 +247,7 @@
   },
   {
     "url": "https://prototype-d8p0y4ksv-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시트 position: relative가 fixed를 덮어쓰는 버그 수정",
+    "message": "fix: 바텀시�� position: relative가 fixed를 덮어쓰는 버그 수정",
     "createdAt": 1772432495136,
     "sha": "d155f4a"
   },
@@ -274,11 +286,5 @@
     "message": "fix: addTodo 변수명 충돌 수정 (bottomSheetData 재선언 오류)",
     "createdAt": 1772380387665,
     "sha": "a68e48a"
-  },
-  {
-    "url": "https://prototype-1dk5ivsfx-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 펄스 애니메이션을 저장 완료 후 1회로 변경",
-    "createdAt": 1772379886617,
-    "sha": "8e11083"
   }
 ]
