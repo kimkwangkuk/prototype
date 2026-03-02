@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-3doq2anl6-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 탭바 주뷰 아이콘 교체",
+    "createdAt": 1772468902705,
+    "sha": "3416783"
+  },
+  {
+    "url": "https://prototype-33666vb4k-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772468233830,
+    "sha": "eab91aa"
+  },
+  {
     "url": "https://prototype-ge9v13plk-kimkwangkuks-projects.vercel.app",
     "message": "fix: 바텀시트 툴바 버튼 FILL + gap 8px",
     "createdAt": 1772468165011,
@@ -280,17 +292,5 @@
     "message": "fix: 바텀시트 그라데이션 위치를 vv-offset-bottom 기준으로 수정, edit 모드만 표시",
     "createdAt": 1772455983194,
     "sha": "d67b5ea"
-  },
-  {
-    "url": "https://prototype-plifxy74s-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 바텀시트 뒤에 탭바와 동일한 그라데이션 배경 추가",
-    "createdAt": 1772455531407,
-    "sha": "94f953d"
-  },
-  {
-    "url": "https://prototype-kk0xmq2bw-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 편집 시 padding-bottom 동적 추가로 하단 행 스크롤 가능하게",
-    "createdAt": 1772455146832,
-    "sha": "a61fd4d"
   }
 ]
