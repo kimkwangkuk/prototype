@@ -39,6 +39,21 @@ html {
   height: 100%;
 }
 
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-bottom: var(--vv-offset-bottom, 0px);
+  overflow: hidden;
+}
+
+.app-body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
 body {
   font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg-primary);
@@ -61,13 +76,11 @@ textarea {
 
 /* ─── Header ─── */
 .header {
-  position: fixed;
-  top: var(--vv-offset-top, 0px);
-  left: 50%;
-  transform: translateX(-50%);
+  flex-shrink: 0;
   width: 100%;
   z-index: 100;
   border-bottom: 1px solid var(--border-quinary);
+  position: relative;
 }
 .header-bg {
   position: absolute;
@@ -319,18 +332,12 @@ textarea {
 }
 /* ─── Content ─── */
 .content {
-  position: absolute;
-  top: 108px;
-  left: 0;
-  right: 0;
-  /* 키보드가 열리면 --vv-offset-bottom만큼 올라가서 키보드 위까지만 차지 */
-  /* iOS가 visualViewport를 스크롤시킬 필요가 없어져 더럭거림 방지 */
-  bottom: var(--vv-offset-bottom, 0px);
+  height: 100%;
   padding: 0 16px 160px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .content::-webkit-scrollbar {
   display: none; /* Chrome/Safari */
@@ -1427,11 +1434,7 @@ textarea {
 
 /* ─── Weekly View ─── */
 .weekly-content {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  right: 0;
-  bottom: var(--vv-offset-bottom, 0px);
+  height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -1818,11 +1821,7 @@ textarea {
 
 /* ─── Monthly View ─── */
 .monthly-content {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  right: 0;
-  bottom: 72px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -1959,11 +1958,7 @@ textarea {
 
 /* ─── Calendar Screen ─── */
 .cal-screen {
-  position: absolute;
-  top: 56px;
-  left: 0;
-  right: 0;
-  bottom: 72px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;

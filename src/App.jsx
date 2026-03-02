@@ -97,8 +97,12 @@ export default function App() {
 
   return (
     <>
-      <Header />
-      {currentTab === 'calendar' ? <CalendarContent /> : <Content />}
+      <div className="app-layout">
+        <Header />
+        <div className="app-body">
+          {currentTab === 'calendar' ? <CalendarContent /> : <Content />}
+        </div>
+      </div>
       <Tabbar />
       {currentTab !== 'calendar' && <BottomSheet />}
     </>
