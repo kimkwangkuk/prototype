@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-qm4npexbi-kimkwangkuks-projects.vercel.app",
+    "message": "docs: 아이콘 SVG 사이즈 스펙 메모 추가",
+    "createdAt": 1772466183828,
+    "sha": "f6223d5"
+  },
+  {
+    "url": "https://prototype-m5nsa5x23-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772465992229,
+    "sha": "2c43362"
+  },
+  {
     "url": "https://prototype-doe82daxc-kimkwangkuks-projects.vercel.app",
     "message": "fix: 툴바 아이콘 SVG 24px로 수정 (서클 20px 표시), 그래버 20px",
     "createdAt": 1772465924272,
@@ -280,17 +292,5 @@
     "message": "fix: 상단 네비바 드래그 스크롤 방지 및 배경 불투명화",
     "createdAt": 1772437123606,
     "sha": "8930d5c"
-  },
-  {
-    "url": "https://prototype-5xtveq5sg-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 탭바 드래그 시 외부 스크롤 방지",
-    "createdAt": 1772436646430,
-    "sha": "674d1d2"
-  },
-  {
-    "url": "https://prototype-9dxopp0zv-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 외곽 스크롤 영역 rubber-band 방지",
-    "createdAt": 1772436283802,
-    "sha": "ce53697"
   }
 ]
