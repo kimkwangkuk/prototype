@@ -763,7 +763,7 @@ textarea {
 .bottom-sheet {
   position: fixed;
   bottom: max(
-    calc(var(--vv-offset-bottom, 0px) + env(safe-area-inset-bottom, 0px) + 12px),
+    calc(var(--vv-offset-bottom, 0px) + 12px),
     calc(env(safe-area-inset-bottom, 0px) + 74px)
   );
   left: 50%;
