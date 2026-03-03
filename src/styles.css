@@ -1262,8 +1262,6 @@ textarea {
   /* 앱 전체 높이 - 비주얼 뷰포트 높이 = 키보드 전체(악세사리 포함) 높이
      여기에 160px를 더해 악세사리 바 위에 확실히 표시 */
   bottom: calc(var(--app-height, 100svh) - var(--vv-height, var(--app-height, 100svh)) + 160px);
-  left: 20px;
-  right: 20px;
   background: var(--bg-primary);
   border-radius: 20px;
   box-shadow: 0 -4px 40px rgba(0,0,0,0.2);

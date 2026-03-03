@@ -134,7 +134,7 @@ const useTodoStore = create((set, get) => ({
       text: '',
       time: '',
       duration: null,
-      date: 'today',
+      date: selectedDate,
     };
 
     set({
@@ -385,7 +385,7 @@ const useTodoStore = create((set, get) => ({
       text: '',
       time: '',
       duration: null,
-      date: 'today',
+      date: selectedDate,
     };
 
     const savedTodoId = editingTodoId;

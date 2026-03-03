@@ -74,6 +74,7 @@ export default function DatePopup({ visible, onClose, style }) {
     setCenterIdx(i);
     scrollRef.current?.scrollTo({ top: i * ITEM_H, behavior: 'smooth' });
     updateBottomSheetField('date', ds);
+    onClose();
   };
 
   if (!visible) return null;
@@ -87,7 +88,7 @@ export default function DatePopup({ visible, onClose, style }) {
         onTouchEnd={(e) => { e.preventDefault(); onClose(); }}
         onClick={onClose}
       />
-      <div className="context-popup" data-popup="date" style={style}>
+      <div className="context-popup" data-popup="date" style={style} onMouseDown={(e) => e.preventDefault()}>
 
         {/* 탭 스위처 */}
         <div className="date-tab-row">

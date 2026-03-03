@@ -2,6 +2,21 @@ import { useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
+import { formatDate } from '../../utils/dateUtils';
+
+const todayStr = formatDate(new Date());
+function getDateLabel(date) {
+  if (!date || date === 'today') return '오늘';
+  if (date === 'repeat') return '반복';
+  const today = new Date(todayStr);
+  const d = new Date(date);
+  const diff = Math.round((d - today) / 86400000);
+  if (diff === -1) return '어제';
+  if (diff === 0) return '오늘';
+  if (diff === 1) return '내일';
+  if (diff === 2) return '모레';
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+}
 import CategoryPopup from './Popup/CategoryPopup';
 import DatePopup from './Popup/DatePopup';
 import TimePopup from './Popup/TimePopup';
@@ -39,7 +54,8 @@ export default function BottomSheetB({
     ) || window.innerHeight;
     const offsetTop = window.visualViewport?.offsetTop ?? 0;
     const bottom = appHeight - (offsetTop + rect.top) + 8;
-    setPopupStyle({ bottom: `${bottom}px` });
+    const centerX = rect.left + rect.width / 2;
+    setPopupStyle({ bottom: `${bottom}px`, left: `${centerX - 100}px`, width: '200px', right: 'auto' });
     setActivePopup(name);
   };
 
@@ -58,8 +74,7 @@ export default function BottomSheetB({
   const categoryColor = selectedSubject?.color;
   const categoryDisabled = !data.category;
 
-  const dateLabels = { today: '오늘', repeat: '반복', date: '날짜' };
-  const dateText = dateLabels[data.date] || '오늘';
+  const dateText = getDateLabel(data.date);
   const dateDisabled = false;
 
   const timeNone = data.time === 'none';
