@@ -30,16 +30,18 @@ export default function DatePopup({ visible, onClose, style }) {
   const scrollRef = useRef(null);
   const scrollTimer = useRef(null);
   const [centerIdx, setCenterIdx] = useState(0);
+  const initialIdxRef = useRef(0);
 
   const isRepeat = data.date === 'repeat';
   const [tab, setTab] = useState(isRepeat ? 'repeat' : 'date');
 
   const currentDate = (data.date === 'today' || data.date === 'repeat') ? todayStr : data.date;
 
-  // 팝업 열릴 때 선택된 날짜로 스크롤 초기화
+  // 팝업 열릴 때 선택된 날짜로 스크롤 초기화 + 초기값 기억
   useEffect(() => {
     if (!visible || tab !== 'date') return;
     const idx = Math.max(0, dates.findIndex(d => d.ds === currentDate));
+    initialIdxRef.current = idx;
     setCenterIdx(idx);
     if (scrollRef.current) {
       scrollRef.current.scrollTop = idx * ITEM_H;
@@ -76,6 +78,13 @@ export default function DatePopup({ visible, onClose, style }) {
     onClose();
   };
 
+  const handleReset = () => {
+    const idx = initialIdxRef.current;
+    setCenterIdx(idx);
+    scrollRef.current?.scrollTo({ top: idx * ITEM_H, behavior: 'smooth' });
+    updateBottomSheetField('date', dates[idx].ds);
+  };
+
   if (!visible) return null;
 
   return (
@@ -88,6 +97,16 @@ export default function DatePopup({ visible, onClose, style }) {
         onClick={onClose}
       />
       <div className="context-popup" data-popup="date" style={style} onMouseDown={(e) => e.preventDefault()}>
+
+        {/* 리셋 버튼 */}
+        {tab === 'date' && centerIdx !== initialIdxRef.current && (
+          <button className="drum-reset-btn" onClick={handleReset} onMouseDown={(e) => e.preventDefault()}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+          </button>
+        )}
 
         {/* 탭 스위처 */}
         <div className="date-tab-row">

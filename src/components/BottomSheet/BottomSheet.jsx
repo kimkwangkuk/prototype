@@ -56,6 +56,10 @@ export default function BottomSheet() {
   const handleOverlayClick = () => {
     if (activePopup) {
       setActivePopup(null);
+      if (mode === 'full') {
+        document.activeElement?.blur();
+        closeBottomSheetWithSave();
+      }
     } else if (mode === 'detail') {
       closeBottomSheet();
     } else if (mode === 'full') {

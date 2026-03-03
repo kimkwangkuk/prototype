@@ -1408,6 +1408,24 @@ textarea {
   bottom: 0;
   background: linear-gradient(to top, var(--bg-primary) 10%, transparent);
 }
+.drum-reset-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+}
+
 .drum-picker-highlight {
   position: absolute;
   top: 50%;
