@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-osu4cncg9-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 날짜 팝업 가로 스크롤 날짜 스트립 + 반복 옵션",
+    "createdAt": 1772519469246,
+    "sha": "1a6ab4f"
+  },
+  {
+    "url": "https://prototype-c55spfzo8-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772468975001,
+    "sha": "d58c9cd"
+  },
+  {
     "url": "https://prototype-3doq2anl6-kimkwangkuks-projects.vercel.app",
     "message": "feat: 탭바 주뷰 아이콘 교체",
     "createdAt": 1772468902705,
@@ -280,17 +292,5 @@
     "message": "feat: 그래버를 쉐브론 아이콘으로 교체, 탭 시 키패드+바텀시트 닫기",
     "createdAt": 1772456527955,
     "sha": "825ddff"
-  },
-  {
-    "url": "https://prototype-1xl66hlx2-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시트 그라데이션 컬러 화이트로 변경",
-    "createdAt": 1772456162047,
-    "sha": "838d277"
-  },
-  {
-    "url": "https://prototype-m9b0kz0qg-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시트 그라데이션 위치를 vv-offset-bottom 기준으로 수정, edit 모드만 표시",
-    "createdAt": 1772455983194,
-    "sha": "d67b5ea"
   }
 ]
