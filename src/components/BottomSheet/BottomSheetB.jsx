@@ -11,7 +11,6 @@ function getDateLabel(date) {
   const today = new Date(todayStr);
   const d = new Date(date);
   const diff = Math.round((d - today) / 86400000);
-  if (diff === -1) return '어제';
   if (diff === 0) return '오늘';
   if (diff === 1) return '내일';
   if (diff === 2) return '모레';

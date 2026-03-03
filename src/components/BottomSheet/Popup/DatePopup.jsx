@@ -8,13 +8,12 @@ const ITEM_H = 44;
 function buildDates() {
   const today = new Date();
   const items = [];
-  for (let i = -1; i <= 60; i++) {
+  for (let i = 0; i <= 60; i++) {
     const d = new Date(today);
     d.setDate(today.getDate() + i);
     const ds = formatDate(d);
     let suffix;
-    if (i === -1) suffix = '(어제)';
-    else if (i === 0) suffix = '(오늘)';
+    if (i === 0) suffix = '(오늘)';
     else if (i === 1) suffix = '(내일)';
     else if (i === 2) suffix = '(모레)';
     else suffix = getDayOfWeekKR(d);

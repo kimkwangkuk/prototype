@@ -58,6 +58,9 @@ export default function BottomSheet() {
       setActivePopup(null);
     } else if (mode === 'detail') {
       closeBottomSheet();
+    } else if (mode === 'full') {
+      document.activeElement?.blur();
+      closeBottomSheetWithSave();
     } else {
       closeBottomSheet();
     }
@@ -103,9 +106,8 @@ export default function BottomSheet() {
     <>
       <div
         className="bottom-sheet-overlay"
-        onClick={mode === 'status-only' || mode === 'detail' ? handleOverlayClick : undefined}
+        onClick={handleOverlayClick}
         style={{
-          pointerEvents: mode === 'status-only' || mode === 'detail' ? 'auto' : 'none',
           backgroundColor: mode === 'detail' ? 'rgba(0,0,0,0.2)' : undefined,
         }}
       ></div>
