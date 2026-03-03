@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-oksnq1l0x-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 날짜 팝업 드럼롤 피커, 버전 버튼 20px",
+    "createdAt": 1772519936177,
+    "sha": "aa8b470"
+  },
+  {
+    "url": "https://prototype-pcfnb563u-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772519538983,
+    "sha": "354f757"
+  },
+  {
     "url": "https://prototype-osu4cncg9-kimkwangkuks-projects.vercel.app",
     "message": "feat: 날짜 팝업 가로 스크롤 날짜 스트립 + 반복 옵션",
     "createdAt": 1772519469246,
@@ -280,17 +292,5 @@
     "message": "feat: 버전 목록을 헤더 플로팅 버튼으로 변경",
     "createdAt": 1772458829615,
     "sha": "6aa9b2a"
-  },
-  {
-    "url": "https://prototype-lthopm0b2-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 버전 목록 첫화면 추가 및 배포 이력 자동화",
-    "createdAt": 1772458283845,
-    "sha": "178b338"
-  },
-  {
-    "url": "https://prototype-o3soai4mw-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 그래버를 쉐브론 아이콘으로 교체, 탭 시 키패드+바텀시트 닫기",
-    "createdAt": 1772456527955,
-    "sha": "825ddff"
   }
 ]
