@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-5qjt11gjy-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 날짜 피커 리셋 버튼 추가, 팝업 외부 터치 시 바텀시트 함께 닫기",
+    "createdAt": 1772523768960,
+    "sha": "30adb8e"
+  },
+  {
+    "url": "https://prototype-4gxclmq0e-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772522501039,
+    "sha": "001fad1"
+  },
+  {
     "url": "https://prototype-pck31gujp-kimkwangkuks-projects.vercel.app",
     "message": "feat: 바텀시트 외부 터치 시 저장/취소 처리, 날짜 피커 어제 제거",
     "createdAt": 1772522432234,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772460380083,
     "sha": "e637007"
-  },
-  {
-    "url": "https://prototype-nnzg6piza-kimkwangkuks-projects.vercel.app",
-    "message": "fix: CSP frame-ancestors * 로 iframe 허용",
-    "createdAt": 1772460311065,
-    "sha": "b29ba53"
-  },
-  {
-    "url": "https://prototype-motbdn5xt-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772460119626,
-    "sha": "e35a8fe"
   }
 ]
