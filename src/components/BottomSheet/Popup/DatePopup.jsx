@@ -98,16 +98,6 @@ export default function DatePopup({ visible, onClose, style }) {
       />
       <div className="context-popup" data-popup="date" style={style} onMouseDown={(e) => e.preventDefault()}>
 
-        {/* 리셋 버튼 */}
-        {tab === 'date' && centerIdx !== initialIdxRef.current && (
-          <button className="drum-reset-btn" onClick={handleReset} onMouseDown={(e) => e.preventDefault()}>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-              <path d="M3 3v5h5"/>
-            </svg>
-          </button>
-        )}
-
         {/* 탭 스위처 */}
         <div className="date-tab-row">
           <button
@@ -131,22 +121,31 @@ export default function DatePopup({ visible, onClose, style }) {
         {tab === 'date' && (
           <div className="drum-picker-wrap">
             <div className="drum-picker-highlight" />
+            {/* 리셋 버튼 */}
+            {centerIdx !== initialIdxRef.current && (
+              <button className="drum-reset-btn" onClick={handleReset} onMouseDown={(e) => e.preventDefault()}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+              </button>
+            )}
             <div className="drum-picker" ref={scrollRef} onScroll={handleScroll}>
-              <div style={{ height: ITEM_H * 2 }} />
+              <div style={{ height: ITEM_H * 3 }} />
               {dates.map(({ ds, label }, i) => {
                 const dist = Math.abs(i - centerIdx);
                 return (
                   <div
                     key={ds}
                     className={`drum-item${i === centerIdx ? ' selected' : ''}`}
-                    style={{ opacity: dist === 0 ? 1 : dist === 1 ? 0.55 : 0.28 }}
+                    style={{ opacity: dist === 0 ? 1 : dist === 1 ? 0.65 : dist === 2 ? 0.38 : 0.18 }}
                     onClick={() => handleItemClick(ds, i)}
                   >
                     {label}
                   </div>
                 );
               })}
-              <div style={{ height: ITEM_H * 2 }} />
+              <div style={{ height: ITEM_H * 3 }} />
             </div>
           </div>
         )}
