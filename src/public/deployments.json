@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-zw7p747kv-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 바텀시트 날짜 팝업 위치 개선 및 선택 날짜 자동 반영",
+    "createdAt": 1772520386089,
+    "sha": "bd5b158"
+  },
+  {
+    "url": "https://prototype-k4sfxww41-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772520003054,
+    "sha": "f667215"
+  },
+  {
     "url": "https://prototype-oksnq1l0x-kimkwangkuks-projects.vercel.app",
     "message": "feat: 날짜 팝업 드럼롤 피커, 버전 버튼 20px",
     "createdAt": 1772519936177,
@@ -280,17 +292,5 @@
     "message": "fix: VersionsButton JSX 루트 Fragment로 감싸기",
     "createdAt": 1772459506365,
     "sha": "ab09f41"
-  },
-  {
-    "url": "https://prototype-lzd8fe6sg-kimkwangkuks-projects.vercel.app",
-    "message": "feat: PWA 앱 아이콘 등록 (192, 512, 180px)",
-    "createdAt": 1772459033972,
-    "sha": "a4be71a"
-  },
-  {
-    "url": "https://prototype-3ik3et9qs-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 버전 목록을 헤더 플로팅 버튼으로 변경",
-    "createdAt": 1772458829615,
-    "sha": "6aa9b2a"
   }
 ]
