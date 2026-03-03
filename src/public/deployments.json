@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-h26etfpnm-kimkwangkuks-projects.vercel.app",
+    "message": "design: 날짜 피커 비선택 항목 opacity 진하게 조정",
+    "createdAt": 1772520710972,
+    "sha": "2575c26"
+  },
+  {
+    "url": "https://prototype-lhnlxnuus-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772520453289,
+    "sha": "2c06ed9"
+  },
+  {
     "url": "https://prototype-zw7p747kv-kimkwangkuks-projects.vercel.app",
     "message": "feat: 바텀시트 날짜 팝업 위치 개선 및 선택 날짜 자동 반영",
     "createdAt": 1772520386089,
@@ -286,11 +298,5 @@
     "message": "feat: X-Frame-Options 해제 (iframe 버전 뷰어 지원)",
     "createdAt": 1772459731467,
     "sha": "2fa7c6a"
-  },
-  {
-    "url": "https://prototype-3twqq81n8-kimkwangkuks-projects.vercel.app",
-    "message": "fix: VersionsButton JSX 루트 Fragment로 감싸기",
-    "createdAt": 1772459506365,
-    "sha": "ab09f41"
   }
 ]
