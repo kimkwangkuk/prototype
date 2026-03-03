@@ -121,7 +121,7 @@ export default function DatePopup({ visible, onClose, style }) {
                   <div
                     key={ds}
                     className={`drum-item${i === centerIdx ? ' selected' : ''}`}
-                    style={{ opacity: dist === 0 ? 1 : dist === 1 ? 0.35 : 0.12 }}
+                    style={{ opacity: dist === 0 ? 1 : dist === 1 ? 0.55 : 0.28 }}
                     onClick={() => handleItemClick(ds, i)}
                   >
                     {label}
