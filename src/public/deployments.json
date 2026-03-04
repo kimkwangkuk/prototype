@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-bk1cu8pp4-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 월뷰 시트 input z-index 수정 및 즉시 키패드 포커스",
+    "createdAt": 1772626721779,
+    "sha": "950b705"
+  },
+  {
+    "url": "https://prototype-i3qvx2l7s-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772622549863,
+    "sha": "3f39b86"
+  },
+  {
     "url": "https://prototype-dwrzqfcma-kimkwangkuks-projects.vercel.app",
     "message": "feat: 월뷰 날짜 셀 탭으로 할일 추가 (시트 내 input)",
     "createdAt": 1772622480857,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772462699348,
     "sha": "13fd16c"
-  },
-  {
-    "url": "https://prototype-ctp8qc61y-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 버전 체크 표시 수정, 상태바 배경 흰색, X버튼 제거 및 목록으로 이탈",
-    "createdAt": 1772462629597,
-    "sha": "5100ca4"
-  },
-  {
-    "url": "https://prototype-d98zq9w3b-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772461484127,
-    "sha": "6604cf0"
   }
 ]
