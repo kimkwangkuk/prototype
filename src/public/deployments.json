@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-dwrzqfcma-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 월뷰 날짜 셀 탭으로 할일 추가 (시트 내 input)",
+    "createdAt": 1772622480857,
+    "sha": "8104faf"
+  },
+  {
+    "url": "https://prototype-im7txhb8g-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772534221874,
+    "sha": "9db6bd3"
+  },
+  {
     "url": "https://prototype-94le7kihb-kimkwangkuks-projects.vercel.app",
     "message": "feat: 날짜 피커 UI 개선, 바텀시트 딤 터치 닫기 수정",
     "createdAt": 1772534154845,
@@ -133,7 +145,7 @@
   },
   {
     "url": "https://prototype-id5d7569x-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 탭바 캘린더 ���이콘에 오늘 날짜 표시",
+    "message": "feat: 탭바 캘린더 아이콘에 오늘 날짜 표시",
     "createdAt": 1772467523754,
     "sha": "6573d47"
   },
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772461484127,
     "sha": "6604cf0"
-  },
-  {
-    "url": "https://prototype-zhbvsxi4n-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 버전 버튼 플로팅으로 변경, 현재 버전 체크 표시",
-    "createdAt": 1772461417082,
-    "sha": "01f467a"
-  },
-  {
-    "url": "https://prototype-5r128cx6o-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772460758648,
-    "sha": "6c1bbbe"
   }
 ]
