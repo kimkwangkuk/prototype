@@ -192,6 +192,75 @@ const useTodoStore = create((set, get) => ({
     });
   },
 
+  // 월뷰에서 날짜 셀 탭 → 해당 날짜에 할일 생성 (시트 내 input 표시)
+  addTodoForDate: (dateStr) => {
+    const { editingTodoId, bottomSheetData, originalBottomSheetData } = get();
+
+    // 현재 편집 중인 항목 처리
+    if (editingTodoId !== null) {
+      const currentText = bottomSheetData.text.trim();
+      const originalText = originalBottomSheetData?.text?.trim() ?? '';
+      if (currentText) {
+        get().updateTodo(editingTodoId, {
+          text: bottomSheetData.text,
+          subjectId: bottomSheetData.category,
+          status: bottomSheetData.status,
+          time: bottomSheetData.time === 'none' ? null : bottomSheetData.time,
+          duration: bottomSheetData.duration === 'none' ? null : bottomSheetData.duration,
+        });
+      } else if (!originalText) {
+        get().deleteTodo(editingTodoId);
+      } else {
+        get().updateTodo(editingTodoId, {
+          text: originalBottomSheetData.text,
+          subjectId: originalBottomSheetData.category,
+          status: originalBottomSheetData.status,
+          time: originalBottomSheetData.time === 'none' ? null : originalBottomSheetData.time,
+          duration: originalBottomSheetData.duration === 'none' ? null : originalBottomSheetData.duration,
+        });
+      }
+    }
+
+    const currentState = get();
+    const currentTodos = currentState.todos;
+    const currentNextId = currentState.nextId;
+
+    const newTodo = {
+      id: currentNextId,
+      subjectId: null,
+      text: '',
+      status: 'empty',
+      time: null,
+      duration: null,
+      overdue: false,
+    };
+
+    const newSheetData = {
+      todoId: currentNextId,
+      category: null,
+      status: 'empty',
+      text: '',
+      time: '',
+      duration: null,
+      date: dateStr,
+      inputInSheet: true,
+    };
+
+    set({
+      selectedDate: dateStr,
+      todos: {
+        ...currentTodos,
+        [dateStr]: [...(currentTodos[dateStr] || []), newTodo],
+      },
+      nextId: currentNextId + 1,
+      editingTodoId: currentNextId,
+      bottomSheetVisible: true,
+      bottomSheetMode: 'full',
+      bottomSheetData: newSheetData,
+      originalBottomSheetData: { ...newSheetData },
+    });
+  },
+
   // ===== BottomSheet Actions =====
   openBottomSheet: (mode, data) => {
     // 원본 데이터 저장 (취소 시 복원용)

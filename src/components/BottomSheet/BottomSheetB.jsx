@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
@@ -33,7 +33,18 @@ export default function BottomSheetB({
 }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
+  const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
+  const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const [popupStyle, setPopupStyle] = useState({});
+  const sheetInputRef = useRef(null);
+
+  // inputInSheet 모드일 때 input 자동 포커스
+  useEffect(() => {
+    if (data.inputInSheet && sheetInputRef.current) {
+      const t = setTimeout(() => sheetInputRef.current?.focus(), 80);
+      return () => clearTimeout(t);
+    }
+  }, [data.inputInSheet]);
 
   // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
   // Desktop: mousedown preventDefault → blur 방지, click에서 처리
@@ -60,7 +71,9 @@ export default function BottomSheetB({
 
   const closePopup = () => {
     setActivePopup(null);
-    if (editingTodoId) {
+    if (data.inputInSheet) {
+      sheetInputRef.current?.focus();
+    } else if (editingTodoId) {
       const input = document.querySelector(`[data-todo-id="${editingTodoId}"] input`);
       input?.focus();
     }
@@ -106,6 +119,19 @@ export default function BottomSheetB({
             <path d="M2.66675 5.5L8.00008 10.8333L13.3334 5.5" stroke="black" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round"/>
           </svg>
         </div>
+        {data.inputInSheet && (
+          <div className="sheet-input-row">
+            <input
+              ref={sheetInputRef}
+              type="text"
+              className="sheet-text-input"
+              value={data.text}
+              onChange={(e) => updateBottomSheetField('text', e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); saveAndAddNewTodo(); } }}
+              placeholder="할 일 입력..."
+            />
+          </div>
+        )}
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
             <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>

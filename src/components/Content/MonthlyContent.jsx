@@ -33,11 +33,12 @@ function getMonthCalendar(baseDate) {
 }
 
 export default function MonthlyContent() {
-  const baseDate        = useTodoStore(state => state.baseDate);
-  const todos           = useTodoStore(state => state.todos);
-  const openBottomSheet = useTodoStore(state => state.openBottomSheet);
-  const nextMonthAction = useTodoStore(state => state.nextMonth);
-  const prevMonthAction = useTodoStore(state => state.prevMonth);
+  const baseDate          = useTodoStore(state => state.baseDate);
+  const todos             = useTodoStore(state => state.todos);
+  const openBottomSheet   = useTodoStore(state => state.openBottomSheet);
+  const addTodoForDate    = useTodoStore(state => state.addTodoForDate);
+  const nextMonthAction   = useTodoStore(state => state.nextMonth);
+  const prevMonthAction   = useTodoStore(state => state.prevMonth);
 
   const weeks = useMemo(() => getMonthCalendar(baseDate), [baseDate]);
 
@@ -149,7 +150,13 @@ export default function MonthlyContent() {
   }, []);
 
   // ─── 렌더 ─────────────────────────────────────────────────────────────────
-  const handleTodoClick = (todo) => {
+  const handleCellClick = (ds, inMonth) => {
+    if (!inMonth) return;
+    addTodoForDate(ds);
+  };
+
+  const handleTodoClick = (e, todo) => {
+    e.stopPropagation();
     openBottomSheet('edit', {
       todoId:   todo.id,
       category: todo.subjectId,
@@ -184,6 +191,7 @@ export default function MonthlyContent() {
                 <div
                   key={ds}
                   className={`monthly-day-cell${isWeekend ? ' weekend' : ''}${!inMonth ? ' out-of-month' : ''}`}
+                  onClick={() => handleCellClick(ds, inMonth)}
                 >
                   <div className={`monthly-date-num${today ? ' today' : ''}`}>
                     {date.getDate()}
@@ -196,7 +204,7 @@ export default function MonthlyContent() {
                         <button
                           key={todo.id}
                           className="monthly-todo-item"
-                          onClick={() => handleTodoClick(todo)}
+                          onClick={(e) => handleTodoClick(e, todo)}
                         >
                           <span className="monthly-todo-dot" style={{ background: subj?.color }}></span>
                           <span className={`monthly-todo-text${completed ? ' completed' : ''}`}>

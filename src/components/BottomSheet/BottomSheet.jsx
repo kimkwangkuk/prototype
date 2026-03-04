@@ -7,7 +7,6 @@ import StatusSection from './StatusSection';
 export default function BottomSheet() {
   const visible = useTodoStore(state => state.bottomSheetVisible);
   const mode = useTodoStore(state => state.bottomSheetMode);
-  const data = useTodoStore(state => state.bottomSheetData);
   const originalData = useTodoStore(state => state.originalBottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const closeBottomSheet = useTodoStore(state => state.closeBottomSheet);
@@ -20,12 +19,15 @@ export default function BottomSheet() {
   const isDraggingRef = useRef(false);
   const touchStartYRef = useRef(0);
 
+  // 오버레이 터치 처리 (스크롤 통과 + 탭 감지)
+  const overlayRef = useRef(null);
+  const overlayTouchRef = useRef(null);
+  const handleOverlayClickRef = useRef(null);
+
   useEffect(() => {
     if (visible) {
-      // 10ms 후 애니메이션 시작 (CSS transition을 위해)
       setTimeout(() => setAnimate(true), 10);
 
-      // 신규 할일(빈 텍스트)만 스크롤: 기존 할일 편집 시 스크롤하면 iOS 키보드가 닫힘
       const isNewTodo = originalData && !originalData.text.trim();
       if (editingTodoId && mode !== 'status-only' && isNewTodo) {
         setTimeout(() => {
@@ -51,6 +53,41 @@ export default function BottomSheet() {
     if (!visible) setActivePopup(null);
   }, [visible]);
 
+  // 오버레이 non-passive 터치 이벤트: 스크롤은 콘텐츠로 전달, 탭만 닫기
+  useEffect(() => {
+    const el = overlayRef.current;
+    if (!el) return;
+    const onTouchStart = (e) => {
+      overlayTouchRef.current = { startY: e.touches[0].clientY, lastY: e.touches[0].clientY, moved: false };
+    };
+    const onTouchMove = (e) => {
+      if (!overlayTouchRef.current) return;
+      const dy = e.touches[0].clientY - overlayTouchRef.current.lastY;
+      if (Math.abs(e.touches[0].clientY - overlayTouchRef.current.startY) > 5) {
+        overlayTouchRef.current.moved = true;
+      }
+      const contentEl = document.getElementById('content');
+      if (contentEl) contentEl.scrollTop -= dy;
+      overlayTouchRef.current.lastY = e.touches[0].clientY;
+      e.preventDefault();
+    };
+    const onTouchEnd = (e) => {
+      if (overlayTouchRef.current && !overlayTouchRef.current.moved) {
+        e.preventDefault(); // 이후 click 이벤트 이중 발생 방지
+        handleOverlayClickRef.current?.();
+      }
+      overlayTouchRef.current = null;
+    };
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd, { passive: false });
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [visible]);
+
   if (!visible) return null;
 
   const handleOverlayClick = () => {
@@ -69,6 +106,7 @@ export default function BottomSheet() {
       closeBottomSheet();
     }
   };
+  handleOverlayClickRef.current = handleOverlayClick;
 
   // 그래버 터치 핸들러
   const handleGrabTouchStart = (e) => {
@@ -85,22 +123,18 @@ export default function BottomSheet() {
   const handleGrabTouchEnd = () => {
     isDraggingRef.current = false;
     if (dragY < 5) {
-      // 탭: 키보드 + 바텀시트 모두 닫기
       document.activeElement?.blur();
       setDragY(window.innerHeight);
       setTimeout(() => closeBottomSheetWithSave(), 280);
     } else if (dragY > 80) {
-      // 드래그 임계값 초과: 화면 아래로 슬라이드 후 저장하며 닫기
       document.activeElement?.blur();
       setDragY(window.innerHeight);
       setTimeout(() => closeBottomSheetWithSave(), 280);
     } else {
-      // 임계값 미달: 원위치로 스냅
       setDragY(0);
     }
   };
 
-  // 드래그 중 인라인 스타일로 transform 오버라이드
   const sheetStyle = dragY > 0 ? {
     transform: `translateX(-50%) translateY(${dragY}px)`,
     transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -109,6 +143,7 @@ export default function BottomSheet() {
   return (
     <>
       <div
+        ref={overlayRef}
         className="bottom-sheet-overlay"
         onClick={handleOverlayClick}
         style={{

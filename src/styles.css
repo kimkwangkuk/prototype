@@ -2316,6 +2316,25 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
+.sheet-input-row {
+  padding: 14px 20px 6px;
+  border-bottom: 1px solid var(--border-quinary);
+}
+.sheet-text-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--label-primary);
+  background: transparent;
+  font-family: inherit;
+  padding: 0;
+}
+.sheet-text-input::placeholder {
+  color: var(--label-quaternary);
+}
+
 .toolbar-buttons-container {
   position: relative;
   display: flex;
