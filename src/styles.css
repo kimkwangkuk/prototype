@@ -2317,6 +2317,8 @@ textarea {
 }
 
 .sheet-input-row {
+  position: relative;
+  z-index: 1;
   padding: 14px 20px 6px;
   border-bottom: 1px solid var(--border-quinary);
 }

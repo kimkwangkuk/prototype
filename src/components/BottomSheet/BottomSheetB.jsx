@@ -38,11 +38,10 @@ export default function BottomSheetB({
   const [popupStyle, setPopupStyle] = useState({});
   const sheetInputRef = useRef(null);
 
-  // inputInSheet 모드일 때 input 자동 포커스
+  // inputInSheet 모드일 때 input 자동 포커스 (즉시)
   useEffect(() => {
     if (data.inputInSheet && sheetInputRef.current) {
-      const t = setTimeout(() => sheetInputRef.current?.focus(), 80);
-      return () => clearTimeout(t);
+      sheetInputRef.current.focus();
     }
   }, [data.inputInSheet]);
 
