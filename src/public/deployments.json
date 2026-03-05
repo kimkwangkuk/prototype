@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-jkkum08mw-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 높이/편집폭 균등화 및 월뷰 키보드 포지셔닝 CSS 위임",
+    "createdAt": 1772690089441,
+    "sha": "59de953"
+  },
+  {
+    "url": "https://prototype-76wln6577-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772685818923,
+    "sha": "a1474d7"
+  },
+  {
     "url": "https://prototype-kufgifxtk-kimkwangkuks-projects.vercel.app",
     "message": "feat: 주뷰/월뷰 편집 배경·펄스 추가, 월뷰 Enter 닫기 수정",
     "createdAt": 1772685750518,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772464153548,
     "sha": "8d0c17a"
-  },
-  {
-    "url": "https://prototype-d433kbi6z-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 버전 버튼 아이콘 색상 어둡게 변경",
-    "createdAt": 1772464082667,
-    "sha": "6f7b7b7"
-  },
-  {
-    "url": "https://prototype-1tu3o8m5k-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772464005093,
-    "sha": "ebb8621"
   }
 ]
