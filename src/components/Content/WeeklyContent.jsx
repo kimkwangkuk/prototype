@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect, useState } from 'react';
+import { useMemo, useRef, useEffect, useLayoutEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { getWeekDates, formatDate, getDayOfWeekKR, isToday } from '../../utils/dateUtils';
@@ -94,7 +94,10 @@ function WeekNavCell({ baseDate, currentWeekStrs, onWeekClick }) {
         {currentRowIdx >= 0 && (
           <div
             className="week-nav-indicator"
-            style={{ top: currentRowIdx * NAV_ROW_H }}
+            style={{
+              top: `${(currentRowIdx / monthCalendar.length) * 100}%`,
+              height: `${(1 / monthCalendar.length) * 100}%`,
+            }}
           />
         )}
         {monthCalendar.map((week, wi) => (
@@ -158,6 +161,21 @@ export default function WeeklyContent() {
   const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false });
   const actionsRef = useRef({ nextWeek: nextWeekAction, prevWeek: prevWeekAction });
   useEffect(() => { actionsRef.current = { nextWeek: nextWeekAction, prevWeek: prevWeekAction }; });
+
+  // 키보드 등장 시 app-body가 줄어들어 블록이 작아지는 것을 방지:
+  // position:fixed로 전환해 layout viewport에 고정 → 키보드와 무관하게 높이 유지
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    Object.assign(el.style, {
+      position: 'fixed',
+      top: `${Math.round(rect.top)}px`,
+      bottom: '0',
+      left: '0',
+      right: '0',
+    });
+  }, []);
 
 
   // ─── 터치 스와이프 ────────────────────────────────────────────────────────
@@ -283,19 +301,16 @@ export default function WeeklyContent() {
     selectDate(dateStr);
     addTodo(subjects[0].id);
 
-    // 새 할일 아이템을 weekly-content 중앙에 스크롤
-    // 350ms: iOS 키보드 애니메이션(~300ms) 완료 후 실행
-    // visualViewport.height: 키보드 위 실제 가시 영역 높이 (layout viewport 전체 높이 X)
+    // 350ms: iOS 키보드 애니메이션(~300ms) 완료 후, 편집 아이템을 키보드 위 가시 영역 중앙으로 스크롤
     setTimeout(() => {
-      const contentEl = containerRef.current;
-      const editingItem = contentEl?.querySelector('.week-todo-item.editing');
-      if (editingItem && contentEl) {
-        const itemRect = editingItem.getBoundingClientRect();
-        const contentRect = contentEl.getBoundingClientRect();
-        const visibleHeight = window.visualViewport?.height ?? window.innerHeight;
-        const scrollTarget = contentEl.scrollTop + (itemRect.top - contentRect.top) - (visibleHeight / 2) + (itemRect.height / 2);
-        contentEl.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-      }
+      const editingItem = document.querySelector('.week-todo-item.editing');
+      if (!editingItem) return;
+      const todosEl = editingItem.closest('.week-day-col-todos');
+      if (!todosEl) return;
+      const visibleHeight = window.visualViewport?.height ?? window.innerHeight;
+      const itemRect  = editingItem.getBoundingClientRect();
+      const scrollDelta = (itemRect.top + itemRect.height / 2) - (visibleHeight / 2);
+      todosEl.scrollTo({ top: todosEl.scrollTop + scrollDelta, behavior: 'smooth' });
     }, 350);
   };
 
