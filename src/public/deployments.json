@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-kufgifxtk-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 주뷰/월뷰 편집 배경·펄스 추가, 월뷰 Enter 닫기 수정",
+    "createdAt": 1772685750518,
+    "sha": "37a033f"
+  },
+  {
+    "url": "https://prototype-929sgb9ms-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772685377348,
+    "sha": "5bef66d"
+  },
+  {
     "url": "https://prototype-qx8r9aar6-kimkwangkuks-projects.vercel.app",
     "message": "fix: bottom 대신 translateY로 키보드 위 바텀시트 위치 보정",
     "createdAt": 1772685308173,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772464005093,
     "sha": "ebb8621"
-  },
-  {
-    "url": "https://prototype-jmzxahyjn-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 버전 버튼 16x16 사이즈로 변경, 배경 제거",
-    "createdAt": 1772463936812,
-    "sha": "b5940dc"
-  },
-  {
-    "url": "https://prototype-gsfl2wb54-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772463775412,
-    "sha": "0e3a05c"
   }
 ]
