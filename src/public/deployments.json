@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-m04mb7skd-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 주뷰 날짜 블록 할일 목록 독립 스크롤 + 오버레이 스크롤 패스스루",
+    "createdAt": 1772694128368,
+    "sha": "193253f"
+  },
+  {
+    "url": "https://prototype-hymx08s16-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772690157723,
+    "sha": "2b5569c"
+  },
+  {
     "url": "https://prototype-jkkum08mw-kimkwangkuks-projects.vercel.app",
     "message": "fix: 주뷰 높이/편집폭 균등화 및 월뷰 키보드 포지셔닝 CSS 위임",
     "createdAt": 1772690089441,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772464275555,
     "sha": "2c04707"
-  },
-  {
-    "url": "https://prototype-4zj7d9v1n-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 버전 버튼 16px 배경 추가, 아이콘 10px로 작게",
-    "createdAt": 1772464205724,
-    "sha": "34df1f5"
-  },
-  {
-    "url": "https://prototype-fc9fsypfb-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772464153548,
-    "sha": "8d0c17a"
   }
 ]
