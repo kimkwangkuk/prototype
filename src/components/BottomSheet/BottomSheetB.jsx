@@ -114,14 +114,19 @@ export default function BottomSheetB({
   const durationDisabled = !data.duration && !durationNone;
   const durationText = durationNone ? '없음' : (durationDisabled ? '지속시간' : formatDuration(data.duration));
 
+  // dragY > 0: 드래그 중
+  // inputInSheet + keyboardBottom > 0: 키보드가 열려있음 → translateY로 올려줌
+  // 그 외: CSS 클래스가 position/transform 담당
   const sheetStyle = {
-    ...(dragY > 0 ? {
-      transform: `translateX(-50%) translateY(${dragY}px)`,
-      transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    } : {}),
-    ...(data.inputInSheet && keyboardBottom > 0 ? {
-      bottom: `${keyboardBottom + 12}px`,
-    } : {}),
+    ...(dragY > 0
+      ? {
+          transform: `translateX(-50%) translateY(${dragY}px)`,
+          transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        }
+      : data.inputInSheet && keyboardBottom > 0
+      ? { transform: `translateX(-50%) translateY(-${keyboardBottom}px)` }
+      : {}),
+    ...(data.inputInSheet ? { bottom: '12px' } : {}),
   };
 
   return (
