@@ -36,6 +36,7 @@ export default function BottomSheetB({
   const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const [popupStyle, setPopupStyle] = useState({});
+  const [keyboardBottom, setKeyboardBottom] = useState(0);
   const sheetInputRef = useRef(null);
 
   // inputInSheet 모드일 때 input 자동 포커스 (즉시)
@@ -43,6 +44,23 @@ export default function BottomSheetB({
     if (data.inputInSheet && sheetInputRef.current) {
       sheetInputRef.current.focus();
     }
+  }, [data.inputInSheet]);
+
+  // inputInSheet 모드: visualViewport 직접 구독 → bottom 인라인 스타일로 키보드 위 고정
+  useEffect(() => {
+    if (!data.inputInSheet) { setKeyboardBottom(0); return; }
+    const update = () => {
+      const vv = window.visualViewport;
+      if (!vv) return;
+      setKeyboardBottom(Math.max(0, window.innerHeight - vv.height));
+    };
+    update();
+    window.visualViewport?.addEventListener('resize', update);
+    window.visualViewport?.addEventListener('scroll', update);
+    return () => {
+      window.visualViewport?.removeEventListener('resize', update);
+      window.visualViewport?.removeEventListener('scroll', update);
+    };
   }, [data.inputInSheet]);
 
   // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
@@ -96,10 +114,15 @@ export default function BottomSheetB({
   const durationDisabled = !data.duration && !durationNone;
   const durationText = durationNone ? '없음' : (durationDisabled ? '지속시간' : formatDuration(data.duration));
 
-  const sheetStyle = dragY > 0 ? {
-    transform: `translateX(-50%) translateY(${dragY}px)`,
-    transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  } : undefined;
+  const sheetStyle = {
+    ...(dragY > 0 ? {
+      transform: `translateX(-50%) translateY(${dragY}px)`,
+      transition: isDraggingRef.current ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    } : {}),
+    ...(data.inputInSheet && keyboardBottom > 0 ? {
+      bottom: `${keyboardBottom + 12}px`,
+    } : {}),
+  };
 
   return (
     <>

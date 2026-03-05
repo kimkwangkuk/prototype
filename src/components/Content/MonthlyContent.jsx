@@ -152,6 +152,7 @@ export default function MonthlyContent() {
   // ─── 렌더 ─────────────────────────────────────────────────────────────────
   const handleCellClick = (ds, inMonth) => {
     if (!inMonth) return;
+    document.body.classList.add('keyboard-open');
     addTodoForDate(ds);
   };
 
