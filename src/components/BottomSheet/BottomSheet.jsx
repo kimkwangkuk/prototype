@@ -57,8 +57,24 @@ export default function BottomSheet() {
   useEffect(() => {
     const el = overlayRef.current;
     if (!el) return;
+    const findScrollTarget = (x, y) => {
+      // 일뷰: #content
+      const contentEl = document.getElementById('content');
+      if (contentEl) return contentEl;
+      // 주뷰: 터치 위치 아래의 .week-day-col-todos
+      const cols = document.querySelectorAll('.week-day-col-todos');
+      for (const col of cols) {
+        const rect = col.getBoundingClientRect();
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+          return col;
+        }
+      }
+      return null;
+    };
     const onTouchStart = (e) => {
-      overlayTouchRef.current = { startY: e.touches[0].clientY, lastY: e.touches[0].clientY, moved: false };
+      const x = e.touches[0].clientX;
+      const y = e.touches[0].clientY;
+      overlayTouchRef.current = { startY: y, lastY: y, moved: false, scrollTarget: findScrollTarget(x, y) };
     };
     const onTouchMove = (e) => {
       if (!overlayTouchRef.current) return;
@@ -66,8 +82,8 @@ export default function BottomSheet() {
       if (Math.abs(e.touches[0].clientY - overlayTouchRef.current.startY) > 5) {
         overlayTouchRef.current.moved = true;
       }
-      const contentEl = document.getElementById('content');
-      if (contentEl) contentEl.scrollTop -= dy;
+      const { scrollTarget } = overlayTouchRef.current;
+      if (scrollTarget) scrollTarget.scrollTop -= dy;
       overlayTouchRef.current.lastY = e.touches[0].clientY;
       e.preventDefault();
     };

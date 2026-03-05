@@ -1719,7 +1719,12 @@ textarea {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.week-day-col-todos::-webkit-scrollbar { display: none; }
 
 .popup-col-label {
   font-size: 12px;
