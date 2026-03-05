@@ -1574,12 +1574,17 @@ textarea {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
 }
 .weekly-content::-webkit-scrollbar { display: none; }
 
 .week-row {
   display: flex;
   border-bottom: 1px solid var(--border-quinary);
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* 미니 캘린더 네비 셀 (그리드 첫 번째 칸) */
@@ -1591,6 +1596,7 @@ textarea {
   flex-direction: column;
   gap: 2px;
   border-right: 1px solid var(--border-quinary);
+  overflow: hidden;
 }
 
 .week-nav-day-labels {
@@ -1869,7 +1875,8 @@ textarea {
   background: rgba(0,0,0,0.04);
   border-radius: 6px;
   padding: 3px 4px;
-  margin: 0 -4px;
+  width: calc(100% + 8px);
+  margin-left: -4px;
 }
 .week-todo-item.pulse-in::before {
   content: '';
