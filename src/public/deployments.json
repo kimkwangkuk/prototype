@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-p4kec9rb7-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 월뷰 바텀시트 키보드 위 고정 (visualViewport 직접 구독)",
+    "createdAt": 1772684723790,
+    "sha": "76c6ba3"
+  },
+  {
+    "url": "https://prototype-bbrstnlaq-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772626791636,
+    "sha": "08f5ebb"
+  },
+  {
     "url": "https://prototype-bk1cu8pp4-kimkwangkuks-projects.vercel.app",
     "message": "fix: 월뷰 시트 input z-index 수정 및 즉시 키패드 포커스",
     "createdAt": 1772626721779,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772463224478,
     "sha": "cddff43"
-  },
-  {
-    "url": "https://prototype-58a9fqbc7-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 버전 버튼 z-index 100001로 올려 iframe 위에 표시",
-    "createdAt": 1772463154328,
-    "sha": "b0d8c79"
-  },
-  {
-    "url": "https://prototype-do36z6u1w-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772462699348,
-    "sha": "13fd16c"
   }
 ]
