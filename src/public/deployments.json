@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-j4k0dg1i9-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 주뷰 블록 고정 높이 + 1번 블록 달력 행 균등 배치",
+    "createdAt": 1772703933928,
+    "sha": "ba8edb3"
+  },
+  {
+    "url": "https://prototype-9sq30hy45-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772694196340,
+    "sha": "0f980a5"
+  },
+  {
     "url": "https://prototype-m04mb7skd-kimkwangkuks-projects.vercel.app",
     "message": "feat: 주뷰 날짜 블록 할일 목록 독립 스크롤 + 오버레이 스크롤 패스스루",
     "createdAt": 1772694128368,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772465466958,
     "sha": "b4ef544"
-  },
-  {
-    "url": "https://prototype-1geulwaja-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀 팝업 그랩-버튼 영역 간격 0으로",
-    "createdAt": 1772465396960,
-    "sha": "8411eaf"
-  },
-  {
-    "url": "https://prototype-765zlulef-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772464275555,
-    "sha": "2c04707"
   }
 ]
