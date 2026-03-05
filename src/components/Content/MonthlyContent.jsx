@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatDate, isToday } from '../../utils/dateUtils';
@@ -33,12 +33,23 @@ function getMonthCalendar(baseDate) {
 }
 
 export default function MonthlyContent() {
-  const baseDate          = useTodoStore(state => state.baseDate);
-  const todos             = useTodoStore(state => state.todos);
-  const openBottomSheet   = useTodoStore(state => state.openBottomSheet);
-  const addTodoForDate    = useTodoStore(state => state.addTodoForDate);
-  const nextMonthAction   = useTodoStore(state => state.nextMonth);
-  const prevMonthAction   = useTodoStore(state => state.prevMonth);
+  const baseDate            = useTodoStore(state => state.baseDate);
+  const todos               = useTodoStore(state => state.todos);
+  const openBottomSheet     = useTodoStore(state => state.openBottomSheet);
+  const addTodoForDate      = useTodoStore(state => state.addTodoForDate);
+  const nextMonthAction     = useTodoStore(state => state.nextMonth);
+  const prevMonthAction     = useTodoStore(state => state.prevMonth);
+  const editingTodoId       = useTodoStore(state => state.editingTodoId);
+  const newlySavedTodoId    = useTodoStore(state => state.newlySavedTodoId);
+  const clearNewlySavedTodo = useTodoStore(state => state.clearNewlySavedTodo);
+  const [pulseTodoId, setPulseTodoId] = useState(null);
+
+  useEffect(() => {
+    if (newlySavedTodoId !== null) {
+      setPulseTodoId(newlySavedTodoId);
+      clearNewlySavedTodo();
+    }
+  }, [newlySavedTodoId]);
 
   const weeks = useMemo(() => getMonthCalendar(baseDate), [baseDate]);
 
@@ -201,10 +212,13 @@ export default function MonthlyContent() {
                     {dayTodos.map(todo => {
                       const subj      = subjects.find(s => s.id === todo.subjectId);
                       const completed = ['done', 'skip', 'cancel'].includes(todo.status);
+                      const isEditing = editingTodoId === todo.id;
+                      const isPulsing = pulseTodoId === todo.id;
                       return (
                         <button
                           key={todo.id}
-                          className="monthly-todo-item"
+                          className={`monthly-todo-item${isEditing ? ' editing' : ''}${isPulsing ? ' pulse-in' : ''}`}
+                          onAnimationEnd={() => setPulseTodoId(null)}
                           onClick={(e) => handleTodoClick(e, todo)}
                         >
                           <span className="monthly-todo-dot" style={{ background: subj?.color }}></span>

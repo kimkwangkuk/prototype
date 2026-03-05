@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect } from 'react';
+import { useMemo, useRef, useEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { getWeekDates, formatDate, getDayOfWeekKR, isToday } from '../../utils/dateUtils';
@@ -138,7 +138,17 @@ export default function WeeklyContent() {
   const openBottomSheet = useTodoStore(state => state.openBottomSheet);
   const nextWeekAction  = useTodoStore(state => state.nextWeek);
   const prevWeekAction  = useTodoStore(state => state.prevWeek);
-  const editingTodoId   = useTodoStore(state => state.editingTodoId);
+  const editingTodoId      = useTodoStore(state => state.editingTodoId);
+  const newlySavedTodoId   = useTodoStore(state => state.newlySavedTodoId);
+  const clearNewlySavedTodo = useTodoStore(state => state.clearNewlySavedTodo);
+  const [pulseTodoId, setPulseTodoId] = useState(null);
+
+  useEffect(() => {
+    if (newlySavedTodoId !== null) {
+      setPulseTodoId(newlySavedTodoId);
+      clearNewlySavedTodo();
+    }
+  }, [newlySavedTodoId]);
 
   const weekDates       = useMemo(() => getWeekDates(baseDate), [baseDate]);
   const currentWeekStrs = useMemo(() => new Set(weekDates.map(d => formatDate(d))), [weekDates]);
@@ -368,7 +378,8 @@ export default function WeeklyContent() {
                     {dayTodos.map(todo => {
                       const subj      = subjects.find(s => s.id === todo.subjectId);
                       const completed = ['done', 'skip', 'cancel'].includes(todo.status);
-                      const isEditing = editingTodoId === todo.id;
+                      const isEditing  = editingTodoId === todo.id;
+                      const isPulsing  = pulseTodoId === todo.id;
 
                       if (isEditing) {
                         return (
@@ -388,7 +399,8 @@ export default function WeeklyContent() {
                       return (
                         <button
                           key={todo.id}
-                          className="week-todo-item"
+                          className={`week-todo-item${isPulsing ? ' pulse-in' : ''}`}
+                          onAnimationEnd={() => setPulseTodoId(null)}
                           onClick={(e) => { e.stopPropagation(); handleTodoClick(todo); }}
                         >
                           <div className="week-todo-check" onClick={(e) => handleCheckboxClick(e, todo)}>

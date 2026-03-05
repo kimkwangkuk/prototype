@@ -33,8 +33,8 @@ export default function BottomSheetB({
 }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
-  const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
-  const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
+  const updateBottomSheetField   = useTodoStore(state => state.updateBottomSheetField);
+  const closeBottomSheetWithSave = useTodoStore(state => state.closeBottomSheetWithSave);
   const [popupStyle, setPopupStyle] = useState({});
   const [keyboardBottom, setKeyboardBottom] = useState(0);
   const sheetInputRef = useRef(null);
@@ -154,7 +154,7 @@ export default function BottomSheetB({
               className="sheet-text-input"
               value={data.text}
               onChange={(e) => updateBottomSheetField('text', e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); saveAndAddNewTodo(); } }}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); closeBottomSheetWithSave(); } }}
               placeholder="할 일 입력..."
             />
           </div>

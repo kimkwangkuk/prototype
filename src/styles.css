@@ -1862,8 +1862,22 @@ textarea {
   outline: none;
 }
 
+.week-todo-item {
+  position: relative;
+}
 .week-todo-item.editing {
-  background: transparent;
+  background: rgba(0,0,0,0.04);
+  border-radius: 6px;
+  padding: 3px 4px;
+  margin: 0 -4px;
+}
+.week-todo-item.pulse-in::before {
+  content: '';
+  position: absolute;
+  inset: 0 -4px;
+  border-radius: 6px;
+  pointer-events: none;
+  animation: pulseBackground 1s ease-in-out 1;
 }
 
 
@@ -2055,6 +2069,7 @@ textarea {
 }
 
 .monthly-todo-item {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -2063,9 +2078,22 @@ textarea {
   padding: 1px 0;
   width: 100%;
   cursor: pointer;
-  overflow: hidden;
+  overflow: visible;
   flex-shrink: 0;
   font-family: inherit;
+}
+.monthly-todo-item.editing {
+  background: rgba(0,0,0,0.04);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.monthly-todo-item.pulse-in::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  animation: pulseBackground 1s ease-in-out 1;
 }
 
 .monthly-todo-dot {
