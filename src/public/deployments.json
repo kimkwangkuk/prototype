@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1u0emlxn0-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 오늘 날짜 동그라미를 실제 회색으로 변경 (주/월뷰)",
+    "createdAt": 1772783977592,
+    "sha": "bf4afa2"
+  },
+  {
+    "url": "https://prototype-nbogjmrmk-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772774075395,
+    "sha": "3499951"
+  },
+  {
     "url": "https://prototype-rj4oud4i9-kimkwangkuks-projects.vercel.app",
     "message": "design: 주뷰 오늘 날짜 회색 동그라미 추가 (월뷰와 동일하게)",
     "createdAt": 1772774008518,
@@ -286,17 +298,5 @@
     "message": "feat: 날짜 팝업 가로 스크롤 날짜 스트립 + 반복 옵션",
     "createdAt": 1772519469246,
     "sha": "1a6ab4f"
-  },
-  {
-    "url": "https://prototype-c55spfzo8-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772468975001,
-    "sha": "d58c9cd"
-  },
-  {
-    "url": "https://prototype-3doq2anl6-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 탭바 주뷰 아이콘 교체",
-    "createdAt": 1772468902705,
-    "sha": "3416783"
   }
 ]
