@@ -426,6 +426,14 @@ textarea {
   border-radius: 8px;
   margin: 0 -8px;
 }
+.todo-item.editing::before {
+  content: '';
+  position: absolute;
+  inset: 0 -8px;
+  border-radius: 8px;
+  pointer-events: none;
+  animation: pulseBackground 1.4s ease-in-out infinite;
+}
 .todo-item.pulse-in::before {
   content: '';
   position: absolute;
@@ -1898,6 +1906,14 @@ textarea {
   width: calc(100% + 8px);
   margin-left: -4px;
 }
+.week-todo-item.editing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+  animation: pulseBackground 1.4s ease-in-out infinite;
+}
 .week-todo-item.pulse-in::before {
   content: '';
   position: absolute;
@@ -2118,6 +2134,14 @@ textarea {
   background: rgba(0,0,0,0.04);
   border-radius: 4px;
   overflow: hidden;
+}
+.monthly-todo-item.editing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  animation: pulseBackground 1.4s ease-in-out infinite;
 }
 .monthly-todo-item.pulse-in::before {
   content: '';
