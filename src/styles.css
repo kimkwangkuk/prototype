@@ -1579,6 +1579,8 @@ textarea {
 .weekly-content {
   position: absolute;
   inset: 0;
+  bottom: 96px; /* tabbar-inner(62) + tabbar-indicator(34) */
+  border-top: 1px solid var(--border-quinary);
   overflow: hidden;
   display: flex;
   flex-direction: column;

@@ -64,6 +64,24 @@ export default function BottomSheetB({
     }
   }, [data.inputInSheet, editingTodoId]);
 
+  // 키패드 열릴 때 편집 중인 아이템을 키패드-네비바 사이 중앙으로 스크롤
+  useEffect(() => {
+    if (!editingTodoId || !showNumpad) return;
+    setTimeout(() => {
+      const todoEl = document.querySelector(`[data-todo-id="${editingTodoId}"]`);
+      if (!todoEl) return;
+      const numpadHeight = numpadRef.current?.offsetHeight ?? 0;
+      const headerBottom = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
+      const numpadTop = window.innerHeight - numpadHeight;
+      const visibleCenter = headerBottom + (numpadTop - headerBottom) / 2;
+      const rect = todoEl.getBoundingClientRect();
+      const itemCenter = rect.top + rect.height / 2;
+      const delta = itemCenter - visibleCenter;
+      if (Math.abs(delta) < 10) return;
+      document.getElementById('content')?.scrollBy({ top: delta, behavior: 'smooth' });
+    }, 50);
+  }, [editingTodoId, showNumpad]);
+
   // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
   // Desktop: mousedown preventDefault → blur 방지, click에서 처리
   const toolbarBtnProps = (name) => ({
