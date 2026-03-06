@@ -72,6 +72,7 @@ export default function BottomSheet() {
       return null;
     };
     const onTouchStart = (e) => {
+      e.preventDefault(); // iOS가 touchstart 시점에 focused input을 blur하는 것 방지
       const x = e.touches[0].clientX;
       const y = e.touches[0].clientY;
       overlayTouchRef.current = { startY: y, lastY: y, moved: false, scrollTarget: findScrollTarget(x, y) };
@@ -94,7 +95,7 @@ export default function BottomSheet() {
       }
       overlayTouchRef.current = null;
     };
-    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
     el.addEventListener('touchmove', onTouchMove, { passive: false });
     el.addEventListener('touchend', onTouchEnd, { passive: false });
     return () => {
