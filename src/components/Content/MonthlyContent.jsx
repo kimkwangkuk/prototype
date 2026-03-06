@@ -43,6 +43,7 @@ export default function MonthlyContent() {
   const newlySavedTodoId    = useTodoStore(state => state.newlySavedTodoId);
   const clearNewlySavedTodo = useTodoStore(state => state.clearNewlySavedTodo);
   const [pulseTodoId, setPulseTodoId] = useState(null);
+  const [focusedDay, setFocusedDay] = useState(() => formatDate(new Date()));
 
   useEffect(() => {
     if (newlySavedTodoId !== null) {
@@ -163,6 +164,7 @@ export default function MonthlyContent() {
   // ─── 렌더 ─────────────────────────────────────────────────────────────────
   const handleCellClick = (ds, inMonth) => {
     if (!inMonth) return;
+    setFocusedDay(ds);
     document.body.classList.add('keyboard-open');
     addTodoForDate(ds);
   };
@@ -202,7 +204,7 @@ export default function MonthlyContent() {
               return (
                 <div
                   key={ds}
-                  className={`monthly-day-cell${isWeekend ? ' weekend' : ''}${!inMonth ? ' out-of-month' : ''}`}
+                  className={`monthly-day-cell${isWeekend ? ' weekend' : ''}${!inMonth ? ' out-of-month' : ''}${focusedDay === ds ? ' focused' : ''}`}
                   onClick={() => handleCellClick(ds, inMonth)}
                 >
                   <div className={`monthly-date-num${today ? ' today' : ''}`}>

@@ -145,6 +145,7 @@ export default function WeeklyContent() {
   const newlySavedTodoId   = useTodoStore(state => state.newlySavedTodoId);
   const clearNewlySavedTodo = useTodoStore(state => state.clearNewlySavedTodo);
   const [pulseTodoId, setPulseTodoId] = useState(null);
+  const [focusedDay, setFocusedDay] = useState(() => formatDate(new Date()));
 
   useEffect(() => {
     if (newlySavedTodoId !== null) {
@@ -162,18 +163,16 @@ export default function WeeklyContent() {
   const actionsRef = useRef({ nextWeek: nextWeekAction, prevWeek: prevWeekAction });
   useEffect(() => { actionsRef.current = { nextWeek: nextWeekAction, prevWeek: prevWeekAction }; });
 
-  // 키보드 등장 시 app-body가 줄어들어 블록이 작아지는 것을 방지:
-  // position:fixed로 전환해 layout viewport에 고정 → 키보드와 무관하게 높이 유지
+  // 키보드 등장 시 컨테이너가 줄어들어도 각 행의 최소 높이를 고정:
+  // 행들이 min-height 이하로 줄어들지 않으므로 overflow-y:auto로 스크롤 가능
   useLayoutEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
-    Object.assign(el.style, {
-      position: 'fixed',
-      top: `${Math.round(rect.top)}px`,
-      bottom: '0',
-      left: '0',
-      right: '0',
+    const rowHeight = Math.round(rect.height / PAIRS.length);
+    el.querySelectorAll(':scope > .week-row').forEach(row => {
+      row.style.minHeight = `${rowHeight}px`;
+      row.style.flexShrink = '0';
     });
   }, []);
 
@@ -296,6 +295,7 @@ export default function WeeklyContent() {
   // ─── 핸들러 ────────────────────────────────────────────────────────────────
   const handleAdd = (dateStr) => {
     if (stateRef.current.animating) return;
+    setFocusedDay(dateStr);
     // 리렌더 전에 미리 keyboard-open 추가 → 탭바 플래시 방지
     document.body.classList.add('keyboard-open');
     selectDate(dateStr);
@@ -365,7 +365,7 @@ export default function WeeklyContent() {
 
             return (
               // 외부 블록(.week-day-col): 테두리·배경 고정
-              <div key={ds} className="week-day-col" onClick={() => handleAdd(ds)}>
+              <div key={ds} className={`week-day-col${focusedDay === ds ? ' focused' : ''}`} onClick={() => handleAdd(ds)}>
                 {/* 내부 컨텐츠(.week-cell-content): 텍스트·할일만 페이드 대상 */}
                 <div
                   className="week-cell-content"

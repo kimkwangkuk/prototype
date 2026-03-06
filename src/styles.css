@@ -1679,6 +1679,21 @@ textarea {
 }
 
 /* 요일 셀 */
+.week-day-col.focused {
+  background: rgba(0, 0, 0, 0.87);
+}
+.week-day-col.focused .week-day-col-num,
+.week-day-col.focused .week-day-col-name,
+.week-day-col.focused .week-day-col-num.today {
+  color: rgba(255, 255, 255, 0.9);
+}
+.week-day-col.focused .week-todo-item-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+.week-day-col.focused .week-todo-item-text.completed {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .week-day-col {
   flex: 1 1 0;
   min-width: 0;
@@ -2041,6 +2056,17 @@ textarea {
   overflow: hidden;
   padding: 3px 2px 2px;
   min-width: 0;
+}
+
+.monthly-day-cell.focused {
+  background: rgba(0, 0, 0, 0.87);
+}
+.monthly-day-cell.focused .monthly-date-num,
+.monthly-day-cell.focused .monthly-date-num.today {
+  color: rgba(255, 255, 255, 0.9);
+}
+.monthly-day-cell.focused .monthly-todo-item {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .monthly-day-cell.out-of-month {
