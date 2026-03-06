@@ -1579,14 +1579,11 @@ textarea {
 .weekly-content {
   position: absolute;
   inset: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  touch-action: pan-y; /* iOS Safari: passive:false 리스너 있어도 세로 스크롤 네이티브 처리 */
+  touch-action: pan-y;
 }
-.weekly-content::-webkit-scrollbar { display: none; }
 
 .week-row {
   display: flex;

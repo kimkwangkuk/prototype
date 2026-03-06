@@ -182,20 +182,6 @@ export default function WeeklyContent() {
     });
   }, []);
 
-  // 키보드 높이만큼 spacer를 추가해 content가 container를 넘치게 → overflow-y: auto 스크롤 활성화
-  // max-height 방식은 iOS Safari flex container에서 overflow 계산이 틀릴 수 있음
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
-  useEffect(() => {
-    const vv = window.visualViewport;
-    if (!vv) return;
-    const update = () => {
-      const appH = parseFloat(document.documentElement.style.getPropertyValue('--app-height')) || window.innerHeight;
-      setKeyboardHeight(Math.max(0, appH - vv.height));
-    };
-    update();
-    vv.addEventListener('resize', update);
-    return () => vv.removeEventListener('resize', update);
-  }, []);
 
 
   // ─── 터치 스와이프 ────────────────────────────────────────────────────────
@@ -443,8 +429,6 @@ export default function WeeklyContent() {
   return (
     <div className="weekly-content" ref={containerRef}>
       {renderGrid()}
-      {/* 키보드 높이만큼 spacer → content > container → overflow-y 스크롤 활성화 */}
-      <div style={{ flex: '0 0 auto', height: keyboardHeight }} />
     </div>
   );
 }
