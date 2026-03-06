@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-q06jgoxc3-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 주/월뷰 날짜 블록 포커스 상태 추가 (오늘 초기 포커스, 검정 배경)",
+    "createdAt": 1772768182669,
+    "sha": "f14fa3a"
+  },
+  {
+    "url": "https://prototype-cll9nzyzk-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772761144469,
+    "sha": "76e9a97"
+  },
+  {
     "url": "https://prototype-emy13jke9-kimkwangkuks-projects.vercel.app",
     "message": "fix: 주뷰 키패드 오픈 상태에서 오버레이 스크롤 시 키패드 유지",
     "createdAt": 1772761076280,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772466251649,
     "sha": "dfb4617"
-  },
-  {
-    "url": "https://prototype-qm4npexbi-kimkwangkuks-projects.vercel.app",
-    "message": "docs: 아이콘 SVG 사이즈 스펙 메모 추가",
-    "createdAt": 1772466183828,
-    "sha": "f6223d5"
-  },
-  {
-    "url": "https://prototype-m5nsa5x23-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772465992229,
-    "sha": "2c43362"
   }
 ]
