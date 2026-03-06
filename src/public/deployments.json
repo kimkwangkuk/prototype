@@ -1,5 +1,23 @@
 [
   {
+    "url": "https://prototype-9ydiozfnh-kimkwangkuks-projects.vercel.app",
+    "message": "design: 펄스 애니메이션 흰색→어두움으로 변경 (대비 강화)",
+    "createdAt": 1772770785643,
+    "sha": "2827306"
+  },
+  {
+    "url": "https://prototype-dl32ih7pm-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 월뷰 바텀시트 키보드 위치 문제 - inputInSheet시 키보드 완전 열린 후 animate",
+    "createdAt": 1772770699025,
+    "sha": "f50076f"
+  },
+  {
+    "url": "https://prototype-535qkwri4-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772770529086,
+    "sha": "d91dce8"
+  },
+  {
     "url": "https://prototype-89izn7g4e-kimkwangkuks-projects.vercel.app",
     "message": "feat: 일/주/월뷰 할일 입력중 infinite pulse 애니메이션 추가",
     "createdAt": 1772770462074,
@@ -280,23 +298,5 @@
     "message": "fix: 탭바 할일 아이콘 strokeWidth 1.5 → 2",
     "createdAt": 1772467762763,
     "sha": "40a0260"
-  },
-  {
-    "url": "https://prototype-lp2lghnhu-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772467594298,
-    "sha": "b8932d5"
-  },
-  {
-    "url": "https://prototype-id5d7569x-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 탭바 캘린더 아이콘에 오늘 날짜 표시",
-    "createdAt": 1772467523754,
-    "sha": "6573d47"
-  },
-  {
-    "url": "https://prototype-7d7fkel6v-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772467076194,
-    "sha": "e4fd999"
   }
 ]
