@@ -46,18 +46,10 @@ export default function MonthlyContent() {
   const [focusedDay, setFocusedDay] = useState(() => formatDate(new Date()));
 
   useEffect(() => {
-    const handleFocusOut = (e) => {
-      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') return;
-      setTimeout(() => {
-        const active = document.activeElement;
-        if (!active || (active.tagName !== 'INPUT' && active.tagName !== 'TEXTAREA')) {
-          setFocusedDay(formatDate(new Date()));
-        }
-      }, 100);
-    };
-    document.addEventListener('focusout', handleFocusOut);
-    return () => document.removeEventListener('focusout', handleFocusOut);
-  }, []);
+    if (editingTodoId === null) {
+      setFocusedDay(formatDate(new Date()));
+    }
+  }, [editingTodoId]);
 
   useEffect(() => {
     if (newlySavedTodoId !== null) {
