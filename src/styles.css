@@ -426,13 +426,8 @@ textarea {
   border-radius: 8px;
   margin: 0 -8px;
 }
-.todo-item.editing::before {
-  content: '';
-  position: absolute;
-  inset: 0 -8px;
-  border-radius: 8px;
-  pointer-events: none;
-  animation: pulseBackground 1.4s ease-in-out infinite;
+.todo-item.editing {
+  animation: pulseBackgroundDay 1.4s ease-in-out infinite;
 }
 .todo-item.pulse-in::before {
   content: '';
@@ -447,6 +442,11 @@ textarea {
   0%   { background: rgba(255,255,255,0.9); }
   50%  { background: rgba(0,0,0,0.08); }
   100% { background: rgba(255,255,255,0.9); }
+}
+@keyframes pulseBackgroundDay {
+  0%   { background: rgba(255,255,255,1); }
+  50%  { background: rgba(0,0,0,0.06); }
+  100% { background: rgba(255,255,255,1); }
 }
 .todo-checkbox {
   width: 24px;
@@ -1906,13 +1906,8 @@ textarea {
   width: calc(100% + 8px);
   margin-left: -4px;
 }
-.week-todo-item.editing::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 6px;
-  pointer-events: none;
-  animation: pulseBackground 1.4s ease-in-out infinite;
+.week-todo-item.editing {
+  animation: pulseBackgroundDay 1.4s ease-in-out infinite;
 }
 .week-todo-item.pulse-in::before {
   content: '';
@@ -2135,13 +2130,8 @@ textarea {
   border-radius: 4px;
   overflow: hidden;
 }
-.monthly-todo-item.editing::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 4px;
-  pointer-events: none;
-  animation: pulseBackground 1.4s ease-in-out infinite;
+.monthly-todo-item.editing {
+  animation: pulseBackgroundDay 1.4s ease-in-out infinite;
 }
 .monthly-todo-item.pulse-in::before {
   content: '';
