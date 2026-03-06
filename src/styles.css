@@ -1584,6 +1584,7 @@ textarea {
   scrollbar-width: none;
   display: flex;
   flex-direction: column;
+  touch-action: pan-y; /* iOS Safari: passive:false 리스너 있어도 세로 스크롤 네이티브 처리 */
 }
 .weekly-content::-webkit-scrollbar { display: none; }
 

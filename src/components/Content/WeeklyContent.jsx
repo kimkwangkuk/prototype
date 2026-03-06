@@ -241,8 +241,7 @@ export default function WeeklyContent() {
         return;
       }
 
-      // 수평 확정 후에만 스크롤 차단 (passive:false 이므로 실제 작동)
-      e.preventDefault();
+      // touch-action: pan-y 가 가로 스크롤을 브라우저 레벨에서 이미 차단하므로 preventDefault 불필요
 
       // 드래그 거리에 비례해 실시간 페이드 + 드래그 방향으로 이동 (직접 DOM 조작 → 60fps)
       const progress = Math.min(adx / FADE_DISTANCE, 1);
@@ -305,7 +304,7 @@ export default function WeeklyContent() {
     }
 
     container.addEventListener('touchstart',  onStart,  { passive: true  });
-    container.addEventListener('touchmove',   onMove,   { passive: false }); // ← preventDefault 가능
+    container.addEventListener('touchmove',   onMove,   { passive: true  }); // touch-action:pan-y로 가로 차단, passive로 세로 스크롤 즉시 시작
     container.addEventListener('touchend',    onEnd,    { passive: true  });
     container.addEventListener('touchcancel', onCancel, { passive: true  });
 
