@@ -32,20 +32,6 @@ export default function BottomSheet() {
       const inputInSheet = useTodoStore.getState().bottomSheetData?.inputInSheet;
       setTimeout(() => setAnimate(true), inputInSheet ? 350 : 10);
 
-      const isNewTodo = originalData && !originalData.text.trim();
-      if (editingTodoId && mode !== 'status-only' && isNewTodo) {
-        setTimeout(() => {
-          const todoItem = document.querySelector(`[data-todo-id="${editingTodoId}"]`);
-          if (todoItem) {
-            const rect = todoItem.getBoundingClientRect();
-            const offset = window.innerHeight * 0.4;
-            const contentEl = document.getElementById('content');
-            if (contentEl && rect.top > offset) {
-              contentEl.scrollBy({ top: rect.top - offset, behavior: 'smooth' });
-            }
-          }
-        }, 150);
-      }
     } else {
       setAnimate(false);
       setDragY(0);
@@ -56,6 +42,26 @@ export default function BottomSheet() {
   useEffect(() => {
     if (!visible) setActivePopup(null);
   }, [visible]);
+
+  // 편집 중인 할일이 numpad/악세사리바 뒤에 숨지 않도록 스크롤
+  useEffect(() => {
+    if (!editingTodoId || !visible || mode === 'status-only') return;
+    const scrollIntoView = () => {
+      const todoItem = document.querySelector(`[data-todo-id="${editingTodoId}"]`);
+      if (!todoItem) return;
+      const rect = todoItem.getBoundingClientRect();
+      const numpadH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+      // 악세사리바 + 여유 마진
+      const accessoryH = numpadH > 0 ? 68 : 0;
+      const visibleBottom = window.innerHeight - numpadH - accessoryH - 8;
+      if (rect.bottom > visibleBottom) {
+        const contentEl = document.getElementById('content');
+        if (contentEl) contentEl.scrollBy({ top: rect.bottom - visibleBottom, behavior: 'smooth' });
+      }
+    };
+    // numpad가 렌더된 후 높이가 측정될 시간 확보
+    setTimeout(scrollIntoView, 200);
+  }, [editingTodoId, visible]);
 
   // 오버레이 non-passive 터치 이벤트: 스크롤은 콘텐츠로 전달, 탭만 닫기
   useEffect(() => {
