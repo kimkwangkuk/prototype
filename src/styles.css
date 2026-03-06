@@ -797,7 +797,7 @@ textarea {
   position: fixed;
   bottom: max(
     calc(var(--vv-offset-bottom, 0px) + var(--numpad-h, 0px) + 12px),
-    calc(env(safe-area-inset-bottom, 0px) + var(--numpad-h, 0px) + 74px)
+    calc(env(safe-area-inset-bottom, 0px) + 74px)
   );
   left: 50%;
   transform: translateX(-50%) translateY(calc(100% + 12px));

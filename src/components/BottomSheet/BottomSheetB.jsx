@@ -46,6 +46,11 @@ export default function BottomSheetB({
   useLayoutEffect(() => {
     const h = showNumpad && numpadRef.current ? numpadRef.current.offsetHeight : 0;
     document.documentElement.style.setProperty('--numpad-h', `${h}px`);
+    if (showNumpad) {
+      document.body.classList.add('keyboard-open');
+    } else {
+      document.body.classList.remove('keyboard-open');
+    }
   }, [showNumpad]);
 
   // 인풋이 활성화될 때마다 OS 키보드 대신 숫자패드 표시
