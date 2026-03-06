@@ -57,13 +57,10 @@ export default function BottomSheetB({
 
   const openPopup = (e, name) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    // --app-height: 시작 시 설정된 고정 레이아웃 뷰포트 높이 (키보드 열려도 불변)
-    // iOS에서 window.innerHeight는 키보드 시 줄어들어 사용 불가
-    const appHeight = parseFloat(
-      document.documentElement.style.getPropertyValue('--app-height')
-    ) || window.innerHeight;
-    const offsetTop = window.visualViewport?.offsetTop ?? 0;
-    const bottom = appHeight - (offsetTop + rect.top) + 8;
+    // position:fixed의 bottom은 visual viewport 기준 (키보드 위 가시 영역)
+    // getBoundingClientRect().top도 visual viewport 기준이므로 동일한 좌표계 사용
+    const vvHeight = window.visualViewport?.height ?? window.innerHeight;
+    const bottom = vvHeight - rect.top + 8;
     const centerX = rect.left + rect.width / 2;
     setPopupStyle({ bottom: `${bottom}px`, left: `${centerX - 100}px`, width: '200px', right: 'auto' });
     setActivePopup(name);
