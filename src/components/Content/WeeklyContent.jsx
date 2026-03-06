@@ -148,15 +148,17 @@ export default function WeeklyContent() {
   const [focusedDay, setFocusedDay] = useState(() => formatDate(new Date()));
 
   useEffect(() => {
-    const vv = window.visualViewport;
-    if (!vv) return;
-    const handleResize = () => {
-      if (vv.height >= window.innerHeight * 0.9) {
-        setFocusedDay(formatDate(new Date()));
-      }
+    const handleFocusOut = (e) => {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') return;
+      setTimeout(() => {
+        const active = document.activeElement;
+        if (!active || (active.tagName !== 'INPUT' && active.tagName !== 'TEXTAREA')) {
+          setFocusedDay(formatDate(new Date()));
+        }
+      }, 100);
     };
-    vv.addEventListener('resize', handleResize);
-    return () => vv.removeEventListener('resize', handleResize);
+    document.addEventListener('focusout', handleFocusOut);
+    return () => document.removeEventListener('focusout', handleFocusOut);
   }, []);
 
   useEffect(() => {
