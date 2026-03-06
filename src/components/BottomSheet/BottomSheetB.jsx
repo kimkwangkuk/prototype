@@ -51,6 +51,10 @@ export default function BottomSheetB({
     } else {
       document.body.classList.remove('keyboard-open');
     }
+    return () => {
+      document.body.classList.remove('keyboard-open');
+      document.documentElement.style.setProperty('--numpad-h', '0px');
+    };
   }, [showNumpad]);
 
   // 인풋이 활성화될 때마다 OS 키보드 대신 숫자패드 표시
