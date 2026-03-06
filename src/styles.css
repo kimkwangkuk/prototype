@@ -796,8 +796,8 @@ textarea {
 .bottom-sheet {
   position: fixed;
   bottom: max(
-    calc(var(--vv-offset-bottom, 0px) + 12px),
-    calc(env(safe-area-inset-bottom, 0px) + 74px)
+    calc(var(--vv-offset-bottom, 0px) + var(--numpad-h, 0px) + 12px),
+    calc(env(safe-area-inset-bottom, 0px) + var(--numpad-h, 0px) + 74px)
   );
   left: 50%;
   transform: translateX(-50%) translateY(calc(100% + 12px));
@@ -2754,12 +2754,15 @@ textarea {
   flex-shrink: 0;
 }
 
-/* ── Numpad (inline inside bottom-sheet) ── */
-.numpad-inline {
+/* ── Numpad (iOS 키보드처럼 fixed 하단 full-width) ── */
+.numpad-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: #d1d5db;
-  border-top: 1px solid rgba(0,0,0,0.08);
-  padding: 8px 4px 8px;
-  margin: 0 -16px -8px;
+  padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 1000;
 }
 
 .numpad-grid {

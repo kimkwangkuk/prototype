@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatTime, formatDuration } from '../../utils/timeUtils';
@@ -40,6 +40,13 @@ export default function BottomSheetB({
   const [popupStyle, setPopupStyle] = useState({});
   const [showNumpad, setShowNumpad] = useState(false);
   const sheetInputRef = useRef(null);
+  const numpadRef = useRef(null);
+
+  // 키패드 높이를 CSS 변수로 설정 → 바텀시트가 키패드 위로 올라감
+  useLayoutEffect(() => {
+    const h = showNumpad && numpadRef.current ? numpadRef.current.offsetHeight : 0;
+    document.documentElement.style.setProperty('--numpad-h', `${h}px`);
+  }, [showNumpad]);
 
   // 인풋이 활성화될 때마다 OS 키보드 대신 숫자패드 표시
   useEffect(() => {
@@ -131,20 +138,6 @@ export default function BottomSheetB({
             />
           </div>
         )}
-        <NumpadPopup
-          key={editingTodoId || 'sheet'}
-          visible={showNumpad}
-          value={data.text}
-          onChange={(v) => updateBottomSheetField('text', v)}
-          onConfirm={() => {
-            if (data.inputInSheet) {
-              closeBottomSheetWithSave();
-              setShowNumpad(false);
-            } else {
-              saveAndAddNewTodo();
-            }
-          }}
-        />
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
             <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>
@@ -218,6 +211,21 @@ export default function BottomSheetB({
         style={popupStyle}
       />
 
+      <NumpadPopup
+        ref={numpadRef}
+        key={editingTodoId || 'sheet'}
+        visible={showNumpad}
+        value={data.text}
+        onChange={(v) => updateBottomSheetField('text', v)}
+        onConfirm={() => {
+          if (data.inputInSheet) {
+            closeBottomSheetWithSave();
+            setShowNumpad(false);
+          } else {
+            saveAndAddNewTodo();
+          }
+        }}
+      />
     </>
   );
 }

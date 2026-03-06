@@ -1,4 +1,6 @@
-export default function NumpadPopup({ visible, value, onChange, onConfirm }) {
+import { forwardRef } from 'react';
+
+const NumpadPopup = forwardRef(function NumpadPopup({ visible, value, onChange, onConfirm }, ref) {
   if (!visible) return null;
 
   const handleKey = (key) => {
@@ -15,7 +17,7 @@ export default function NumpadPopup({ visible, value, onChange, onConfirm }) {
   const KEYS = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '←', '0', '확인'];
 
   return (
-    <div className="numpad-inline">
+    <div ref={ref} className="numpad-popup">
       <div className="numpad-grid">
         {KEYS.map(key => (
           <button
@@ -36,4 +38,6 @@ export default function NumpadPopup({ visible, value, onChange, onConfirm }) {
       </div>
     </div>
   );
-}
+});
+
+export default NumpadPopup;
