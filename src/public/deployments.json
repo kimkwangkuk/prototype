@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-7nicfmut4-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주/월뷰 포커스를 블록 전체 대신 날짜 숫자 동그라미로 변경",
+    "createdAt": 1772769984988,
+    "sha": "6b8db37"
+  },
+  {
+    "url": "https://prototype-knwq3ogq6-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772768249075,
+    "sha": "4428dc2"
+  },
+  {
     "url": "https://prototype-q06jgoxc3-kimkwangkuks-projects.vercel.app",
     "message": "feat: 주/월뷰 날짜 블록 포커스 상태 추가 (오늘 초기 포커스, 검정 배경)",
     "createdAt": 1772768182669,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772466774441,
     "sha": "938279e"
-  },
-  {
-    "url": "https://prototype-9l1vcpb9y-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 시간 피커를 단일 컬럼 10분 단위로 변경",
-    "createdAt": 1772466704709,
-    "sha": "410de17"
-  },
-  {
-    "url": "https://prototype-p391415y3-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772466251649,
-    "sha": "dfb4617"
   }
 ]
