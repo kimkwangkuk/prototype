@@ -182,6 +182,18 @@ export default function WeeklyContent() {
     });
   }, []);
 
+  // 키보드가 올라오면 visual viewport 높이로 max-height 제한 → row들이 넘쳐 스크롤 가능
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const update = () => { el.style.maxHeight = `${vv.height}px`; };
+    update();
+    vv.addEventListener('resize', update);
+    return () => vv.removeEventListener('resize', update);
+  }, []);
+
 
   // ─── 터치 스와이프 ────────────────────────────────────────────────────────
   useEffect(() => {
