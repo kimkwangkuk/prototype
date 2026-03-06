@@ -126,7 +126,21 @@ export default function WeeklyContent() {
   useEffect(() => {
     if (editingTodoId === null) {
       setFocusedDay(formatDate(new Date()));
+      return;
     }
+    // 편집 중인 할일이 .week-day-col-todos 내에서 보이도록 스크롤
+    const scrollIntoView = () => {
+      const editingEl = containerRef.current?.querySelector('.week-todo-item.editing');
+      if (!editingEl) return;
+      const todosContainer = editingEl.closest('.week-day-col-todos');
+      if (!todosContainer) return;
+      const elRect = editingEl.getBoundingClientRect();
+      const containerRect = todosContainer.getBoundingClientRect();
+      if (elRect.bottom > containerRect.bottom) {
+        todosContainer.scrollBy({ top: elRect.bottom - containerRect.bottom + 4, behavior: 'smooth' });
+      }
+    };
+    setTimeout(scrollIntoView, 50);
   }, [editingTodoId]);
 
   useEffect(() => {
