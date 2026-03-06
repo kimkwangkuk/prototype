@@ -444,9 +444,9 @@ textarea {
 }
 
 @keyframes pulseBackground {
-  0%   { background: rgba(0,0,0,0.02); }
+  0%   { background: rgba(255,255,255,0.9); }
   50%  { background: rgba(0,0,0,0.08); }
-  100% { background: rgba(0,0,0,0.02); }
+  100% { background: rgba(255,255,255,0.9); }
 }
 .todo-checkbox {
   width: 24px;
