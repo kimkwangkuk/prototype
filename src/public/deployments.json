@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-89izn7g4e-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 일/주/월뷰 할일 입력중 infinite pulse 애니메이션 추가",
+    "createdAt": 1772770462074,
+    "sha": "83bcae4"
+  },
+  {
+    "url": "https://prototype-610vrt9e0-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772770411131,
+    "sha": "e8a4ca2"
+  },
+  {
     "url": "https://prototype-nvn1giont-kimkwangkuks-projects.vercel.app",
     "message": "fix: 월뷰 오늘 날짜 focused 동그라미 black !important 강제 적용",
     "createdAt": 1772770344272,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772467076194,
     "sha": "e4fd999"
-  },
-  {
-    "url": "https://prototype-659wkq51o-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 탭바 할일 아이콘 교체 (선택/비선택 구분)",
-    "createdAt": 1772467007359,
-    "sha": "6d291cb"
-  },
-  {
-    "url": "https://prototype-kzcagr630-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772466998683,
-    "sha": "2c4bbb1"
   }
 ]
