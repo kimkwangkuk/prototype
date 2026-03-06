@@ -36,39 +36,15 @@ function getMonthCalendar(baseDate) {
 }
 
 function WeekTodoEditInput({ text }) {
-  const inputRef = useRef(null);
-  const updateBottomSheetField = useTodoStore(state => state.updateBottomSheetField);
-  const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
-
-  useEffect(() => {
-    const el = inputRef.current;
-    if (!el) return;
-    // iOS는 focus 시 overflow-y:auto 컨테이너를 자동 스크롤해 화면이 아래로 쏠림.
-    // scroll 위치를 저장 후 복원해 점프 방지.
-    const container = document.querySelector('.weekly-content');
-    const savedScroll = container?.scrollTop ?? 0;
-    el.removeAttribute('readonly');
-    el.focus();
-    if (container) {
-      container.scrollTop = savedScroll;
-      requestAnimationFrame(() => { container.scrollTop = savedScroll; });
-    }
-  }, []);
-
   return (
     <input
-      ref={inputRef}
       type="text"
+      inputMode="none"
+      tabIndex={-1}
       readOnly
       className="week-todo-text week-todo-edit-input"
       value={text}
-      onChange={(e) => updateBottomSheetField('text', e.target.value)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          saveAndAddNewTodo();
-        }
-      }}
+      style={{ pointerEvents: 'none' }}
       placeholder="할 일 입력..."
     />
   );
