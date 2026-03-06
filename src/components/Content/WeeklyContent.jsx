@@ -165,7 +165,7 @@ export default function WeeklyContent() {
 
   const containerRef = useRef(null);
   // 모든 변경 가능 상태를 ref 하나로 관리 (React 렌더 루프 밖에서 동작)
-  const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false });
+  const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false, didScroll: false });
   const actionsRef = useRef({ nextWeek: nextWeekAction, prevWeek: prevWeekAction });
   useEffect(() => { actionsRef.current = { nextWeek: nextWeekAction, prevWeek: prevWeekAction }; });
 
@@ -182,13 +182,16 @@ export default function WeeklyContent() {
     });
   }, []);
 
-  // 키보드가 올라오면 visual viewport 높이로 max-height 제한 → row들이 넘쳐 스크롤 가능
+  // 키보드 높이만큼 spacer를 추가해 content가 container를 넘치게 → overflow-y: auto 스크롤 활성화
+  // max-height 방식은 iOS Safari flex container에서 overflow 계산이 틀릴 수 있음
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   useEffect(() => {
     const vv = window.visualViewport;
     if (!vv) return;
-    const el = containerRef.current;
-    if (!el) return;
-    const update = () => { el.style.maxHeight = `${vv.height}px`; };
+    const update = () => {
+      const appH = parseFloat(document.documentElement.style.getPropertyValue('--app-height')) || window.innerHeight;
+      setKeyboardHeight(Math.max(0, appH - vv.height));
+    };
     update();
     vv.addEventListener('resize', update);
     return () => vv.removeEventListener('resize', update);
@@ -214,6 +217,7 @@ export default function WeeklyContent() {
 
     function onStart(e) {
       s.direction = null;                 // 항상 방향 리셋
+      s.didScroll = false;               // 스크롤 여부 리셋
       if (s.animating) return;
       s.startX = e.touches[0].clientX;
       s.startY = e.touches[0].clientY;
@@ -232,7 +236,10 @@ export default function WeeklyContent() {
         // 가로가 세로의 2배 이상일 때만 수평으로 확정 → 세로 스크롤 오판 방지
         s.direction = adx >= ady * 2 ? 'h' : 'v';
       }
-      if (s.direction !== 'h') return;
+      if (s.direction !== 'h') {
+        if (s.direction === 'v') s.didScroll = true; // 세로 스크롤 중 click 차단용
+        return;
+      }
 
       // 수평 확정 후에만 스크롤 차단 (passive:false 이므로 실제 작동)
       e.preventDefault();
@@ -313,6 +320,7 @@ export default function WeeklyContent() {
   // ─── 핸들러 ────────────────────────────────────────────────────────────────
   const handleAdd = (dateStr) => {
     if (stateRef.current.animating) return;
+    if (stateRef.current.didScroll) return; // 스크롤 제스처 후 click 무시
     setFocusedDay(dateStr);
     // 리렌더 전에 미리 keyboard-open 추가 → 탭바 플래시 방지
     document.body.classList.add('keyboard-open');
@@ -446,6 +454,8 @@ export default function WeeklyContent() {
   return (
     <div className="weekly-content" ref={containerRef}>
       {renderGrid()}
+      {/* 키보드 높이만큼 spacer → content > container → overflow-y 스크롤 활성화 */}
+      <div style={{ flex: '0 0 auto', height: keyboardHeight }} />
     </div>
   );
 }
