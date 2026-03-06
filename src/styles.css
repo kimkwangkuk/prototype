@@ -1585,6 +1585,13 @@ textarea {
   touch-action: pan-y;
 }
 
+.week-cell-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0; /* 이게 없으면 flex 높이가 컨텐츠 크기로 늘어나 overflow:auto 미작동 */
+}
+
 .week-row {
   display: flex;
   border-bottom: 1px solid var(--border-quinary);

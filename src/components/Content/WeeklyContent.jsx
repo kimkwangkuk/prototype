@@ -368,10 +368,7 @@ export default function WeeklyContent() {
               // 외부 블록(.week-day-col): 테두리·배경 고정
               <div key={ds} className={`week-day-col${focusedDay === ds ? ' focused' : ''}`} onClick={() => handleAdd(ds)}>
                 {/* 내부 컨텐츠(.week-cell-content): 텍스트·할일만 페이드 대상 */}
-                <div
-                  className="week-cell-content"
-                  style={{ display: 'flex', flexDirection: 'column', flex: 1 }}
-                >
+                <div className="week-cell-content">
                   <div className="week-day-col-header">
                     <span className={`week-day-col-num${today ? ' today' : ''}`}>
                       {date.getDate()}
