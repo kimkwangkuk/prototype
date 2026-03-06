@@ -46,6 +46,18 @@ export default function MonthlyContent() {
   const [focusedDay, setFocusedDay] = useState(() => formatDate(new Date()));
 
   useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const handleResize = () => {
+      if (vv.height >= window.innerHeight * 0.9) {
+        setFocusedDay(formatDate(new Date()));
+      }
+    };
+    vv.addEventListener('resize', handleResize);
+    return () => vv.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     if (newlySavedTodoId !== null) {
       setPulseTodoId(newlySavedTodoId);
       clearNewlySavedTodo();
