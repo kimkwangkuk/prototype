@@ -87,10 +87,11 @@ export default function TodoItemB({ todo, subjectColor }) {
           ref={inputRef}
           type="text"
           inputMode="none"
+          tabIndex={-1}
           className={titleClass}
           value={todo.text}
           readOnly
-          style={isEditing ? undefined : { pointerEvents: 'none' }}
+          style={{ pointerEvents: 'none' }}
           placeholder="할 일 입력..."
         />
         {(todo.time || todo.duration) && (

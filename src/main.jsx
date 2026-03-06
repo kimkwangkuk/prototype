@@ -47,6 +47,8 @@ window.addEventListener('scroll', () => {
 document.addEventListener('focusin', (e) => {
   const el = e.target;
   if (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA') return;
+  // inputMode="none" 또는 readOnly 인풋은 OS 키보드가 뜨지 않으므로 keyboard-open 제외
+  if (el.inputMode === 'none' || el.readOnly) return;
   document.body.classList.add('keyboard-open');
 
   // 바텀시트 인풋은 시트 자체가 키보드 위에 위치하므로 스크롤 불필요

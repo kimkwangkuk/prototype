@@ -113,17 +113,21 @@ export default function BottomSheetB({
           </svg>
         </div>
         {data.inputInSheet && (
-          <div className="sheet-input-row">
+          <div
+            className="sheet-input-row"
+            onMouseDown={(e) => { e.preventDefault(); setShowNumpad(true); }}
+            onTouchStart={(e) => { e.preventDefault(); setShowNumpad(true); }}
+          >
             <input
               ref={sheetInputRef}
               type="text"
               inputMode="none"
+              tabIndex={-1}
               readOnly
               className="sheet-text-input"
               value={data.text}
               placeholder="할 일 입력..."
-              onMouseDown={(e) => { e.preventDefault(); setShowNumpad(true); }}
-              onTouchEnd={(e) => { e.preventDefault(); setShowNumpad(true); }}
+              style={{ pointerEvents: 'none' }}
             />
           </div>
         )}
