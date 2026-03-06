@@ -2754,72 +2754,12 @@ textarea {
   flex-shrink: 0;
 }
 
-/* ── Numpad ── */
-.numpad-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1001;
-  background: transparent;
-}
-
-.numpad-popup {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+/* ── Numpad (inline inside bottom-sheet) ── */
+.numpad-inline {
   background: #d1d5db;
-  border-radius: 12px 12px 0 0;
-  padding: 10px 4px 20px;
-  z-index: 1002;
-  box-shadow: 0 -2px 16px rgba(0,0,0,0.12);
-}
-
-.numpad-display-row {
-  display: flex;
-  align-items: center;
-  background: var(--bg-primary);
-  border-radius: 10px;
-  margin: 0 4px 8px;
-  padding: 10px 14px;
-  gap: 6px;
-}
-
-.numpad-display-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--label-primary);
-  background: transparent;
-  font-family: inherit;
-  caret-color: transparent;
-  /* inputmode="none"으로 OS 키보드 억제 */
-}
-
-.numpad-display-input::placeholder {
-  color: rgba(0,0,0,0.2);
-}
-
-.numpad-display-unit {
-  font-size: 16px;
-  color: rgba(0,0,0,0.4);
-  font-weight: 500;
-  padding-top: 6px;
-}
-
-.numpad-backspace {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  color: rgba(0,0,0,0.4);
-  cursor: pointer;
-  border-radius: 8px;
-  flex-shrink: 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 8px 4px 8px;
+  margin: 0 -16px -8px;
 }
 
 .numpad-grid {

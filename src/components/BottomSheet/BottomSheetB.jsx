@@ -131,6 +131,20 @@ export default function BottomSheetB({
             />
           </div>
         )}
+        <NumpadPopup
+          key={editingTodoId || 'sheet'}
+          visible={showNumpad}
+          value={data.text}
+          onChange={(v) => updateBottomSheetField('text', v)}
+          onConfirm={() => {
+            if (data.inputInSheet) {
+              closeBottomSheetWithSave();
+              setShowNumpad(false);
+            } else {
+              saveAndAddNewTodo();
+            }
+          }}
+        />
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
             <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>
@@ -204,21 +218,6 @@ export default function BottomSheetB({
         style={popupStyle}
       />
 
-      <NumpadPopup
-        key={editingTodoId || 'sheet'}
-        visible={showNumpad}
-        value={data.text}
-        onChange={(v) => updateBottomSheetField('text', v)}
-        onConfirm={() => {
-          if (data.inputInSheet) {
-            closeBottomSheetWithSave();
-            setShowNumpad(false);
-          } else {
-            saveAndAddNewTodo();
-          }
-        }}
-        onClose={() => setShowNumpad(false)}
-      />
     </>
   );
 }
