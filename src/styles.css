@@ -1728,7 +1728,15 @@ textarea {
 }
 
 .week-day-col-num.today {
-  color: var(--fill-primary);
+  background: var(--fill-primary);
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .week-day-col-name {
