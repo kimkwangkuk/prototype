@@ -38,16 +38,14 @@ export default function BottomSheetB({
   const closeBottomSheetWithSave = useTodoStore(state => state.closeBottomSheetWithSave);
   const [popupStyle, setPopupStyle] = useState({});
   const [showNumpad, setShowNumpad] = useState(false);
-  const [numpadValue, setNumpadValue] = useState('');
   const sheetInputRef = useRef(null);
 
-  // inputInSheet 모드일 때 input 자동 포커스 (즉시)
+  // inputInSheet 모드 활성화 시 OS 키보드 대신 숫자패드 표시
   useEffect(() => {
-    if (data.inputInSheet && sheetInputRef.current) {
-      sheetInputRef.current.focus();
+    if (data.inputInSheet) {
+      setShowNumpad(true);
     }
   }, [data.inputInSheet]);
-
 
   // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
   // Desktop: mousedown preventDefault → blur 방지, click에서 처리
@@ -60,8 +58,6 @@ export default function BottomSheetB({
 
   const openPopup = (e, name) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    // position:fixed의 bottom은 visual viewport 기준 (키보드 위 가시 영역)
-    // getBoundingClientRect().top도 visual viewport 기준이므로 동일한 좌표계 사용
     const vvHeight = window.visualViewport?.height ?? window.innerHeight;
     const bottom = vvHeight - rect.top + 8;
     const centerX = rect.left + rect.width / 2;
@@ -71,12 +67,6 @@ export default function BottomSheetB({
 
   const closePopup = () => {
     setActivePopup(null);
-    if (data.inputInSheet) {
-      sheetInputRef.current?.focus();
-    } else if (editingTodoId) {
-      const input = document.querySelector(`[data-todo-id="${editingTodoId}"] input`);
-      input?.focus();
-    }
   };
 
   const selectedSubject = data.category
@@ -97,8 +87,6 @@ export default function BottomSheetB({
   const durationDisabled = !data.duration && !durationNone;
   const durationText = durationNone ? '없음' : (durationDisabled ? '지속시간' : formatDuration(data.duration));
 
-  // dragY > 0: 드래그 중 → inline transform으로 위치 제어
-  // 그 외: CSS .bottom-sheet bottom 값(--vv-offset-bottom 반영)이 키보드 위치 처리
   const sheetStyle = dragY > 0
     ? {
         transform: `translateX(-50%) translateY(${dragY}px)`,
@@ -128,29 +116,16 @@ export default function BottomSheetB({
             <input
               ref={sheetInputRef}
               type="text"
+              inputMode="none"
+              readOnly
               className="sheet-text-input"
               value={data.text}
-              onChange={(e) => updateBottomSheetField('text', e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); closeBottomSheetWithSave(); } }}
               placeholder="할 일 입력..."
+              onMouseDown={(e) => { e.preventDefault(); setShowNumpad(true); }}
+              onTouchEnd={(e) => { e.preventDefault(); setShowNumpad(true); }}
             />
           </div>
         )}
-        <div className="sheet-numpad-row">
-          <span className="sheet-numpad-label">목표 시간</span>
-          <input
-            type="text"
-            inputMode="none"
-            readOnly
-            value={numpadValue}
-            placeholder="입력"
-            className="sheet-numpad-input"
-            onFocus={(e) => { e.target.blur(); setShowNumpad(true); }}
-            onMouseDown={(e) => { e.preventDefault(); setShowNumpad(true); }}
-            onTouchEnd={(e) => { e.preventDefault(); setShowNumpad(true); }}
-          />
-          <span className="sheet-numpad-unit">분</span>
-        </div>
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
             <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>
@@ -226,9 +201,9 @@ export default function BottomSheetB({
 
       <NumpadPopup
         visible={showNumpad}
-        value={numpadValue}
-        unit="분"
-        onConfirm={(v) => setNumpadValue(v != null ? String(v) : '')}
+        value={data.text}
+        onChange={(v) => updateBottomSheetField('text', v)}
+        onConfirm={() => closeBottomSheetWithSave()}
         onClose={() => setShowNumpad(false)}
       />
     </>

@@ -1,25 +1,27 @@
 import { useState, useEffect } from 'react';
 
-export default function NumpadPopup({ visible, value: initialValue, unit = '분', onConfirm, onClose }) {
+export default function NumpadPopup({ visible, value: initialValue, onChange, onConfirm, onClose }) {
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    if (visible) {
-      setValue(initialValue != null && initialValue !== '' ? String(initialValue) : '');
-    }
+    if (visible) setValue(initialValue || '');
   }, [visible]);
 
   if (!visible) return null;
 
   const handleKey = (key) => {
     if (key === '←') {
-      setValue(v => v.slice(0, -1));
+      const next = value.slice(0, -1);
+      setValue(next);
+      onChange?.(next);
     } else if (key === '확인') {
-      onConfirm(value ? Number(value) : null);
+      onConfirm?.();
       onClose();
     } else {
-      if (value.length >= 4) return;
-      setValue(v => v + key);
+      if (value.length >= 10) return;
+      const next = value + key;
+      setValue(next);
+      onChange?.(next);
     }
   };
 
@@ -30,8 +32,7 @@ export default function NumpadPopup({ visible, value: initialValue, unit = '분'
       <div className="numpad-overlay" onClick={onClose} />
       <div className="numpad-popup">
         <div className="numpad-display-row">
-          <span className="numpad-display-value">{value || '0'}</span>
-          <span className="numpad-display-unit">{unit}</span>
+          <span className="numpad-display-value">{value || <span style={{ opacity: 0.3 }}>0</span>}</span>
           <button
             className="numpad-backspace"
             onMouseDown={(e) => e.preventDefault()}
