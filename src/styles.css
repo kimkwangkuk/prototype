@@ -1728,8 +1728,8 @@ textarea {
 }
 
 .week-day-col-num.today {
-  background: var(--fill-primary);
-  color: #fff;
+  background: rgba(0,0,0,0.13);
+  color: rgba(0,0,0,0.77);
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -2102,8 +2102,8 @@ textarea {
 }
 
 .monthly-date-num.today {
-  background: var(--fill-primary);
-  color: #fff;
+  background: rgba(0,0,0,0.13);
+  color: var(--label-primary);
 }
 
 .monthly-day-cell.weekend .monthly-date-num:not(.today) {
