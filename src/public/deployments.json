@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-nvn1giont-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 월뷰 오늘 날짜 focused 동그라미 black !important 강제 적용",
+    "createdAt": 1772770344272,
+    "sha": "06e28ad"
+  },
+  {
+    "url": "https://prototype-9h7ayjk7g-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772770051821,
+    "sha": "ce386ff"
+  },
+  {
     "url": "https://prototype-7nicfmut4-kimkwangkuks-projects.vercel.app",
     "message": "fix: 주/월뷰 포커스를 블록 전체 대신 날짜 숫자 동그라미로 변경",
     "createdAt": 1772769984988,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1772466998683,
     "sha": "2c4bbb1"
-  },
-  {
-    "url": "https://prototype-f3fm5dn6j-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 날짜 이동 시 바텀시트 자동 닫기",
-    "createdAt": 1772466930613,
-    "sha": "21c702c"
-  },
-  {
-    "url": "https://prototype-hthcz3gad-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772466774441,
-    "sha": "938279e"
   }
 ]
