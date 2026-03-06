@@ -32,11 +32,7 @@ export default function TodoItemB({ todo, subjectColor }) {
   const isCompleted = todo.status === 'done' || todo.status === 'skip' || todo.status === 'cancel';
 
   useEffect(() => {
-    if (isEditing && inputRef.current) {
-      inputRef.current.removeAttribute('readonly');
-      inputRef.current.focus();
-      // 포커스 후 스크롤 센터링은 main.jsx의 전역 focusin 핸들러가 처리
-    }
+    // inputMode="none" 으로 OS 키보드 억제 - focus 불필요, numpad가 입력 처리
   }, [isEditing]);
 
   const handleKeyDown = (e) => {
@@ -90,12 +86,11 @@ export default function TodoItemB({ todo, subjectColor }) {
         <input
           ref={inputRef}
           type="text"
+          inputMode="none"
           className={titleClass}
           value={todo.text}
-          readOnly={!isEditing}
+          readOnly
           style={isEditing ? undefined : { pointerEvents: 'none' }}
-          onChange={isEditing ? (e) => updateBottomSheetField('text', e.target.value) : undefined}
-          onKeyDown={isEditing ? handleKeyDown : undefined}
           placeholder="할 일 입력..."
         />
         {(todo.time || todo.duration) && (

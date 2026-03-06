@@ -36,16 +36,17 @@ export default function BottomSheetB({
   const editingTodoId = useTodoStore(state => state.editingTodoId);
   const updateBottomSheetField   = useTodoStore(state => state.updateBottomSheetField);
   const closeBottomSheetWithSave = useTodoStore(state => state.closeBottomSheetWithSave);
+  const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const [popupStyle, setPopupStyle] = useState({});
   const [showNumpad, setShowNumpad] = useState(false);
   const sheetInputRef = useRef(null);
 
-  // inputInSheet 모드 활성화 시 OS 키보드 대신 숫자패드 표시
+  // 인풋이 활성화될 때마다 OS 키보드 대신 숫자패드 표시
   useEffect(() => {
-    if (data.inputInSheet) {
+    if (data.inputInSheet || editingTodoId) {
       setShowNumpad(true);
     }
-  }, [data.inputInSheet]);
+  }, [data.inputInSheet, editingTodoId]);
 
   // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
   // Desktop: mousedown preventDefault → blur 방지, click에서 처리
@@ -200,10 +201,18 @@ export default function BottomSheetB({
       />
 
       <NumpadPopup
+        key={editingTodoId || 'sheet'}
         visible={showNumpad}
         value={data.text}
         onChange={(v) => updateBottomSheetField('text', v)}
-        onConfirm={() => closeBottomSheetWithSave()}
+        onConfirm={() => {
+          if (data.inputInSheet) {
+            closeBottomSheetWithSave();
+            setShowNumpad(false);
+          } else {
+            saveAndAddNewTodo();
+          }
+        }}
         onClose={() => setShowNumpad(false)}
       />
     </>
