@@ -2713,6 +2713,47 @@ textarea {
   display: block;
 }
 
+/* ── Sheet Numpad Input Row ── */
+.sheet-numpad-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px 8px;
+}
+
+.sheet-numpad-label {
+  font-size: 13px;
+  color: rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+.sheet-numpad-input {
+  flex: 1;
+  border: none;
+  border-bottom: 1.5px solid rgba(0,0,0,0.12);
+  outline: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--label-primary);
+  background: transparent;
+  font-family: inherit;
+  padding: 4px 0;
+  cursor: pointer;
+  caret-color: transparent;
+  /* inputMode="none" 으로 OS 키보드 억제 */
+}
+
+.sheet-numpad-input::placeholder {
+  color: rgba(0,0,0,0.2);
+  font-weight: 400;
+}
+
+.sheet-numpad-unit {
+  font-size: 13px;
+  color: rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
 /* ── Numpad ── */
 .numpad-overlay {
   position: fixed;
@@ -2822,4 +2863,8 @@ textarea {
   background: #b0b5be;
   color: var(--label-primary);
   font-size: 14px;
+}
+
+.numpad-key-back {
+  background: #b0b5be;
 }

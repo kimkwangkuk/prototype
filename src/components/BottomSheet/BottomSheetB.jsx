@@ -37,6 +37,8 @@ export default function BottomSheetB({
   const updateBottomSheetField   = useTodoStore(state => state.updateBottomSheetField);
   const closeBottomSheetWithSave = useTodoStore(state => state.closeBottomSheetWithSave);
   const [popupStyle, setPopupStyle] = useState({});
+  const [showNumpad, setShowNumpad] = useState(false);
+  const [numpadValue, setNumpadValue] = useState('');
   const sheetInputRef = useRef(null);
 
   // inputInSheet 모드일 때 input 자동 포커스 (즉시)
@@ -134,6 +136,21 @@ export default function BottomSheetB({
             />
           </div>
         )}
+        <div className="sheet-numpad-row">
+          <span className="sheet-numpad-label">목표 시간</span>
+          <input
+            type="text"
+            inputMode="none"
+            readOnly
+            value={numpadValue}
+            placeholder="입력"
+            className="sheet-numpad-input"
+            onFocus={(e) => { e.target.blur(); setShowNumpad(true); }}
+            onMouseDown={(e) => { e.preventDefault(); setShowNumpad(true); }}
+            onTouchEnd={(e) => { e.preventDefault(); setShowNumpad(true); }}
+          />
+          <span className="sheet-numpad-unit">분</span>
+        </div>
         <div className="toolbar-buttons-container">
           <button className="toolbar-icon-btn" {...toolbarBtnProps('category')}>
             <div className={`toolbar-icon${categoryDisabled ? ' toolbar-icon-disabled' : ''}`}>
@@ -170,7 +187,7 @@ export default function BottomSheetB({
             <span className={`toolbar-icon-text${timeDisabled ? ' toolbar-icon-text-disabled' : ''}${timeNone ? ' toolbar-icon-text-none' : ''}`}>{timeText}</span>
           </button>
 
-          <button className="toolbar-icon-btn" {...toolbarBtnProps('numpad')}>
+          <button className="toolbar-icon-btn" {...toolbarBtnProps('duration')}>
             <div className={`toolbar-icon${durationDisabled ? ' toolbar-icon-disabled' : ''}`}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="10" x2="14" y1="2" y2="2"/>
@@ -208,8 +225,11 @@ export default function BottomSheetB({
       />
 
       <NumpadPopup
-        visible={activePopup === 'numpad'}
-        onClose={closePopup}
+        visible={showNumpad}
+        value={numpadValue}
+        unit="분"
+        onConfirm={(v) => setNumpadValue(v != null ? String(v) : '')}
+        onClose={() => setShowNumpad(false)}
       />
     </>
   );
