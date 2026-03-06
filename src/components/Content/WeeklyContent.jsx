@@ -373,7 +373,7 @@ export default function WeeklyContent() {
                 >
                   <div className="week-day-col-header">
                     <span className={`week-day-col-num${today ? ' today' : ''}`}>
-                      {date.getDate()}.
+                      {date.getDate()}
                     </span>
                     <span className="week-day-col-name">{getDayOfWeekKR(date)}</span>
                   </div>

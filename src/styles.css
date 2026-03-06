@@ -1679,19 +1679,16 @@ textarea {
 }
 
 /* 요일 셀 */
-.week-day-col.focused {
-  background: rgba(0, 0, 0, 0.87);
-}
-.week-day-col.focused .week-day-col-num,
-.week-day-col.focused .week-day-col-name,
-.week-day-col.focused .week-day-col-num.today {
-  color: rgba(255, 255, 255, 0.9);
-}
-.week-day-col.focused .week-todo-item-text {
-  color: rgba(255, 255, 255, 0.85);
-}
-.week-day-col.focused .week-todo-item-text.completed {
-  color: rgba(255, 255, 255, 0.4);
+.week-day-col.focused .week-day-col-num {
+  background: #000;
+  color: #fff !important;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .week-day-col {
@@ -2058,15 +2055,9 @@ textarea {
   min-width: 0;
 }
 
-.monthly-day-cell.focused {
-  background: rgba(0, 0, 0, 0.87);
-}
-.monthly-day-cell.focused .monthly-date-num,
-.monthly-day-cell.focused .monthly-date-num.today {
-  color: rgba(255, 255, 255, 0.9);
-}
-.monthly-day-cell.focused .monthly-todo-item {
-  color: rgba(255, 255, 255, 0.85);
+.monthly-day-cell.focused .monthly-date-num {
+  background: #000;
+  color: #fff !important;
 }
 
 .monthly-day-cell.out-of-month {
