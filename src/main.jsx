@@ -43,11 +43,41 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// 인풋 포커스 즉시 탭바 숨김 (resize 이벤트보다 빠르게 반응)
+// 인풋 포커스 즉시 탭바 숨김 + 키보드 열린 후 가시 영역 중앙으로 스크롤
 document.addEventListener('focusin', (e) => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-    document.body.classList.add('keyboard-open');
-  }
+  const el = e.target;
+  if (el.tagName !== 'INPUT' && el.tagName !== 'TEXTAREA') return;
+  document.body.classList.add('keyboard-open');
+
+  // 바텀시트 인풋은 시트 자체가 키보드 위에 위치하므로 스크롤 불필요
+  if (el.closest('.bottom-sheet')) return;
+
+  // 키보드 애니메이션(~300ms) 완료 후 포커스 위치 계산
+  setTimeout(() => {
+    const vv = window.visualViewport;
+    if (!vv || !document.contains(el)) return;
+    const keyboardHeight = window.innerHeight - vv.height;
+    if (keyboardHeight < 100) return; // 키보드가 충분히 열리지 않았으면 스킵
+
+    // 가시 영역: 헤더 하단 ~ 키보드 상단
+    const headerBottom = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
+    const visibleCenter = headerBottom + (vv.height - headerBottom) / 2;
+
+    const rect = el.getBoundingClientRect();
+    const inputCenter = rect.top + rect.height / 2;
+    const delta = inputCenter - visibleCenter;
+    if (Math.abs(delta) < 20) return;
+
+    // 가장 바깥쪽 스크롤 가능한 조상으로 스크롤 (내부 스크롤 컨테이너 전체를 이동)
+    let outermost = null;
+    let cur = el.parentElement;
+    while (cur && cur !== document.body) {
+      const oy = window.getComputedStyle(cur).overflowY;
+      if (oy === 'auto' || oy === 'scroll') outermost = cur;
+      cur = cur.parentElement;
+    }
+    outermost?.scrollBy({ top: delta, behavior: 'smooth' });
+  }, 350);
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(

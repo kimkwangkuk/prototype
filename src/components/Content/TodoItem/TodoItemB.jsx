@@ -35,15 +35,7 @@ export default function TodoItemB({ todo, subjectColor }) {
     if (isEditing && inputRef.current) {
       inputRef.current.removeAttribute('readonly');
       inputRef.current.focus();
-
-      const itemEl = itemRef.current;
-      const contentEl = document.getElementById('content');
-      if (itemEl && contentEl) {
-        const itemRect = itemEl.getBoundingClientRect();
-        const contentRect = contentEl.getBoundingClientRect();
-        const scrollTarget = contentEl.scrollTop + (itemRect.top - contentRect.top) - (contentRect.height / 2) + (itemRect.height / 2);
-        contentEl.scrollTo({ top: scrollTarget, behavior: 'smooth' });
-      }
+      // 포커스 후 스크롤 센터링은 main.jsx의 전역 focusin 핸들러가 처리
     }
   }, [isEditing]);
 

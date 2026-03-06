@@ -326,17 +326,7 @@ export default function WeeklyContent() {
     selectDate(dateStr);
     addTodo(subjects[0].id);
 
-    // 350ms: iOS 키보드 애니메이션(~300ms) 완료 후, 편집 아이템을 키보드 위 가시 영역 중앙으로 스크롤
-    setTimeout(() => {
-      const editingItem = document.querySelector('.week-todo-item.editing');
-      if (!editingItem) return;
-      const todosEl = editingItem.closest('.week-day-col-todos');
-      if (!todosEl) return;
-      const visibleHeight = window.visualViewport?.height ?? window.innerHeight;
-      const itemRect  = editingItem.getBoundingClientRect();
-      const scrollDelta = (itemRect.top + itemRect.height / 2) - (visibleHeight / 2);
-      todosEl.scrollTo({ top: todosEl.scrollTop + scrollDelta, behavior: 'smooth' });
-    }, 350);
+    // 포커스 후 스크롤 센터링은 main.jsx의 전역 focusin 핸들러가 처리
   };
 
   const handleTodoClick = (todo) => {
