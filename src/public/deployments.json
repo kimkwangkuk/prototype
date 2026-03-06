@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-gfyz6bu15-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 편집중 펄스 - background 직접 애니메이션으로 마진 유지 및 글자 점멸 방지",
+    "createdAt": 1772771313296,
+    "sha": "b749c0b"
+  },
+  {
+    "url": "https://prototype-93rdyjv5s-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1772770891059,
+    "sha": "50072af"
+  },
+  {
     "url": "https://prototype-9ydiozfnh-kimkwangkuks-projects.vercel.app",
     "message": "design: 펄스 애니메이션 흰색→어두움으로 변경 (대비 강화)",
     "createdAt": 1772770785643,
@@ -286,17 +298,5 @@
     "message": "feat: 탭바 일/주/월 뷰 아이콘 교체",
     "createdAt": 1772468041285,
     "sha": "7a4df20"
-  },
-  {
-    "url": "https://prototype-k8aj0okzb-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772467833134,
-    "sha": "cb5389d"
-  },
-  {
-    "url": "https://prototype-9olsw12ku-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 탭바 할일 아이콘 strokeWidth 1.5 → 2",
-    "createdAt": 1772467762763,
-    "sha": "40a0260"
   }
 ]
