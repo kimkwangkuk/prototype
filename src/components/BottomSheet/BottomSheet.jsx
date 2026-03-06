@@ -26,7 +26,11 @@ export default function BottomSheet() {
 
   useEffect(() => {
     if (visible) {
-      setTimeout(() => setAnimate(true), 10);
+      // inputInSheet(월뷰): 시트 인풋이 포커스 → 키보드가 열림
+      // 키보드가 다 올라온 뒤(~350ms) animate해야 --vv-offset-bottom이 반영된 위치에 시트가 나타남
+      // 그 외: 인라인 인풋이 이미 키보드를 열었으므로 바로 animate
+      const inputInSheet = useTodoStore.getState().bottomSheetData?.inputInSheet;
+      setTimeout(() => setAnimate(true), inputInSheet ? 350 : 10);
 
       const isNewTodo = originalData && !originalData.text.trim();
       if (editingTodoId && mode !== 'status-only' && isNewTodo) {
