@@ -97,28 +97,40 @@ export default function BottomSheet() {
       e.preventDefault(); // iOS가 touchstart 시점에 focused input을 blur하는 것 방지
       const x = e.touches[0].clientX;
       const y = e.touches[0].clientY;
-      overlayTouchRef.current = { startY: y, lastY: y, moved: false, scrollTarget: findScrollTarget(x, y) };
+      overlayTouchRef.current = { startY: y, lastY: y, moved: false, scrollTarget: findScrollTarget(x, y), finalTarget: null };
     };
     const onTouchMove = (e) => {
       if (!overlayTouchRef.current) return;
-      const dy = e.touches[0].clientY - overlayTouchRef.current.lastY;
-      if (Math.abs(e.touches[0].clientY - overlayTouchRef.current.startY) > 5) {
+      const currentY = e.touches[0].clientY;
+      const dy = currentY - overlayTouchRef.current.lastY;
+      if (Math.abs(currentY - overlayTouchRef.current.startY) > 5) {
         overlayTouchRef.current.moved = true;
       }
-      const { scrollTarget } = overlayTouchRef.current;
-      if (scrollTarget) {
-        const before = scrollTarget.scrollTop;
-        scrollTarget.scrollTop -= dy;
-        const scrolled = scrollTarget.scrollTop - before; // 실제 스크롤된 양 (부호 포함)
-        // 내부 스크롤이 경계에 닿아 다 소화 못했으면 외부 컨테이너로 잔여분 전파
-        if (Math.abs(scrolled) < Math.abs(dy)) {
-          const outer = document.querySelector('.weekly-content') ?? document.querySelector('.monthly-content');
-          if (outer && outer !== scrollTarget) {
-            outer.scrollTop -= (dy + scrolled);
+      // 첫 유효 이동 시점에 이번 제스처의 스크롤 대상을 확정:
+      // 내부 컨테이너가 해당 방향으로 스크롤 가능하면 내부 고정 (경계에 닿아도 체이닝 안 함)
+      // 이미 경계에 있으면 외부 컨테이너를 대상으로 확정
+      if (!overlayTouchRef.current.finalTarget && Math.abs(dy) > 1) {
+        const primary = overlayTouchRef.current.scrollTarget;
+        let target = primary;
+        if (primary) {
+          const { scrollTop, scrollHeight, clientHeight } = primary;
+          const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+          const atTop = scrollTop <= 0;
+          const wantsDown = dy < 0; // 손가락 위 → 콘텐츠 아래로
+          const wantsUp = dy > 0;   // 손가락 아래 → 콘텐츠 위로
+          const atBoundary = (wantsDown && atBottom) || (wantsUp && atTop);
+          if (atBoundary) {
+            const outer = document.querySelector('.weekly-content') ?? document.querySelector('.monthly-content');
+            if (outer && outer !== primary) target = outer;
           }
         }
+        overlayTouchRef.current.finalTarget = target;
       }
-      overlayTouchRef.current.lastY = e.touches[0].clientY;
+      const { finalTarget } = overlayTouchRef.current;
+      if (finalTarget) {
+        finalTarget.scrollTop -= dy;
+      }
+      overlayTouchRef.current.lastY = currentY;
       e.preventDefault();
     };
     const onTouchEnd = (e) => {
