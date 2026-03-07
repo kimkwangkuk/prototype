@@ -28,9 +28,6 @@ export default function BottomSheetB({
   animate,
   dragY,
   isDraggingRef,
-  handleGrabTouchStart,
-  handleGrabTouchMove,
-  handleGrabTouchEnd
 }) {
   const data = useTodoStore(state => state.bottomSheetData);
   const editingTodoId = useTodoStore(state => state.editingTodoId);
@@ -137,16 +134,6 @@ export default function BottomSheetB({
         style={sheetStyle}
       >
         <div className="toolbar-surface" />
-        <div
-          className="toolbar-grabber"
-          onTouchStart={handleGrabTouchStart}
-          onTouchMove={handleGrabTouchMove}
-          onTouchEnd={handleGrabTouchEnd}
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.66675 5.5L8.00008 10.8333L13.3334 5.5" stroke="black" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </div>
         {data.inputInSheet && (
           <div
             className="sheet-input-row"

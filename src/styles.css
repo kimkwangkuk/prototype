@@ -2421,18 +2421,6 @@ textarea {
   z-index: 0;
 }
 
-.toolbar-grabber {
-  position: relative;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  z-index: 1;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
 .sheet-input-row {
   position: relative;
   z-index: 1;
