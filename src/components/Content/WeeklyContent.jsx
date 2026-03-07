@@ -144,8 +144,7 @@ export default function WeeklyContent() {
       }
     };
     setTimeout(scrollIntoView, 50);
-    // 숫자패드 렌더 후 --numpad-h 확정된 시점에 포커스 블럭을 가시 영역 중앙으로 스크롤
-    // (OS 키보드가 아닌 커스텀 NumpadPopup → visualViewport resize 미발생, --numpad-h로 직접 계산)
+    // --numpad-h가 확정된 후 포커스 블럭을 가시 영역(헤더~키패드) 중앙으로 스크롤
     setTimeout(() => {
       const container = containerRef.current;
       const spacer    = spacerRef.current;

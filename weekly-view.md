@@ -67,29 +67,55 @@ row.style.flexShrink = '0';
 
 **⚠️ 정책: 이 useLayoutEffect를 제거하거나 조건을 바꾸면 키보드 등장 시 행이 찌그러집니다.**
 
-### 키보드 등장 시 포커스된 블럭 스크롤
+### NumpadPopup 오픈 시 포커스 블럭 센터링 + 콘텐츠 스크롤
 
-키보드가 열리면 `.weekly-content`가 키보드 위까지 줄어들고, 포커스된 블럭이 보이도록 자동 스크롤됩니다.
+OS 키보드 대신 커스텀 NumpadPopup을 사용합니다. visualViewport resize가 발생하지 않으므로 `--numpad-h` CSS 변수로 직접 계산합니다.
 
 ```css
-/* 키보드 열릴 때: tabbar가 숨겨지므로 96px 여백 제거 + 수직 스크롤 허용 */
-/* ⚠️ bottom: var(--vv-offset-bottom) 금지 — app-layout이 padding-bottom으로 이미 수축 처리하므로 이중 수축 발생 */
+/* 키패드 열릴 때: tabbar 숨김, .weekly-content 수직 스크롤 허용 */
 .keyboard-open .weekly-content {
-  bottom: 0;
   overflow-y: auto;
 }
 ```
 
 ```js
-// editingTodoId 변경 시, 키보드 애니메이션 완료(400ms) 후 포커스된 .week-row를 스크롤
+// editingTodoId 변경 시, --numpad-h 확정 후 포커스 블럭을 가시 영역 중앙으로 스크롤
 setTimeout(() => {
-  container.scrollTo({ top: rowBottom - container.clientHeight, behavior: 'smooth' });
-}, 400);
+  const numpadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+  const headerH  = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
+  const visibleH = window.innerHeight - numpadH - headerH; // 헤더~키패드 사이 높이
+
+  spacer.style.height = `${visibleH}px`;   // 어떤 행이든 중앙 정렬 + 전체 스크롤 가능
+  container.scrollTo({ top: rowMid - visibleH / 2, behavior: 'smooth' });
+}, 50);
 ```
 
-- `app-layout`의 `padding-bottom: var(--vv-offset-bottom)`이 키보드 높이를 이미 흡수 → `app-body`가 키보드 위까지 자동 수축
-- `bottom: 0`은 tabbar 96px 여백을 없애는 용도 (tabbar는 keyboard-open 시 display: none)
-- 400ms delay: iOS 키보드 애니메이션 완료 후 clientHeight가 확정된 시점에 스크롤
+**스페이서 역할**: `spacer.height = visibleH`로 콘텐츠 하단에 여백 추가.
+- 마지막 행도 visibleH/2 중앙 정렬 가능 (스크롤 여지 확보)
+- 키패드 뒤에 숨은 행을 위로 끌어올릴 수 있는 overflow 생성
+
+**편집 종료 시** spacer를 0으로 리셋하고 scrollTop을 0으로 복귀.
+
+### 오버레이를 통한 콘텐츠 스크롤 전달
+
+`bottom-sheet-overlay`가 콘텐츠 영역 전체를 덮으므로 네이티브 터치 스크롤이 차단됩니다.
+오버레이의 `touchmove` 핸들러에서 수동으로 스크롤을 전달합니다.
+
+```js
+// BottomSheet.jsx — findScrollTarget
+// 1. 터치 위치의 .week-day-col-todos → 할일 목록 내부 스크롤
+// 2. 그 외 영역 → .weekly-content → 행 간 스크롤
+
+// onTouchMove — 스크롤 체이닝
+scrollTarget.scrollTop -= dy;
+const scrolled = scrollTarget.scrollTop - before;
+// 내부 스크롤이 경계에 닿으면 잔여분을 .weekly-content로 전파
+if (Math.abs(scrolled) < Math.abs(dy)) {
+  outer.scrollTop -= (dy + scrolled);
+}
+```
+
+**⚠️ 정책: 오버레이는 `touchstart`에 `e.preventDefault()`를 사용해야 iOS blur를 방지합니다. 제거하면 키패드가 닫힙니다.**
 
 ---
 
@@ -162,13 +188,19 @@ if (stateRef.current.didScroll) return;   // 세로 스크롤 후 클릭 무시
 
 ## 5. 편집 중 자동 스크롤
 
+`editingTodoId` 변경 시 두 가지 스크롤이 50ms delay 후 함께 실행됩니다.
+
+**① 할일 아이템 내부 스크롤** — `.week-day-col-todos` 안에서 편집 중인 항목이 잘리지 않도록
 ```js
-// editingTodoId 변경 시, 편집 중인 할일이 스크롤 영역 밖으로 나가면 자동 스크롤
 todosContainer.scrollBy({ top: elRect.bottom - containerRect.bottom + 4, behavior: 'smooth' });
 ```
 
-- 50ms delay 후 실행 (DOM 반영 대기)
-- 스크롤 기준: `.week-day-col-todos` (날짜별 독립 스크롤 컨테이너)
+**② 행 센터링 스크롤** — `.weekly-content` 전체를 스크롤해 포커스 행을 가시 영역 중앙으로
+```js
+container.scrollTo({ top: rowMid - visibleH / 2, behavior: 'smooth' });
+```
+
+두 스크롤이 같은 setTimeout 내에 실행되므로 순서는 보장되지 않지만, ②가 ①보다 더 큰 이동이라 실제로는 ②가 최종 위치를 결정합니다.
 
 ---
 
@@ -246,3 +278,5 @@ todosContainer.scrollBy({ top: elRect.bottom - containerRect.bottom + 4, behavio
 3. 스와이프 핸들러를 `passive: false`로 변경 → 세로 스크롤 버벅임
 4. `.week-day-col` 전체에 opacity/transform 애니메이션 → 테두리 깜빡임
 5. `stateRef`를 `useState`로 교체 → 렌더 루프 성능 저하
+6. `bottom-sheet-overlay`의 `touchstart` `e.preventDefault()` 제거 → iOS에서 키패드 닫힘
+7. `findScrollTarget`에서 `.weekly-content` 반환 제거 → 키패드 오픈 중 행 간 스크롤 불가
