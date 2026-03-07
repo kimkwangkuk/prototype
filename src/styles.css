@@ -429,12 +429,16 @@ textarea {
 .todo-item.editing {
   animation: pulseBackgroundDay 1.4s ease-in-out infinite;
 }
+.todo-item.pulse-in {
+  isolation: isolate;
+}
 .todo-item.pulse-in::before {
   content: '';
   position: absolute;
   inset: 0 -8px;
   border-radius: 8px;
   pointer-events: none;
+  z-index: -1;
   animation: pulseBackground 1s ease-in-out 1;
 }
 
@@ -1927,12 +1931,16 @@ textarea {
 .week-todo-item.editing {
   animation: pulseBackgroundDay 1.4s ease-in-out infinite;
 }
+.week-todo-item.pulse-in {
+  isolation: isolate;
+}
 .week-todo-item.pulse-in::before {
   content: '';
   position: absolute;
   inset: 0 -4px;
   border-radius: 6px;
   pointer-events: none;
+  z-index: -1;
   animation: pulseBackground 1s ease-in-out 1;
 }
 
@@ -2160,12 +2168,16 @@ textarea {
 .monthly-todo-item.editing {
   animation: pulseBackgroundDay 1.4s ease-in-out infinite;
 }
+.monthly-todo-item.pulse-in {
+  isolation: isolate;
+}
 .monthly-todo-item.pulse-in::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 4px;
   pointer-events: none;
+  z-index: -1;
   animation: pulseBackground 1s ease-in-out 1;
 }
 
