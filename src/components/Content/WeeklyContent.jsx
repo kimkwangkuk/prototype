@@ -126,6 +126,9 @@ export default function WeeklyContent() {
   useEffect(() => {
     if (editingTodoId === null) {
       setFocusedDay(formatDate(new Date()));
+      // 숫자패드 닫힐 때 스페이서·스크롤 리셋
+      if (spacerRef.current) spacerRef.current.style.height = '0px';
+      if (containerRef.current) containerRef.current.scrollTop = 0;
       return;
     }
     // 편집 중인 할일이 .week-day-col-todos 내에서 보이도록 스크롤
@@ -141,17 +144,24 @@ export default function WeeklyContent() {
       }
     };
     setTimeout(scrollIntoView, 50);
-    // 키보드 열린 후 포커스된 블럭(.week-row)을 가시 영역 중앙으로 스크롤
+    // 숫자패드 렌더 후 --numpad-h 확정된 시점에 포커스 블럭을 가시 영역 중앙으로 스크롤
+    // (OS 키보드가 아닌 커스텀 NumpadPopup → visualViewport resize 미발생, --numpad-h로 직접 계산)
     setTimeout(() => {
       const container = containerRef.current;
-      if (!container) return;
+      const spacer    = spacerRef.current;
+      if (!container || !spacer) return;
+      const numpadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+      const headerH  = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
+      const visibleH = window.innerHeight - numpadH - headerH;
+      // 마지막 행도 중앙으로 올 수 있도록 스페이서 설정
+      spacer.style.height = `${visibleH / 2}px`;
       const focusedCol = container.querySelector('.week-day-col.focused');
       if (!focusedCol) return;
       const row = focusedCol.closest('.week-row');
       if (!row) return;
       const rowMid = row.offsetTop + row.offsetHeight / 2;
-      container.scrollTo({ top: rowMid - container.clientHeight / 2, behavior: 'smooth' });
-    }, 400); // 키보드 애니메이션(~300ms) 완료 후 실행
+      container.scrollTo({ top: rowMid - visibleH / 2, behavior: 'smooth' });
+    }, 50);
   }, [editingTodoId]);
 
   useEffect(() => {
@@ -166,27 +176,6 @@ export default function WeeklyContent() {
 
   const containerRef = useRef(null);
   const spacerRef    = useRef(null);
-
-  // 키보드 등장/해제 시 스페이서 높이 조정
-  // 스페이서가 있어야 마지막 행도 가시 영역 중앙으로 스크롤 가능
-  useEffect(() => {
-    const vv = window.visualViewport;
-    if (!vv) return;
-    const update = () => {
-      const container = containerRef.current;
-      const spacer    = spacerRef.current;
-      if (!container || !spacer) return;
-      const keyboardOpen = window.innerHeight - vv.height > 100;
-      if (keyboardOpen) {
-        spacer.style.height = `${container.clientHeight / 2}px`;
-      } else {
-        spacer.style.height = '0px';
-        container.scrollTop = 0;
-      }
-    };
-    vv.addEventListener('resize', update);
-    return () => vv.removeEventListener('resize', update);
-  }, []);
 
   // 모든 변경 가능 상태를 ref 하나로 관리 (React 렌더 루프 밖에서 동작)
   const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false, didScroll: false });
