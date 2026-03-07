@@ -141,7 +141,7 @@ export default function WeeklyContent() {
       }
     };
     setTimeout(scrollIntoView, 50);
-    // 키보드 열린 후 포커스된 블럭(.week-row)이 .weekly-content 내에서 보이도록 스크롤
+    // 키보드 열린 후 포커스된 블럭(.week-row)을 가시 영역 중앙으로 스크롤
     setTimeout(() => {
       const container = containerRef.current;
       if (!container) return;
@@ -149,10 +149,8 @@ export default function WeeklyContent() {
       if (!focusedCol) return;
       const row = focusedCol.closest('.week-row');
       if (!row) return;
-      const rowBottom = row.offsetTop + row.offsetHeight;
-      if (rowBottom > container.scrollTop + container.clientHeight) {
-        container.scrollTo({ top: rowBottom - container.clientHeight, behavior: 'smooth' });
-      }
+      const rowMid = row.offsetTop + row.offsetHeight / 2;
+      container.scrollTo({ top: rowMid - container.clientHeight / 2, behavior: 'smooth' });
     }, 400); // 키보드 애니메이션(~300ms) 완료 후 실행
   }, [editingTodoId]);
 
