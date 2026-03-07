@@ -72,9 +72,10 @@ row.style.flexShrink = '0';
 키보드가 열리면 `.weekly-content`가 키보드 위까지 줄어들고, 포커스된 블럭이 보이도록 자동 스크롤됩니다.
 
 ```css
-/* 키보드 열릴 때 .weekly-content 높이 = 네비바 하단 ~ 키보드 상단 */
+/* 키보드 열릴 때: tabbar가 숨겨지므로 96px 여백 제거 + 수직 스크롤 허용 */
+/* ⚠️ bottom: var(--vv-offset-bottom) 금지 — app-layout이 padding-bottom으로 이미 수축 처리하므로 이중 수축 발생 */
 .keyboard-open .weekly-content {
-  bottom: var(--vv-offset-bottom, 0px);
+  bottom: 0;
   overflow-y: auto;
 }
 ```
@@ -86,7 +87,8 @@ setTimeout(() => {
 }, 400);
 ```
 
-- `--vv-offset-bottom` = 키보드 높이 (main.jsx의 visualViewport resize에서 계산)
+- `app-layout`의 `padding-bottom: var(--vv-offset-bottom)`이 키보드 높이를 이미 흡수 → `app-body`가 키보드 위까지 자동 수축
+- `bottom: 0`은 tabbar 96px 여백을 없애는 용도 (tabbar는 keyboard-open 시 display: none)
 - 400ms delay: iOS 키보드 애니메이션 완료 후 clientHeight가 확정된 시점에 스크롤
 
 ---
