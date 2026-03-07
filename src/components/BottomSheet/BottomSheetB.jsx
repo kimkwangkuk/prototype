@@ -37,6 +37,7 @@ export default function BottomSheetB({
   const updateBottomSheetField   = useTodoStore(state => state.updateBottomSheetField);
   const closeBottomSheetWithSave = useTodoStore(state => state.closeBottomSheetWithSave);
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
+  const addTodoForDate    = useTodoStore(state => state.addTodoForDate);
   const [popupStyle, setPopupStyle] = useState({});
   const [showNumpad, setShowNumpad] = useState(false);
   const sheetInputRef = useRef(null);
@@ -246,8 +247,14 @@ export default function BottomSheetB({
         onChange={(v) => updateBottomSheetField('text', v)}
         onConfirm={() => {
           if (data.inputInSheet) {
-            closeBottomSheetWithSave();
-            setShowNumpad(false);
+            if (!data.text.trim()) {
+              // 빈 텍스트 → 닫기
+              closeBottomSheetWithSave();
+              setShowNumpad(false);
+            } else {
+              // 저장 후 같은 날짜에 다음 할일 추가
+              addTodoForDate(data.date);
+            }
           } else {
             saveAndAddNewTodo();
           }
