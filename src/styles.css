@@ -1768,6 +1768,7 @@ textarea {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  overscroll-behavior: contain;
 }
 .week-day-col-todos::-webkit-scrollbar { display: none; }
 
