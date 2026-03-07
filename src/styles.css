@@ -2792,7 +2792,7 @@ textarea {
   right: 0;
   background: #cdd1d8;
   padding: 8px 3px calc(6px + env(safe-area-inset-bottom, 0px));
-  z-index: 1000;
+  z-index: 1002; /* bottom-sheet(1001) 위에 위치 */
 }
 
 .keypad-row {
