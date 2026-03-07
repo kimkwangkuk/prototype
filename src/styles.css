@@ -803,7 +803,7 @@ textarea {
 .bottom-sheet {
   position: fixed;
   bottom: max(
-    calc(var(--vv-offset-bottom, 0px) + var(--numpad-h, 0px) + 12px),
+    calc(var(--vv-offset-bottom, 0px) + var(--keypad-h, 0px) + 12px),
     calc(env(safe-area-inset-bottom, 0px) + 74px)
   );
   left: 50%;
@@ -2784,60 +2784,86 @@ textarea {
   flex-shrink: 0;
 }
 
-/* ── Numpad (iOS 키보드처럼 fixed 하단 full-width) ── */
-.numpad-popup {
+/* ── 커스텀 키패드 (iOS 키보드처럼 fixed 하단 full-width) ── */
+.keypad-popup {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #d1d5db;
-  padding: 8px 4px calc(8px + env(safe-area-inset-bottom, 0px));
+  background: #cdd1d8;
+  padding: 8px 3px calc(6px + env(safe-area-inset-bottom, 0px));
   z-index: 1000;
 }
 
-.numpad-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  padding: 0 4px;
+.keypad-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
 }
 
-.numpad-key {
-  height: 52px;
-  background: var(--bg-primary);
+.keypad-row-mid {
+  justify-content: center;
+  padding: 0 5%;
+}
+
+.keypad-row-bottom {
+  gap: 5px;
+  margin-bottom: 0;
+}
+
+.keypad-key {
+  flex: 1;
+  height: 42px;
+  min-width: 0;
+  background: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: 500;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
   color: var(--label-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: inherit;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.28);
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
-.numpad-key:active {
-  background: #b0b5be;
+.keypad-key:active {
+  background: #adb5bd;
 }
 
-.numpad-key-confirm {
+.keypad-key-mod {
+  flex: 1.5;
+  background: #adb5bd;
+}
+
+.keypad-key-mod:active {
+  background: #9ba3ab;
+}
+
+.keypad-key-caps {
+  background: #fff;
+  box-shadow: 0 0 0 1.5px var(--blue-500);
+  color: var(--blue-500);
+}
+
+.keypad-key-space {
+  flex: 4;
+  font-size: 14px;
+  color: var(--label-secondary);
+}
+
+.keypad-key-confirm {
+  flex: 2;
   background: var(--blue-500);
   color: #fff;
+  font-size: 15px;
+  font-weight: 500;
 }
 
-.numpad-key-confirm:active {
+.keypad-key-confirm:active {
   background: #3d54e0;
-}
-
-.numpad-key-clear {
-  background: #b0b5be;
-  color: var(--label-primary);
-  font-size: 14px;
-}
-
-.numpad-key-back {
-  background: #b0b5be;
 }

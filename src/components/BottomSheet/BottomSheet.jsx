@@ -43,23 +43,23 @@ export default function BottomSheet() {
     if (!visible) setActivePopup(null);
   }, [visible]);
 
-  // 편집 중인 할일이 numpad/악세사리바 뒤에 숨지 않도록 스크롤
+  // 편집 중인 할일이 커스텀 키패드/악세사리바 뒤에 숨지 않도록 스크롤
   useEffect(() => {
     if (!editingTodoId || !visible || mode === 'status-only') return;
     const scrollIntoView = () => {
       const todoItem = document.querySelector(`[data-todo-id="${editingTodoId}"]`);
       if (!todoItem) return;
       const rect = todoItem.getBoundingClientRect();
-      const numpadH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+      const keypadH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--keypad-h')) || 0;
       // 악세사리바 + 여유 마진
-      const accessoryH = numpadH > 0 ? 68 : 0;
-      const visibleBottom = window.innerHeight - numpadH - accessoryH - 8;
+      const accessoryH = keypadH > 0 ? 68 : 0;
+      const visibleBottom = window.innerHeight - keypadH - accessoryH - 8;
       if (rect.bottom > visibleBottom) {
         const contentEl = document.getElementById('content');
         if (contentEl) contentEl.scrollBy({ top: rect.bottom - visibleBottom, behavior: 'smooth' });
       }
     };
-    // numpad가 렌더된 후 높이가 측정될 시간 확보
+    // 커스텀 키패드가 렌더된 후 높이가 측정될 시간 확보
     setTimeout(scrollIntoView, 200);
   }, [editingTodoId, visible]);
 

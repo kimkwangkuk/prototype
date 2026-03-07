@@ -67,9 +67,9 @@ row.style.flexShrink = '0';
 
 **⚠️ 정책: 이 useLayoutEffect를 제거하거나 조건을 바꾸면 키보드 등장 시 행이 찌그러집니다.**
 
-### NumpadPopup 오픈 시 포커스 블럭 센터링 + 콘텐츠 스크롤
+### KeypadPopup 오픈 시 포커스 블럭 센터링 + 콘텐츠 스크롤
 
-OS 키보드 대신 커스텀 NumpadPopup을 사용합니다. visualViewport resize가 발생하지 않으므로 `--numpad-h` CSS 변수로 직접 계산합니다.
+OS 키보드 대신 커스텀 KeypadPopup을 사용합니다. visualViewport resize가 발생하지 않으므로 `--keypad-h` CSS 변수로 직접 계산합니다.
 
 ```css
 /* 키패드 열릴 때: tabbar 숨김, .weekly-content 수직 스크롤 허용 */
@@ -79,11 +79,11 @@ OS 키보드 대신 커스텀 NumpadPopup을 사용합니다. visualViewport res
 ```
 
 ```js
-// editingTodoId 변경 시, --numpad-h 확정 후 포커스 블럭을 가시 영역 중앙으로 스크롤
+// editingTodoId 변경 시, --keypad-h 확정 후 포커스 블럭을 가시 영역 중앙으로 스크롤
 setTimeout(() => {
-  const numpadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+  const keypadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--keypad-h')) || 0;
   const headerH  = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
-  const visibleH = window.innerHeight - numpadH - headerH; // 헤더~키패드 사이 높이
+  const visibleH = window.innerHeight - keypadH - headerH; // 헤더~키패드 사이 높이
 
   spacer.style.height = `${visibleH}px`;   // 어떤 행이든 중앙 정렬 + 전체 스크롤 가능
   container.scrollTo({ top: rowMid - visibleH / 2, behavior: 'smooth' });

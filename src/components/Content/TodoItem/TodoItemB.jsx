@@ -32,7 +32,7 @@ export default function TodoItemB({ todo, subjectColor }) {
   const isCompleted = todo.status === 'done' || todo.status === 'skip' || todo.status === 'cancel';
 
   useEffect(() => {
-    // inputMode="none" 으로 OS 키보드 억제 - focus 불필요, numpad가 입력 처리
+    // inputMode="none" 으로 OS 키보드 억제 - focus 불필요, 커스텀 키패드가 입력 처리
   }, [isEditing]);
 
   const handleKeyDown = (e) => {

@@ -20,7 +20,7 @@ import CategoryPopup from './Popup/CategoryPopup';
 import DatePopup from './Popup/DatePopup';
 import TimePopup from './Popup/TimePopup';
 import DurationPopup from './Popup/DurationPopup';
-import NumpadPopup from './Popup/NumpadPopup';
+import KeypadPopup from './Popup/KeypadPopup';
 
 export default function BottomSheetB({
   activePopup,
@@ -39,49 +39,49 @@ export default function BottomSheetB({
   const saveAndAddNewTodo = useTodoStore(state => state.saveAndAddNewTodo);
   const addTodoForDate    = useTodoStore(state => state.addTodoForDate);
   const [popupStyle, setPopupStyle] = useState({});
-  const [showNumpad, setShowNumpad] = useState(false);
+  const [showKeypad, setShowKeypad] = useState(false);
   const sheetInputRef = useRef(null);
-  const numpadRef = useRef(null);
+  const keypadRef = useRef(null);
 
-  // 키패드 높이를 CSS 변수로 설정 → 바텀시트가 키패드 위로 올라감
+  // 커스텀 키패드 높이를 CSS 변수로 설정 → 바텀시트가 키패드 위로 올라감
   useLayoutEffect(() => {
-    const h = showNumpad && numpadRef.current ? numpadRef.current.offsetHeight : 0;
-    document.documentElement.style.setProperty('--numpad-h', `${h}px`);
-    if (showNumpad) {
+    const h = showKeypad && keypadRef.current ? keypadRef.current.offsetHeight : 0;
+    document.documentElement.style.setProperty('--keypad-h', `${h}px`);
+    if (showKeypad) {
       document.body.classList.add('keyboard-open');
     } else {
       document.body.classList.remove('keyboard-open');
     }
     return () => {
       document.body.classList.remove('keyboard-open');
-      document.documentElement.style.setProperty('--numpad-h', '0px');
+      document.documentElement.style.setProperty('--keypad-h', '0px');
     };
-  }, [showNumpad]);
+  }, [showKeypad]);
 
-  // 인풋이 활성화될 때마다 OS 키보드 대신 숫자패드 표시
+  // 인풋이 활성화될 때마다 OS 키보드 대신 커스텀 키패드 표시
   useEffect(() => {
     if (data.inputInSheet || editingTodoId) {
-      setShowNumpad(true);
+      setShowKeypad(true);
     }
   }, [data.inputInSheet, editingTodoId]);
 
-  // 키패드 열릴 때 편집 중인 아이템을 키패드-네비바 사이 중앙으로 스크롤
+  // 커스텀 키패드 열릴 때 편집 중인 아이템을 키패드-네비바 사이 중앙으로 스크롤
   useEffect(() => {
-    if (!editingTodoId || !showNumpad) return;
+    if (!editingTodoId || !showKeypad) return;
     setTimeout(() => {
       const todoEl = document.querySelector(`[data-todo-id="${editingTodoId}"]`);
       if (!todoEl) return;
-      const numpadHeight = numpadRef.current?.offsetHeight ?? 0;
+      const keypadHeight = keypadRef.current?.offsetHeight ?? 0;
       const headerBottom = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
-      const numpadTop = window.innerHeight - numpadHeight;
-      const visibleCenter = headerBottom + (numpadTop - headerBottom) / 2;
+      const keypadTop = window.innerHeight - keypadHeight;
+      const visibleCenter = headerBottom + (keypadTop - headerBottom) / 2;
       const rect = todoEl.getBoundingClientRect();
       const itemCenter = rect.top + rect.height / 2;
       const delta = itemCenter - visibleCenter;
       if (Math.abs(delta) < 10) return;
       document.getElementById('content')?.scrollBy({ top: delta, behavior: 'smooth' });
     }, 50);
-  }, [editingTodoId, showNumpad]);
+  }, [editingTodoId, showKeypad]);
 
   // iOS: touchstart preventDefault → blur 방지, click 억제됨 → touchend에서 처리
   // Desktop: mousedown preventDefault → blur 방지, click에서 처리
@@ -150,8 +150,8 @@ export default function BottomSheetB({
         {data.inputInSheet && (
           <div
             className="sheet-input-row"
-            onMouseDown={(e) => { e.preventDefault(); setShowNumpad(true); }}
-            onTouchStart={(e) => { e.preventDefault(); setShowNumpad(true); }}
+            onMouseDown={(e) => { e.preventDefault(); setShowKeypad(true); }}
+            onTouchStart={(e) => { e.preventDefault(); setShowKeypad(true); }}
           >
             <input
               ref={sheetInputRef}
@@ -239,10 +239,10 @@ export default function BottomSheetB({
         style={popupStyle}
       />
 
-      <NumpadPopup
-        ref={numpadRef}
+      <KeypadPopup
+        ref={keypadRef}
         key={editingTodoId || 'sheet'}
-        visible={showNumpad}
+        visible={showKeypad}
         value={data.text}
         onChange={(v) => updateBottomSheetField('text', v)}
         onConfirm={() => {
@@ -250,7 +250,7 @@ export default function BottomSheetB({
             if (!data.text.trim()) {
               // 빈 텍스트 → 닫기
               closeBottomSheetWithSave();
-              setShowNumpad(false);
+              setShowKeypad(false);
             } else {
               // 저장 후 같은 날짜에 다음 할일 추가
               addTodoForDate(data.date);

@@ -66,14 +66,14 @@ export default function MonthlyContent() {
       }
     };
     setTimeout(scrollIntoView, 50);
-    // --numpad-h가 확정된 후 포커스 날짜 블록을 가시 영역 중앙으로 스크롤
+    // --keypad-h가 확정된 후 포커스 날짜 블록을 가시 영역 중앙으로 스크롤
     setTimeout(() => {
       const container = containerRef.current;
       const spacer    = spacerRef.current;
       if (!container || !spacer) return;
-      const numpadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+      const keypadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--keypad-h')) || 0;
       const headerH  = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
-      const visibleH = window.innerHeight - numpadH - headerH;
+      const visibleH = window.innerHeight - keypadH - headerH;
       spacer.style.height = `${visibleH}px`;
       const focusedCell = container.querySelector('.monthly-day-cell.focused');
       if (!focusedCell) return;
