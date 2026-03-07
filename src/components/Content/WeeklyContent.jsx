@@ -314,6 +314,48 @@ export default function WeeklyContent() {
     };
   }, []);
 
+  // ─── 날짜 블록 스크롤 체이닝 차단 ────────────────────────────────────────
+  // overscroll-behavior: contain 이 iOS Safari에서 동작하지 않는 경우를 대비해
+  // non-passive touchmove 핸들러로 경계 도달 시 부모 스크롤 전파를 직접 차단
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const startYMap = new WeakMap();
+
+    function onTouchStart(e) {
+      startYMap.set(this, e.touches[0].clientY);
+    }
+
+    function onTouchMove(e) {
+      const startY = startYMap.get(this);
+      if (startY === undefined) return;
+
+      const dy = e.touches[0].clientY - startY;
+      const { scrollTop, scrollHeight, clientHeight } = this;
+      const atTop    = scrollTop <= 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+      // 위로 당기는데 이미 맨 위, 또는 아래로 당기는데 이미 맨 아래 → 전파 차단
+      if ((dy > 0 && atTop) || (dy < 0 && atBottom)) {
+        e.preventDefault();
+      }
+    }
+
+    const cols = container.querySelectorAll('.week-day-col-todos');
+    cols.forEach(el => {
+      el.addEventListener('touchstart', onTouchStart, { passive: true });
+      el.addEventListener('touchmove',  onTouchMove,  { passive: false });
+    });
+
+    return () => {
+      cols.forEach(el => {
+        el.removeEventListener('touchstart', onTouchStart);
+        el.removeEventListener('touchmove',  onTouchMove);
+      });
+    };
+  }, []);
+
   // ─── 핸들러 ────────────────────────────────────────────────────────────────
   const handleAdd = (dateStr) => {
     if (stateRef.current.animating) return;
