@@ -153,8 +153,8 @@ export default function WeeklyContent() {
       const numpadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
       const headerH  = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
       const visibleH = window.innerHeight - numpadH - headerH;
-      // 마지막 행도 중앙으로 올 수 있도록 스페이서 설정
-      spacer.style.height = `${visibleH / 2}px`;
+      // 스페이서 = visibleH: 어떤 행이든 중앙 정렬 가능 + 숫자패드 뒤로 숨은 콘텐츠 스크롤 가능
+      spacer.style.height = `${visibleH}px`;
       const focusedCol = container.querySelector('.week-day-col.focused');
       if (!focusedCol) return;
       const row = focusedCol.closest('.week-row');
