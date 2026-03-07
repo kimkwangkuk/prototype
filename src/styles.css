@@ -627,6 +627,10 @@ textarea {
 .keyboard-open .tabbar {
   display: none;
 }
+.keyboard-open .weekly-content {
+  bottom: var(--vv-offset-bottom, 0px);
+  overflow-y: auto;
+}
 .tabbar {
   position: fixed;
   bottom: 0;

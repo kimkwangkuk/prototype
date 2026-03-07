@@ -67,6 +67,28 @@ row.style.flexShrink = '0';
 
 **⚠️ 정책: 이 useLayoutEffect를 제거하거나 조건을 바꾸면 키보드 등장 시 행이 찌그러집니다.**
 
+### 키보드 등장 시 포커스된 블럭 스크롤
+
+키보드가 열리면 `.weekly-content`가 키보드 위까지 줄어들고, 포커스된 블럭이 보이도록 자동 스크롤됩니다.
+
+```css
+/* 키보드 열릴 때 .weekly-content 높이 = 네비바 하단 ~ 키보드 상단 */
+.keyboard-open .weekly-content {
+  bottom: var(--vv-offset-bottom, 0px);
+  overflow-y: auto;
+}
+```
+
+```js
+// editingTodoId 변경 시, 키보드 애니메이션 완료(400ms) 후 포커스된 .week-row를 스크롤
+setTimeout(() => {
+  container.scrollTo({ top: rowBottom - container.clientHeight, behavior: 'smooth' });
+}, 400);
+```
+
+- `--vv-offset-bottom` = 키보드 높이 (main.jsx의 visualViewport resize에서 계산)
+- 400ms delay: iOS 키보드 애니메이션 완료 후 clientHeight가 확정된 시점에 스크롤
+
 ---
 
 ## 3. 스와이프 (주 전환) 정책

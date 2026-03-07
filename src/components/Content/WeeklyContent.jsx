@@ -141,6 +141,19 @@ export default function WeeklyContent() {
       }
     };
     setTimeout(scrollIntoView, 50);
+    // 키보드 열린 후 포커스된 블럭(.week-row)이 .weekly-content 내에서 보이도록 스크롤
+    setTimeout(() => {
+      const container = containerRef.current;
+      if (!container) return;
+      const focusedCol = container.querySelector('.week-day-col.focused');
+      if (!focusedCol) return;
+      const row = focusedCol.closest('.week-row');
+      if (!row) return;
+      const rowBottom = row.offsetTop + row.offsetHeight;
+      if (rowBottom > container.scrollTop + container.clientHeight) {
+        container.scrollTo({ top: rowBottom - container.clientHeight, behavior: 'smooth' });
+      }
+    }, 400); // 키보드 애니메이션(~300ms) 완료 후 실행
   }, [editingTodoId]);
 
   useEffect(() => {
