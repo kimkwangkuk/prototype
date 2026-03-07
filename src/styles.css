@@ -2201,6 +2201,10 @@ textarea {
   line-height: 1.3;
 }
 
+.monthly-todo-text.placeholder {
+  color: var(--label-quaternary);
+}
+
 .monthly-todo-text.completed {
   color: var(--label-tertiary);
   text-decoration: line-through;

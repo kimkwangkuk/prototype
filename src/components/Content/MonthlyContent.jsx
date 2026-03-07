@@ -283,8 +283,8 @@ export default function MonthlyContent() {
                           onClick={(e) => handleTodoClick(e, todo)}
                         >
                           <span className="monthly-todo-dot" style={{ background: subj?.color }}></span>
-                          <span className={`monthly-todo-text${completed ? ' completed' : ''}`}>
-                            {todo.text || '...'}
+                          <span className={`monthly-todo-text${completed ? ' completed' : ''}${isEditing && !todo.text ? ' placeholder' : ''}`}>
+                            {todo.text || (isEditing ? '할 일...' : '...')}
                           </span>
                         </button>
                       );
