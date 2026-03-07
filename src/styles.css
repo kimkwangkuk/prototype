@@ -1922,11 +1922,11 @@ textarea {
   position: relative;
 }
 .week-todo-item.editing {
-  background: rgba(0,0,0,0.04);
-  border-radius: 6px;
-  padding: 3px 4px;
-  width: calc(100% + 8px);
-  margin-left: -4px;
+  background: rgba(0,0,0,0.02);
+  border-radius: 8px;
+  padding: 4px 8px;
+  width: calc(100% + 16px);
+  margin-left: -8px;
 }
 .week-todo-item.editing {
   animation: pulseBackgroundDay 1.4s ease-in-out infinite;
@@ -1937,8 +1937,8 @@ textarea {
 .week-todo-item.pulse-in::before {
   content: '';
   position: absolute;
-  inset: 0 -4px;
-  border-radius: 6px;
+  inset: 0 -8px;
+  border-radius: 8px;
   pointer-events: none;
   z-index: -1;
   animation: pulseBackground 1s ease-in-out 1;
