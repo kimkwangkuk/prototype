@@ -61,12 +61,16 @@
 // weeks.length 변경 시마다 각 .monthly-week-row 높이를 px로 고정
 row.style.minHeight = `${rowHeight}px`;
 row.style.flexShrink = '0';
+// body도 함께 고정: flex:1로 수축해 rows를 clip하는 것 방지
+body.style.minHeight = `${rowHeight * rows.length}px`;
+body.style.flexShrink = '0';
 ```
 
 키보드가 올라와 `.monthly-content` 높이가 줄어도 각 행 높이가 줄어들지 않도록 합니다.
-덕분에 각 날짜 블록의 스크롤 컨테이너 높이가 유지되어 스크롤이 계속 동작합니다.
+**`.monthly-body`도 함께 고정**해야 body가 flex:1로 수축하며 rows를 clip하는 것을 막을 수 있습니다.
 
-**⚠️ 정책: 이 useLayoutEffect를 제거하거나 조건을 바꾸면 키보드 등장 시 행이 찌그러집니다.**
+**⚠️ 정책: 이 useLayoutEffect를 제거하거나 조건을 바꾸면 키보드 등장 시 콘텐츠가 잘립니다.**
+**⚠️ 정책: rows만 고정하고 body를 고정하지 않으면, body가 수축해 rows를 overflow:hidden으로 clip합니다.**
 
 ### NumpadPopup 오픈 시 포커스 블록 센터링 + 콘텐츠 스크롤
 

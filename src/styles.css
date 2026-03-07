@@ -2040,6 +2040,7 @@ textarea {
 .keyboard-open .monthly-content {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  bottom: 0; /* 키보드 열릴 때 탭바 숨으므로 여백 불필요 */
 }
 
 .monthly-day-labels {

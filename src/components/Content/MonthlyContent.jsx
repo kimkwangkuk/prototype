@@ -113,6 +113,9 @@ export default function MonthlyContent() {
       row.style.minHeight = `${rowHeight}px`;
       row.style.flexShrink = '0';
     });
+    // body 자체도 고정: 키보드 등장 시 flex:1로 body가 수축해 rows를 clip하는 것 방지
+    body.style.minHeight = `${rowHeight * rows.length}px`;
+    body.style.flexShrink = '0';
   }, [weeks.length]);
 
   // ─── 터치 스와이프 ─────────────────────────────────────────────────────────
