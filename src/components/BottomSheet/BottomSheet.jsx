@@ -97,7 +97,9 @@ export default function BottomSheet() {
       e.preventDefault(); // iOS가 touchstart 시점에 focused input을 blur하는 것 방지
       const x = e.touches[0].clientX;
       const y = e.touches[0].clientY;
-      overlayTouchRef.current = { startY: y, lastY: y, moved: false, scrollTarget: findScrollTarget(x, y), finalTarget: null };
+      const scrollTarget = findScrollTarget(x, y);
+      const outerTarget = document.querySelector('.weekly-content') ?? document.querySelector('.monthly-content');
+      overlayTouchRef.current = { startY: y, lastY: y, moved: false, scrollTarget, outerTarget, finalTarget: null };
     };
     const onTouchMove = (e) => {
       if (!overlayTouchRef.current) return;
@@ -106,23 +108,15 @@ export default function BottomSheet() {
       if (Math.abs(currentY - overlayTouchRef.current.startY) > 5) {
         overlayTouchRef.current.moved = true;
       }
-      // 첫 유효 이동 시점에 이번 제스처의 스크롤 대상을 확정:
-      // 내부 컨테이너가 해당 방향으로 스크롤 가능하면 내부 고정 (경계에 닿아도 체이닝 안 함)
-      // 이미 경계에 있으면 외부 컨테이너를 대상으로 확정
-      if (!overlayTouchRef.current.finalTarget && Math.abs(dy) > 1) {
-        const primary = overlayTouchRef.current.scrollTarget;
-        let target = primary;
-        if (primary) {
-          const { scrollTop, scrollHeight, clientHeight } = primary;
-          const atBottom = scrollTop + clientHeight >= scrollHeight - 1;
-          const atTop = scrollTop <= 0;
-          const wantsDown = dy < 0; // 손가락 위 → 콘텐츠 아래로
-          const wantsUp = dy > 0;   // 손가락 아래 → 콘텐츠 위로
-          const atBoundary = (wantsDown && atBottom) || (wantsUp && atTop);
-          if (atBoundary) {
-            const outer = document.querySelector('.weekly-content') ?? document.querySelector('.monthly-content');
-            if (outer && outer !== primary) target = outer;
-          }
+      // 첫 이동 시점에 제스처 대상 확정: 내부가 스크롤 가능하면 내부 고정(체이닝 없음),
+      // 이미 경계면 외부 컨테이너로 확정
+      if (!overlayTouchRef.current.finalTarget && dy !== 0) {
+        const { scrollTarget, outerTarget } = overlayTouchRef.current;
+        let target = scrollTarget;
+        if (scrollTarget) {
+          const { scrollTop, scrollHeight, clientHeight } = scrollTarget;
+          const atBoundary = (dy < 0 && scrollTop + clientHeight >= scrollHeight - 1) || (dy > 0 && scrollTop <= 0);
+          if (atBoundary && outerTarget && outerTarget !== scrollTarget) target = outerTarget;
         }
         overlayTouchRef.current.finalTarget = target;
       }
