@@ -628,7 +628,7 @@ textarea {
   display: none;
 }
 .keyboard-open .weekly-content {
-  bottom: var(--vv-offset-bottom, 0px);
+  bottom: 0;
   overflow-y: auto;
 }
 .tabbar {
