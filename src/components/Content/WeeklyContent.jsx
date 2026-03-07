@@ -165,6 +165,29 @@ export default function WeeklyContent() {
   const currentWeekStrs = useMemo(() => new Set(weekDates.map(d => formatDate(d))), [weekDates]);
 
   const containerRef = useRef(null);
+  const spacerRef    = useRef(null);
+
+  // 키보드 등장/해제 시 스페이서 높이 조정
+  // 스페이서가 있어야 마지막 행도 가시 영역 중앙으로 스크롤 가능
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!vv) return;
+    const update = () => {
+      const container = containerRef.current;
+      const spacer    = spacerRef.current;
+      if (!container || !spacer) return;
+      const keyboardOpen = window.innerHeight - vv.height > 100;
+      if (keyboardOpen) {
+        spacer.style.height = `${container.clientHeight / 2}px`;
+      } else {
+        spacer.style.height = '0px';
+        container.scrollTop = 0;
+      }
+    };
+    vv.addEventListener('resize', update);
+    return () => vv.removeEventListener('resize', update);
+  }, []);
+
   // 모든 변경 가능 상태를 ref 하나로 관리 (React 렌더 루프 밖에서 동작)
   const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false, didScroll: false });
   const actionsRef = useRef({ nextWeek: nextWeekAction, prevWeek: prevWeekAction });
@@ -427,6 +450,7 @@ export default function WeeklyContent() {
   return (
     <div className="weekly-content" ref={containerRef}>
       {renderGrid()}
+      <div ref={spacerRef} style={{ flexShrink: 0, height: 0 }} />
     </div>
   );
 }
