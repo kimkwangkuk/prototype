@@ -29,6 +29,7 @@
 | 뷰 | 문서 |
 |----|------|
 | 주뷰 (Weekly View) | [`weekly-view.md`](./weekly-view.md) |
+| 월뷰 (Monthly View) | [`monthly-view.md`](./monthly-view.md) |
 
 ---
 

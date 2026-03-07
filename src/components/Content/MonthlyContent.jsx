@@ -1,4 +1,4 @@
-import { useMemo, useRef, useEffect, useState } from 'react';
+import { useMemo, useRef, useEffect, useLayoutEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatDate, isToday } from '../../utils/dateUtils';
@@ -48,7 +48,42 @@ export default function MonthlyContent() {
   useEffect(() => {
     if (editingTodoId === null) {
       setFocusedDay(formatDate(new Date()));
+      // 키패드 닫힐 때 스페이서·스크롤 리셋
+      if (spacerRef.current) spacerRef.current.style.height = '0px';
+      if (containerRef.current) containerRef.current.scrollTop = 0;
+      return;
     }
+    // 편집 중인 할일이 .monthly-todos 내에서 보이도록 스크롤
+    const scrollIntoView = () => {
+      const editingEl = containerRef.current?.querySelector('.monthly-todo-item.editing');
+      if (!editingEl) return;
+      const todosContainer = editingEl.closest('.monthly-todos');
+      if (!todosContainer) return;
+      const elRect = editingEl.getBoundingClientRect();
+      const containerRect = todosContainer.getBoundingClientRect();
+      if (elRect.bottom > containerRect.bottom) {
+        todosContainer.scrollBy({ top: elRect.bottom - containerRect.bottom + 4, behavior: 'smooth' });
+      }
+    };
+    setTimeout(scrollIntoView, 50);
+    // --numpad-h가 확정된 후 포커스 날짜 블록을 가시 영역 중앙으로 스크롤
+    setTimeout(() => {
+      const container = containerRef.current;
+      const spacer    = spacerRef.current;
+      if (!container || !spacer) return;
+      const numpadH  = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--numpad-h')) || 0;
+      const headerH  = document.querySelector('.header')?.getBoundingClientRect().bottom ?? 0;
+      const visibleH = window.innerHeight - numpadH - headerH;
+      spacer.style.height = `${visibleH}px`;
+      const focusedCell = container.querySelector('.monthly-day-cell.focused');
+      if (!focusedCell) return;
+      const row = focusedCell.closest('.monthly-week-row');
+      if (!row) return;
+      const containerRect = container.getBoundingClientRect();
+      const rowRect = row.getBoundingClientRect();
+      const rowMid = rowRect.top - containerRect.top + container.scrollTop + rowRect.height / 2;
+      container.scrollTo({ top: rowMid - visibleH / 2, behavior: 'smooth' });
+    }, 50);
   }, [editingTodoId]);
 
   useEffect(() => {
@@ -60,10 +95,25 @@ export default function MonthlyContent() {
 
   const weeks = useMemo(() => getMonthCalendar(baseDate), [baseDate]);
 
-  const bodyRef    = useRef(null);
-  const stateRef   = useRef({ startX: 0, startY: 0, direction: null, animating: false });
-  const actionsRef = useRef({ nextMonth: nextMonthAction, prevMonth: prevMonthAction });
+  const containerRef = useRef(null); // .monthly-content (스크롤 컨테이너)
+  const bodyRef      = useRef(null); // .monthly-body (스와이프 애니메이션 대상)
+  const spacerRef    = useRef(null);
+  const stateRef     = useRef({ startX: 0, startY: 0, direction: null, animating: false });
+  const actionsRef   = useRef({ nextMonth: nextMonthAction, prevMonth: prevMonthAction });
   useEffect(() => { actionsRef.current = { nextMonth: nextMonthAction, prevMonth: prevMonthAction }; });
+
+  // 키보드 등장 시 컨테이너가 줄어들어도 각 행의 최소 높이를 고정
+  useLayoutEffect(() => {
+    const body = containerRef.current?.querySelector('.monthly-body');
+    if (!body) return;
+    const rows = body.querySelectorAll(':scope > .monthly-week-row');
+    if (rows.length === 0) return;
+    const rowHeight = Math.round(body.getBoundingClientRect().height / rows.length);
+    rows.forEach(row => {
+      row.style.minHeight = `${rowHeight}px`;
+      row.style.flexShrink = '0';
+    });
+  }, [weeks.length]);
 
   // ─── 터치 스와이프 ─────────────────────────────────────────────────────────
   useEffect(() => {
@@ -188,7 +238,7 @@ export default function MonthlyContent() {
   };
 
   return (
-    <div className="monthly-content">
+    <div className="monthly-content" ref={containerRef}>
       {/* 요일 헤더: 고정 */}
       <div className="monthly-day-labels">
         {DAY_LABELS.map((d, i) => (
@@ -243,6 +293,7 @@ export default function MonthlyContent() {
           </div>
         ))}
       </div>
+      <div ref={spacerRef} style={{ flexShrink: 0, height: 0 }} />
     </div>
   );
 }

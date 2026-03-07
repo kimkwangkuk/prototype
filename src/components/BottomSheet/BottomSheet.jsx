@@ -80,7 +80,18 @@ export default function BottomSheet() {
         }
       }
       // 주뷰: 할일 영역 밖 → .weekly-content 자체 스크롤
-      return document.querySelector('.weekly-content') ?? null;
+      const weeklyContent = document.querySelector('.weekly-content');
+      if (weeklyContent) return weeklyContent;
+      // 월뷰: 터치 위치 아래의 .monthly-todos (내부 할일 스크롤)
+      const monthlyCols = document.querySelectorAll('.monthly-todos');
+      for (const col of monthlyCols) {
+        const rect = col.getBoundingClientRect();
+        if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+          return col;
+        }
+      }
+      // 월뷰: 할일 영역 밖 → .monthly-content 자체 스크롤
+      return document.querySelector('.monthly-content') ?? null;
     };
     const onTouchStart = (e) => {
       e.preventDefault(); // iOS가 touchstart 시점에 focused input을 blur하는 것 방지
@@ -99,9 +110,9 @@ export default function BottomSheet() {
         const before = scrollTarget.scrollTop;
         scrollTarget.scrollTop -= dy;
         const scrolled = scrollTarget.scrollTop - before; // 실제 스크롤된 양 (부호 포함)
-        // 내부 스크롤이 경계에 닿아 다 소화 못했으면 .weekly-content로 잔여분 전파
+        // 내부 스크롤이 경계에 닿아 다 소화 못했으면 외부 컨테이너로 잔여분 전파
         if (Math.abs(scrolled) < Math.abs(dy)) {
-          const outer = document.querySelector('.weekly-content');
+          const outer = document.querySelector('.weekly-content') ?? document.querySelector('.monthly-content');
           if (outer && outer !== scrollTarget) {
             outer.scrollTop -= (dy + scrolled);
           }
