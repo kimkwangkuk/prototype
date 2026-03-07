@@ -106,16 +106,22 @@ setTimeout(() => {
 // 1. 터치 위치의 .week-day-col-todos → 할일 목록 내부 스크롤
 // 2. 그 외 영역 → .weekly-content → 행 간 스크롤
 
-// onTouchMove — 스크롤 체이닝
-scrollTarget.scrollTop -= dy;
-const scrolled = scrollTarget.scrollTop - before;
-// 내부 스크롤이 경계에 닿으면 잔여분을 .weekly-content로 전파
-if (Math.abs(scrolled) < Math.abs(dy)) {
-  outer.scrollTop -= (dy + scrolled);
+// onTouchStart: 스크롤 후보(scrollTarget)와 외부 컨테이너(outerTarget)를 미리 계산
+
+// onTouchMove — 제스처 시작 시점에 대상 확정 (체이닝 없음)
+// - 내부가 해당 방향으로 스크롤 가능 → 내부로 고정, 경계에 닿아도 외부로 체이닝 안 함
+// - 이미 경계에 있음 → 외부 컨테이너(weekly-content)로 확정
+// 새 제스처를 시작해야만 외부 스크롤이 동작
+if (!finalTarget && dy !== 0) {
+  const atBoundary = (dy < 0 && atBottom) || (dy > 0 && atTop);
+  finalTarget = (atBoundary && outerTarget) ? outerTarget : scrollTarget;
 }
+finalTarget.scrollTop -= dy;
 ```
 
 **⚠️ 정책: 오버레이는 `touchstart`에 `e.preventDefault()`를 사용해야 iOS blur를 방지합니다. 제거하면 키패드가 닫힙니다.**
+
+**⚠️ 정책: 같은 제스처 내에서 내부→외부로 체이닝하면 안 됩니다.** 날짜 블록 스크롤이 경계에 닿자마자 전체 뷰가 스크롤되는 버그가 재발합니다. (2026-03-07 수정)
 
 ---
 
@@ -280,3 +286,4 @@ container.scrollTo({ top: rowMid - visibleH / 2, behavior: 'smooth' });
 5. `stateRef`를 `useState`로 교체 → 렌더 루프 성능 저하
 6. `bottom-sheet-overlay`의 `touchstart` `e.preventDefault()` 제거 → iOS에서 키패드 닫힘
 7. `findScrollTarget`에서 `.weekly-content` 반환 제거 → 키패드 오픈 중 행 간 스크롤 불가
+8. 오버레이 `onTouchMove`에서 내부→외부 즉시 체이닝 재추가 → 날짜 블록 스크롤 끝에서 전체 뷰 스크롤 버그 재발
