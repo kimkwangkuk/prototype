@@ -71,7 +71,7 @@ export default function BottomSheet() {
       // 일뷰: #content
       const contentEl = document.getElementById('content');
       if (contentEl) return contentEl;
-      // 주뷰: 터치 위치 아래의 .week-day-col-todos
+      // 주뷰: 터치 위치 아래의 .week-day-col-todos (내부 할일 스크롤)
       const cols = document.querySelectorAll('.week-day-col-todos');
       for (const col of cols) {
         const rect = col.getBoundingClientRect();
@@ -79,7 +79,8 @@ export default function BottomSheet() {
           return col;
         }
       }
-      return null;
+      // 주뷰: 할일 영역 밖 → .weekly-content 자체 스크롤
+      return document.querySelector('.weekly-content') ?? null;
     };
     const onTouchStart = (e) => {
       e.preventDefault(); // iOS가 touchstart 시점에 focused input을 blur하는 것 방지
@@ -94,7 +95,18 @@ export default function BottomSheet() {
         overlayTouchRef.current.moved = true;
       }
       const { scrollTarget } = overlayTouchRef.current;
-      if (scrollTarget) scrollTarget.scrollTop -= dy;
+      if (scrollTarget) {
+        const before = scrollTarget.scrollTop;
+        scrollTarget.scrollTop -= dy;
+        const scrolled = scrollTarget.scrollTop - before; // 실제 스크롤된 양 (부호 포함)
+        // 내부 스크롤이 경계에 닿아 다 소화 못했으면 .weekly-content로 잔여분 전파
+        if (Math.abs(scrolled) < Math.abs(dy)) {
+          const outer = document.querySelector('.weekly-content');
+          if (outer && outer !== scrollTarget) {
+            outer.scrollTop -= (dy + scrolled);
+          }
+        }
+      }
       overlayTouchRef.current.lastY = e.touches[0].clientY;
       e.preventDefault();
     };
