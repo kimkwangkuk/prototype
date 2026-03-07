@@ -2,6 +2,7 @@ import { useMemo, useRef, useEffect, useLayoutEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 import { subjects } from '../../config';
 import { formatDate, isToday } from '../../utils/dateUtils';
+import Checkbox from './TodoItem/Checkbox';
 
 const DAY_LABELS = ['월', '화', '수', '목', '금', '토', '일'];
 const SWIPE_THRESHOLD = 55;
@@ -228,6 +229,20 @@ export default function MonthlyContent() {
     addTodoForDate(ds);
   };
 
+  const handleCheckboxClick = (e, todo) => {
+    e.stopPropagation();
+    document.activeElement?.blur();
+    openBottomSheet('status-only', {
+      todoId:   todo.id,
+      category: todo.subjectId,
+      status:   todo.status,
+      text:     todo.text,
+      time:     todo.time || '',
+      duration: todo.duration,
+      date:     todo.date || 'today',
+    });
+  };
+
   const handleTodoClick = (e, todo) => {
     e.stopPropagation();
     openBottomSheet('edit', {
@@ -282,7 +297,9 @@ export default function MonthlyContent() {
                           onAnimationEnd={() => setPulseTodoId(null)}
                           onClick={(e) => handleTodoClick(e, todo)}
                         >
-                          <span className="monthly-todo-dot" style={{ background: subj?.color }}></span>
+                          <div className="monthly-todo-check" onClick={(e) => handleCheckboxClick(e, todo)}>
+                            <Checkbox status={todo.status} color={subj?.color} />
+                          </div>
                           <span className={`monthly-todo-text${completed ? ' completed' : ''}${isEditing && !todo.text ? ' placeholder' : ''}`}>
                             {todo.text || (isEditing ? '할 일...' : '...')}
                           </span>

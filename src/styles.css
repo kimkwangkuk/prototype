@@ -2150,7 +2150,7 @@ textarea {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   background: none;
   border: none;
   padding: 1px 0;
@@ -2181,11 +2181,46 @@ textarea {
   animation: pulseBackground 1s ease-in-out 1;
 }
 
-.monthly-todo-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+.monthly-todo-check {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monthly-todo-check .todo-checkbox {
+  width: 11px;
+  height: 11px;
+}
+
+.monthly-todo-check .cb-empty {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+.monthly-todo-check .cb-progress {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+.monthly-todo-check .cb-done {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.monthly-todo-check .cb-cancel,
+.monthly-todo-check .cb-skip {
+  width: 11px;
+  height: 11px;
+}
+
+.monthly-todo-check .cb-cancel svg,
+.monthly-todo-check .cb-skip svg {
+  width: 9px;
+  height: 9px;
 }
 
 .monthly-todo-text {
