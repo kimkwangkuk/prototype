@@ -3301,7 +3301,7 @@ textarea {
 }
 
 .hed-title-row {
-  padding: 12px 4px 10px;
+  padding: 12px 0 10px;
   border-bottom: 1px solid var(--border-quinary);
 }
 
@@ -3316,7 +3316,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 4px;
+  padding: 8px 0;
 }
 
 .hed-info-text {
@@ -3327,27 +3327,17 @@ textarea {
 }
 
 /* ─── Challenge Sheet ─── */
-.challenge-sheet {
-  padding: 4px 16px 32px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 24px;
-  overflow: clip;
-  box-shadow: 0 4px 50px rgba(0,0,0,0.15);
-}
-
 .challenge-sheet-title {
   font-size: 20px;
   font-weight: 700;
   color: var(--label-primary);
-  padding: 12px 10px 16px;
+  padding: 8px 0 14px;
   letter-spacing: -0.06px;
 }
 
 .challenge-sheet-list {
   display: flex;
   flex-direction: column;
-  gap: 0;
 }
 
 .challenge-item {
@@ -3420,7 +3410,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin: 8px 4px 0;
+  margin: 12px 0 0;
   padding: 10px 14px;
   border: none;
   border-radius: 12px;
@@ -3469,4 +3459,8 @@ textarea {
   display: flex;
   justify-content: center;
   padding: 10px 0 4px;
+}
+
+.attached-sheet-content {
+  padding: 0 20px 32px;
 }

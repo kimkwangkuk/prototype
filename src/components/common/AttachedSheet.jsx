@@ -26,7 +26,9 @@ export default function AttachedSheet({ visible, onClose, children }) {
             <rect width="36" height="4" rx="2" fill="rgba(0,0,0,0.18)" />
           </svg>
         </div>
-        {children}
+        <div className="attached-sheet-content">
+          {children}
+        </div>
       </div>
     </>
   );
