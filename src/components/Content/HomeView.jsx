@@ -24,13 +24,12 @@ function toMin(h, m = 0) { return h * 60 + m; }
 const STUDY_TYPES = new Set(['focus', 'task']);
 
 function getStudyFill(ev) {
-  const now = new Date();
-  const nowMin = now.getHours() * 60 + now.getMinutes();
-  const startMin = toMin(ev.startH, ev.startM);
-  const endMin   = toMin(ev.endH,   ev.endM);
-  if (nowMin >= endMin)   return 1;
-  if (nowMin <= startMin) return 0;
-  return (nowMin - startMin) / (endMin - startMin);
+  const nowTop   = getNowTop();
+  const startTop = timeToTop(ev.startH, ev.startM);
+  const endTop   = timeToTop(ev.endH,   ev.endM);
+  if (nowTop >= endTop)   return 1;
+  if (nowTop <= startTop) return 0;
+  return (nowTop - startTop) / (endTop - startTop);
 }
 
 function timeToTop(h, m = 0) {
