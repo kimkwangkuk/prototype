@@ -4,7 +4,10 @@ import useTodoStore from '../../store/useTodoStore';
 
 const HOUR_HEIGHT = 60;
 const START_HOUR = 5;
-const LABEL_W = 70; // 타임라인 왼쪽 시간 레이블 열 너비
+const LABEL_W = 70;     // 시간 레이블 열 너비
+const CONT_PAD = 16;    // .timeline-container 좌우 패딩
+const EVENTS_LEFT = CONT_PAD + LABEL_W; // 86px — 이벤트 영역 시작점 (절대 기준)
+const EVENTS_RIGHT_PAD = CONT_PAD;      // 16px — 오른쪽 여백
 const HOURS = Array.from({ length: 24 }, (_, i) => (START_HOUR + i) % 24);
 
 function hourLabel(h) {
@@ -95,13 +98,11 @@ function computeLayout(events) {
 }
 
 // 이벤트 절대 포지션 스타일 (컨테이너 기준)
-// 컨테이너에 padding: 0 16px 이므로 이벤트 left는 컨테이너 내부 기준
+// 100% = 컨테이너 전체 너비(패딩 포함). 이벤트 영역 = 86px ~ (100% - 16px)
 function getEventStyle(top, height, col, numCols) {
-  // 사용 가능한 너비: calc(100% - LABEL_W px) → 레이블 열 제외
-  const left = col === 0
-    ? LABEL_W
-    : `calc(${LABEL_W}px + ${col} * (100% - ${LABEL_W}px) / ${numCols})`;
-  const width = `calc((100% - ${LABEL_W}px) / ${numCols} - 2px)`;
+  const totalReserved = EVENTS_LEFT + EVENTS_RIGHT_PAD; // 102px
+  const left = `calc(${EVENTS_LEFT}px + ${col} * (100% - ${totalReserved}px) / ${numCols})`;
+  const width = `calc((100% - ${totalReserved}px) / ${numCols} - 2px)`;
   return { position: 'absolute', top, height, left, width };
 }
 
@@ -134,9 +135,9 @@ const CHIPS = [
 ];
 
 function getChipStyle(col, top) {
-  if (col === 'full')  return { position: 'absolute', top, left: LABEL_W, right: 0 };
-  if (col === 'right') return { position: 'absolute', top, left: 'calc(50% + 2px)', right: 0 };
-  return { position: 'absolute', top, left: LABEL_W, right: 'calc(50% + 1px)' };
+  if (col === 'full')  return { position: 'absolute', top, left: EVENTS_LEFT, right: EVENTS_RIGHT_PAD };
+  if (col === 'right') return { position: 'absolute', top, left: `calc(50% + 2px)`, right: EVENTS_RIGHT_PAD };
+  return { position: 'absolute', top, left: EVENTS_LEFT, right: `calc(50% + 1px)` };
 }
 
 export default function HomeView() {
