@@ -1,5 +1,11 @@
 [
   {
+    "url": "https://prototype-de9k6uxbx-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773211449342,
+    "sha": "af27ac3"
+  },
+  {
     "url": "https://prototype-1fhardeyv-kimkwangkuks-projects.vercel.app",
     "message": "fix: 타임라인 블록 border 제거, 겹침 시 1px 간격, todoCount 아이콘 Group으로 교체",
     "createdAt": 1773211380757,
@@ -286,17 +292,5 @@
     "message": "fix: BottomSheetB 언마운트 시 keyboard-open 클래스 cleanup 추가 → 탭바 복원",
     "createdAt": 1772813589519,
     "sha": "eb86a44"
-  },
-  {
-    "url": "https://prototype-47xyw8q82-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 악세사리바 위치 수정 - numpad-h를 max() 첫 항에만 적용, keyboard-open 토글 추가",
-    "createdAt": 1772813318404,
-    "sha": "cb8bdd2"
-  },
-  {
-    "url": "https://prototype-os48ow7kg-kimkwangkuks-projects.vercel.app",
-    "message": "refactor: numpad를 iOS 키보드처럼 fixed 하단 배치, 바텀시트는 악세사리바로 위에 위치",
-    "createdAt": 1772812877050,
-    "sha": "22869f6"
   }
 ]
