@@ -1,6 +1,6 @@
-import { Clock, FileText, Users, Trash2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Clock, FileText, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
-import AttachedSheet from '../common/AttachedSheet';
 
 function formatLabel(h, m) {
   const isPM = h >= 12;
@@ -9,9 +9,17 @@ function formatLabel(h, m) {
 }
 
 export default function HomeEventDetailSheet({ event, onClose }) {
+  const [animate, setAnimate] = useState(false);
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
 
-  const isDynamic = typeof event?.id === 'number';
+  useEffect(() => {
+    if (event) setTimeout(() => setAnimate(true), 10);
+    else setAnimate(false);
+  }, [event]);
+
+  if (!event) return null;
+
+  const isDynamic = typeof event.id === 'number';
 
   const handleDelete = () => {
     removeHomeEvent(event.id);
@@ -19,38 +27,53 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   };
 
   return (
-    <AttachedSheet visible={!!event} onClose={onClose}>
-      <div className="hed-title-row">
-        <span className="hed-title">{event?.title}</span>
-      </div>
-
-      <div className="hed-info-row">
-        <Clock size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
-        <span className="hed-info-text">
-          {event && `${formatLabel(event.startH, event.startM)} – ${formatLabel(event.endH, event.endM)}`}
-        </span>
-      </div>
-
-      {event?.todoCount && (
-        <div className="hed-info-row">
-          <Users size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
-          <span className="hed-info-text">할 일 {event.todoCount}개</span>
+    <>
+      <div
+        className="bottom-sheet-overlay"
+        style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
+        onClick={onClose}
+      />
+      <div className={`bottom-sheet detail-sheet${animate ? ' visible' : ''}`}>
+        <div className="toolbar-grabber">
+          <div className="toolbar-grabber-bar" />
         </div>
-      )}
 
-      {event?.note && (
-        <div className="hed-info-row">
-          <FileText size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
-          <span className="hed-info-text">{event.note}</span>
+        <div className="detail-sheet-body">
+          <p className="detail-sheet-text">{event.title}</p>
+
+          <div className="detail-sheet-meta">
+            <div className="detail-sheet-meta-row">
+              <Clock size={16} className="detail-meta-icon" strokeWidth={2} />
+              <span className="detail-meta-label">
+                {formatLabel(event.startH, event.startM)} – {formatLabel(event.endH, event.endM)}
+              </span>
+            </div>
+            {event.todoCount && (
+              <div className="detail-sheet-meta-row">
+                <Users size={16} className="detail-meta-icon" strokeWidth={2} />
+                <span className="detail-meta-label">할 일 {event.todoCount}개</span>
+              </div>
+            )}
+            {event.note && (
+              <div className="detail-sheet-meta-row">
+                <FileText size={16} className="detail-meta-icon" strokeWidth={2} />
+                <span className="detail-meta-label">{event.note}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="detail-sheet-actions">
+            {isDynamic && (
+              <button className="detail-action-btn detail-action-delete" onClick={handleDelete}>
+                삭제
+              </button>
+            )}
+            <button className="detail-action-btn detail-action-edit" onClick={onClose}>
+              닫기
+            </button>
+          </div>
         </div>
-      )}
-
-      {isDynamic && (
-        <button className="hed-delete-btn" onClick={handleDelete}>
-          <Trash2 size={15} strokeWidth={2} />
-          삭제
-        </button>
-      )}
-    </AttachedSheet>
+      </div>
+    </>
   );
 }

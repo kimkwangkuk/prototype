@@ -1,4 +1,4 @@
-import AttachedSheet from '../common/AttachedSheet';
+import { useState, useEffect } from 'react';
 
 const CHALLENGES = [
   { id: 1, emoji: '🌞', title: '기상인증',      time: '오전 5:00' },
@@ -7,21 +7,44 @@ const CHALLENGES = [
 ];
 
 export default function ChallengeSheet({ visible, onClose }) {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    if (visible) setTimeout(() => setAnimate(true), 10);
+    else setAnimate(false);
+  }, [visible]);
+
+  if (!visible) return null;
+
   return (
-    <AttachedSheet visible={visible} onClose={onClose}>
-      <div className="challenge-sheet-title">1.13 챌린지</div>
-      <div className="challenge-sheet-list">
-        {CHALLENGES.map(ch => (
-          <div key={ch.id} className="challenge-item">
-            <span className="challenge-emoji">{ch.emoji}</span>
-            <div className="challenge-info">
-              <span className="challenge-name">{ch.title}</span>
-              <span className="challenge-time">{ch.time}</span>
-            </div>
-            <button className="challenge-cert-btn">인증</button>
+    <>
+      <div
+        className="bottom-sheet-overlay"
+        style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
+        onClick={onClose}
+      />
+      <div className={`bottom-sheet detail-sheet${animate ? ' visible' : ''}`}>
+        <div className="toolbar-grabber">
+          <div className="toolbar-grabber-bar" />
+        </div>
+
+        <div className="detail-sheet-body">
+          <p className="detail-sheet-text">1.13 챌린지</p>
+
+          <div className="detail-sheet-meta">
+            {CHALLENGES.map(ch => (
+              <div key={ch.id} className="challenge-item">
+                <span className="challenge-emoji">{ch.emoji}</span>
+                <div className="challenge-info">
+                  <span className="challenge-name">{ch.title}</span>
+                  <span className="challenge-time">{ch.time}</span>
+                </div>
+                <button className="challenge-cert-btn">인증</button>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-    </AttachedSheet>
+    </>
   );
 }
