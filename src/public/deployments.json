@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-2qafpfnjs-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 일정 디테일 시트 전체너비 붙는 타입으로 변경, 어두운 오버레이 적용",
+    "createdAt": 1773233792887,
+    "sha": "d2f245d"
+  },
+  {
+    "url": "https://prototype-qub1n4i36-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773226466666,
+    "sha": "2d2daa8"
+  },
+  {
     "url": "https://prototype-hyk628go3-kimkwangkuks-projects.vercel.app",
     "message": "fix: HomeView JSX fragment 누락 수정",
     "createdAt": 1773226398064,
@@ -238,17 +250,5 @@
     "message": "fix: 주뷰 날짜 블록 내 마지막 할일 스크롤 불가 문제 수정",
     "createdAt": 1772861998369,
     "sha": "c8b1441"
-  },
-  {
-    "url": "https://prototype-8p3c35qcx-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772817450904,
-    "sha": "f440c65"
-  },
-  {
-    "url": "https://prototype-b9ee32cqu-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 날짜 블록 하단 잘림 - padding-bottom → ::after 더미 요소로 교체",
-    "createdAt": 1772817381376,
-    "sha": "5405a8f"
   }
 ]
