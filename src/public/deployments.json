@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-muq0o1luo-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 모든 이벤트 타입에 게이지바 표시, 집중계획/할일만 채움",
+    "createdAt": 1773241335950,
+    "sha": "274c236"
+  },
+  {
+    "url": "https://prototype-g1l9xln9e-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773241251367,
+    "sha": "2f16c5e"
+  },
+  {
     "url": "https://prototype-kdjfbq1kc-kimkwangkuks-projects.vercel.app",
     "message": "feat: 스터디 타임바 추가, 이벤트 생성 시 타입 선택(집중계획/할일)",
     "createdAt": 1773241178761,
@@ -223,7 +235,7 @@
   },
   {
     "url": "https://prototype-8kpv5yoj3-kimkwangkuks-projects.vercel.app",
-    "message": "fix(pulse): 생성 애니메이션 배경만 점멸 (텍스트/버튼 제외)",
+    "message": "fix(pulse): 생성 애니���이션 배경만 점멸 (텍스트/버튼 제외)",
     "createdAt": 1772867685257,
     "sha": "5d5b6f1"
   },
@@ -238,17 +250,5 @@
     "message": "feat(monthly): 날짜 블록 스크롤 + 키패드 시 높이 스크롤 (주뷰 동일 정책)",
     "createdAt": 1772866796668,
     "sha": "9241728"
-  },
-  {
-    "url": "https://prototype-dddfrdcjk-kimkwangkuks-projects.vercel.app",
-    "message": "docs: 주뷰 정책 문서 업데이트 + OS 키보드 잔여 주석 제거",
-    "createdAt": 1772865799793,
-    "sha": "ce4b5d9"
-  },
-  {
-    "url": "https://prototype-fonmwtg0k-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 키패드 오픈 시 오버레이가 막은 weekly-content 스크롤 복원",
-    "createdAt": 1772865551445,
-    "sha": "5c31297"
   }
 ]
