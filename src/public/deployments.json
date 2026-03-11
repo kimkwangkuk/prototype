@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ncd519d12-kimkwangkuks-projects.vercel.app",
+    "message": "fix: AttachedSheet 좌우 패딩 통일, ChallengeSheet/DetailSheet 모두 AttachedSheet 사용",
+    "createdAt": 1773235090571,
+    "sha": "f01689f"
+  },
+  {
+    "url": "https://prototype-odcfxi2uc-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773234306868,
+    "sha": "ac952bf"
+  },
+  {
     "url": "https://prototype-4gb1oel76-kimkwangkuks-projects.vercel.app",
     "message": "refactor: AttachedSheet 공통 컴포넌트화, 화이트 배경 적용",
     "createdAt": 1773234237660,
@@ -238,17 +250,5 @@
     "message": "fix: weekly-content keyboard-open bottom을 0으로 수정",
     "createdAt": 1772863512924,
     "sha": "a465f1f"
-  },
-  {
-    "url": "https://prototype-6i77s554c-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 키보드 열릴 때 포커스된 블럭 자동 스크롤",
-    "createdAt": 1772863264001,
-    "sha": "61c63ee"
-  },
-  {
-    "url": "https://prototype-g05zgwsbz-kimkwangkuks-projects.vercel.app",
-    "message": "rename: 주뷰.md → weekly-view.md",
-    "createdAt": 1772862562716,
-    "sha": "dfa16e6"
   }
 ]
