@@ -256,17 +256,5 @@
     "message": "fix: 주뷰 날짜 블록 하단 스크롤 여백 추가",
     "createdAt": 1772817065072,
     "sha": "ad379f3"
-  },
-  {
-    "url": "https://prototype-aye1x0rqe-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772816748489,
-    "sha": "c17d8d0"
-  },
-  {
-    "url": "https://prototype-cb39z43a5-kimkwangkuks-projects.vercel.app",
-    "message": "weekly 뷰 레이아웃 개선 및 인풋 포커스 스크롤 수정",
-    "createdAt": 1772816677254,
-    "sha": "a427f8e"
   }
 ]
