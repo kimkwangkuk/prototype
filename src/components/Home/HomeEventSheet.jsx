@@ -63,13 +63,13 @@ export default function HomeEventSheet() {
     if (!visible) return;
     const update = () => {
       const h = keypadRef.current?.offsetHeight || 0;
-      document.documentElement.style.setProperty('--numpad-h', `${h}px`);
+      document.documentElement.style.setProperty('--keypad-h', `${h}px`);
     };
     update();
     document.body.classList.add('keyboard-open');
     return () => {
       document.body.classList.remove('keyboard-open');
-      document.documentElement.style.setProperty('--numpad-h', '0px');
+      document.documentElement.style.setProperty('--keypad-h', '0px');
     };
   }, [visible]);
 
