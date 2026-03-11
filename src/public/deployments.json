@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-kdjfbq1kc-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 스터디 타임바 추가, 이벤트 생성 시 타입 선택(집중계획/할일)",
+    "createdAt": 1773241178761,
+    "sha": "c4c2a1e"
+  },
+  {
+    "url": "https://prototype-gehzcwqkf-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773237374170,
+    "sha": "e3419ef"
+  },
+  {
     "url": "https://prototype-3nlui1zpm-kimkwangkuks-projects.vercel.app",
     "message": "chore: 미사용 AttachedSheet 컴포넌트 및 CSS 삭제",
     "createdAt": 1773237305914,
@@ -229,7 +241,7 @@
   },
   {
     "url": "https://prototype-dddfrdcjk-kimkwangkuks-projects.vercel.app",
-    "message": "docs: ���뷰 정책 문서 업데이트 + OS 키보드 잔여 주석 제거",
+    "message": "docs: 주뷰 정책 문서 업데이트 + OS 키보드 잔여 주석 제거",
     "createdAt": 1772865799793,
     "sha": "ce4b5d9"
   },
@@ -238,17 +250,5 @@
     "message": "fix: 키패드 오픈 시 오버레이가 막은 weekly-content 스크롤 복원",
     "createdAt": 1772865551445,
     "sha": "5c31297"
-  },
-  {
-    "url": "https://prototype-70968uk0p-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 스페이서 높이 visibleH/2 → visibleH로 확대",
-    "createdAt": 1772865155604,
-    "sha": "f7517d5"
-  },
-  {
-    "url": "https://prototype-fk7arrurk-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 숫자패드(NumpadPopup) 기준으로 포커스 블럭 중앙 정렬",
-    "createdAt": 1772864833881,
-    "sha": "67df585"
   }
 ]
