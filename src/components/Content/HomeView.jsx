@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { Target, UtensilsCrossed, Square, Gamepad2, Zap, ListChecks, Group } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Target, UtensilsCrossed, Square, Gamepad2, Zap, ListChecks, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
+import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
 
 const HOUR_HEIGHT = 60;
 const START_HOUR = 5;
@@ -144,6 +145,7 @@ function getChipStyle(col, top) {
 export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
+  const [selectedEvent, setSelectedEvent] = useState(null);
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -198,7 +200,12 @@ export default function HomeView() {
           const Icon   = ICON_MAP[ev.type] || Square;
 
           return (
-            <div key={ev.id} className="timeline-event" style={getEventStyle(top, height, col, numCols)}>
+            <div
+              key={ev.id}
+              className="timeline-event"
+              style={getEventStyle(top, height, col, numCols)}
+              onClick={() => setSelectedEvent(ev)}
+            >
               <div className="timeline-event-title-row">
                 <div className="timeline-event-icon">
                   <Icon size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
@@ -211,7 +218,7 @@ export default function HomeView() {
                 </span>
                 {ev.todoCount && (
                   <div className="timeline-event-count-row">
-                    <Group size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
+                    <Users size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
                     <span className="timeline-event-time">{ev.todoCount}</span>
                   </div>
                 )}
@@ -245,5 +252,7 @@ export default function HomeView() {
         })}
       </div>
     </div>
+
+    <HomeEventDetailSheet event={selectedEvent} onClose={() => setSelectedEvent(null)} />
   );
 }

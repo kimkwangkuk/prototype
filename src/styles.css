@@ -3163,6 +3163,13 @@ textarea {
   flex-direction: column;
   gap: 1px;
   padding: 4px 8px;
+  cursor: pointer;
+  transition: background 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.timeline-event:active {
+  background: rgba(200, 200, 200, 0.75);
 }
 
 .timeline-event-title-row {
@@ -3262,4 +3269,40 @@ textarea {
   color: rgba(0, 0, 0, 0.86);
   white-space: nowrap;
   letter-spacing: -0.02px;
+}
+
+/* ─── Home Event Detail Sheet ─── */
+.home-event-detail-sheet {
+  padding: 4px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: clip;
+  box-shadow: 0 4px 50px rgba(0,0,0,0.15);
+}
+
+.hed-title-row {
+  padding: 12px 4px 10px;
+  border-bottom: 1px solid var(--border-quinary);
+}
+
+.hed-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--label-primary);
+  letter-spacing: -0.054px;
+}
+
+.hed-info-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px;
+}
+
+.hed-info-text {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--label-secondary);
+  letter-spacing: -0.04px;
 }
