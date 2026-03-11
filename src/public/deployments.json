@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-5aehl4598-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 홈 이벤트 시트 키패드 높이 CSS 변수 --numpad-h → --keypad-h 수정",
+    "createdAt": 1773210973286,
+    "sha": "3b34a4d"
+  },
+  {
+    "url": "https://prototype-hb3t76vfe-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773210900457,
+    "sha": "07206e1"
+  },
+  {
     "url": "https://prototype-h1mqc9qbj-kimkwangkuks-projects.vercel.app",
     "message": "fix: 홈 타임라인 이벤트 블록 좌표 보정 - 컨테이너 패딩 반영, 레이블 영역 침범 수정",
     "createdAt": 1773210831175,
@@ -286,17 +298,5 @@
     "message": "fix: WeeklyContent WeekTodoEditInput focus() 제거 → OS 키보드 차단",
     "createdAt": 1772812258324,
     "sha": "a05b3d0"
-  },
-  {
-    "url": "https://prototype-k1kllnk5z-kimkwangkuks-projects.vercel.app",
-    "message": "fix: iOS 키보드 완전 차단 - pointer-events:none + tabIndex=-1 적용",
-    "createdAt": 1772812106683,
-    "sha": "7b47fb1"
-  },
-  {
-    "url": "https://prototype-gx2std39t-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 인라인 인풋 OS 키보드 차단 → 커스텀 숫자패드로 교체",
-    "createdAt": 1772811880997,
-    "sha": "b79a067"
   }
 ]
