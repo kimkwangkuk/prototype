@@ -3168,7 +3168,8 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
-.timeline-event:active {
+.timeline-event:active,
+.timeline-event.pressed {
   background: rgba(200, 200, 200, 0.75);
 }
 
@@ -3395,4 +3396,26 @@ textarea {
   display: flex;
   gap: 0;
   -webkit-tap-highlight-color: transparent;
+}
+
+.hed-delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 4px 0;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+}
+
+.hed-delete-btn:active {
+  background: rgba(255, 59, 48, 0.2);
 }

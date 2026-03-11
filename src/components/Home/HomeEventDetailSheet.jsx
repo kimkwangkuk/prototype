@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Clock, FileText, Users } from 'lucide-react';
+import { Clock, FileText, Users, Trash2 } from 'lucide-react';
+import useTodoStore from '../../store/useTodoStore';
 
 function formatLabel(h, m) {
   const isPM = h >= 12;
@@ -9,6 +10,7 @@ function formatLabel(h, m) {
 
 export default function HomeEventDetailSheet({ event, onClose }) {
   const [animate, setAnimate] = useState(false);
+  const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
 
   useEffect(() => {
     if (event) setTimeout(() => setAnimate(true), 10);
@@ -16,6 +18,14 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   }, [event]);
 
   if (!event) return null;
+
+  // id가 숫자(timestamp)면 동적 이벤트, 문자열 'ev*'면 샘플
+  const isDynamic = typeof event.id === 'number';
+
+  const handleDelete = () => {
+    removeHomeEvent(event.id);
+    onClose();
+  };
 
   return (
     <>
@@ -51,6 +61,13 @@ export default function HomeEventDetailSheet({ event, onClose }) {
             <FileText size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
             <span className="hed-info-text">{event.note}</span>
           </div>
+        )}
+
+        {isDynamic && (
+          <button className="hed-delete-btn" onClick={handleDelete}>
+            <Trash2 size={15} strokeWidth={2} />
+            삭제
+          </button>
         )}
       </div>
     </>

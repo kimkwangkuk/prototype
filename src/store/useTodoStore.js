@@ -483,6 +483,7 @@ const useTodoStore = create((set, get) => ({
   openHomeSheet: () => set({ homeSheetVisible: true }),
   closeHomeSheet: () => set({ homeSheetVisible: false }),
   addHomeEvent: (event) => set(state => ({ homeEvents: [...state.homeEvents, event] })),
+  removeHomeEvent: (id) => set(state => ({ homeEvents: state.homeEvents.filter(e => e.id !== id) })),
 }));
 
 export default useTodoStore;

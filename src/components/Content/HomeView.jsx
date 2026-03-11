@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Target, Hamburger, Square, Gamepad2, Zap, ListChecks, Users } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
 import ChallengeSheet from '../Home/ChallengeSheet';
@@ -122,32 +122,13 @@ const SAMPLE_EVENTS = [
   { id: 'ev9', type: 'game',  title: '게임 한판',   startH: 22, startM: 0,  endH: 22, endM: 43 },
 ];
 
-// 컴팩트 투두 칩
-const CHIPS = [
-  { id: 'ch0', title: '할 일 +2',       startH: 6,  startM: 0,  col: 'full', grouped: true },
-  { id: 'ch1', title: '영어 단어 30개', startH: 9,  startM: 0,  col: 'right' },
-  { id: 'ch2', title: '수학 공식 3개',  startH: 9,  startM: 16, col: 'right' },
-  { id: 'ch3', title: '영어 단어 30개', startH: 14, startM: 0,  col: 'right' },
-  { id: 'ch4', title: '수학 공식 3개',  startH: 14, startM: 16, col: 'right' },
-  { id: 'ch5', title: '영어 단어 30개', startH: 17, startM: 0,  col: 'right' },
-  { id: 'ch6', title: '수학 공식 3개',  startH: 17, startM: 16, col: 'right' },
-  { id: 'ch7', title: '과학 오답노트',  startH: 17, startM: 32, col: 'right' },
-  { id: 'ch8', title: '영어 단어 30개', startH: 20, startM: 0,  col: 'full' },
-  { id: 'ch9', title: '수학 공식 3개',  startH: 20, startM: 16, col: 'full' },
-  { id:'ch10', title: '과학 오답노트',  startH: 20, startM: 32, col: 'full' },
-];
-
-function getChipStyle(col, top) {
-  if (col === 'full')  return { position: 'absolute', top, left: EVENTS_LEFT, right: EVENTS_RIGHT_PAD };
-  if (col === 'right') return { position: 'absolute', top, left: `calc(50% + 2px)`, right: EVENTS_RIGHT_PAD };
-  return { position: 'absolute', top, left: EVENTS_LEFT, right: `calc(50% + 1px)` };
-}
 
 export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
+  const [pressedId, setPressedId] = useState(null);
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -204,9 +185,12 @@ export default function HomeView() {
           return (
             <div
               key={ev.id}
-              className="timeline-event"
+              className={`timeline-event${pressedId === ev.id ? ' pressed' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
-              onClick={() => setSelectedEvent(ev)}
+              onPointerDown={() => setPressedId(ev.id)}
+              onPointerUp={() => { setPressedId(null); setSelectedEvent(ev); }}
+              onPointerLeave={() => setPressedId(null)}
+              onPointerCancel={() => setPressedId(null)}
             >
               <div className="timeline-event-title-row">
                 <div className="timeline-event-icon">
@@ -232,26 +216,6 @@ export default function HomeView() {
           );
         })}
 
-        {/* 투두 칩 */}
-        {CHIPS.map(chip => {
-          const top = timeToTop(chip.startH, chip.startM);
-          const style = getChipStyle(chip.col, top);
-
-          if (chip.grouped) {
-            return (
-              <div key={chip.id} className="timeline-grouped-chip" style={style}>
-                <ListChecks size={13} strokeWidth={1.8} color="rgba(0,0,0,0.6)" style={{ flexShrink: 0 }} />
-                <span className="timeline-grouped-chip-label">{chip.title}</span>
-              </div>
-            );
-          }
-          return (
-            <div key={chip.id} className="timeline-chip" style={style}>
-              <Square size={10} strokeWidth={1.5} color="rgba(0,0,0,0.35)" style={{ flexShrink: 0 }} />
-              <span className="timeline-chip-label">{chip.title}</span>
-            </div>
-          );
-        })}
       </div>
     </div>
 
