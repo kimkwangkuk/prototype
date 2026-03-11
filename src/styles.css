@@ -823,6 +823,26 @@ textarea {
   transform: translateX(-50%) translateY(0);
 }
 
+/* 전체 너비 붙는 타입 바텀시트 */
+.bottom-sheet-overlay.dim {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.bottom-sheet.attached {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: none;
+  transform: translateY(calc(100% + 12px));
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 40px rgba(0,0,0,0.12);
+}
+
+.bottom-sheet.attached.visible {
+  transform: translateY(0);
+}
+
 .bottom-sheet.status-only-mode .bottom-sheet-section:not(:has([data-status])) {
   display: none;
 }
@@ -3277,9 +3297,7 @@ textarea {
   padding: 4px 16px 24px;
   display: flex;
   flex-direction: column;
-  border-radius: 24px;
   overflow: clip;
-  box-shadow: 0 4px 50px rgba(0,0,0,0.15);
 }
 
 .hed-title-row {

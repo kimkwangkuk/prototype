@@ -29,8 +29,8 @@ export default function HomeEventDetailSheet({ event, onClose }) {
 
   return (
     <>
-      <div className="bottom-sheet-overlay" onClick={onClose} />
-      <div className={`bottom-sheet home-event-detail-sheet${animate ? ' visible' : ''}`}>
+      <div className="bottom-sheet-overlay dim" onClick={onClose} />
+      <div className={`bottom-sheet attached home-event-detail-sheet${animate ? ' visible' : ''}`}>
         <div className="toolbar-surface" />
         <div className="toolbar-grabber">
           <svg width="36" height="4" viewBox="0 0 36 4" fill="none">
