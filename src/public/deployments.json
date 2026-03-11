@@ -280,17 +280,5 @@
     "message": "fix: 주뷰 할일 추가 시 week-day-col-todos 내에서 자동 스크롤",
     "createdAt": 1772814087485,
     "sha": "c3671b2"
-  },
-  {
-    "url": "https://prototype-6usop2hx4-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 할일 추가 시 numpad 위로 자동 스크롤 - editingTodoId 변경 시 visible area 계산 개선",
-    "createdAt": 1772813865955,
-    "sha": "a939d69"
-  },
-  {
-    "url": "https://prototype-1lak9dt3i-kimkwangkuks-projects.vercel.app",
-    "message": "fix: BottomSheetB 언마운트 시 keyboard-open 클래스 cleanup 추가 → 탭바 복원",
-    "createdAt": 1772813589519,
-    "sha": "eb86a44"
   }
 ]
