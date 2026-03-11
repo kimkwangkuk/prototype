@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-fx6bibmi0-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 홈 바텀시트 일뷰 DetailSheet 스타일로 통일",
+    "createdAt": 1773235561374,
+    "sha": "a59db2d"
+  },
+  {
+    "url": "https://prototype-j515eqe1x-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773235161621,
+    "sha": "54a291d"
+  },
+  {
     "url": "https://prototype-ncd519d12-kimkwangkuks-projects.vercel.app",
     "message": "fix: AttachedSheet 좌우 패딩 통일, ChallengeSheet/DetailSheet 모두 AttachedSheet 사용",
     "createdAt": 1773235090571,
@@ -238,17 +250,5 @@
     "message": "fix: 포커스 블럭 높이 성장 및 중앙 정렬 문제 수정",
     "createdAt": 1772864113900,
     "sha": "cceae71"
-  },
-  {
-    "url": "https://prototype-o5gqdbw3c-kimkwangkuks-projects.vercel.app",
-    "message": "docs: weekly-view.md keyboard 스크롤 정책 오류 수정",
-    "createdAt": 1772863594657,
-    "sha": "9178e6b"
-  },
-  {
-    "url": "https://prototype-o0vzvkeq5-kimkwangkuks-projects.vercel.app",
-    "message": "fix: weekly-content keyboard-open bottom을 0으로 수정",
-    "createdAt": 1772863512924,
-    "sha": "a465f1f"
   }
 ]
