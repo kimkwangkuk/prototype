@@ -3306,3 +3306,93 @@ textarea {
   color: var(--label-secondary);
   letter-spacing: -0.04px;
 }
+
+/* ─── Challenge Sheet ─── */
+.challenge-sheet {
+  padding: 4px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: clip;
+  box-shadow: 0 4px 50px rgba(0,0,0,0.15);
+}
+
+.challenge-sheet-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--label-primary);
+  padding: 12px 10px 16px;
+  letter-spacing: -0.06px;
+}
+
+.challenge-sheet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 10px;
+}
+
+.challenge-emoji {
+  font-size: 26px;
+  line-height: 1;
+  width: 34px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.challenge-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.challenge-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--label-primary);
+  letter-spacing: -0.045px;
+}
+
+.challenge-time {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--label-tertiary);
+  letter-spacing: -0.04px;
+}
+
+.challenge-cert-btn {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--label-primary);
+  background: rgba(0,0,0,0.08);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+}
+
+.challenge-cert-btn:active {
+  background: rgba(0,0,0,0.15);
+}
+
+/* 이모지 버튼 스타일 초기화 */
+.timeline-hour-emojis {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  gap: 0;
+  -webkit-tap-highlight-color: transparent;
+}

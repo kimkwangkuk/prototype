@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Target, Hamburger, Square, Gamepad2, Zap, ListChecks, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
+import ChallengeSheet from '../Home/ChallengeSheet';
 
 const HOUR_HEIGHT = 60;
 const START_HOUR = 5;
@@ -146,6 +147,7 @@ export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [challengeOpen, setChallengeOpen] = useState(false);
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -175,11 +177,11 @@ export default function HomeView() {
             <div className="timeline-label-col">
               <span className="timeline-time-label">{hourLabel(h)}</span>
               {HOUR_EMOJIS[h] && (
-                <div className="timeline-hour-emojis">
+                <button className="timeline-hour-emojis" onClick={() => setChallengeOpen(true)}>
                   {HOUR_EMOJIS[h].map((emoji, i) => (
                     <span key={i} className="timeline-hour-emoji">{emoji}</span>
                   ))}
-                </div>
+                </button>
               )}
             </div>
             <div className="timeline-content-col" />
@@ -254,5 +256,6 @@ export default function HomeView() {
     </div>
 
     <HomeEventDetailSheet event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+    <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
   );
 }
