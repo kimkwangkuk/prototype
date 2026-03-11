@@ -1,5 +1,11 @@
 [
   {
+    "url": "https://prototype-hyk628go3-kimkwangkuks-projects.vercel.app",
+    "message": "fix: HomeView JSX fragment 누락 수정",
+    "createdAt": 1773226398064,
+    "sha": "9a48e69"
+  },
+  {
     "url": "https://prototype-de9k6uxbx-kimkwangkuks-projects.vercel.app",
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773211449342,
@@ -244,17 +250,5 @@
     "message": "fix: 주뷰 날짜 블록 하단 잘림 - padding-bottom → ::after 더미 요소로 교체",
     "createdAt": 1772817381376,
     "sha": "5405a8f"
-  },
-  {
-    "url": "https://prototype-klmgv4gxl-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772817133304,
-    "sha": "e470152"
-  },
-  {
-    "url": "https://prototype-nokma8cr0-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 날짜 블록 하단 스크롤 여백 추가",
-    "createdAt": 1772817065072,
-    "sha": "ad379f3"
   }
 ]
