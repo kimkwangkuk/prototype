@@ -1,302 +1,302 @@
 [
   {
-    "url": "https://prototype-1u0emlxn0-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 오늘 날짜 동그라미를 실제 회색으로 변경 (주/월뷰)",
-    "createdAt": 1772783977592,
-    "sha": "bf4afa2"
+    "url": "https://prototype-bvmt7el7m-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 홈탭 일정 추가 UI + 겹침 감지 타임라인 레이아웃",
+    "createdAt": 1773210591263,
+    "sha": "fdf262d"
   },
   {
-    "url": "https://prototype-nbogjmrmk-kimkwangkuks-projects.vercel.app",
+    "url": "https://prototype-6zk3uzxt4-kimkwangkuks-projects.vercel.app",
     "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772774075395,
-    "sha": "3499951"
+    "createdAt": 1773209865011,
+    "sha": "1aeef08"
   },
   {
-    "url": "https://prototype-rj4oud4i9-kimkwangkuks-projects.vercel.app",
-    "message": "design: 주뷰 오늘 날짜 회색 동그라미 추가 (월뷰와 동일하게)",
-    "createdAt": 1772774008518,
-    "sha": "7fb0f23"
+    "url": "https://prototype-cbehpeztr-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 홈탭 일정 추가 UI + 겹침 감지 타임라인 레이아웃",
+    "createdAt": 1773209797646,
+    "sha": "7ddab2d"
   },
   {
-    "url": "https://prototype-lxzj2218w-kimkwangkuks-projects.vercel.app",
+    "url": "https://prototype-mgdy3akxg-kimkwangkuks-projects.vercel.app",
     "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772771564636,
-    "sha": "5ee2e4f"
+    "createdAt": 1773207881402,
+    "sha": "5a7e4ea"
   },
   {
-    "url": "https://prototype-svw364wjx-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 팝업 위치 계산 - appHeight 대신 visualViewport.height 사용으로 키보드 위 표시",
-    "createdAt": 1772771497285,
-    "sha": "ce9444b"
+    "url": "https://prototype-pf9vjp84z-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 홈 탭 타임라인 뷰 구현",
+    "createdAt": 1773207814157,
+    "sha": "152d57c"
   },
   {
-    "url": "https://prototype-6x82i8krc-kimkwangkuks-projects.vercel.app",
+    "url": "https://prototype-ly38icgeg-kimkwangkuks-projects.vercel.app",
+    "message": "docs: 주뷰 정책문서 — 오버레이 스크롤 체이닝 수정 내용 반영",
+    "createdAt": 1772890026803,
+    "sha": "61ddb42"
+  },
+  {
+    "url": "https://prototype-1xblzx4pq-kimkwangkuks-projects.vercel.app",
+    "message": "refactor: 오버레이 터치 핸들러 코드 정리",
+    "createdAt": 1772888431501,
+    "sha": "ea927e9"
+  },
+  {
+    "url": "https://prototype-4n357tjgo-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 오버레이 스크롤 체이닝 제거 - 제스처 시작 시 대상 확정",
+    "createdAt": 1772887071471,
+    "sha": "daebdaa"
+  },
+  {
+    "url": "https://prototype-63vuphuu8-kimkwangkuks-projects.vercel.app",
+    "message": "Fix scroll chaining in weekly view date blocks (iOS Safari)",
+    "createdAt": 1772870371766,
+    "sha": "eac3a6d"
+  },
+  {
+    "url": "https://prototype-p7s72xai3-kimkwangkuks-projects.vercel.app",
+    "message": "Prevent scroll chaining in weekly view date blocks",
+    "createdAt": 1772869956109,
+    "sha": "d874050"
+  },
+  {
+    "url": "https://prototype-anjkk8ukv-kimkwangkuks-projects.vercel.app",
+    "message": "Add status checkbox to monthly view todo items",
+    "createdAt": 1772869137731,
+    "sha": "2e9d302"
+  },
+  {
+    "url": "https://prototype-38u5xnnwm-kimkwangkuks-projects.vercel.app",
+    "message": "Match weekly view pulse animation style to daily view",
+    "createdAt": 1772869014824,
+    "sha": "76ee504"
+  },
+  {
+    "url": "https://prototype-dqjt954gl-kimkwangkuks-projects.vercel.app",
+    "message": "Remove grab icon and area from bottom sheet toolbar accessory",
+    "createdAt": 1772868723417,
+    "sha": "30962f8"
+  },
+  {
+    "url": "https://prototype-ew81gge3u-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 커스텀 키패드 z-index 1000→1002, 바텀시트(1001) 위로 고정",
+    "createdAt": 1772868528270,
+    "sha": "8d5b083"
+  },
+  {
+    "url": "https://prototype-p84lc6twl-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 숫자 키패드 → 영문 QWERTY 커스텀 키패드로 교체",
+    "createdAt": 1772868455588,
+    "sha": "5a30bd4"
+  },
+  {
+    "url": "https://prototype-b5w9u06z1-kimkwangkuks-projects.vercel.app",
+    "message": "feat(monthly): 포커스 날짜 셀에 '할 일...' 플레이스홀더 표시",
+    "createdAt": 1772867979737,
+    "sha": "7d73280"
+  },
+  {
+    "url": "https://prototype-96hlx5kqx-kimkwangkuks-projects.vercel.app",
+    "message": "feat(monthly): 확인(엔터) 시 다음 할일 자동 생성",
+    "createdAt": 1772867852088,
+    "sha": "1726f49"
+  },
+  {
+    "url": "https://prototype-8kpv5yoj3-kimkwangkuks-projects.vercel.app",
+    "message": "fix(pulse): 생성 애니메이션 배경만 점멸 (텍스트/버튼 제외)",
+    "createdAt": 1772867685257,
+    "sha": "5d5b6f1"
+  },
+  {
+    "url": "https://prototype-8mpa4d3ip-kimkwangkuks-projects.vercel.app",
+    "message": "fix(monthly): 키보드 열릴 때 콘텐츠 잘림 수정",
+    "createdAt": 1772867275242,
+    "sha": "193cf7f"
+  },
+  {
+    "url": "https://prototype-5bgihtj93-kimkwangkuks-projects.vercel.app",
+    "message": "feat(monthly): 날짜 블록 스크롤 + 키패드 시 높이 스크롤 (주뷰 동일 정책)",
+    "createdAt": 1772866796668,
+    "sha": "9241728"
+  },
+  {
+    "url": "https://prototype-dddfrdcjk-kimkwangkuks-projects.vercel.app",
+    "message": "docs: 주뷰 정책 문서 업데이트 + OS 키보드 잔여 주석 제거",
+    "createdAt": 1772865799793,
+    "sha": "ce4b5d9"
+  },
+  {
+    "url": "https://prototype-fonmwtg0k-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 키패드 오픈 시 오버레이가 막은 weekly-content 스크롤 복원",
+    "createdAt": 1772865551445,
+    "sha": "5c31297"
+  },
+  {
+    "url": "https://prototype-70968uk0p-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 스페이서 높이 visibleH/2 → visibleH로 확대",
+    "createdAt": 1772865155604,
+    "sha": "f7517d5"
+  },
+  {
+    "url": "https://prototype-fk7arrurk-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 숫자패드(NumpadPopup) 기준으로 포커스 블럭 중앙 정렬",
+    "createdAt": 1772864833881,
+    "sha": "67df585"
+  },
+  {
+    "url": "https://prototype-pqkxe2jsb-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 키보드 오픈 시 스페이서로 포커스 블럭 중앙 정렬 보장",
+    "createdAt": 1772864582931,
+    "sha": "e09e2ac"
+  },
+  {
+    "url": "https://prototype-50ujwlrjm-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 포커스 블럭 높이 성장 및 중앙 정렬 문제 수정",
+    "createdAt": 1772864113900,
+    "sha": "cceae71"
+  },
+  {
+    "url": "https://prototype-o5gqdbw3c-kimkwangkuks-projects.vercel.app",
+    "message": "docs: weekly-view.md keyboard 스크롤 정책 오류 수정",
+    "createdAt": 1772863594657,
+    "sha": "9178e6b"
+  },
+  {
+    "url": "https://prototype-o0vzvkeq5-kimkwangkuks-projects.vercel.app",
+    "message": "fix: weekly-content keyboard-open bottom을 0으로 수정",
+    "createdAt": 1772863512924,
+    "sha": "a465f1f"
+  },
+  {
+    "url": "https://prototype-6i77s554c-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 키보드 열릴 때 포커스된 블럭 자동 스크롤",
+    "createdAt": 1772863264001,
+    "sha": "61c63ee"
+  },
+  {
+    "url": "https://prototype-g05zgwsbz-kimkwangkuks-projects.vercel.app",
+    "message": "rename: 주뷰.md → weekly-view.md",
+    "createdAt": 1772862562716,
+    "sha": "dfa16e6"
+  },
+  {
+    "url": "https://prototype-f0xtx2p5a-kimkwangkuks-projects.vercel.app",
+    "message": "docs: 주뷰 정책 문서 추가 및 CLAUDE.md 연결",
+    "createdAt": 1772862450359,
+    "sha": "e4d2974"
+  },
+  {
+    "url": "https://prototype-eyrt1r2jb-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 날짜 블록 내 마지막 할일 스크롤 불가 문제 수정",
+    "createdAt": 1772861998369,
+    "sha": "c8b1441"
+  },
+  {
+    "url": "https://prototype-8p3c35qcx-kimkwangkuks-projects.vercel.app",
     "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772771381969,
-    "sha": "2c398e6"
+    "createdAt": 1772817450904,
+    "sha": "f440c65"
   },
   {
-    "url": "https://prototype-gfyz6bu15-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 편집중 펄스 - background 직접 애니메이션으로 마진 유지 및 글자 점멸 방지",
-    "createdAt": 1772771313296,
-    "sha": "b749c0b"
+    "url": "https://prototype-b9ee32cqu-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 날짜 블록 하단 잘림 - padding-bottom → ::after 더미 요소로 교체",
+    "createdAt": 1772817381376,
+    "sha": "5405a8f"
   },
   {
-    "url": "https://prototype-93rdyjv5s-kimkwangkuks-projects.vercel.app",
+    "url": "https://prototype-klmgv4gxl-kimkwangkuks-projects.vercel.app",
     "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772770891059,
-    "sha": "50072af"
+    "createdAt": 1772817133304,
+    "sha": "e470152"
   },
   {
-    "url": "https://prototype-9ydiozfnh-kimkwangkuks-projects.vercel.app",
-    "message": "design: 펄스 애니메이션 흰색→어두움으로 변경 (대비 강화)",
-    "createdAt": 1772770785643,
-    "sha": "2827306"
+    "url": "https://prototype-nokma8cr0-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 날짜 블록 하단 스크롤 여백 추가",
+    "createdAt": 1772817065072,
+    "sha": "ad379f3"
   },
   {
-    "url": "https://prototype-dl32ih7pm-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 월뷰 바텀시트 키보드 위치 문제 - inputInSheet시 키보드 완전 열린 후 animate",
-    "createdAt": 1772770699025,
-    "sha": "f50076f"
-  },
-  {
-    "url": "https://prototype-535qkwri4-kimkwangkuks-projects.vercel.app",
+    "url": "https://prototype-aye1x0rqe-kimkwangkuks-projects.vercel.app",
     "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772770529086,
-    "sha": "d91dce8"
+    "createdAt": 1772816748489,
+    "sha": "c17d8d0"
   },
   {
-    "url": "https://prototype-89izn7g4e-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 일/주/월뷰 할일 입력중 infinite pulse 애니메이션 추가",
-    "createdAt": 1772770462074,
-    "sha": "83bcae4"
+    "url": "https://prototype-cb39z43a5-kimkwangkuks-projects.vercel.app",
+    "message": "weekly 뷰 레이아웃 개선 및 인풋 포커스 스크롤 수정",
+    "createdAt": 1772816677254,
+    "sha": "a427f8e"
   },
   {
-    "url": "https://prototype-610vrt9e0-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772770411131,
-    "sha": "e8a4ca2"
+    "url": "https://prototype-ol3uidt80-kimkwangkuks-projects.vercel.app",
+    "message": "weekly 뷰 레이아웃 개선 및 인풋 포커스 스크롤 수정",
+    "createdAt": 1772815100722,
+    "sha": "a427f8e"
   },
   {
-    "url": "https://prototype-nvn1giont-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 월뷰 오늘 날짜 focused 동그라미 black !important 강제 적용",
-    "createdAt": 1772770344272,
-    "sha": "06e28ad"
+    "url": "https://prototype-5os6258th-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 할일 추가 시 week-day-col-todos 내에서 자동 스크롤",
+    "createdAt": 1772814087485,
+    "sha": "c3671b2"
   },
   {
-    "url": "https://prototype-9h7ayjk7g-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772770051821,
-    "sha": "ce386ff"
+    "url": "https://prototype-6usop2hx4-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 할일 추가 시 numpad 위로 자동 스크롤 - editingTodoId 변경 시 visible area 계산 개선",
+    "createdAt": 1772813865955,
+    "sha": "a939d69"
   },
   {
-    "url": "https://prototype-7nicfmut4-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주/월뷰 포커스를 블록 전체 대신 날짜 숫자 동그라미로 변경",
-    "createdAt": 1772769984988,
-    "sha": "6b8db37"
+    "url": "https://prototype-1lak9dt3i-kimkwangkuks-projects.vercel.app",
+    "message": "fix: BottomSheetB 언마운트 시 keyboard-open 클래스 cleanup 추가 → 탭바 복원",
+    "createdAt": 1772813589519,
+    "sha": "eb86a44"
   },
   {
-    "url": "https://prototype-knwq3ogq6-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772768249075,
-    "sha": "4428dc2"
+    "url": "https://prototype-47xyw8q82-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 악세사리바 위치 수정 - numpad-h를 max() 첫 항에만 적용, keyboard-open 토글 추가",
+    "createdAt": 1772813318404,
+    "sha": "cb8bdd2"
   },
   {
-    "url": "https://prototype-q06jgoxc3-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 주/월뷰 날짜 블록 포커스 상태 추가 (오늘 초기 포커스, 검정 배경)",
-    "createdAt": 1772768182669,
-    "sha": "f14fa3a"
+    "url": "https://prototype-os48ow7kg-kimkwangkuks-projects.vercel.app",
+    "message": "refactor: numpad를 iOS 키보드처럼 fixed 하단 배치, 바텀시트는 악세사리바로 위에 위치",
+    "createdAt": 1772812877050,
+    "sha": "22869f6"
   },
   {
-    "url": "https://prototype-cll9nzyzk-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772761144469,
-    "sha": "76e9a97"
+    "url": "https://prototype-l868y565o-kimkwangkuks-projects.vercel.app",
+    "message": "refactor: numpad를 바텀시트 인라인으로 이동 - 팝업이 키패드 위로 표시",
+    "createdAt": 1772812636175,
+    "sha": "4e26f01"
   },
   {
-    "url": "https://prototype-emy13jke9-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 키패드 오픈 상태에서 오버레이 스크롤 시 키패드 유지",
-    "createdAt": 1772761076280,
-    "sha": "74712dd"
+    "url": "https://prototype-8ptzdflaf-kimkwangkuks-projects.vercel.app",
+    "message": "fix: WeeklyContent WeekTodoEditInput focus() 제거 → OS 키보드 차단",
+    "createdAt": 1772812258324,
+    "sha": "a05b3d0"
   },
   {
-    "url": "https://prototype-cmr4evmne-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772704002117,
-    "sha": "4c0209a"
+    "url": "https://prototype-k1kllnk5z-kimkwangkuks-projects.vercel.app",
+    "message": "fix: iOS 키보드 완전 차단 - pointer-events:none + tabIndex=-1 적용",
+    "createdAt": 1772812106683,
+    "sha": "7b47fb1"
   },
   {
-    "url": "https://prototype-j4k0dg1i9-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 주뷰 블록 고정 높이 + 1번 블록 달력 행 균등 배치",
-    "createdAt": 1772703933928,
-    "sha": "ba8edb3"
+    "url": "https://prototype-gx2std39t-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 주뷰 인라인 인풋 OS 키보드 차단 → 커스텀 숫자패드로 교체",
+    "createdAt": 1772811880997,
+    "sha": "b79a067"
   },
   {
-    "url": "https://prototype-9sq30hy45-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772694196340,
-    "sha": "0f980a5"
+    "url": "https://prototype-1l38tcuqs-kimkwangkuks-projects.vercel.app",
+    "message": "refactor: 할일 인풋 탭 시 OS 키보드 차단 → 커스텀 숫자패드로 교체",
+    "createdAt": 1772811646107,
+    "sha": "e3e3483"
   },
   {
-    "url": "https://prototype-m04mb7skd-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 주뷰 날짜 블록 할일 목록 독립 스크롤 + 오버레이 스크롤 패스스루",
-    "createdAt": 1772694128368,
-    "sha": "193253f"
-  },
-  {
-    "url": "https://prototype-hymx08s16-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772690157723,
-    "sha": "2b5569c"
-  },
-  {
-    "url": "https://prototype-jkkum08mw-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 높이/편집폭 균등화 및 월뷰 키보드 포지셔닝 CSS 위임",
-    "createdAt": 1772690089441,
-    "sha": "59de953"
-  },
-  {
-    "url": "https://prototype-76wln6577-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772685818923,
-    "sha": "a1474d7"
-  },
-  {
-    "url": "https://prototype-kufgifxtk-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 주뷰/월뷰 편집 배경·펄스 추가, 월뷰 Enter 닫기 수정",
-    "createdAt": 1772685750518,
-    "sha": "37a033f"
-  },
-  {
-    "url": "https://prototype-929sgb9ms-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772685377348,
-    "sha": "5bef66d"
-  },
-  {
-    "url": "https://prototype-qx8r9aar6-kimkwangkuks-projects.vercel.app",
-    "message": "fix: bottom 대신 translateY로 키보드 위 바텀시트 위치 보정",
-    "createdAt": 1772685308173,
-    "sha": "bc0c6c1"
-  },
-  {
-    "url": "https://prototype-k3z2logap-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772684791022,
-    "sha": "650801d"
-  },
-  {
-    "url": "https://prototype-p4kec9rb7-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 월뷰 바텀시트 키보드 위 고정 (visualViewport 직접 구독)",
-    "createdAt": 1772684723790,
-    "sha": "76c6ba3"
-  },
-  {
-    "url": "https://prototype-bbrstnlaq-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772626791636,
-    "sha": "08f5ebb"
-  },
-  {
-    "url": "https://prototype-bk1cu8pp4-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 월뷰 시트 input z-index 수정 및 즉시 키패드 포커스",
-    "createdAt": 1772626721779,
-    "sha": "950b705"
-  },
-  {
-    "url": "https://prototype-i3qvx2l7s-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772622549863,
-    "sha": "3f39b86"
-  },
-  {
-    "url": "https://prototype-dwrzqfcma-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 월뷰 날짜 셀 탭으로 할일 추가 (시트 내 input)",
-    "createdAt": 1772622480857,
-    "sha": "8104faf"
-  },
-  {
-    "url": "https://prototype-im7txhb8g-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772534221874,
-    "sha": "9db6bd3"
-  },
-  {
-    "url": "https://prototype-94le7kihb-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 날짜 피커 UI 개선, 바텀시트 딤 터치 닫기 수정",
-    "createdAt": 1772534154845,
-    "sha": "1a52347"
-  },
-  {
-    "url": "https://prototype-aui7nsngr-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772523835685,
-    "sha": "535cb93"
-  },
-  {
-    "url": "https://prototype-5qjt11gjy-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 날짜 피커 리셋 버튼 추가, 팝업 외부 터치 시 바텀시트 함께 닫기",
-    "createdAt": 1772523768960,
-    "sha": "30adb8e"
-  },
-  {
-    "url": "https://prototype-4gxclmq0e-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772522501039,
-    "sha": "001fad1"
-  },
-  {
-    "url": "https://prototype-pck31gujp-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 바텀시트 외부 터치 시 저장/취소 처리, 날짜 피커 어제 제거",
-    "createdAt": 1772522432234,
-    "sha": "fcc60fe"
-  },
-  {
-    "url": "https://prototype-nkurvmt5r-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772520780826,
-    "sha": "8634568"
-  },
-  {
-    "url": "https://prototype-h26etfpnm-kimkwangkuks-projects.vercel.app",
-    "message": "design: 날짜 피커 비선택 항목 opacity 진하게 조정",
-    "createdAt": 1772520710972,
-    "sha": "2575c26"
-  },
-  {
-    "url": "https://prototype-lhnlxnuus-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772520453289,
-    "sha": "2c06ed9"
-  },
-  {
-    "url": "https://prototype-zw7p747kv-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 바텀시트 날짜 팝업 위치 개선 및 선택 날짜 자동 반영",
-    "createdAt": 1772520386089,
-    "sha": "bd5b158"
-  },
-  {
-    "url": "https://prototype-k4sfxww41-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772520003054,
-    "sha": "f667215"
-  },
-  {
-    "url": "https://prototype-oksnq1l0x-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 날짜 팝업 드럼롤 피커, 버전 버튼 20px",
-    "createdAt": 1772519936177,
-    "sha": "aa8b470"
-  },
-  {
-    "url": "https://prototype-pcfnb563u-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1772519538983,
-    "sha": "354f757"
-  },
-  {
-    "url": "https://prototype-osu4cncg9-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 날짜 팝업 가로 스크롤 날짜 스트립 + 반복 옵션",
-    "createdAt": 1772519469246,
-    "sha": "1a6ab4f"
+    "url": "https://prototype-mfd5vytps-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 인풋 탭 → 하단 커스텀 numpad 트리거로 변경, 지속시간 드럼피커 복원",
+    "createdAt": 1772811312867,
+    "sha": "7062e85"
   }
 ]
