@@ -268,17 +268,5 @@
     "message": "weekly 뷰 레이아웃 개선 및 인풋 포커스 스크롤 수정",
     "createdAt": 1772816677254,
     "sha": "a427f8e"
-  },
-  {
-    "url": "https://prototype-ol3uidt80-kimkwangkuks-projects.vercel.app",
-    "message": "weekly 뷰 레이아웃 개선 및 인풋 포커스 스크롤 수정",
-    "createdAt": 1772815100722,
-    "sha": "a427f8e"
-  },
-  {
-    "url": "https://prototype-5os6258th-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 할일 추가 시 week-day-col-todos 내에서 자동 스크롤",
-    "createdAt": 1772814087485,
-    "sha": "c3671b2"
   }
 ]
