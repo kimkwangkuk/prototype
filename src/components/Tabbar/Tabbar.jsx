@@ -65,10 +65,16 @@ export default function Tabbar() {
       <div className="tabbar-inner">
         <div className="tabbar-group">
           <div className="tabbar-group-bg"></div>
-          <button className="tab-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            </svg>
+          <button className={`tab-btn${currentTab === 'home' ? ' active' : ''}`} onClick={() => setTab('home')}>
+            {currentTab === 'home' ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fillRule="evenodd" clipRule="evenodd" d="M12 2.59619L22 9.86317V21C22 21.5523 21.5523 22 21 22H15V16H9V22H3C2.44772 22 2 21.5523 2 21V9.86317L12 2.59619Z" fill="currentColor"/>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              </svg>
+            )}
             <span className="tab-btn-label">홈</span>
           </button>
           <button className={`tab-btn${currentTab === 'todo' ? ' active' : ''}`} onClick={() => setTab('todo')}>

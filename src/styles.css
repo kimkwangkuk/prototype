@@ -2896,3 +2896,212 @@ textarea {
 .keypad-key-confirm:active {
   background: #3d54e0;
 }
+
+.numpad-key-clear {
+  background: #b0b5be;
+  color: var(--label-primary);
+  font-size: 14px;
+}
+
+.numpad-key-back {
+  background: #b0b5be;
+}
+
+/* ─── Home View – Timeline ─── */
+.home-view {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.timeline-container {
+  position: relative;
+  padding: 0 16px;
+  padding-bottom: 160px;
+}
+
+.timeline-row {
+  display: flex;
+  height: 60px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.05);
+}
+
+.timeline-label-col {
+  width: 70px;
+  flex-shrink: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 4px;
+  padding-right: 4px;
+}
+
+.timeline-time-label {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  color: #999;
+  white-space: nowrap;
+}
+
+.timeline-hour-emojis {
+  display: flex;
+  gap: 0;
+}
+
+.timeline-hour-emoji {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.timeline-content-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Current time indicator */
+.timeline-now-pill {
+  position: absolute;
+  left: 16px;
+  min-width: 37px;
+  height: 18px;
+  padding: 0 6px;
+  background: rgba(0, 0, 0, 0.86);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.timeline-now-pill-text {
+  font-size: 12px;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+}
+
+.timeline-now-line {
+  position: absolute;
+  left: 51px;
+  right: 16px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.86);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Event cards */
+.timeline-event {
+  background: rgba(235, 235, 235, 0.6);
+  border: 1px solid white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 8px;
+}
+
+.timeline-event-title-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.timeline-event-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-event-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.86);
+  white-space: nowrap;
+  letter-spacing: -0.04px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.timeline-event-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.timeline-event-time {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.59);
+  white-space: nowrap;
+  letter-spacing: -0.04px;
+}
+
+.timeline-event-count-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.timeline-event-note {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.59);
+  letter-spacing: -0.04px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Grouped todo chip (30px tall, "할 일 +2") */
+.timeline-grouped-chip {
+  height: 30px;
+  background: rgba(235, 235, 235, 0.6);
+  border: 1px solid white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 7px;
+}
+
+.timeline-grouped-chip-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.86);
+  white-space: nowrap;
+  letter-spacing: -0.04px;
+}
+
+/* Compact todo chip (15px tall, individual todo strip) */
+.timeline-chip {
+  height: 15px;
+  background: rgba(235, 235, 235, 0.6);
+  border: 1px solid white;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 7px;
+}
+
+.timeline-chip-label {
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.86);
+  white-space: nowrap;
+  letter-spacing: -0.02px;
+}

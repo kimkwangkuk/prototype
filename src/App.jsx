@@ -3,6 +3,7 @@ import './styles.css';
 import Header from './components/Header/Header';
 import Content from './components/Content/Content';
 import CalendarContent from './components/Content/CalendarContent';
+import HomeView from './components/Content/HomeView';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Tabbar from './components/Tabbar/Tabbar';
 import VersionsButton from './components/Header/VersionsButton';
@@ -102,11 +103,11 @@ export default function App() {
       <div className="app-layout">
         <Header />
         <div className="app-body">
-          {currentTab === 'calendar' ? <CalendarContent /> : <Content />}
+          {currentTab === 'home' ? <HomeView /> : currentTab === 'calendar' ? <CalendarContent /> : <Content />}
         </div>
       </div>
       <Tabbar />
-      {currentTab !== 'calendar' && <BottomSheet />}
+      {currentTab !== 'calendar' && currentTab !== 'home' && <BottomSheet />}
     </>
   );
 }

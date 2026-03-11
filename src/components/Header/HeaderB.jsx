@@ -69,7 +69,7 @@ export default function HeaderB() {
             </button>
           </div>
         </div>
-        {currentView === 'day' && currentTab !== 'calendar' && <WeekDayBar />}
+        {currentView === 'day' && currentTab !== 'calendar' && currentTab !== 'home' && <WeekDayBar />}
       </div>
     </div>
   );
