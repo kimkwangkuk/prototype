@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
+import { Target, UtensilsCrossed, Square, Gamepad2, Zap, ListChecks } from 'lucide-react';
+import useTodoStore from '../../store/useTodoStore';
 
 const HOUR_HEIGHT = 60;
 const START_HOUR = 5;
+const LABEL_W = 70; // 타임라인 왼쪽 시간 레이블 열 너비
 const HOURS = Array.from({ length: 24 }, (_, i) => (START_HOUR + i) % 24);
 
 function hourLabel(h) {
@@ -11,13 +14,15 @@ function hourLabel(h) {
   return `PM ${h - 12}`;
 }
 
+function toMin(h, m = 0) { return h * 60 + m; }
+
 function timeToTop(h, m = 0) {
   return ((h - START_HOUR + 24) % 24) * HOUR_HEIGHT + (m / 60) * HOUR_HEIGHT;
 }
 
-function formatTimeRange(startH, startM, endH, endM) {
+function formatRange(sh, sm, eh, em) {
   const f = (h, m) => `${h}:${String(m).padStart(2, '0')}`;
-  return `${f(startH, startM)}~${f(endH, endM)}`;
+  return `${f(sh, sm)}~${f(eh, em)}`;
 }
 
 function getNowTop() {
@@ -28,173 +33,140 @@ function getNowTop() {
 function getNowLabel() {
   const d = new Date();
   const h = d.getHours();
-  const m = d.getMinutes();
   const hh = h % 12 || 12;
-  return `${hh}:${String(m).padStart(2, '0')}`;
+  return `${hh}:${String(d.getMinutes()).padStart(2, '0')}`;
 }
 
-// Emoji indicators per hour (from Figma design)
+// 시간대별 이모지
 const HOUR_EMOJIS = {
   5: ['🌞', '💧'],
   9: ['🏃🏻‍♂️'],
 };
 
-// Inline SVG icons for event types
-const FocusIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path d="M7 1.5C7 1.5 4.5 4.5 4.5 7C4.5 8.38 5.62 9.5 7 9.5C8.38 9.5 9.5 8.38 9.5 7C9.5 4.5 7 1.5 7 1.5Z" fill="rgba(0,0,0,0.86)"/>
-    <path d="M7 9.5V12.5" stroke="rgba(0,0,0,0.86)" strokeWidth="1.2" strokeLinecap="round"/>
-    <path d="M5.2 11.5H8.8" stroke="rgba(0,0,0,0.86)" strokeWidth="1.2" strokeLinecap="round"/>
-  </svg>
-);
-
-const MealIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <path d="M5 1.5V5C5 6.1 4.1 7 3 7V12.5" stroke="rgba(0,0,0,0.86)" strokeWidth="1.1" strokeLinecap="round"/>
-    <path d="M3 1.5V4M5 1.5V4" stroke="rgba(0,0,0,0.86)" strokeWidth="1.1" strokeLinecap="round"/>
-    <path d="M10 1.5C10 1.5 11.5 3.2 11.5 5.5C11.5 6.66 10.7 7.5 9.5 7.5V12.5" stroke="rgba(0,0,0,0.86)" strokeWidth="1.1" strokeLinecap="round"/>
-  </svg>
-);
-
-const TaskCheckIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <rect x="1.44" y="1.44" width="11.12" height="11.12" rx="2.5" stroke="rgba(0,0,0,0.4)" strokeWidth="0.88"/>
-  </svg>
-);
-
-const GameIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-    <rect x="1" y="4" width="12" height="7.5" rx="3.75" stroke="rgba(0,0,0,0.86)" strokeWidth="1.1"/>
-    <path d="M4.5 6.5V8.5M3.5 7.5H5.5" stroke="rgba(0,0,0,0.86)" strokeWidth="1.1" strokeLinecap="round"/>
-    <circle cx="9.5" cy="7.5" r="0.75" fill="rgba(0,0,0,0.86)"/>
-  </svg>
-);
-
-const SmallCheckIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <rect x="1" y="1" width="10" height="10" rx="2" stroke="rgba(0,0,0,0.4)" strokeWidth="0.75"/>
-  </svg>
-);
-
-const GroupCheckIcon = () => (
-  <div style={{ position: 'relative', width: 14, height: 13, flexShrink: 0 }}>
-    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" style={{ position: 'absolute', top: 0, left: 0 }}>
-      <rect x="0.5" y="0.5" width="8" height="8" rx="1.5" stroke="rgba(0,0,0,0.4)" strokeWidth="0.75"/>
-    </svg>
-    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" style={{ position: 'absolute', top: 3, left: 4.5 }}>
-      <rect x="0.5" y="0.5" width="8" height="8" rx="1.5" stroke="rgba(0,0,0,0.4)" strokeWidth="0.75"/>
-    </svg>
-  </div>
-);
-
-const CalCheckIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <rect x="1" y="1" width="10" height="10" rx="2" stroke="rgba(0,0,0,0.4)" strokeWidth="0.75"/>
-  </svg>
-);
-
+// Lucide 아이콘 매핑
 const ICON_MAP = {
-  focus: FocusIcon,
-  meal: MealIcon,
-  task: TaskCheckIcon,
-  game: GameIcon,
+  focus: Target,
+  meal:  UtensilsCrossed,
+  task:  Square,
+  game:  Gamepad2,
+  custom: Zap,
 };
 
-// Column layout helpers
-function getColStyle(col) {
-  if (col === 'left') return { left: 86, right: 'calc(50% + 1px)' };
-  if (col === 'right') return { left: 'calc(50% + 2px)', right: 16 };
-  return { left: 86, right: 16 }; // full
+// ─── 겹침 감지 레이아웃 알고리즘 (Google Calendar 방식) ───
+function computeLayout(events) {
+  if (!events.length) return {};
+
+  const sorted = [...events].sort(
+    (a, b) => toMin(a.startH, a.startM) - toMin(b.startH, b.startM)
+  );
+
+  // 1단계: 그리디 열 배정
+  const colEndMin = []; // 각 열의 마지막 이벤트 종료 시각(분)
+  const result = {};
+
+  for (const ev of sorted) {
+    const start = toMin(ev.startH, ev.startM);
+    const end   = toMin(ev.endH,   ev.endM);
+
+    let col = colEndMin.findIndex(t => t <= start);
+    if (col === -1) col = colEndMin.length;
+    colEndMin[col] = end;
+    result[ev.id] = { col, numCols: 1 };
+  }
+
+  // 2단계: 각 이벤트의 numCols = 동시 중첩 클러스터 내 최대 열 + 1
+  for (const ev of sorted) {
+    const evStart = toMin(ev.startH, ev.startM);
+    const evEnd   = toMin(ev.endH,   ev.endM);
+    let maxCol = result[ev.id].col;
+
+    for (const other of sorted) {
+      if (other.id === ev.id) continue;
+      const os = toMin(other.startH, other.startM);
+      const oe = toMin(other.endH,   other.endM);
+      if (evStart < oe && evEnd > os) {
+        maxCol = Math.max(maxCol, result[other.id].col);
+      }
+    }
+    result[ev.id].numCols = maxCol + 1;
+  }
+
+  return result;
 }
 
-// Sample events matching the Figma design
-const EVENTS = [
-  {
-    id: 'ev1', type: 'task', title: '오답노트',
-    startH: 8, startM: 0, endH: 9, endM: 0,
-    col: 'left',
-  },
-  {
-    id: 'ev2', type: 'focus', title: '집중계획',
-    startH: 8, startM: 30, endH: 10, endM: 30,
-    todoCount: 3, col: 'right',
-  },
-  {
-    id: 'ev3', type: 'task', title: '영어단어 30개',
-    startH: 9, startM: 30, endH: 10, endM: 30,
-    col: 'right',
-  },
-  {
-    id: 'ev4', type: 'focus', title: '집중계획',
-    startH: 12, startM: 0, endH: 12, endM: 43,
-    note: '버스에서 줄리아 만남!', todoCount: 3, col: 'left',
-  },
-  {
-    id: 'ev5', type: 'task', title: '영어단어 30개',
-    startH: 12, startM: 0, endH: 12, endM: 43,
-    col: 'right',
-  },
-  {
-    id: 'ev6', type: 'meal', title: '점심식사',
-    startH: 14, startM: 0, endH: 14, endM: 40,
-    col: 'left',
-  },
-  {
-    id: 'ev7', type: 'focus', title: '집중계획',
-    startH: 17, startM: 0, endH: 17, endM: 43,
-    note: '버스에서 줄리아 만남!', todoCount: 3, col: 'left',
-  },
-  {
-    id: 'ev8', type: 'meal', title: '저녁식사',
-    startH: 22, startM: 0, endH: 22, endM: 43,
-    col: 'left',
-  },
-  {
-    id: 'ev9', type: 'game', title: '게임 한판',
-    startH: 22, startM: 0, endH: 22, endM: 43,
-    col: 'right',
-  },
+// 이벤트 절대 포지션 스타일 (컨테이너 기준)
+// 컨테이너에 padding: 0 16px 이므로 이벤트 left는 컨테이너 내부 기준
+function getEventStyle(top, height, col, numCols) {
+  // 사용 가능한 너비: calc(100% - LABEL_W px) → 레이블 열 제외
+  const left = col === 0
+    ? LABEL_W
+    : `calc(${LABEL_W}px + ${col} * (100% - ${LABEL_W}px) / ${numCols})`;
+  const width = `calc((100% - ${LABEL_W}px) / ${numCols} - 2px)`;
+  return { position: 'absolute', top, height, left, width };
+}
+
+// ─── 샘플 이벤트 ───
+const SAMPLE_EVENTS = [
+  { id: 'ev1', type: 'task',  title: '오답노트',    startH: 8,  startM: 0,  endH: 9,  endM: 0  },
+  { id: 'ev2', type: 'focus', title: '집중계획',    startH: 8,  startM: 30, endH: 10, endM: 30, todoCount: 3 },
+  { id: 'ev3', type: 'task',  title: '영어단어 30개', startH: 9, startM: 30, endH: 10, endM: 30 },
+  { id: 'ev4', type: 'focus', title: '집중계획',    startH: 12, startM: 0,  endH: 12, endM: 43, note: '버스에서 줄리아 만남!', todoCount: 3 },
+  { id: 'ev5', type: 'task',  title: '영어단어 30개', startH: 12, startM: 0, endH: 12, endM: 43 },
+  { id: 'ev6', type: 'meal',  title: '점심식사',    startH: 14, startM: 0,  endH: 14, endM: 40 },
+  { id: 'ev7', type: 'focus', title: '집중계획',    startH: 17, startM: 0,  endH: 17, endM: 43, note: '버스에서 줄리아 만남!', todoCount: 3 },
+  { id: 'ev8', type: 'meal',  title: '저녁식사',    startH: 22, startM: 0,  endH: 22, endM: 43 },
+  { id: 'ev9', type: 'game',  title: '게임 한판',   startH: 22, startM: 0,  endH: 22, endM: 43 },
 ];
 
-// Compact todo chips (thin horizontal strips)
+// 컴팩트 투두 칩
 const CHIPS = [
-  // AM 6 – grouped chip (full width)
-  { id: 'ch0', title: '할 일 +2', startH: 6, startM: 0, col: 'full', grouped: true },
-  // AM 9 – right column chips
-  { id: 'ch1', title: '영어 단어 30개', startH: 9, startM: 0, col: 'right' },
-  { id: 'ch2', title: '수학 공식 3개', startH: 9, startM: 16, col: 'right' },
-  // PM 2 – right column chips
-  { id: 'ch3', title: '영어 단어 30개', startH: 14, startM: 0, col: 'right' },
-  { id: 'ch4', title: '수학 공식 3개', startH: 14, startM: 16, col: 'right' },
-  // PM 5 – right column chips
-  { id: 'ch5', title: '영어 단어 30개', startH: 17, startM: 0, col: 'right' },
-  { id: 'ch6', title: '수학 공식 3개', startH: 17, startM: 16, col: 'right' },
-  { id: 'ch7', title: '과학 오답노트 작성', startH: 17, startM: 32, col: 'right' },
-  // PM 8 – full width chips
-  { id: 'ch8', title: '영어 단어 30개', startH: 20, startM: 0, col: 'full' },
-  { id: 'ch9', title: '수학 공식 3개', startH: 20, startM: 16, col: 'full' },
-  { id: 'ch10', title: '과학 오답노트 작성', startH: 20, startM: 32, col: 'full' },
+  { id: 'ch0', title: '할 일 +2',       startH: 6,  startM: 0,  col: 'full', grouped: true },
+  { id: 'ch1', title: '영어 단어 30개', startH: 9,  startM: 0,  col: 'right' },
+  { id: 'ch2', title: '수학 공식 3개',  startH: 9,  startM: 16, col: 'right' },
+  { id: 'ch3', title: '영어 단어 30개', startH: 14, startM: 0,  col: 'right' },
+  { id: 'ch4', title: '수학 공식 3개',  startH: 14, startM: 16, col: 'right' },
+  { id: 'ch5', title: '영어 단어 30개', startH: 17, startM: 0,  col: 'right' },
+  { id: 'ch6', title: '수학 공식 3개',  startH: 17, startM: 16, col: 'right' },
+  { id: 'ch7', title: '과학 오답노트',  startH: 17, startM: 32, col: 'right' },
+  { id: 'ch8', title: '영어 단어 30개', startH: 20, startM: 0,  col: 'full' },
+  { id: 'ch9', title: '수학 공식 3개',  startH: 20, startM: 16, col: 'full' },
+  { id:'ch10', title: '과학 오답노트',  startH: 20, startM: 32, col: 'full' },
 ];
+
+function getChipStyle(col, top) {
+  if (col === 'full')  return { position: 'absolute', top, left: LABEL_W, right: 0 };
+  if (col === 'right') return { position: 'absolute', top, left: 'calc(50% + 2px)', right: 0 };
+  return { position: 'absolute', top, left: LABEL_W, right: 'calc(50% + 1px)' };
+}
 
 export default function HomeView() {
   const scrollRef = useRef(null);
+  const homeEvents = useTodoStore(state => state.homeEvents);
 
   useEffect(() => {
     if (!scrollRef.current) return;
-    // Auto-scroll so current time is visible ~1/3 from top
     const top = getNowTop();
-    const containerH = scrollRef.current.clientHeight;
-    scrollRef.current.scrollTop = Math.max(0, top - containerH / 3);
+    const h = scrollRef.current.clientHeight;
+    scrollRef.current.scrollTop = Math.max(0, top - h / 3);
   }, []);
 
-  const nowY = getNowTop();
+  const nowY    = getNowTop();
   const nowLabel = getNowLabel();
+
+  // 샘플 + 동적 이벤트 합치기
+  const allEvents = [
+    ...SAMPLE_EVENTS,
+    ...homeEvents.map(e => ({ ...e, id: String(e.id) })),
+  ];
+
+  const layout = computeLayout(allEvents);
 
   return (
     <div className="home-view" ref={scrollRef}>
       <div className="timeline-container">
-        {/* Hour grid rows */}
-        {HOURS.map((h) => (
+
+        {/* 시간 그리드 */}
+        {HOURS.map(h => (
           <div key={h} className="timeline-row">
             <div className="timeline-label-col">
               <span className="timeline-time-label">{hourLabel(h)}</span>
@@ -210,44 +182,34 @@ export default function HomeView() {
           </div>
         ))}
 
-        {/* Current time indicator */}
-        <div
-          className="timeline-now-pill"
-          style={{ top: nowY - 9 }}
-        >
+        {/* 현재 시각 인디케이터 */}
+        <div className="timeline-now-pill" style={{ top: nowY - 9 }}>
           <span className="timeline-now-pill-text">{nowLabel}</span>
         </div>
-        <div
-          className="timeline-now-line"
-          style={{ top: nowY }}
-        />
+        <div className="timeline-now-line" style={{ top: nowY }} />
 
-        {/* Event cards */}
-        {EVENTS.map((ev) => {
-          const Icon = ICON_MAP[ev.type];
-          const top = timeToTop(ev.startH, ev.startM);
+        {/* 이벤트 카드 (겹침 감지 레이아웃 적용) */}
+        {allEvents.map(ev => {
+          const { col = 0, numCols = 1 } = layout[ev.id] || {};
+          const top    = timeToTop(ev.startH, ev.startM);
           const height = Math.max(timeToTop(ev.endH, ev.endM) - top, 30);
-          const colStyle = getColStyle(ev.col);
+          const Icon   = ICON_MAP[ev.type] || Square;
 
           return (
-            <div
-              key={ev.id}
-              className="timeline-event"
-              style={{ position: 'absolute', top, height, ...colStyle }}
-            >
+            <div key={ev.id} className="timeline-event" style={getEventStyle(top, height, col, numCols)}>
               <div className="timeline-event-title-row">
                 <div className="timeline-event-icon">
-                  {Icon && <Icon />}
+                  <Icon size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
                 </div>
                 <span className="timeline-event-title">{ev.title}</span>
               </div>
               <div className="timeline-event-meta">
                 <span className="timeline-event-time">
-                  {formatTimeRange(ev.startH, ev.startM, ev.endH, ev.endM)}
+                  {formatRange(ev.startH, ev.startM, ev.endH, ev.endM)}
                 </span>
                 {ev.todoCount && (
                   <div className="timeline-event-count-row">
-                    <CalCheckIcon />
+                    <Square size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
                     <span className="timeline-event-time">{ev.todoCount}</span>
                   </div>
                 )}
@@ -259,31 +221,22 @@ export default function HomeView() {
           );
         })}
 
-        {/* Compact todo chips */}
-        {CHIPS.map((chip) => {
+        {/* 투두 칩 */}
+        {CHIPS.map(chip => {
           const top = timeToTop(chip.startH, chip.startM);
-          const colStyle = getColStyle(chip.col);
+          const style = getChipStyle(chip.col, top);
 
           if (chip.grouped) {
             return (
-              <div
-                key={chip.id}
-                className="timeline-grouped-chip"
-                style={{ position: 'absolute', top, ...colStyle }}
-              >
-                <GroupCheckIcon />
+              <div key={chip.id} className="timeline-grouped-chip" style={style}>
+                <ListChecks size={13} strokeWidth={1.8} color="rgba(0,0,0,0.6)" style={{ flexShrink: 0 }} />
                 <span className="timeline-grouped-chip-label">{chip.title}</span>
               </div>
             );
           }
-
           return (
-            <div
-              key={chip.id}
-              className="timeline-chip"
-              style={{ position: 'absolute', top, ...colStyle }}
-            >
-              <SmallCheckIcon />
+            <div key={chip.id} className="timeline-chip" style={style}>
+              <Square size={10} strokeWidth={1.5} color="rgba(0,0,0,0.35)" style={{ flexShrink: 0 }} />
               <span className="timeline-chip-label">{chip.title}</span>
             </div>
           );

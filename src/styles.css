@@ -2907,6 +2907,167 @@ textarea {
   background: #b0b5be;
 }
 
+/* ─── QWERTY Keypad ─── */
+.keypad-popup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #cdd1d8;
+  padding: 8px 3px calc(6px + env(safe-area-inset-bottom, 0px));
+  z-index: 1000;
+}
+
+.keypad-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.keypad-row-mid {
+  justify-content: center;
+  padding: 0 5%;
+}
+
+.keypad-row-bottom {
+  gap: 5px;
+  margin-bottom: 0;
+}
+
+.keypad-key {
+  flex: 1;
+  height: 42px;
+  min-width: 0;
+  background: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--label-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.28);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.keypad-key:active {
+  background: #adb5bd;
+}
+
+.keypad-key-mod {
+  flex: 1.5;
+  background: #adb5bd;
+}
+
+.keypad-key-mod:active {
+  background: #9ba3ab;
+}
+
+.keypad-key-caps {
+  background: #fff;
+  box-shadow: 0 0 0 1.5px var(--blue-500);
+  color: var(--blue-500);
+}
+
+.keypad-key-space {
+  flex: 4;
+  font-size: 14px;
+  color: var(--label-secondary);
+}
+
+.keypad-key-confirm {
+  flex: 2;
+  background: var(--blue-500);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.keypad-key-confirm:active {
+  background: #3d54e0;
+}
+
+/* ─── Home Event Sheet ─── */
+.home-event-sheet {
+  padding: 4px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: clip;
+  box-shadow: 0 4px 50px rgba(0,0,0,0.15);
+}
+
+.home-event-title-row {
+  position: relative;
+  z-index: 1;
+  padding: 12px 4px 10px;
+  border-bottom: 1px solid var(--border-quinary);
+}
+
+.home-event-title-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--label-primary);
+  background: transparent;
+  font-family: inherit;
+  padding: 0;
+  letter-spacing: -0.054px;
+}
+
+.home-event-title-input::placeholder {
+  color: var(--label-quaternary);
+}
+
+.home-event-time-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px;
+}
+
+.home-event-time-btn {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-event-time-btn.active {
+  background: rgba(85, 112, 247, 0.12);
+  color: var(--blue-500);
+}
+
+.home-event-picker {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border-quinary);
+  padding-top: 6px;
+}
+
+.home-event-picker-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  padding: 0 4px 2px;
+  letter-spacing: -0.036px;
+}
+
 /* ─── Home View – Timeline ─── */
 .home-view {
   height: 100%;

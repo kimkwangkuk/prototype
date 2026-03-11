@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Plus } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
 const IconBase = () => (
@@ -47,6 +48,7 @@ export default function Tabbar() {
   const setView = useTodoStore(state => state.setView);
   const currentTab = useTodoStore(state => state.currentTab);
   const setTab = useTodoStore(state => state.setTab);
+  const openHomeSheet = useTodoStore(state => state.openHomeSheet);
   const [viewMenuOpen, setViewMenuOpen] = useState(false);
 
   const handleViewSelect = (view) => {
@@ -108,8 +110,14 @@ export default function Tabbar() {
           </button>
         </div>
 
-        {/* 뷰 전환 영역 */}
-        <div className="tabbar-view-area">
+        {/* 홈탭: + 버튼 / 나머지: 뷰 전환 */}
+        {currentTab === 'home' ? (
+          <button className="tabbar-add" onClick={openHomeSheet} aria-label="일정 추가">
+            <div className="tabbar-add-bg" />
+            <Plus size={24} strokeWidth={2} style={{ position: 'relative', color: 'var(--label-primary)' }} />
+          </button>
+        ) : null}
+        <div className="tabbar-view-area" style={currentTab === 'home' ? { display: 'none' } : undefined}>
           <div className={`view-speed-dial${viewMenuOpen ? ' open' : ''}`}>
             {['month', 'week', 'day'].map(view => {
               const Icon = VIEW_ICONS[view];
