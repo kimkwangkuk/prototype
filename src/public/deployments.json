@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-3nlui1zpm-kimkwangkuks-projects.vercel.app",
+    "message": "chore: 미사용 AttachedSheet 컴포넌트 및 CSS 삭제",
+    "createdAt": 1773237305914,
+    "sha": "f04e711"
+  },
+  {
+    "url": "https://prototype-rh69ivxzu-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773235632047,
+    "sha": "b04f225"
+  },
+  {
     "url": "https://prototype-fx6bibmi0-kimkwangkuks-projects.vercel.app",
     "message": "fix: 홈 바텀시트 일뷰 DetailSheet 스타일로 통일",
     "createdAt": 1773235561374,
@@ -217,7 +229,7 @@
   },
   {
     "url": "https://prototype-dddfrdcjk-kimkwangkuks-projects.vercel.app",
-    "message": "docs: 주뷰 정책 문서 업데이트 + OS 키보드 잔여 주석 제거",
+    "message": "docs: ���뷰 정책 문서 업데이트 + OS 키보드 잔여 주석 제거",
     "createdAt": 1772865799793,
     "sha": "ce4b5d9"
   },
@@ -238,17 +250,5 @@
     "message": "fix: 숫자패드(NumpadPopup) 기준으로 포커스 블럭 중앙 정렬",
     "createdAt": 1772864833881,
     "sha": "67df585"
-  },
-  {
-    "url": "https://prototype-pqkxe2jsb-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 키보드 오픈 시 스페이서로 포커스 블럭 중앙 정렬 보장",
-    "createdAt": 1772864582931,
-    "sha": "e09e2ac"
-  },
-  {
-    "url": "https://prototype-50ujwlrjm-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 포커스 블럭 높이 성장 및 중앙 정렬 문제 수정",
-    "createdAt": 1772864113900,
-    "sha": "cceae71"
   }
 ]
