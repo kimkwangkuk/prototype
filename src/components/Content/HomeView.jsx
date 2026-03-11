@@ -195,25 +195,23 @@ export default function HomeView() {
           const height = Math.max(timeToTop(ev.endH, ev.endM) - top, 30);
           const Icon   = ICON_MAP[ev.type] || Square;
 
-          const hasBar = STUDY_TYPES.has(ev.type);
-          const fill   = hasBar ? getStudyFill(ev) : 0;
+          const canFill = STUDY_TYPES.has(ev.type);
+          const fill   = canFill ? getStudyFill(ev) : 0;
 
           return (
             <div
               key={ev.id}
-              className={`timeline-event${hasBar ? ' has-bar' : ''}${pressedId === ev.id ? ' pressed' : ''}`}
+              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(ev.id)}
               onPointerUp={() => { setPressedId(null); setSelectedEvent(ev); }}
               onPointerLeave={() => setPressedId(null)}
               onPointerCancel={() => setPressedId(null)}
             >
-              {hasBar && (
-                <div className="study-time-bar">
-                  <div className="study-time-gauge" style={{ height: `${fill * 100}%` }} />
-                </div>
-              )}
-              <div className={hasBar ? 'timeline-event-inner' : undefined}>
+              <div className="study-time-bar">
+                <div className="study-time-gauge" style={{ height: `${fill * 100}%` }} />
+              </div>
+              <div className="timeline-event-inner">
                 <div className="timeline-event-title-row">
                   <div className="timeline-event-icon">
                     <Icon size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
