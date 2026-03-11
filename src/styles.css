@@ -3158,7 +3158,6 @@ textarea {
 /* Event cards */
 .timeline-event {
   background: rgba(235, 235, 235, 0.6);
-  border: 1px solid white;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -3231,7 +3230,6 @@ textarea {
 .timeline-grouped-chip {
   height: 30px;
   background: rgba(235, 235, 235, 0.6);
-  border: 1px solid white;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -3251,7 +3249,6 @@ textarea {
 .timeline-chip {
   height: 15px;
   background: rgba(235, 235, 235, 0.6);
-  border: 1px solid white;
   overflow: hidden;
   display: flex;
   align-items: center;

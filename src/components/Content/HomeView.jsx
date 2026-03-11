@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Target, UtensilsCrossed, Square, Gamepad2, Zap, ListChecks } from 'lucide-react';
+import { Target, UtensilsCrossed, Square, Gamepad2, Zap, ListChecks, Group } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
 const HOUR_HEIGHT = 60;
@@ -101,8 +101,9 @@ function computeLayout(events) {
 // 100% = 컨테이너 전체 너비(패딩 포함). 이벤트 영역 = 86px ~ (100% - 16px)
 function getEventStyle(top, height, col, numCols) {
   const totalReserved = EVENTS_LEFT + EVENTS_RIGHT_PAD; // 102px
-  const left = `calc(${EVENTS_LEFT}px + ${col} * (100% - ${totalReserved}px) / ${numCols})`;
-  const width = `calc((100% - ${totalReserved}px) / ${numCols} - 2px)`;
+  const gap = numCols > 1 ? 1 : 0; // 겹칠 때만 1px 간격
+  const left = `calc(${EVENTS_LEFT}px + ${col} * ((100% - ${totalReserved}px) / ${numCols} + ${gap}px))`;
+  const width = `calc((100% - ${totalReserved}px) / ${numCols} - ${gap}px)`;
   return { position: 'absolute', top, height, left, width };
 }
 
@@ -210,7 +211,7 @@ export default function HomeView() {
                 </span>
                 {ev.todoCount && (
                   <div className="timeline-event-count-row">
-                    <Square size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
+                    <Group size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
                     <span className="timeline-event-time">{ev.todoCount}</span>
                   </div>
                 )}
