@@ -21,6 +21,18 @@ function hourLabel(h) {
 
 function toMin(h, m = 0) { return h * 60 + m; }
 
+const STUDY_TYPES = new Set(['focus', 'task']);
+
+function getStudyFill(ev) {
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const startMin = toMin(ev.startH, ev.startM);
+  const endMin   = toMin(ev.endH,   ev.endM);
+  if (nowMin >= endMin)   return 1;
+  if (nowMin <= startMin) return 0;
+  return (nowMin - startMin) / (endMin - startMin);
+}
+
 function timeToTop(h, m = 0) {
   return ((h - START_HOUR + 24) % 24) * HOUR_HEIGHT + (m / 60) * HOUR_HEIGHT;
 }
@@ -183,36 +195,46 @@ export default function HomeView() {
           const height = Math.max(timeToTop(ev.endH, ev.endM) - top, 30);
           const Icon   = ICON_MAP[ev.type] || Square;
 
+          const hasBar = STUDY_TYPES.has(ev.type);
+          const fill   = hasBar ? getStudyFill(ev) : 0;
+
           return (
             <div
               key={ev.id}
-              className={`timeline-event${pressedId === ev.id ? ' pressed' : ''}`}
+              className={`timeline-event${hasBar ? ' has-bar' : ''}${pressedId === ev.id ? ' pressed' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(ev.id)}
               onPointerUp={() => { setPressedId(null); setSelectedEvent(ev); }}
               onPointerLeave={() => setPressedId(null)}
               onPointerCancel={() => setPressedId(null)}
             >
-              <div className="timeline-event-title-row">
-                <div className="timeline-event-icon">
-                  <Icon size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
+              {hasBar && (
+                <div className="study-time-bar">
+                  <div className="study-time-gauge" style={{ height: `${fill * 100}%` }} />
                 </div>
-                <span className="timeline-event-title">{ev.title}</span>
-              </div>
-              <div className="timeline-event-meta">
-                <span className="timeline-event-time">
-                  {formatRange(ev.startH, ev.startM, ev.endH, ev.endM)}
-                </span>
-                {ev.todoCount && (
-                  <div className="timeline-event-count-row">
-                    <Users size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
-                    <span className="timeline-event-time">{ev.todoCount}</span>
+              )}
+              <div className={hasBar ? 'timeline-event-inner' : undefined}>
+                <div className="timeline-event-title-row">
+                  <div className="timeline-event-icon">
+                    <Icon size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
                   </div>
+                  <span className="timeline-event-title">{ev.title}</span>
+                </div>
+                <div className="timeline-event-meta">
+                  <span className="timeline-event-time">
+                    {formatRange(ev.startH, ev.startM, ev.endH, ev.endM)}
+                  </span>
+                  {ev.todoCount && (
+                    <div className="timeline-event-count-row">
+                      <Users size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
+                      <span className="timeline-event-time">{ev.todoCount}</span>
+                    </div>
+                  )}
+                </div>
+                {ev.note && (
+                  <span className="timeline-event-note">{ev.note}</span>
                 )}
               </div>
-              {ev.note && (
-                <span className="timeline-event-note">{ev.note}</span>
-              )}
             </div>
           );
         })}

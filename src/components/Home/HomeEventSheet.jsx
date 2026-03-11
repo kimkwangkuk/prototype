@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight } from 'lucide-react';
+import { Clock, ArrowRight, Target, Square } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
 import useTodoStore from '../../store/useTodoStore';
 
@@ -40,6 +40,7 @@ export default function HomeEventSheet() {
 
   const [animate, setAnimate] = useState(false);
   const [title, setTitle] = useState('');
+  const [eventType, setEventType] = useState('focus'); // 'focus' | 'task'
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('10:00');
   const [timeField, setTimeField] = useState(null); // 'start' | 'end' | null
@@ -50,6 +51,7 @@ export default function HomeEventSheet() {
     if (visible) {
       setTimeout(() => setAnimate(true), 10);
       setTitle('');
+      setEventType('focus');
       setStartTime('09:00');
       setEndTime('10:00');
       setTimeField(null);
@@ -84,7 +86,7 @@ export default function HomeEventSheet() {
     if (title.trim()) {
       const [sh, sm] = startTime.split(':').map(Number);
       const [eh, em] = endTime.split(':').map(Number);
-      addHomeEvent({ id: Date.now(), title, startH: sh, startM: sm, endH: eh, endM: em, type: 'custom' });
+      addHomeEvent({ id: Date.now(), title, startH: sh, startM: sm, endH: eh, endM: em, type: eventType });
     }
     closeHomeSheet();
   };
@@ -137,6 +139,26 @@ export default function HomeEventSheet() {
             placeholder="일정 이름"
             style={{ pointerEvents: 'none' }}
           />
+        </div>
+
+        {/* 타입 선택 */}
+        <div className="home-event-type-row">
+          {[
+            { value: 'focus', label: '집중계획', Icon: Target },
+            { value: 'task',  label: '할일',    Icon: Square },
+          ].map(({ value, label, Icon }) => (
+            <button
+              key={value}
+              className={`home-event-type-btn${eventType === value ? ' active' : ''}`}
+              onMouseDown={e => e.preventDefault()}
+              onTouchStart={e => e.preventDefault()}
+              onTouchEnd={e => { e.preventDefault(); setEventType(value); }}
+              onClick={() => setEventType(value)}
+            >
+              <Icon size={13} strokeWidth={1.8} />
+              {label}
+            </button>
+          ))}
         </div>
 
         {/* 시간 선택 행 */}

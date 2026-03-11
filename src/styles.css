@@ -3429,3 +3429,69 @@ textarea {
 }
 
 
+
+/* ─── Study Time Bar ─── */
+.timeline-event.has-bar {
+  flex-direction: row;
+  gap: 5px;
+  padding: 0 8px 0 0;
+  align-items: stretch;
+}
+
+.study-time-bar {
+  width: 3px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.study-time-gauge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  background: #ff7300;
+  border-radius: 10px;
+}
+
+.timeline-event-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 5px 0;
+  min-width: 0;
+}
+
+/* ─── Home Event Type Selector ─── */
+.home-event-type-row {
+  display: flex;
+  gap: 6px;
+  padding: 6px 4px 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.home-event-type-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 12px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+
+.home-event-type-btn.active {
+  background: rgba(85, 112, 247, 0.12);
+  color: var(--blue-500);
+}
