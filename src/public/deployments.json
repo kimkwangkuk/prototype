@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-h1mqc9qbj-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 홈 타임라인 이벤트 블록 좌표 보정 - 컨테이너 패딩 반영, 레이블 영역 침범 수정",
+    "createdAt": 1773210831175,
+    "sha": "dc94eac"
+  },
+  {
+    "url": "https://prototype-17myiwh6z-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773210660574,
+    "sha": "66de2f1"
+  },
+  {
     "url": "https://prototype-bvmt7el7m-kimkwangkuks-projects.vercel.app",
     "message": "feat: 홈탭 일정 추가 UI + 겹침 감지 타임라인 레이아웃",
     "createdAt": 1773210591263,
@@ -286,17 +298,5 @@
     "message": "fix: 주뷰 인라인 인풋 OS 키보드 차단 → 커스텀 숫자패드로 교체",
     "createdAt": 1772811880997,
     "sha": "b79a067"
-  },
-  {
-    "url": "https://prototype-1l38tcuqs-kimkwangkuks-projects.vercel.app",
-    "message": "refactor: 할일 인풋 탭 시 OS 키보드 차단 → 커스텀 숫자패드로 교체",
-    "createdAt": 1772811646107,
-    "sha": "e3e3483"
-  },
-  {
-    "url": "https://prototype-mfd5vytps-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 인풋 탭 → 하단 커스텀 numpad 트리거로 변경, 지속시간 드럼피커 복원",
-    "createdAt": 1772811312867,
-    "sha": "7062e85"
   }
 ]
