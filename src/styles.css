@@ -3428,39 +3428,4 @@ textarea {
   background: rgba(255, 59, 48, 0.2);
 }
 
-/* ─── AttachedSheet (공통 컴포넌트) ─── */
-.attached-sheet-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.4);
-}
 
-.attached-sheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1001;
-  background: #ffffff;
-  border-radius: 24px 24px 0 0;
-  box-shadow: 0 -4px 40px rgba(0,0,0,0.12);
-  overflow: clip;
-  transform: translateY(calc(100% + 12px));
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  pointer-events: auto;
-}
-
-.attached-sheet.visible {
-  transform: translateY(0);
-}
-
-.attached-sheet-grabber-row {
-  display: flex;
-  justify-content: center;
-  padding: 10px 0 4px;
-}
-
-.attached-sheet-content {
-  padding: 0 20px 32px;
-}
