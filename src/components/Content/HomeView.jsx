@@ -209,7 +209,7 @@ export default function HomeView() {
               onPointerCancel={() => setPressedId(null)}
             >
               <div className="study-time-bar">
-                <div className="study-time-gauge" style={{ height: `${fill * 100}%` }} />
+                <div className="study-time-gauge" style={{ transform: `scaleY(${fill})` }} />
               </div>
               <div className="timeline-event-inner">
                 <div className="timeline-event-title-row">

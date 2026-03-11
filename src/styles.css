@@ -3451,9 +3451,11 @@ textarea {
   position: absolute;
   top: 0;
   left: 0;
-  width: 3px;
+  right: 0;
+  bottom: 0;
   background: #ff7300;
   border-radius: 10px;
+  transform-origin: top center;
 }
 
 .timeline-event-inner {
