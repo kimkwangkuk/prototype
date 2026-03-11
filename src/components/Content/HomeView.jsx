@@ -149,6 +149,7 @@ export default function HomeView() {
   const layout = computeLayout(allEvents);
 
   return (
+    <>
     <div className="home-view" ref={scrollRef}>
       <div className="timeline-container">
 
@@ -221,5 +222,6 @@ export default function HomeView() {
 
     <HomeEventDetailSheet event={selectedEvent} onClose={() => setSelectedEvent(null)} />
     <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
+    </>
   );
 }
