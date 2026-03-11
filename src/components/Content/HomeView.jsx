@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Target, UtensilsCrossed, Square, Gamepad2, Zap, ListChecks, Users } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap, ListChecks, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
 
@@ -50,7 +50,7 @@ const HOUR_EMOJIS = {
 // Lucide 아이콘 매핑
 const ICON_MAP = {
   focus: Target,
-  meal:  UtensilsCrossed,
+  meal:  Hamburger,
   task:  Square,
   game:  Gamepad2,
   custom: Zap,

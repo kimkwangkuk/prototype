@@ -11,7 +11,7 @@ const useTodoStore = create((set, get) => ({
   editingTodoId: null,
   currentVariant: 'b', // 'a' or 'b'
   currentView: 'day', // 'day' | 'week'
-  currentTab: 'todo', // 'todo' | 'calendar'
+  currentTab: 'home', // 'todo' | 'calendar' | 'home'
   homeSheetVisible: false,
   homeEvents: [], // { id, title, startH, startM, endH, endM, type }
 
