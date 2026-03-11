@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-4gb1oel76-kimkwangkuks-projects.vercel.app",
+    "message": "refactor: AttachedSheet 공통 컴포넌트화, 화이트 배경 적용",
+    "createdAt": 1773234237660,
+    "sha": "be36d1a"
+  },
+  {
+    "url": "https://prototype-heu1kp17t-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773233861211,
+    "sha": "e4714d4"
+  },
+  {
     "url": "https://prototype-2qafpfnjs-kimkwangkuks-projects.vercel.app",
     "message": "feat: 일정 디테일 시트 전체너비 붙는 타입으로 변경, 어두운 오버레이 적용",
     "createdAt": 1773233792887,
@@ -238,17 +250,5 @@
     "message": "rename: 주뷰.md → weekly-view.md",
     "createdAt": 1772862562716,
     "sha": "dfa16e6"
-  },
-  {
-    "url": "https://prototype-f0xtx2p5a-kimkwangkuks-projects.vercel.app",
-    "message": "docs: 주뷰 정책 문서 추가 및 CLAUDE.md 연결",
-    "createdAt": 1772862450359,
-    "sha": "e4d2974"
-  },
-  {
-    "url": "https://prototype-eyrt1r2jb-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 주뷰 날짜 블록 내 마지막 할일 스크롤 불가 문제 수정",
-    "createdAt": 1772861998369,
-    "sha": "c8b1441"
   }
 ]
