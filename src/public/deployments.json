@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ale9ac7na-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 스터디 게이지 자정 기준 버그 수정 - 분 비교 → 타임라인 y좌표 비교",
+    "createdAt": 1773241850597,
+    "sha": "e23ac01"
+  },
+  {
+    "url": "https://prototype-7quhhn5wr-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773241747993,
+    "sha": "8c447e1"
+  },
+  {
     "url": "https://prototype-3be9awkj8-kimkwangkuks-projects.vercel.app",
     "message": "fix: 스터디 타임 게이지 height% → scaleY로 교체 (flex stretch 환경 대응)",
     "createdAt": 1773241677238,
@@ -238,17 +250,5 @@
     "message": "feat(monthly): 포커스 날짜 셀에 '할 일...' 플레이스홀더 표시",
     "createdAt": 1772867979737,
     "sha": "7d73280"
-  },
-  {
-    "url": "https://prototype-96hlx5kqx-kimkwangkuks-projects.vercel.app",
-    "message": "feat(monthly): 확인(엔터) 시 다음 할일 자동 생성",
-    "createdAt": 1772867852088,
-    "sha": "1726f49"
-  },
-  {
-    "url": "https://prototype-8kpv5yoj3-kimkwangkuks-projects.vercel.app",
-    "message": "fix(pulse): 생성 애니메이션 배경만 점멸 (텍스트/버튼 제외)",
-    "createdAt": 1772867685257,
-    "sha": "5d5b6f1"
   }
 ]
