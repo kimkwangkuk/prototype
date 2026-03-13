@@ -48,7 +48,9 @@ export default function Tabbar() {
   const setView = useTodoStore(state => state.setView);
   const currentTab = useTodoStore(state => state.currentTab);
   const setTab = useTodoStore(state => state.setTab);
-  const openHomeSheet = useTodoStore(state => state.openHomeSheet);
+  const homeAddMode = useTodoStore(state => state.homeAddMode);
+  const enterHomeAddMode = useTodoStore(state => state.enterHomeAddMode);
+  const exitHomeAddMode = useTodoStore(state => state.exitHomeAddMode);
   const [viewMenuOpen, setViewMenuOpen] = useState(false);
 
   const handleViewSelect = (view) => {
@@ -112,9 +114,20 @@ export default function Tabbar() {
 
         {/* 홈탭: + 버튼 / 나머지: 뷰 전환 */}
         {currentTab === 'home' ? (
-          <button className="tabbar-add" onClick={openHomeSheet} aria-label="일정 추가">
+          <button
+            className={`tabbar-add${homeAddMode ? ' add-mode-active' : ''}`}
+            onClick={homeAddMode ? exitHomeAddMode : enterHomeAddMode}
+            aria-label={homeAddMode ? '추가 모드 종료' : '일정 추가'}
+          >
             <div className="tabbar-add-bg" />
-            <Plus size={24} strokeWidth={2} style={{ position: 'relative', color: 'var(--label-primary)' }} />
+            {homeAddMode ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" style={{ position: 'relative', width: 22, height: 22, color: 'var(--label-primary)' }}>
+                <line x1="5" y1="5" x2="19" y2="19"/>
+                <line x1="19" y1="5" x2="5" y2="19"/>
+              </svg>
+            ) : (
+              <Plus size={24} strokeWidth={2} style={{ position: 'relative', color: 'var(--label-primary)' }} />
+            )}
           </button>
         ) : null}
         <div className="tabbar-view-area" style={currentTab === 'home' ? { display: 'none' } : undefined}>

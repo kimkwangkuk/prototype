@@ -752,6 +752,10 @@ textarea {
   color: var(--label-primary);
   position: relative;
 }
+.tabbar-add.add-mode-active .tabbar-add-bg {
+  background: rgba(0, 0, 0, 0.08);
+}
+
 .tabbar-add-label {
   font-size: 10px;
   font-weight: 600;
@@ -3290,6 +3294,23 @@ textarea {
   color: rgba(0, 0, 0, 0.86);
   white-space: nowrap;
   letter-spacing: -0.02px;
+}
+
+/* ─── Timeline Empty Slot (Add Mode) ─── */
+.timeline-empty-slot {
+  border: 1.5px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.025);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.timeline-empty-slot:active {
+  background: rgba(0, 0, 0, 0.07);
 }
 
 /* ─── Home Event Detail Sheet ─── */

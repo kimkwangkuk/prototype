@@ -37,6 +37,8 @@ export default function HomeEventSheet() {
   const visible = useTodoStore(state => state.homeSheetVisible);
   const closeHomeSheet = useTodoStore(state => state.closeHomeSheet);
   const addHomeEvent = useTodoStore(state => state.addHomeEvent);
+  const homeSheetInitialStart = useTodoStore(state => state.homeSheetInitialStart);
+  const homeSheetInitialEnd = useTodoStore(state => state.homeSheetInitialEnd);
 
   const [animate, setAnimate] = useState(false);
   const [title, setTitle] = useState('');
@@ -52,8 +54,8 @@ export default function HomeEventSheet() {
       setTimeout(() => setAnimate(true), 10);
       setTitle('');
       setEventType('focus');
-      setStartTime('09:00');
-      setEndTime('10:00');
+      setStartTime(homeSheetInitialStart || '09:00');
+      setEndTime(homeSheetInitialEnd || '10:00');
       setTimeField(null);
     } else {
       setAnimate(false);

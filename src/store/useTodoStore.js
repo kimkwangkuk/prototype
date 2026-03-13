@@ -13,6 +13,9 @@ const useTodoStore = create((set, get) => ({
   currentView: 'day', // 'day' | 'week'
   currentTab: 'home', // 'todo' | 'calendar' | 'home'
   homeSheetVisible: false,
+  homeAddMode: false,
+  homeSheetInitialStart: null,
+  homeSheetInitialEnd: null,
   homeEvents: [], // { id, title, startH, startM, endH, endM, type }
 
   newlySavedTodoId: null,
@@ -480,8 +483,19 @@ const useTodoStore = create((set, get) => ({
   setView: (view) => set({ currentView: view }),
   setTab: (tab) => set({ currentTab: tab }),
   setBaseDate: (date) => set({ baseDate: date }),
-  openHomeSheet: () => set({ homeSheetVisible: true }),
-  closeHomeSheet: () => set({ homeSheetVisible: false }),
+  enterHomeAddMode: () => set({ homeAddMode: true }),
+  exitHomeAddMode: () => set({ homeAddMode: false }),
+  openHomeSheet: (startTime, endTime) => set({
+    homeSheetVisible: true,
+    homeAddMode: false,
+    homeSheetInitialStart: startTime || null,
+    homeSheetInitialEnd: endTime || null,
+  }),
+  closeHomeSheet: () => set({
+    homeSheetVisible: false,
+    homeSheetInitialStart: null,
+    homeSheetInitialEnd: null,
+  }),
   addHomeEvent: (event) => set(state => ({ homeEvents: [...state.homeEvents, event] })),
   removeHomeEvent: (id) => set(state => ({ homeEvents: state.homeEvents.filter(e => e.id !== id) })),
 }));

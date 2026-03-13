@@ -137,6 +137,8 @@ const SAMPLE_EVENTS = [
 export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
+  const homeAddMode = useTodoStore(state => state.homeAddMode);
+  const openHomeSheet = useTodoStore(state => state.openHomeSheet);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [pressedId, setPressedId] = useState(null);
@@ -158,6 +160,27 @@ export default function HomeView() {
   ];
 
   const layout = computeLayout(allEvents);
+
+  // 빈 슬롯 계산: 이벤트가 없는 1시간 단위 슬롯
+  const occupiedHours = new Set();
+  allEvents.forEach(ev => {
+    const startMin = ev.startH * 60 + ev.startM;
+    const endMin = ev.endH * 60 + ev.endM;
+    HOURS.forEach(h => {
+      const slotStart = h * 60;
+      const slotEnd = (h + 1) * 60;
+      if (startMin < slotEnd && endMin > slotStart) {
+        occupiedHours.add(h);
+      }
+    });
+  });
+
+  const handleSlotTap = (h) => {
+    const startStr = `${String(h).padStart(2, '0')}:00`;
+    const endH = (h + 1) % 24;
+    const endStr = `${String(endH).padStart(2, '0')}:00`;
+    openHomeSheet(startStr, endStr);
+  };
 
   return (
     <>
@@ -186,6 +209,25 @@ export default function HomeView() {
           <span className="timeline-now-pill-text">{nowLabel}</span>
         </div>
         <div className="timeline-now-line" style={{ top: nowY }} />
+
+        {/* 빈 슬롯 점선 블록 (추가 모드) */}
+        {homeAddMode && HOURS.map(h => {
+          if (occupiedHours.has(h)) return null;
+          const top = timeToTop(h);
+          return (
+            <div
+              key={`slot-${h}`}
+              className="timeline-empty-slot"
+              style={getEventStyle(top, HOUR_HEIGHT, 0, 1)}
+              onClick={() => handleSlotTap(h)}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <line x1="8" y1="2" x2="8" y2="14" stroke="rgba(0,0,0,0.3)" strokeWidth="1.8" strokeLinecap="round"/>
+                <line x1="2" y1="8" x2="14" y2="8" stroke="rgba(0,0,0,0.3)" strokeWidth="1.8" strokeLinecap="round"/>
+              </svg>
+            </div>
+          );
+        })}
 
         {/* 이벤트 카드 (겹침 감지 레이아웃 적용) */}
         {allEvents.map(ev => {
