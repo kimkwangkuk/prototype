@@ -161,6 +161,10 @@ export default function HomeView() {
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [pressedId, setPressedId] = useState(null);
   const [pressedSlot, setPressedSlot] = useState(null); // { startMins, endMins }
+  const longPressTimerRef = useRef(null);
+  const longPressSlotRef = useRef(null);  // 롱탭 대기 중인 슬롯
+  const confirmedSlotRef = useRef(null);  // 롱탭 확정된 슬롯 (release 시 열기)
+  const pointerStartRef  = useRef(null);  // 이동 감지용 시작 좌표
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -215,14 +219,44 @@ export default function HomeView() {
     return { startMins, endMins };
   };
 
-  const handleTimelinePointerDown = (e) => {
-    const slot = getSlotFromPointer(e);
-    setPressedSlot(slot);
+  const cancelLongPress = () => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+    longPressSlotRef.current = null;
+    confirmedSlotRef.current = null;
+    pointerStartRef.current = null;
+    setPressedSlot(null);
   };
 
-  const handleTimelineClick = (e) => {
+  const handleTimelinePointerDown = (e) => {
     const slot = getSlotFromPointer(e);
-    setPressedSlot(null);
+    if (!slot) return;
+    pointerStartRef.current = { x: e.clientX, y: e.clientY };
+    longPressSlotRef.current = slot;
+    longPressTimerRef.current = setTimeout(() => {
+      confirmedSlotRef.current = longPressSlotRef.current;
+      setPressedSlot(longPressSlotRef.current);
+      longPressTimerRef.current = null;
+    }, 400);
+  };
+
+  const handleTimelinePointerMove = (e) => {
+    if (!pointerStartRef.current || !longPressTimerRef.current) return;
+    const dx = e.clientX - pointerStartRef.current.x;
+    const dy = e.clientY - pointerStartRef.current.y;
+    if (Math.sqrt(dx * dx + dy * dy) > 8) {
+      // 스크롤 제스처 → 롱탭 취소
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+      longPressSlotRef.current = null;
+    }
+  };
+
+  const handleTimelinePointerUp = () => {
+    const slot = confirmedSlotRef.current;
+    cancelLongPress();
     if (slot) {
       openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
     }
@@ -261,9 +295,9 @@ export default function HomeView() {
       <div
         className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`}
         onPointerDown={handleTimelinePointerDown}
-        onPointerCancel={() => setPressedSlot(null)}
-        onPointerUp={() => setPressedSlot(null)}
-        onClick={handleTimelineClick}
+        onPointerMove={handleTimelinePointerMove}
+        onPointerUp={handleTimelinePointerUp}
+        onPointerCancel={cancelLongPress}
       >
 
         {/* 시간 그리드 (25행: AM5 ~ AM5 다음날) */}
