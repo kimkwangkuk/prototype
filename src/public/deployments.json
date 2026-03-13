@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-eac3cm5eu-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 신규 일정 점멸 → 할일 탭과 동일한 배경 펄스 방식으로 교체",
+    "createdAt": 1773372722128,
+    "sha": "e4c7cd7"
+  },
+  {
+    "url": "https://prototype-2mirogm24-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773365735556,
+    "sha": "7e74434"
+  },
+  {
     "url": "https://prototype-m8h9nymmn-kimkwangkuks-projects.vercel.app",
     "message": "feat: 신규 일정 점멸 애니메이션 + 추가 모드 오버레이 흐림",
     "createdAt": 1773365666953,
@@ -238,17 +250,5 @@
     "message": "fix: 오버레이 스크롤 체이닝 제거 - 제스처 시작 시 대상 확정",
     "createdAt": 1772887071471,
     "sha": "daebdaa"
-  },
-  {
-    "url": "https://prototype-63vuphuu8-kimkwangkuks-projects.vercel.app",
-    "message": "Fix scroll chaining in weekly view date blocks (iOS Safari)",
-    "createdAt": 1772870371766,
-    "sha": "eac3a6d"
-  },
-  {
-    "url": "https://prototype-p7s72xai3-kimkwangkuks-projects.vercel.app",
-    "message": "Prevent scroll chaining in weekly view date blocks",
-    "createdAt": 1772869956109,
-    "sha": "d874050"
   }
 ]
