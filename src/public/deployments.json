@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-8avm20eco-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 타임라인 추가 버튼 → 빈 슬롯 점선 블록 선택 후 일정 생성",
+    "createdAt": 1773362819111,
+    "sha": "c2bcc0c"
+  },
+  {
+    "url": "https://prototype-gtp5en17f-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773241919979,
+    "sha": "b8a8ed3"
+  },
+  {
     "url": "https://prototype-ale9ac7na-kimkwangkuks-projects.vercel.app",
     "message": "fix: 스터디 게이지 자정 기준 버그 수정 - 분 비교 → 타임라인 y좌표 비교",
     "createdAt": 1773241850597,
@@ -238,17 +250,5 @@
     "message": "fix: 커스텀 키패드 z-index 1000→1002, 바텀시트(1001) 위로 고정",
     "createdAt": 1772868528270,
     "sha": "8d5b083"
-  },
-  {
-    "url": "https://prototype-p84lc6twl-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 숫자 키패드 → 영문 QWERTY 커스텀 키패드로 교체",
-    "createdAt": 1772868455588,
-    "sha": "5a30bd4"
-  },
-  {
-    "url": "https://prototype-b5w9u06z1-kimkwangkuks-projects.vercel.app",
-    "message": "feat(monthly): 포커스 날짜 셀에 '할 일...' 플레이스홀더 표시",
-    "createdAt": 1772867979737,
-    "sha": "7d73280"
   }
 ]
