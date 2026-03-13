@@ -79,10 +79,11 @@ export default function HomeEventSheet() {
       setEndTime(initEnd);
       setTimeField(null);
       setMounted(true);
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        setAnimate(true);
-        setTimeout(() => inputRef.current?.focus(), 80);
-      }));
+      // 포커스를 먼저 → iOS가 유저 제스처로 인식해 키보드 표시
+      requestAnimationFrame(() => {
+        inputRef.current?.focus();
+        requestAnimationFrame(() => setAnimate(true));
+      });
     } else {
       // 닫힐 때 키보드 해제 + keyboard-open 클래스 명시적 제거 → 탭바 복원
       inputRef.current?.blur();

@@ -184,6 +184,41 @@ export default function HomeView() {
     ...homeEvents.map(e => ({ ...e, id: String(e.id) })),
   ];
 
+  // 타임라인 빈 영역 클릭 → 클릭 위치 기준 1시간 스마트 세팅
+  const handleTimelineClick = (e) => {
+    if (!homeAddMode) return;
+    if (
+      e.target.closest('.timeline-event') ||
+      e.target.closest('.timeline-label-col') ||
+      e.target.closest('.timeline-hour-emojis') ||
+      e.target.closest('.timeline-now-pill')
+    ) return;
+
+    const containerEl = e.currentTarget;
+    const rect = containerEl.getBoundingClientRect();
+    const clickY = e.clientY - rect.top;
+
+    // Y → 타임라인 분 (0 = AM5), HOUR_HEIGHT px = 60분
+    const rawMins = (clickY / HOUR_HEIGHT) * 60;
+    const startMins = Math.max(0, Math.min(Math.round(rawMins / 10) * 10, 24 * 60 - 10));
+
+    // 클릭 지점이 기존 이벤트 안에 있으면 무시
+    const intervals = allEvents.map(ev => ({
+      start: toTimelineMins(ev.startH, ev.startM),
+      end: toTimelineMins(ev.endH, ev.endM),
+    }));
+    if (intervals.some(iv => startMins >= iv.start && startMins < iv.end)) return;
+
+    // 클릭 이후 가장 가까운 이벤트 시작 시간 (1시간 이내에 있으면 end를 그 시간으로 조정)
+    const nextStart = intervals
+      .filter(iv => iv.start > startMins)
+      .reduce((min, iv) => (iv.start < min ? iv.start : min), Infinity);
+
+    const endMins = nextStart < startMins + 60 ? nextStart : startMins + 60;
+
+    openHomeSheet(minsToTimeStr(startMins), minsToTimeStr(Math.min(endMins, 24 * 60)));
+  };
+
   const layout = computeLayout(allEvents);
 
   // 추가 모드: 이벤트 사이 빈 시간 구간을 하나의 블록으로 계산
@@ -214,7 +249,7 @@ export default function HomeView() {
   return (
     <>
     <div className="home-view" ref={scrollRef}>
-      <div className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`}>
+      <div className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`} onClick={handleTimelineClick}>
 
         {/* 시간 그리드 (25행: AM5 ~ AM5 다음날) */}
         {DISPLAY_HOURS.map((h, idx) => (
@@ -248,7 +283,6 @@ export default function HomeView() {
               key={`gap-${i}`}
               className="timeline-empty-slot"
               style={getEventStyle(top, height, 0, 1)}
-              onClick={() => openHomeSheet(minsToTimeStr(gap.startMins), minsToTimeStr(gap.endMins))}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <line x1="8" y1="2" x2="8" y2="14" stroke="rgba(0,0,0,0.25)" strokeWidth="1.8" strokeLinecap="round"/>
