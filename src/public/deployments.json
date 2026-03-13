@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1ve4wyvjs-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 일정 생성 취소 시 탭바 안보이는 문제 + 종료시간 기본값 보정",
+    "createdAt": 1773401258083,
+    "sha": "525ee14"
+  },
+  {
+    "url": "https://prototype-6jwesp20l-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773400849673,
+    "sha": "9d40828"
+  },
+  {
     "url": "https://prototype-4rh5kbsed-kimkwangkuks-projects.vercel.app",
     "message": "fix: 점멸 애니메이션 개선 + 자정 시간 등록 허용 + 종료시간 유효성 검사",
     "createdAt": 1773400783178,
@@ -238,17 +250,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773207881402,
     "sha": "5a7e4ea"
-  },
-  {
-    "url": "https://prototype-pf9vjp84z-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 홈 탭 타임라인 뷰 구현",
-    "createdAt": 1773207814157,
-    "sha": "152d57c"
-  },
-  {
-    "url": "https://prototype-ly38icgeg-kimkwangkuks-projects.vercel.app",
-    "message": "docs: 주뷰 정책문서 — 오버레이 스크롤 체이닝 수정 내용 반영",
-    "createdAt": 1772890026803,
-    "sha": "61ddb42"
   }
 ]
