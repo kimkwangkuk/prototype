@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-m8h9nymmn-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 신규 일정 점멸 애니메이션 + 추가 모드 오버레이 흐림",
+    "createdAt": 1773365666953,
+    "sha": "1fc664e"
+  },
+  {
+    "url": "https://prototype-r4jau8fa7-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773365163295,
+    "sha": "9a4e09b"
+  },
+  {
     "url": "https://prototype-33e2u0vby-kimkwangkuks-projects.vercel.app",
     "message": "feat: 타임라인 5시 표시 / 빈시간 갭 블록 / 일정 생성 전체 페이지",
     "createdAt": 1773365093996,
@@ -238,17 +250,5 @@
     "message": "Prevent scroll chaining in weekly view date blocks",
     "createdAt": 1772869956109,
     "sha": "d874050"
-  },
-  {
-    "url": "https://prototype-anjkk8ukv-kimkwangkuks-projects.vercel.app",
-    "message": "Add status checkbox to monthly view todo items",
-    "createdAt": 1772869137731,
-    "sha": "2e9d302"
-  },
-  {
-    "url": "https://prototype-38u5xnnwm-kimkwangkuks-projects.vercel.app",
-    "message": "Match weekly view pulse animation style to daily view",
-    "createdAt": 1772869014824,
-    "sha": "76ee504"
   }
 ]
