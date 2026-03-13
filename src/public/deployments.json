@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-4rh5kbsed-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 점멸 애니메이션 개선 + 자정 시간 등록 허용 + 종료시간 유효성 검사",
+    "createdAt": 1773400783178,
+    "sha": "1053e0c"
+  },
+  {
+    "url": "https://prototype-5m7rp3pi9-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773372788939,
+    "sha": "638a7b3"
+  },
+  {
     "url": "https://prototype-eac3cm5eu-kimkwangkuks-projects.vercel.app",
     "message": "fix: 신규 일정 점멸 → 할일 탭과 동일한 배경 펄스 방식으로 교체",
     "createdAt": 1773372722128,
@@ -238,17 +250,5 @@
     "message": "docs: 주뷰 정책문서 — 오버레이 스크롤 체이닝 수정 내용 반영",
     "createdAt": 1772890026803,
     "sha": "61ddb42"
-  },
-  {
-    "url": "https://prototype-1xblzx4pq-kimkwangkuks-projects.vercel.app",
-    "message": "refactor: 오버레이 터치 핸들러 코드 정리",
-    "createdAt": 1772888431501,
-    "sha": "ea927e9"
-  },
-  {
-    "url": "https://prototype-4n357tjgo-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 오버레이 스크롤 체이닝 제거 - 제스처 시작 시 대상 확정",
-    "createdAt": 1772887071471,
-    "sha": "daebdaa"
   }
 ]
