@@ -3452,11 +3452,24 @@ textarea {
   background: rgba(0, 0, 0, 0.07);
 }
 
-/* 빈 영역 탭 pressed 피드백 */
+/* 빈 영역 롱탭 피드백 */
+@keyframes longpress-fill {
+  0%   { background: rgba(0, 0, 0, 0); }
+  20%  { background: rgba(0, 0, 0, 0.02); }
+  100% { background: rgba(0, 0, 0, 0.06); }
+}
+
 .timeline-pressed-slot {
-  background: rgba(0, 0, 0, 0.07);
   border-radius: 8px;
   pointer-events: none;
+  border: 1.5px solid transparent;
+  animation: longpress-fill 400ms cubic-bezier(0.25, 0, 0.5, 1) forwards;
+}
+
+.timeline-pressed-slot.confirmed {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.16);
+  transition: border-color 0.12s ease-out;
 }
 
 /* ─── Home Event Detail Sheet ─── */

@@ -160,11 +160,12 @@ export default function HomeView() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [pressedId, setPressedId] = useState(null);
-  const [pressedSlot, setPressedSlot] = useState(null); // { startMins, endMins }
+  const [pressedSlot, setPressedSlot] = useState(null);      // { startMins, endMins }
+  const [pressedConfirmed, setPressedConfirmed] = useState(false); // 롱탭 완료 → 보더 표시
   const longPressTimerRef = useRef(null);
-  const longPressSlotRef = useRef(null);  // 롱탭 대기 중인 슬롯
-  const confirmedSlotRef = useRef(null);  // 롱탭 확정된 슬롯 (release 시 열기)
-  const pointerStartRef  = useRef(null);  // 이동 감지용 시작 좌표
+  const longPressSlotRef = useRef(null);
+  const confirmedSlotRef = useRef(null);
+  const pointerStartRef  = useRef(null);
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -228,6 +229,7 @@ export default function HomeView() {
     confirmedSlotRef.current = null;
     pointerStartRef.current = null;
     setPressedSlot(null);
+    setPressedConfirmed(false);
   };
 
   const handleTimelinePointerDown = (e) => {
@@ -235,22 +237,22 @@ export default function HomeView() {
     if (!slot) return;
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
     longPressSlotRef.current = slot;
+    // 즉시 슬롯 표시 (애니메이션 시작)
+    setPressedSlot(slot);
+    setPressedConfirmed(false);
     longPressTimerRef.current = setTimeout(() => {
       confirmedSlotRef.current = longPressSlotRef.current;
-      setPressedSlot(longPressSlotRef.current);
+      setPressedConfirmed(true); // 보더 등장
       longPressTimerRef.current = null;
     }, 400);
   };
 
   const handleTimelinePointerMove = (e) => {
-    if (!pointerStartRef.current || !longPressTimerRef.current) return;
+    if (!pointerStartRef.current) return;
     const dx = e.clientX - pointerStartRef.current.x;
     const dy = e.clientY - pointerStartRef.current.y;
     if (Math.sqrt(dx * dx + dy * dy) > 8) {
-      // 스크롤 제스처 → 롱탭 취소
-      clearTimeout(longPressTimerRef.current);
-      longPressTimerRef.current = null;
-      longPressSlotRef.current = null;
+      cancelLongPress();
     }
   };
 
@@ -347,7 +349,7 @@ export default function HomeView() {
           const height = ((pressedSlot.endMins - pressedSlot.startMins) / 60) * HOUR_HEIGHT;
           return (
             <div
-              className="timeline-pressed-slot"
+              className={`timeline-pressed-slot${pressedConfirmed ? ' confirmed' : ''}`}
               style={getEventStyle(top, height, 0, 1)}
             />
           );
