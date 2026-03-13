@@ -67,10 +67,16 @@ export default function HomeEventSheet() {
 
   useEffect(() => {
     if (visible) {
+      const initStart = homeSheetInitialStart || '09:00';
+      // 종료 시간이 시작 시간 이전이면 시작+1시간으로 보정
+      let initEnd = homeSheetInitialEnd || addHour(initStart, 1);
+      if (toTimelineMins(initEnd) <= toTimelineMins(initStart)) {
+        initEnd = addHour(initStart, 1);
+      }
       setTitle('');
       setEventType('focus');
-      setStartTime(homeSheetInitialStart || '09:00');
-      setEndTime(homeSheetInitialEnd || '10:00');
+      setStartTime(initStart);
+      setEndTime(initEnd);
       setTimeField(null);
       setMounted(true);
       requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -78,6 +84,9 @@ export default function HomeEventSheet() {
         setTimeout(() => inputRef.current?.focus(), 80);
       }));
     } else {
+      // 닫힐 때 키보드 해제 + keyboard-open 클래스 명시적 제거 → 탭바 복원
+      inputRef.current?.blur();
+      document.body.classList.remove('keyboard-open');
       setAnimate(false);
       const t = setTimeout(() => setMounted(false), 350);
       return () => clearTimeout(t);
