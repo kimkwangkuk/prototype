@@ -160,6 +160,7 @@ export default function HomeView() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [pressedId, setPressedId] = useState(null);
+  const [pressedSlot, setPressedSlot] = useState(null); // { startMins, endMins }
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -184,39 +185,47 @@ export default function HomeView() {
     ...homeEvents.map(e => ({ ...e, id: String(e.id) })),
   ];
 
-  // 타임라인 빈 영역 클릭 → 클릭 위치 기준 1시간 스마트 세팅
-  const handleTimelineClick = (e) => {
-    if (!homeAddMode) return;
+  // 포인터 위치 → 빈 슬롯 계산 (없으면 null)
+  const getSlotFromPointer = (e) => {
     if (
       e.target.closest('.timeline-event') ||
       e.target.closest('.timeline-label-col') ||
       e.target.closest('.timeline-hour-emojis') ||
       e.target.closest('.timeline-now-pill')
-    ) return;
+    ) return null;
 
     const containerEl = e.currentTarget;
     const rect = containerEl.getBoundingClientRect();
     const clickY = e.clientY - rect.top;
 
-    // Y → 타임라인 분 (0 = AM5), HOUR_HEIGHT px = 60분
     const rawMins = (clickY / HOUR_HEIGHT) * 60;
     const startMins = Math.max(0, Math.min(Math.round(rawMins / 10) * 10, 24 * 60 - 10));
 
-    // 클릭 지점이 기존 이벤트 안에 있으면 무시
     const intervals = allEvents.map(ev => ({
       start: toTimelineMins(ev.startH, ev.startM),
       end: toTimelineMins(ev.endH, ev.endM),
     }));
-    if (intervals.some(iv => startMins >= iv.start && startMins < iv.end)) return;
+    if (intervals.some(iv => startMins >= iv.start && startMins < iv.end)) return null;
 
-    // 클릭 이후 가장 가까운 이벤트 시작 시간 (1시간 이내에 있으면 end를 그 시간으로 조정)
     const nextStart = intervals
       .filter(iv => iv.start > startMins)
       .reduce((min, iv) => (iv.start < min ? iv.start : min), Infinity);
 
     const endMins = nextStart < startMins + 60 ? nextStart : startMins + 60;
+    return { startMins, endMins };
+  };
 
-    openHomeSheet(minsToTimeStr(startMins), minsToTimeStr(Math.min(endMins, 24 * 60)));
+  const handleTimelinePointerDown = (e) => {
+    const slot = getSlotFromPointer(e);
+    setPressedSlot(slot);
+  };
+
+  const handleTimelineClick = (e) => {
+    const slot = getSlotFromPointer(e);
+    setPressedSlot(null);
+    if (slot) {
+      openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
+    }
   };
 
   const layout = computeLayout(allEvents);
@@ -249,7 +258,13 @@ export default function HomeView() {
   return (
     <>
     <div className="home-view" ref={scrollRef}>
-      <div className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`} onClick={handleTimelineClick}>
+      <div
+        className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`}
+        onPointerDown={handleTimelinePointerDown}
+        onPointerCancel={() => setPressedSlot(null)}
+        onPointerUp={() => setPressedSlot(null)}
+        onClick={handleTimelineClick}
+      >
 
         {/* 시간 그리드 (25행: AM5 ~ AM5 다음날) */}
         {DISPLAY_HOURS.map((h, idx) => (
@@ -291,6 +306,18 @@ export default function HomeView() {
             </div>
           );
         })}
+
+        {/* 빈 영역 pressed 효과 */}
+        {pressedSlot && (() => {
+          const top = (pressedSlot.startMins / 60) * HOUR_HEIGHT;
+          const height = ((pressedSlot.endMins - pressedSlot.startMins) / 60) * HOUR_HEIGHT;
+          return (
+            <div
+              className="timeline-pressed-slot"
+              style={getEventStyle(top, height, 0, 1)}
+            />
+          );
+        })()}
 
         {/* 이벤트 카드 (겹침 감지 레이아웃 적용) */}
         {allEvents.map(ev => {

@@ -3452,6 +3452,13 @@ textarea {
   background: rgba(0, 0, 0, 0.07);
 }
 
+/* 빈 영역 탭 pressed 피드백 */
+.timeline-pressed-slot {
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
 /* ─── Home Event Detail Sheet ─── */
 .home-event-detail-sheet {
   padding: 4px 16px 24px;
