@@ -3,12 +3,36 @@ import Picker from 'react-mobile-picker';
 import { Clock, ArrowRight, Target, Square, ChevronDown } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
+// 타임라인은 AM5 기준 0~1440분. 자정(00:00)은 1140분 → 저녁 이후 시간보다 큼
+const TIMELINE_START_H = 5;
+function toTimelineMins(timeStr) {
+  const [h, m] = timeStr.split(':').map(Number);
+  let offset = h - TIMELINE_START_H;
+  if (offset < 0) offset += 24;
+  return offset * 60 + m;
+}
+
+// 00:00~04:50 → "다음날" 레이블 추가
+function formatLabel(t) {
+  const [h, m] = t.split(':').map(Number);
+  const isPM = h >= 12;
+  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+  const base = `${isPM ? '오후' : '오전'} ${h12}:${String(m).padStart(2, '0')}`;
+  return h < TIMELINE_START_H ? `${base} (다음날)` : base;
+}
+
 const timeSlots = [];
 for (let h = 0; h < 24; h++) {
   for (let m = 0; m < 60; m += 10) {
     timeSlots.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
   }
 }
+
+// AM5 기준으로 정렬된 슬롯 순서 (5:00 → 4:50)
+const sortedTimeSlots = [
+  ...timeSlots.filter(t => parseInt(t) >= TIMELINE_START_H),
+  ...timeSlots.filter(t => parseInt(t) < TIMELINE_START_H),
+];
 
 function snapSlot(t) {
   if (!t) return '09:00';
@@ -22,13 +46,6 @@ function snapSlot(t) {
 function addHour(t, hours = 1) {
   const [h, m] = t.split(':').map(Number);
   return `${String((h + hours) % 24).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-}
-
-function formatLabel(t) {
-  const [h, m] = t.split(':').map(Number);
-  const isPM = h >= 12;
-  const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
-  return `${isPM ? '오후' : '오전'} ${h12}:${String(m).padStart(2, '0')}`;
 }
 
 export default function HomeEventSheet() {
@@ -89,13 +106,16 @@ export default function HomeEventSheet() {
     setPickerVal(val);
     if (timeField === 'start') {
       setStartTime(val.time);
-      const [sh, sm] = val.time.split(':').map(Number);
-      const [eh, em] = endTime.split(':').map(Number);
-      if (sh * 60 + sm >= eh * 60 + em) setEndTime(addHour(val.time, 1));
+      // 타임라인 기준으로 종료가 시작 이후인지 확인 (자정 포함)
+      if (toTimelineMins(endTime) <= toTimelineMins(val.time)) {
+        setEndTime(addHour(val.time, 1));
+      }
     } else {
       setEndTime(val.time);
     }
   };
+
+  const isEndValid = toTimelineMins(endTime) > toTimelineMins(startTime);
 
   return (
     <div className={`home-event-page${animate ? ' visible' : ''}`}>
@@ -103,7 +123,7 @@ export default function HomeEventSheet() {
       <div className="hep-header">
         <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
         <span className="hep-header-title">새 일정</span>
-        <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim()}>저장</button>
+        <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim() || !isEndValid}>저장</button>
       </div>
 
       {/* 본문 */}
@@ -150,7 +170,7 @@ export default function HomeEventSheet() {
           </button>
           <ArrowRight size={13} color="rgba(0,0,0,0.25)" strokeWidth={2} style={{ flexShrink: 0 }} />
           <button
-            className={`hep-time-btn${timeField === 'end' ? ' active' : ''}`}
+            className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
             onClick={() => handleTimeTap('end')}
           >
             {formatLabel(endTime)}
@@ -173,7 +193,7 @@ export default function HomeEventSheet() {
                 itemHeight={44}
               >
                 <Picker.Column name="time">
-                  {timeSlots.map(v => (
+                  {sortedTimeSlots.map(v => (
                     <Picker.Item key={v} value={v}>
                       {({ selected }) => (
                         <span className={selected ? 'drum-item selected' : 'drum-item'}>

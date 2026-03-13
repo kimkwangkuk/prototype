@@ -3161,6 +3161,10 @@ textarea {
   background: rgba(0, 0, 0, 0.07);
 }
 
+.hep-time-btn.invalid {
+  color: var(--red-400);
+}
+
 .hep-picker-section {
   padding: 10px 16px 14px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -3288,8 +3292,14 @@ textarea {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
-  animation: pulseBackground 1s ease-in-out 1 0.35s both;
+  z-index: 0;
+  animation: timelineEventPulse 1.4s ease-in-out 1 0.35s forwards;
+}
+
+@keyframes timelineEventPulse {
+  0%   { background: transparent; }
+  35%  { background: rgba(0, 0, 0, 0.13); }
+  100% { background: transparent; }
 }
 
 /* 추가 모드: 기존 이벤트 흐리게, 현재 시간 인디케이터 흐리게 */
