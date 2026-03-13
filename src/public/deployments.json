@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-33e2u0vby-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 타임라인 5시 표시 / 빈시간 갭 블록 / 일정 생성 전체 페이지",
+    "createdAt": 1773365093996,
+    "sha": "9a8edb8"
+  },
+  {
+    "url": "https://prototype-p17qvad4u-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773362886744,
+    "sha": "955c383"
+  },
+  {
     "url": "https://prototype-8avm20eco-kimkwangkuks-projects.vercel.app",
     "message": "feat: 타임라인 추가 버튼 → 빈 슬롯 점선 블록 선택 후 일정 생성",
     "createdAt": 1773362819111,
@@ -238,17 +250,5 @@
     "message": "Match weekly view pulse animation style to daily view",
     "createdAt": 1772869014824,
     "sha": "76ee504"
-  },
-  {
-    "url": "https://prototype-dqjt954gl-kimkwangkuks-projects.vercel.app",
-    "message": "Remove grab icon and area from bottom sheet toolbar accessory",
-    "createdAt": 1772868723417,
-    "sha": "30962f8"
-  },
-  {
-    "url": "https://prototype-ew81gge3u-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 커스텀 키패드 z-index 1000→1002, 바텀시트(1001) 위로 고정",
-    "createdAt": 1772868528270,
-    "sha": "8d5b083"
   }
 ]
