@@ -1,10 +1,8 @@
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight, Target, Square } from 'lucide-react';
-import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
+import { Clock, ArrowRight, Target, Square, ChevronDown } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
-// 10분 단위 타임슬롯
 const timeSlots = [];
 for (let h = 0; h < 24; h++) {
   for (let m = 0; m < 60; m += 10) {
@@ -40,51 +38,38 @@ export default function HomeEventSheet() {
   const homeSheetInitialStart = useTodoStore(state => state.homeSheetInitialStart);
   const homeSheetInitialEnd = useTodoStore(state => state.homeSheetInitialEnd);
 
+  const [mounted, setMounted] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [title, setTitle] = useState('');
-  const [eventType, setEventType] = useState('focus'); // 'focus' | 'task'
+  const [eventType, setEventType] = useState('focus');
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('10:00');
-  const [timeField, setTimeField] = useState(null); // 'start' | 'end' | null
+  const [timeField, setTimeField] = useState(null);
   const [pickerVal, setPickerVal] = useState({ time: '09:00' });
-  const keypadRef = useRef(null);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (visible) {
-      setTimeout(() => setAnimate(true), 10);
       setTitle('');
       setEventType('focus');
       setStartTime(homeSheetInitialStart || '09:00');
       setEndTime(homeSheetInitialEnd || '10:00');
       setTimeField(null);
+      setMounted(true);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        setAnimate(true);
+        setTimeout(() => inputRef.current?.focus(), 80);
+      }));
     } else {
       setAnimate(false);
+      const t = setTimeout(() => setMounted(false), 350);
+      return () => clearTimeout(t);
     }
   }, [visible]);
 
-  // 키패드 높이를 CSS 변수로 설정 → 바텀시트가 키패드 위로 올라감
-  useLayoutEffect(() => {
-    if (!visible) return;
-    const update = () => {
-      const h = keypadRef.current?.offsetHeight || 0;
-      document.documentElement.style.setProperty('--keypad-h', `${h}px`);
-    };
-    update();
-    document.body.classList.add('keyboard-open');
-    return () => {
-      document.body.classList.remove('keyboard-open');
-      document.documentElement.style.setProperty('--keypad-h', '0px');
-    };
-  }, [visible]);
+  if (!mounted) return null;
 
-  if (!visible) return null;
-
-  const handleConfirm = () => {
-    if (timeField) {
-      // 시간 피커 닫고 제목 입력으로 복귀 (키패드는 유지)
-      setTimeField(null);
-      return;
-    }
+  const handleSave = () => {
     if (title.trim()) {
       const [sh, sm] = startTime.split(':').map(Number);
       const [eh, em] = endTime.split(':').map(Number);
@@ -93,14 +78,10 @@ export default function HomeEventSheet() {
     closeHomeSheet();
   };
 
-  const handleOverlay = () => {
-    if (timeField) { setTimeField(null); return; }
-    closeHomeSheet();
-  };
-
   const handleTimeTap = (field) => {
+    inputRef.current?.blur();
     const t = field === 'start' ? startTime : endTime;
-    setTimeField(field);
+    setTimeField(prev => prev === field ? null : field);
     setPickerVal({ time: snapSlot(t) });
   };
 
@@ -117,44 +98,38 @@ export default function HomeEventSheet() {
   };
 
   return (
-    <>
-      <div className="bottom-sheet-overlay" onClick={handleOverlay} />
-      <div className={`bottom-sheet home-event-sheet${animate ? ' visible' : ''}`}>
-        <div className="toolbar-surface" />
+    <div className={`home-event-page${animate ? ' visible' : ''}`}>
+      {/* 헤더 */}
+      <div className="hep-header">
+        <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
+        <span className="hep-header-title">새 일정</span>
+        <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim()}>저장</button>
+      </div>
 
-        {/* 그래버 */}
-        <div className="toolbar-grabber">
-          <svg width="36" height="4" viewBox="0 0 36 4" fill="none">
-            <rect width="36" height="4" rx="2" fill="rgba(0,0,0,0.18)" />
-          </svg>
-        </div>
-
-        {/* 일정 이름 입력 */}
-        <div className="home-event-title-row">
+      {/* 본문 */}
+      <div className="hep-body">
+        {/* 일정 이름 */}
+        <div className="hep-section">
           <input
+            ref={inputRef}
             type="text"
-            inputMode="none"
-            readOnly
-            tabIndex={-1}
-            className="home-event-title-input"
-            value={title}
+            className="hep-title-input"
             placeholder="일정 이름"
-            style={{ pointerEvents: 'none' }}
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
           />
         </div>
 
         {/* 타입 선택 */}
-        <div className="home-event-type-row">
+        <div className="hep-section hep-type-row">
           {[
             { value: 'focus', label: '집중계획', Icon: Target },
-            { value: 'task',  label: '할일',    Icon: Square },
+            { value: 'task',  label: '할일',    Icon: Square  },
           ].map(({ value, label, Icon }) => (
             <button
               key={value}
-              className={`home-event-type-btn${eventType === value ? ' active' : ''}`}
-              onMouseDown={e => e.preventDefault()}
-              onTouchStart={e => e.preventDefault()}
-              onTouchEnd={e => { e.preventDefault(); setEventType(value); }}
+              className={`hep-type-btn${eventType === value ? ' active' : ''}`}
               onClick={() => setEventType(value)}
             >
               <Icon size={13} strokeWidth={1.8} />
@@ -163,34 +138,30 @@ export default function HomeEventSheet() {
           ))}
         </div>
 
-        {/* 시간 선택 행 */}
-        <div className="home-event-time-row">
+        {/* 시간 설정 */}
+        <div className="hep-section hep-time-row">
           <Clock size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
           <button
-            className={`home-event-time-btn${timeField === 'start' ? ' active' : ''}`}
-            onMouseDown={e => e.preventDefault()}
-            onTouchStart={e => e.preventDefault()}
-            onTouchEnd={e => { e.preventDefault(); handleTimeTap('start'); }}
+            className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
             onClick={() => handleTimeTap('start')}
           >
             {formatLabel(startTime)}
+            <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
           </button>
           <ArrowRight size={13} color="rgba(0,0,0,0.25)" strokeWidth={2} style={{ flexShrink: 0 }} />
           <button
-            className={`home-event-time-btn${timeField === 'end' ? ' active' : ''}`}
-            onMouseDown={e => e.preventDefault()}
-            onTouchStart={e => e.preventDefault()}
-            onTouchEnd={e => { e.preventDefault(); handleTimeTap('end'); }}
+            className={`hep-time-btn${timeField === 'end' ? ' active' : ''}`}
             onClick={() => handleTimeTap('end')}
           >
             {formatLabel(endTime)}
+            <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
           </button>
         </div>
 
-        {/* 인라인 드럼 피커 (시간 필드 선택시, 키패드는 유지) */}
+        {/* 드럼 피커 */}
         {timeField && (
-          <div className="home-event-picker">
-            <div className="home-event-picker-label">
+          <div className="hep-picker-section">
+            <div className="hep-picker-label">
               {timeField === 'start' ? '시작 시간' : '종료 시간'}
             </div>
             <div className="drum-picker-wrapper">
@@ -217,15 +188,6 @@ export default function HomeEventSheet() {
           </div>
         )}
       </div>
-
-      {/* 키패드: 시간 피커 열려있어도 항상 유지 */}
-      <KeypadPopup
-        ref={keypadRef}
-        visible
-        value={title}
-        onChange={timeField ? undefined : setTitle}
-        onConfirm={handleConfirm}
-      />
-    </>
+    </div>
   );
 }

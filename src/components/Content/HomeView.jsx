@@ -10,7 +10,23 @@ const LABEL_W = 70;     // 시간 레이블 열 너비
 const CONT_PAD = 16;    // .timeline-container 좌우 패딩
 const EVENTS_LEFT = CONT_PAD + LABEL_W; // 86px — 이벤트 영역 시작점 (절대 기준)
 const EVENTS_RIGHT_PAD = CONT_PAD;      // 16px — 오른쪽 여백
-const HOURS = Array.from({ length: 24 }, (_, i) => (START_HOUR + i) % 24);
+// 25개: 5am → 5am (다음날) — 마지막 행에 AM 5 레이블 표시
+const DISPLAY_HOURS = Array.from({ length: 25 }, (_, i) => (START_HOUR + i) % 24);
+
+// 이벤트 시각 → 타임라인 기준 분(0=5am, 1440=5am 다음날)
+function toTimelineMins(h, m = 0) {
+  let offset = h - START_HOUR;
+  if (offset < 0) offset += 24;
+  return offset * 60 + m;
+}
+
+// 타임라인 분 → "HH:MM" 문자열
+function minsToTimeStr(mins) {
+  const realMins = (mins + START_HOUR * 60) % (24 * 60);
+  const h = Math.floor(realMins / 60);
+  const m = realMins % 60;
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
 
 function hourLabel(h) {
   if (h === 0) return 'AM 12';
@@ -161,38 +177,42 @@ export default function HomeView() {
 
   const layout = computeLayout(allEvents);
 
-  // 빈 슬롯 계산: 이벤트가 없는 1시간 단위 슬롯
-  const occupiedHours = new Set();
-  allEvents.forEach(ev => {
-    const startMin = ev.startH * 60 + ev.startM;
-    const endMin = ev.endH * 60 + ev.endM;
-    HOURS.forEach(h => {
-      const slotStart = h * 60;
-      const slotEnd = (h + 1) * 60;
-      if (startMin < slotEnd && endMin > slotStart) {
-        occupiedHours.add(h);
+  // 추가 모드: 이벤트 사이 빈 시간 구간을 하나의 블록으로 계산
+  const MIN_GAP_MINS = 30; // 30분 이상의 빈 시간만 표시
+  const TIMELINE_END = 24 * 60;
+  let emptyGaps = [];
+  if (homeAddMode) {
+    const intervals = allEvents
+      .map(ev => ({ start: toTimelineMins(ev.startH, ev.startM), end: toTimelineMins(ev.endH, ev.endM) }))
+      .filter(iv => iv.end > iv.start)
+      .sort((a, b) => a.start - b.start);
+    const merged = [];
+    for (const iv of intervals) {
+      if (!merged.length || iv.start >= merged[merged.length - 1].end) {
+        merged.push({ ...iv });
+      } else {
+        merged[merged.length - 1].end = Math.max(merged[merged.length - 1].end, iv.end);
       }
-    });
-  });
-
-  const handleSlotTap = (h) => {
-    const startStr = `${String(h).padStart(2, '0')}:00`;
-    const endH = (h + 1) % 24;
-    const endStr = `${String(endH).padStart(2, '0')}:00`;
-    openHomeSheet(startStr, endStr);
-  };
+    }
+    let cursor = 0;
+    for (const iv of merged) {
+      if (iv.start - cursor >= MIN_GAP_MINS) emptyGaps.push({ startMins: cursor, endMins: iv.start });
+      cursor = Math.max(cursor, iv.end);
+    }
+    if (TIMELINE_END - cursor >= MIN_GAP_MINS) emptyGaps.push({ startMins: cursor, endMins: TIMELINE_END });
+  }
 
   return (
     <>
     <div className="home-view" ref={scrollRef}>
       <div className="timeline-container">
 
-        {/* 시간 그리드 */}
-        {HOURS.map(h => (
-          <div key={h} className="timeline-row">
+        {/* 시간 그리드 (25행: AM5 ~ AM5 다음날) */}
+        {DISPLAY_HOURS.map((h, idx) => (
+          <div key={idx} className="timeline-row">
             <div className="timeline-label-col">
               <span className="timeline-time-label">{hourLabel(h)}</span>
-              {HOUR_EMOJIS[h] && (
+              {idx < 24 && HOUR_EMOJIS[h] && (
                 <button className="timeline-hour-emojis" onClick={() => setChallengeOpen(true)}>
                   {HOUR_EMOJIS[h].map((emoji, i) => (
                     <span key={i} className="timeline-hour-emoji">{emoji}</span>
@@ -210,20 +230,20 @@ export default function HomeView() {
         </div>
         <div className="timeline-now-line" style={{ top: nowY }} />
 
-        {/* 빈 슬롯 점선 블록 (추가 모드) */}
-        {homeAddMode && HOURS.map(h => {
-          if (occupiedHours.has(h)) return null;
-          const top = timeToTop(h);
+        {/* 빈 시간 갭 블록 (추가 모드) */}
+        {emptyGaps.map((gap, i) => {
+          const top = (gap.startMins / 60) * HOUR_HEIGHT;
+          const height = ((gap.endMins - gap.startMins) / 60) * HOUR_HEIGHT;
           return (
             <div
-              key={`slot-${h}`}
+              key={`gap-${i}`}
               className="timeline-empty-slot"
-              style={getEventStyle(top, HOUR_HEIGHT, 0, 1)}
-              onClick={() => handleSlotTap(h)}
+              style={getEventStyle(top, height, 0, 1)}
+              onClick={() => openHomeSheet(minsToTimeStr(gap.startMins), minsToTimeStr(gap.endMins))}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <line x1="8" y1="2" x2="8" y2="14" stroke="rgba(0,0,0,0.3)" strokeWidth="1.8" strokeLinecap="round"/>
-                <line x1="2" y1="8" x2="14" y2="8" stroke="rgba(0,0,0,0.3)" strokeWidth="1.8" strokeLinecap="round"/>
+                <line x1="8" y1="2" x2="8" y2="14" stroke="rgba(0,0,0,0.25)" strokeWidth="1.8" strokeLinecap="round"/>
+                <line x1="2" y1="8" x2="14" y2="8" stroke="rgba(0,0,0,0.25)" strokeWidth="1.8" strokeLinecap="round"/>
               </svg>
             </div>
           );
