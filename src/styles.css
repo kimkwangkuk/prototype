@@ -1139,6 +1139,22 @@ textarea {
   border-top: 1px solid var(--border-quinary);
 }
 
+/* ─── Toolbar Grabber (공용) ─── */
+.toolbar-grabber {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 4px;
+  flex-shrink: 0;
+  cursor: grab;
+}
+
+.toolbar-grabber-bar {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
 /* ─── Bottom Sheet Grabber ─── */
 .bottom-sheet-grabber-area {
   display: flex;
@@ -3015,16 +3031,22 @@ textarea {
   background: #3d54e0;
 }
 
-/* ─── Home Event Page (전체 화면 일정 생성) ─── */
+/* ─── Home Event Page (바텀시트 70% 일정 생성) ─── */
 .home-event-page {
   position: fixed;
-  inset: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
   background: var(--bg-primary);
-  z-index: 500;
+  z-index: 1001;
   display: flex;
   flex-direction: column;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.12);
   transform: translateY(100%);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: hidden;
 }
 
 .home-event-page.visible {
@@ -3036,8 +3058,7 @@ textarea {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  padding-top: env(safe-area-inset-top, 0px);
-  height: calc(52px + env(safe-area-inset-top, 0px));
+  height: 52px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   flex-shrink: 0;
 }

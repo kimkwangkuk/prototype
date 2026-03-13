@@ -127,96 +127,107 @@ export default function HomeEventSheet() {
   const isEndValid = toTimelineMins(endTime) > toTimelineMins(startTime);
 
   return (
-    <div className={`home-event-page${animate ? ' visible' : ''}`}>
-      {/* 헤더 */}
-      <div className="hep-header">
-        <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
-        <span className="hep-header-title">새 일정</span>
-        <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim() || !isEndValid}>저장</button>
-      </div>
-
-      {/* 본문 */}
-      <div className="hep-body">
-        {/* 일정 이름 */}
-        <div className="hep-section">
-          <input
-            ref={inputRef}
-            type="text"
-            className="hep-title-input"
-            placeholder="일정 이름"
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
-          />
+    <>
+      <div
+        className="bottom-sheet-overlay"
+        style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
+        onClick={closeHomeSheet}
+      />
+      <div className={`home-event-page${animate ? ' visible' : ''}`}>
+        {/* 그래버 */}
+        <div className="toolbar-grabber">
+          <div className="toolbar-grabber-bar" />
+        </div>
+        {/* 헤더 */}
+        <div className="hep-header">
+          <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
+          <span className="hep-header-title">새 일정</span>
+          <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim() || !isEndValid}>저장</button>
         </div>
 
-        {/* 타입 선택 */}
-        <div className="hep-section hep-type-row">
-          {[
-            { value: 'focus', label: '집중계획', Icon: Target },
-            { value: 'task',  label: '할일',    Icon: Square  },
-          ].map(({ value, label, Icon }) => (
-            <button
-              key={value}
-              className={`hep-type-btn${eventType === value ? ' active' : ''}`}
-              onClick={() => setEventType(value)}
-            >
-              <Icon size={13} strokeWidth={1.8} />
-              {label}
-            </button>
-          ))}
-        </div>
-
-        {/* 시간 설정 */}
-        <div className="hep-section hep-time-row">
-          <Clock size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
-          <button
-            className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
-            onClick={() => handleTimeTap('start')}
-          >
-            {formatLabel(startTime)}
-            <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
-          </button>
-          <ArrowRight size={13} color="rgba(0,0,0,0.25)" strokeWidth={2} style={{ flexShrink: 0 }} />
-          <button
-            className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
-            onClick={() => handleTimeTap('end')}
-          >
-            {formatLabel(endTime)}
-            <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
-          </button>
-        </div>
-
-        {/* 드럼 피커 */}
-        {timeField && (
-          <div className="hep-picker-section">
-            <div className="hep-picker-label">
-              {timeField === 'start' ? '시작 시간' : '종료 시간'}
-            </div>
-            <div className="drum-picker-wrapper">
-              <Picker
-                value={pickerVal}
-                onChange={handlePickerChange}
-                wheelMode="natural"
-                height={160}
-                itemHeight={44}
-              >
-                <Picker.Column name="time">
-                  {sortedTimeSlots.map(v => (
-                    <Picker.Item key={v} value={v}>
-                      {({ selected }) => (
-                        <span className={selected ? 'drum-item selected' : 'drum-item'}>
-                          {formatLabel(v)}
-                        </span>
-                      )}
-                    </Picker.Item>
-                  ))}
-                </Picker.Column>
-              </Picker>
-            </div>
+        {/* 본문 */}
+        <div className="hep-body">
+          {/* 일정 이름 */}
+          <div className="hep-section">
+            <input
+              ref={inputRef}
+              type="text"
+              className="hep-title-input"
+              placeholder="일정 이름"
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
+            />
           </div>
-        )}
+
+          {/* 타입 선택 */}
+          <div className="hep-section hep-type-row">
+            {[
+              { value: 'focus', label: '집중계획', Icon: Target },
+              { value: 'task',  label: '할일',    Icon: Square  },
+            ].map(({ value, label, Icon }) => (
+              <button
+                key={value}
+                className={`hep-type-btn${eventType === value ? ' active' : ''}`}
+                onClick={() => setEventType(value)}
+              >
+                <Icon size={13} strokeWidth={1.8} />
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {/* 시간 설정 */}
+          <div className="hep-section hep-time-row">
+            <Clock size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
+            <button
+              className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
+              onClick={() => handleTimeTap('start')}
+            >
+              {formatLabel(startTime)}
+              <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+            </button>
+            <ArrowRight size={13} color="rgba(0,0,0,0.25)" strokeWidth={2} style={{ flexShrink: 0 }} />
+            <button
+              className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
+              onClick={() => handleTimeTap('end')}
+            >
+              {formatLabel(endTime)}
+              <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+            </button>
+          </div>
+
+          {/* 드럼 피커 */}
+          {timeField && (
+            <div className="hep-picker-section">
+              <div className="hep-picker-label">
+                {timeField === 'start' ? '시작 시간' : '종료 시간'}
+              </div>
+              <div className="drum-picker-wrapper">
+                <Picker
+                  value={pickerVal}
+                  onChange={handlePickerChange}
+                  wheelMode="natural"
+                  height={160}
+                  itemHeight={44}
+                >
+                  <Picker.Column name="time">
+                    {sortedTimeSlots.map(v => (
+                      <Picker.Item key={v} value={v}>
+                        {({ selected }) => (
+                          <span className={selected ? 'drum-item selected' : 'drum-item'}>
+                            {formatLabel(v)}
+                          </span>
+                        )}
+                      </Picker.Item>
+                    ))}
+                  </Picker.Column>
+                </Picker>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
