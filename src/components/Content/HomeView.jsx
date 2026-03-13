@@ -171,7 +171,7 @@ export default function HomeView() {
   // 신규 이벤트 점멸 후 플래그 해제 (페이지 닫힘 350ms + 점멸 750ms)
   useEffect(() => {
     if (!newlyAddedHomeEventId) return;
-    const t = setTimeout(clearNewlyAddedHomeEventId, 1200);
+    const t = setTimeout(clearNewlyAddedHomeEventId, 1500);
     return () => clearTimeout(t);
   }, [newlyAddedHomeEventId]);
 
