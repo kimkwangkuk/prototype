@@ -155,6 +155,8 @@ export default function HomeView() {
   const homeEvents = useTodoStore(state => state.homeEvents);
   const homeAddMode = useTodoStore(state => state.homeAddMode);
   const openHomeSheet = useTodoStore(state => state.openHomeSheet);
+  const newlyAddedHomeEventId = useTodoStore(state => state.newlyAddedHomeEventId);
+  const clearNewlyAddedHomeEventId = useTodoStore(state => state.clearNewlyAddedHomeEventId);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [pressedId, setPressedId] = useState(null);
@@ -165,6 +167,13 @@ export default function HomeView() {
     const h = scrollRef.current.clientHeight;
     scrollRef.current.scrollTop = Math.max(0, top - h / 3);
   }, []);
+
+  // 신규 이벤트 점멸 후 플래그 해제 (페이지 닫힘 350ms + 점멸 750ms)
+  useEffect(() => {
+    if (!newlyAddedHomeEventId) return;
+    const t = setTimeout(clearNewlyAddedHomeEventId, 1200);
+    return () => clearTimeout(t);
+  }, [newlyAddedHomeEventId]);
 
   const nowY    = getNowTop();
   const nowLabel = getNowLabel();
@@ -205,7 +214,7 @@ export default function HomeView() {
   return (
     <>
     <div className="home-view" ref={scrollRef}>
-      <div className="timeline-container">
+      <div className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`}>
 
         {/* 시간 그리드 (25행: AM5 ~ AM5 다음날) */}
         {DISPLAY_HOURS.map((h, idx) => (
@@ -259,10 +268,11 @@ export default function HomeView() {
           const canFill = STUDY_TYPES.has(ev.type);
           const fill   = canFill ? getStudyFill(ev) : 0;
 
+          const isNew = ev.id === String(newlyAddedHomeEventId);
           return (
             <div
               key={ev.id}
-              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}`}
+              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(ev.id)}
               onPointerUp={() => { setPressedId(null); setSelectedEvent(ev); }}

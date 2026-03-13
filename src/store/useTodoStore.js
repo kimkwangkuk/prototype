@@ -496,7 +496,12 @@ const useTodoStore = create((set, get) => ({
     homeSheetInitialStart: null,
     homeSheetInitialEnd: null,
   }),
-  addHomeEvent: (event) => set(state => ({ homeEvents: [...state.homeEvents, event] })),
+  newlyAddedHomeEventId: null,
+  addHomeEvent: (event) => set(state => ({
+    homeEvents: [...state.homeEvents, event],
+    newlyAddedHomeEventId: event.id,
+  })),
+  clearNewlyAddedHomeEventId: () => set({ newlyAddedHomeEventId: null }),
   removeHomeEvent: (id) => set(state => ({ homeEvents: state.homeEvents.filter(e => e.id !== id) })),
 }));
 

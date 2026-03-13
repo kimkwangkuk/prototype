@@ -3279,6 +3279,30 @@ textarea {
   background: rgba(200, 200, 200, 0.75);
 }
 
+@keyframes event-blink {
+  0%, 100% { opacity: 1; }
+  30%       { opacity: 0.2; }
+  60%       { opacity: 1; }
+  80%       { opacity: 0.2; }
+}
+
+.timeline-event.newly-added {
+  animation: event-blink 0.75s ease 0.35s both;
+}
+
+/* 추가 모드: 기존 이벤트 흐리게, 현재 시간 인디케이터 흐리게 */
+.timeline-container.adding-mode .timeline-event,
+.timeline-container.adding-mode .study-time-bar,
+.timeline-container.adding-mode .timeline-now-pill,
+.timeline-container.adding-mode .timeline-now-line {
+  opacity: 0.25;
+  transition: opacity 0.2s;
+}
+
+.timeline-container.adding-mode .timeline-empty-slot {
+  opacity: 1;
+}
+
 .timeline-event-title-row {
   display: flex;
   align-items: center;
