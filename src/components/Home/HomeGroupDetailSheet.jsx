@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Clock, ChevronLeft, FileText, Users } from 'lucide-react';
+import useTodoStore from '../../store/useTodoStore';
 
 function formatLabel(h, m) {
   const isPM = h >= 12;
@@ -10,6 +11,7 @@ function formatLabel(h, m) {
 export default function HomeGroupDetailSheet({ group, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [selectedEv, setSelectedEv] = useState(null);
+  const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
 
   useEffect(() => {
     if (group) setTimeout(() => setAnimate(true), 10);
@@ -99,26 +101,38 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
           {/* 패널 2: 할일 상세 */}
           <div className="group-sheet-panel">
             {selectedEv && (
-              <div className="detail-sheet-meta">
-                <div className="detail-sheet-meta-row">
-                  <Clock size={16} className="detail-meta-icon" strokeWidth={2} />
-                  <span className="detail-meta-label">
-                    {formatLabel(selectedEv.startH, selectedEv.startM)} – {formatLabel(selectedEv.endH, selectedEv.endM)}
-                  </span>
+              <>
+                <div className="detail-sheet-meta">
+                  <div className="detail-sheet-meta-row">
+                    <Clock size={16} className="detail-meta-icon" strokeWidth={2} />
+                    <span className="detail-meta-label">
+                      {formatLabel(selectedEv.startH, selectedEv.startM)} – {formatLabel(selectedEv.endH, selectedEv.endM)}
+                    </span>
+                  </div>
+                  {selectedEv.todoCount && (
+                    <div className="detail-sheet-meta-row">
+                      <Users size={16} className="detail-meta-icon" strokeWidth={2} />
+                      <span className="detail-meta-label">할 일 {selectedEv.todoCount}개</span>
+                    </div>
+                  )}
+                  {selectedEv.note && (
+                    <div className="detail-sheet-meta-row">
+                      <FileText size={16} className="detail-meta-icon" strokeWidth={2} />
+                      <span className="detail-meta-label">{selectedEv.note}</span>
+                    </div>
+                  )}
                 </div>
-                {selectedEv.todoCount && (
-                  <div className="detail-sheet-meta-row">
-                    <Users size={16} className="detail-meta-icon" strokeWidth={2} />
-                    <span className="detail-meta-label">할 일 {selectedEv.todoCount}개</span>
+                {typeof selectedEv.id === 'number' && (
+                  <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+                    <button
+                      className="detail-action-btn detail-action-delete"
+                      onClick={() => { removeHomeEvent(selectedEv.id); handleClose(); }}
+                    >
+                      삭제
+                    </button>
                   </div>
                 )}
-                {selectedEv.note && (
-                  <div className="detail-sheet-meta-row">
-                    <FileText size={16} className="detail-meta-icon" strokeWidth={2} />
-                    <span className="detail-meta-label">{selectedEv.note}</span>
-                  </div>
-                )}
-              </div>
+              </>
             )}
           </div>
 
