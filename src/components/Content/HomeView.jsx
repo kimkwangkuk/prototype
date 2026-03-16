@@ -392,6 +392,11 @@ export default function HomeView() {
               key={`gap-${i}`}
               className="timeline-empty-slot"
               style={getEventStyle(top, height, 0, 1)}
+              onPointerDown={e => e.stopPropagation()}
+              onClick={e => {
+                e.stopPropagation();
+                openHomeSheet(minsToTimeStr(gap.startMins), minsToTimeStr(Math.min(gap.endMins, 24 * 60)));
+              }}
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <line x1="8" y1="2" x2="8" y2="14" stroke="rgba(0,0,0,0.25)" strokeWidth="1.8" strokeLinecap="round"/>

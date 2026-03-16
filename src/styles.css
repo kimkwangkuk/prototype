@@ -3742,6 +3742,88 @@ textarea {
   background: rgba(0,0,0,0.15);
 }
 
+.challenge-item-tappable {
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+}
+
+.challenge-item-tappable:active {
+  background: rgba(0,0,0,0.05);
+}
+
+.challenge-time-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.challenge-done-badge {
+  font-size: 12px;
+  color: #00b13b;
+  font-weight: 500;
+}
+
+/* ─── Challenge Detail Panel ─── */
+
+.challenge-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 24px;
+  gap: 8px;
+}
+
+.challenge-detail-emoji {
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.challenge-detail-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.88);
+  margin: 0;
+}
+
+.challenge-detail-time {
+  font-size: 14px;
+  color: rgba(0,0,0,0.4);
+  margin: 0 0 16px;
+}
+
+.challenge-cert-action-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 14px 0;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.12s;
+}
+
+.challenge-cert-action-btn:active {
+  background: #333;
+}
+
+.challenge-certified-badge {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #00b13b;
+}
+
 /* 이모지 버튼 스타일 초기화 */
 .timeline-hour-emojis {
   background: none;
