@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-f13p5nilf-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 그룹 블록 스타일 개선 - 회색 유지, (+N) 포맷, Users 아이콘 제거",
+    "createdAt": 1773644150925,
+    "sha": "9e2b7af"
+  },
+  {
+    "url": "https://prototype-9eo145y19-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773643681128,
+    "sha": "0434f5a"
+  },
+  {
     "url": "https://prototype-tmpsr0ehc-kimkwangkuks-projects.vercel.app",
     "message": "feat: 타임라인 연속 이벤트 그룹 블록 합치기 + 개발 시작 시 브랜치 확인 규칙 추가",
     "createdAt": 1773643612066,
