@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap, Users, Layers } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
+import HomeGroupDetailSheet from '../Home/HomeGroupDetailSheet';
 import ChallengeSheet from '../Home/ChallengeSheet';
 
 const HOUR_HEIGHT = 60;
@@ -84,6 +85,57 @@ const ICON_MAP = {
   custom: Zap,
 };
 
+// ─── 연속 이벤트 그룹핑 (종료~시작 0~15분 이내면 하나의 블록으로 합침) ───
+const MAX_MERGE_GAP = 15;
+
+function groupNearbyEvents(events) {
+  if (!events.length) return { singles: [], merged: [] };
+
+  const sorted = [...events].sort(
+    (a, b) => toMin(a.startH, a.startM) - toMin(b.startH, b.startM)
+  );
+
+  const chains = [];
+  let current = [sorted[0]];
+
+  for (let i = 1; i < sorted.length; i++) {
+    const prev = current[current.length - 1];
+    const gap = toMin(sorted[i].startH, sorted[i].startM) - toMin(prev.endH, prev.endM);
+    if (gap >= 0 && gap <= MAX_MERGE_GAP) {
+      current.push(sorted[i]);
+    } else {
+      chains.push([...current]);
+      current = [sorted[i]];
+    }
+  }
+  chains.push([...current]);
+
+  const singles = [];
+  const merged = [];
+
+  for (const chain of chains) {
+    if (chain.length === 1) {
+      singles.push(chain[0]);
+    } else {
+      const maxEndEv = chain.reduce((best, ev) =>
+        toMin(ev.endH, ev.endM) > toMin(best.endH, best.endM) ? ev : best
+      );
+      merged.push({
+        id: `group-${chain[0].id}`,
+        type: 'group',
+        events: chain,
+        startH: chain[0].startH,
+        startM: chain[0].startM,
+        endH: maxEndEv.endH,
+        endM: maxEndEv.endM,
+        title: `${chain[0].title} 외 ${chain.length - 1}`,
+      });
+    }
+  }
+
+  return { singles, merged };
+}
+
 // ─── 겹침 감지 레이아웃 알고리즘 (Google Calendar 방식) ───
 function computeLayout(events) {
   if (!events.length) return {};
@@ -158,6 +210,7 @@ export default function HomeView() {
   const newlyAddedHomeEventId = useTodoStore(state => state.newlyAddedHomeEventId);
   const clearNewlyAddedHomeEventId = useTodoStore(state => state.clearNewlyAddedHomeEventId);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedGroup, setSelectedGroup] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [pressedId, setPressedId] = useState(null);
   const [pressedSlot, setPressedSlot] = useState(null);      // { startMins, endMins }
@@ -189,6 +242,10 @@ export default function HomeView() {
     ...SAMPLE_EVENTS,
     ...homeEvents.map(e => ({ ...e, id: String(e.id) })),
   ];
+
+  // 연속 이벤트 그룹핑
+  const { singles, merged: mergedGroups } = groupNearbyEvents(allEvents);
+  const layoutEvents = [...singles, ...mergedGroups];
 
   // 포인터 위치 → 빈 슬롯 계산 (없으면 null)
   const getSlotFromPointer = (e) => {
@@ -264,7 +321,7 @@ export default function HomeView() {
     }
   };
 
-  const layout = computeLayout(allEvents);
+  const layout = computeLayout(layoutEvents);
 
   // 추가 모드: 이벤트 사이 빈 시간 구간을 하나의 블록으로 계산
   const MIN_GAP_MINS = 30; // 30분 이상의 빈 시간만 표시
@@ -355,8 +412,8 @@ export default function HomeView() {
           );
         })()}
 
-        {/* 이벤트 카드 (겹침 감지 레이아웃 적용) */}
-        {allEvents.map(ev => {
+        {/* 단일 이벤트 카드 */}
+        {singles.map(ev => {
           const { col = 0, numCols = 1 } = layout[ev.id] || {};
           const top    = timeToTop(ev.startH, ev.startM);
           const height = Math.max(timeToTop(ev.endH, ev.endM) - top, 30);
@@ -405,10 +462,48 @@ export default function HomeView() {
           );
         })}
 
+        {/* 그룹 블록 (0~15분 이내 연속 이벤트 합치기) */}
+        {mergedGroups.map(group => {
+          const { col = 0, numCols = 1 } = layout[group.id] || {};
+          const top    = timeToTop(group.startH, group.startM);
+          const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
+          return (
+            <div
+              key={group.id}
+              className={`timeline-event has-bar timeline-event-group${pressedId === group.id ? ' pressed' : ''}`}
+              style={getEventStyle(top, height, col, numCols)}
+              onPointerDown={() => setPressedId(group.id)}
+              onPointerUp={() => { setPressedId(null); setSelectedGroup(group); }}
+              onPointerLeave={() => setPressedId(null)}
+              onPointerCancel={() => setPressedId(null)}
+            >
+              <div className="study-time-bar" />
+              <div className="timeline-event-inner">
+                <div className="timeline-event-title-row">
+                  <div className="timeline-event-icon">
+                    <Layers size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
+                  </div>
+                  <span className="timeline-event-title">{group.title}</span>
+                </div>
+                <div className="timeline-event-meta">
+                  <span className="timeline-event-time">
+                    {formatRange(group.startH, group.startM, group.endH, group.endM)}
+                  </span>
+                  <div className="timeline-event-count-row">
+                    <Users size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
+                    <span className="timeline-event-time">{group.events.length}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
       </div>
     </div>
 
     <HomeEventDetailSheet event={selectedEvent} onClose={() => setSelectedEvent(null)} />
+    <HomeGroupDetailSheet group={selectedGroup} onClose={() => setSelectedGroup(null)} />
     <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
     </>
   );
