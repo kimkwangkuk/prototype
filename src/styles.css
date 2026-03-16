@@ -3481,6 +3481,9 @@ textarea {
 
 .group-sheet {
   overflow: hidden !important;
+  /* .detail-sheet의 좌우 padding(20px)을 제거 — 내부에서 직접 관리 */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 /* Grabber */
