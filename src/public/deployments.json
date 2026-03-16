@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-d93te512o-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 그룹 바텀시트 상세 패널에 삭제 버튼 추가",
+    "createdAt": 1773652368790,
+    "sha": "37a4cc4"
+  },
+  {
+    "url": "https://prototype-haxwxy2b0-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773650822678,
+    "sha": "504f408"
+  },
+  {
     "url": "https://prototype-chnlt41rn-kimkwangkuks-projects.vercel.app",
     "message": "fix: 그룹 바텀시트 좌우 패딩 중복 제거 (.detail-sheet 20px 오버라이드)",
     "createdAt": 1773650754335,
@@ -286,17 +298,5 @@
     "message": "refactor: AttachedSheet 공통 컴포넌트화, 화이트 배경 적용",
     "createdAt": 1773234237660,
     "sha": "be36d1a"
-  },
-  {
-    "url": "https://prototype-heu1kp17t-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773233861211,
-    "sha": "e4714d4"
-  },
-  {
-    "url": "https://prototype-2qafpfnjs-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 일정 디테일 시트 전체너비 붙는 타입으로 변경, 어두운 오버레이 적용",
-    "createdAt": 1773233792887,
-    "sha": "d2f245d"
   }
 ]
