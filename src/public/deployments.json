@@ -1,5 +1,71 @@
 [
   {
+    "url": "https://prototype-mtjhx81l7-kimkwangkuks-projects.vercel.app",
+    "message": "롱탭 시간 경과에 따른 점진적 피드백 효과",
+    "createdAt": 1773641555981,
+    "sha": "f389450"
+  },
+  {
+    "url": "https://prototype-69jhgco7k-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773641019573,
+    "sha": "e52d0e3"
+  },
+  {
+    "url": "https://prototype-kdolzh0bo-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 타임라인 빈 영역 롱탭(400ms)으로 일정 추가 기능 복구",
+    "createdAt": 1773640952525,
+    "sha": "8e6863f"
+  },
+  {
+    "url": "https://prototype-3pyx131ut-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773639602004,
+    "sha": "cf55a0e"
+  },
+  {
+    "url": "https://prototype-l89r5po77-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 타임라인 연속 이벤트 그룹 블록 합치기 기능 추가",
+    "createdAt": 1773639532954,
+    "sha": "f224900"
+  },
+  {
+    "url": "https://prototype-200xqccrc-kimkwangkuks-projects.vercel.app",
+    "message": "롱탭 시간 경과에 따른 점진적 피드백 효과",
+    "createdAt": 1773410964342,
+    "sha": "f389450"
+  },
+  {
+    "url": "https://prototype-kcqk3tksw-kimkwangkuks-projects.vercel.app",
+    "message": "타임라인 빈 영역: 롱탭(400ms)으로만 pressed 효과 + 시트 호출",
+    "createdAt": 1773410650467,
+    "sha": "5896531"
+  },
+  {
+    "url": "https://prototype-3dqt04kyj-kimkwangkuks-projects.vercel.app",
+    "message": "타임라인 빈 영역 클릭: 추가모드 무관하게 동작 + pressed 효과 추가",
+    "createdAt": 1773409855185,
+    "sha": "f353caf"
+  },
+  {
+    "url": "https://prototype-q1s5q2jbx-kimkwangkuks-projects.vercel.app",
+    "message": "홈탭 바텀시트 개선: 80% 높이, 키보드 즉시 표시, 스마트 시간 선택",
+    "createdAt": 1773408769381,
+    "sha": "9c734cc"
+  },
+  {
+    "url": "https://prototype-nfd7s3kr5-kimkwangkuks-projects.vercel.app",
+    "message": "홈탭 일정 추가: 풀 페이지 → 바텀시트 70% 타입으로 변경",
+    "createdAt": 1773407186813,
+    "sha": "a999e55"
+  },
+  {
+    "url": "https://prototype-lbkgiw7n2-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773401331650,
+    "sha": "6bd14af"
+  },
+  {
     "url": "https://prototype-1ve4wyvjs-kimkwangkuks-projects.vercel.app",
     "message": "fix: 일정 생성 취소 시 탭바 안보이는 문제 + 종료시간 기본값 보정",
     "createdAt": 1773401258083,
@@ -184,71 +250,5 @@
     "message": "fix: HomeView JSX fragment 누락 수정",
     "createdAt": 1773226398064,
     "sha": "9a48e69"
-  },
-  {
-    "url": "https://prototype-de9k6uxbx-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773211449342,
-    "sha": "af27ac3"
-  },
-  {
-    "url": "https://prototype-1fhardeyv-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 타임라인 블록 border 제거, 겹침 시 1px 간격, todoCount 아이콘 Group으로 교체",
-    "createdAt": 1773211380757,
-    "sha": "a012477"
-  },
-  {
-    "url": "https://prototype-hwa1y6d69-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773211040673,
-    "sha": "7a4c0ba"
-  },
-  {
-    "url": "https://prototype-5aehl4598-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 홈 이벤트 시트 키패드 높이 CSS 변수 --numpad-h → --keypad-h 수정",
-    "createdAt": 1773210973286,
-    "sha": "3b34a4d"
-  },
-  {
-    "url": "https://prototype-hb3t76vfe-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773210900457,
-    "sha": "07206e1"
-  },
-  {
-    "url": "https://prototype-h1mqc9qbj-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 홈 타임라인 이벤트 블록 좌표 보정 - 컨테이너 패딩 반영, 레이블 영역 침범 수정",
-    "createdAt": 1773210831175,
-    "sha": "dc94eac"
-  },
-  {
-    "url": "https://prototype-17myiwh6z-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773210660574,
-    "sha": "66de2f1"
-  },
-  {
-    "url": "https://prototype-bvmt7el7m-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 홈탭 일정 추가 UI + 겹침 감지 타임라인 레이아웃",
-    "createdAt": 1773210591263,
-    "sha": "fdf262d"
-  },
-  {
-    "url": "https://prototype-6zk3uzxt4-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773209865011,
-    "sha": "1aeef08"
-  },
-  {
-    "url": "https://prototype-cbehpeztr-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 홈탭 일정 추가 UI + 겹침 감지 타임라인 레이아웃",
-    "createdAt": 1773209797646,
-    "sha": "7ddab2d"
-  },
-  {
-    "url": "https://prototype-mgdy3akxg-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773207881402,
-    "sha": "5a7e4ea"
   }
 ]
