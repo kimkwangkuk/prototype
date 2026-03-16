@@ -3473,8 +3473,8 @@ textarea {
 }
 
 /* ─── Group block on timeline ─── */
-.timeline-event-group {
-  background: rgba(220, 230, 255, 0.65) !important;
+.timeline-event-group-count {
+  color: rgba(0,0,0,0.38);
 }
 
 /* ─── Group Detail Sheet ─── */

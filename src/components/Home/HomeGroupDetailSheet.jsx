@@ -30,7 +30,10 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
         </div>
 
         <div className="detail-sheet-body">
-          <p className="detail-sheet-text">{group.title}</p>
+          <p className="detail-sheet-text">
+            {group.title}
+            <span style={{ color: 'rgba(0,0,0,0.38)', fontWeight: 400 }}> (+{group.extraCount})</span>
+          </p>
 
           <div className="group-event-list">
             {group.events.map(ev => (

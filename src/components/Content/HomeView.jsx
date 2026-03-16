@@ -128,7 +128,8 @@ function groupNearbyEvents(events) {
         startM: chain[0].startM,
         endH: maxEndEv.endH,
         endM: maxEndEv.endM,
-        title: `${chain[0].title} 외 ${chain.length - 1}`,
+        title: chain[0].title,
+        extraCount: chain.length - 1,
       });
     }
   }
@@ -470,7 +471,7 @@ export default function HomeView() {
           return (
             <div
               key={group.id}
-              className={`timeline-event has-bar timeline-event-group${pressedId === group.id ? ' pressed' : ''}`}
+              className={`timeline-event has-bar${pressedId === group.id ? ' pressed' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(group.id)}
               onPointerUp={() => { setPressedId(null); setSelectedGroup(group); }}
@@ -483,16 +484,15 @@ export default function HomeView() {
                   <div className="timeline-event-icon">
                     <Layers size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
                   </div>
-                  <span className="timeline-event-title">{group.title}</span>
+                  <span className="timeline-event-title">
+                    {group.title}
+                    <span className="timeline-event-group-count"> (+{group.extraCount})</span>
+                  </span>
                 </div>
                 <div className="timeline-event-meta">
                   <span className="timeline-event-time">
                     {formatRange(group.startH, group.startM, group.endH, group.endM)}
                   </span>
-                  <div className="timeline-event-count-row">
-                    <Users size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
-                    <span className="timeline-event-time">{group.events.length}</span>
-                  </div>
                 </div>
               </div>
             </div>
