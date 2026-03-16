@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1jdyjj261-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 그룹 바텀시트 앱바 디자인 개선",
+    "createdAt": 1773646317639,
+    "sha": "44e0c52"
+  },
+  {
+    "url": "https://prototype-druk9x10t-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773644513854,
+    "sha": "5e55545"
+  },
+  {
     "url": "https://prototype-b57rrvrma-kimkwangkuks-projects.vercel.app",
     "message": "feat: 그룹 바텀시트 내 할일 클릭 시 상세 슬라이드 패널 추가",
     "createdAt": 1773644446912,
@@ -67,7 +79,7 @@
   },
   {
     "url": "https://prototype-200xqccrc-kimkwangkuks-projects.vercel.app",
-    "message": "롱탭 시간 경과에 따른 점진적 피드백 효과",
+    "message": "롱탭 시간 경과에 따른 점진적 피��백 효과",
     "createdAt": 1773410964342,
     "sha": "f389450"
   },
