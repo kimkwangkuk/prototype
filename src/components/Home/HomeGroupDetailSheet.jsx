@@ -19,7 +19,6 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
     }
   }, [group]);
 
-  // 바텀시트 닫힐 때 상세도 초기화
   const handleClose = () => {
     setSelectedEv(null);
     onClose();
@@ -36,31 +35,44 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
       />
       <div className={`bottom-sheet detail-sheet group-sheet${animate ? ' visible' : ''}`}>
 
-        {/* 타이틀바 */}
-        <div className="group-sheet-titlebar">
-          {selectedEv ? (
-            <>
-              <button className="group-sheet-back-btn" onClick={() => setSelectedEv(null)}>
-                <ChevronLeft size={20} strokeWidth={2} />
-              </button>
-              <span className="group-sheet-titlebar-text">{selectedEv.title}</span>
-              <div className="group-sheet-titlebar-spacer" />
-            </>
-          ) : (
-            <>
-              <div className="group-sheet-grabber-area">
-                <div className="toolbar-grabber-bar" />
-              </div>
-              <div className="group-sheet-titlebar-row">
-                <span className="group-sheet-titlebar-text">
-                  {group.title}
-                  <span style={{ color: 'rgba(0,0,0,0.38)', fontWeight: 400 }}> (+{group.extraCount})</span>
-                </span>
-                <button className="group-sheet-close-btn" onClick={handleClose}>닫기</button>
-              </div>
-            </>
-          )}
+        {/* Grabber — 목록 뷰에서만 노출 */}
+        <div className={`group-sheet-grabber${selectedEv ? ' hidden' : ''}`}>
+          <div className="toolbar-grabber-bar" />
         </div>
+
+        {/* 앱바 */}
+        <div className="group-sheet-appbar">
+          {/* 왼쪽 */}
+          <div className="group-sheet-appbar-side">
+            {selectedEv && (
+              <button className="group-sheet-back-btn" onClick={() => setSelectedEv(null)}>
+                <ChevronLeft size={22} strokeWidth={2} />
+              </button>
+            )}
+          </div>
+
+          {/* 타이틀 */}
+          <div className="group-sheet-appbar-title">
+            {selectedEv ? (
+              <span>{selectedEv.title}</span>
+            ) : (
+              <span>
+                {group.title}
+                <span className="group-sheet-appbar-count"> (+{group.extraCount})</span>
+              </span>
+            )}
+          </div>
+
+          {/* 오른쪽 */}
+          <div className="group-sheet-appbar-side group-sheet-appbar-side--right">
+            {!selectedEv && (
+              <button className="group-sheet-close-btn" onClick={handleClose}>닫기</button>
+            )}
+          </div>
+        </div>
+
+        {/* 구분선 */}
+        <div className="group-sheet-divider" />
 
         {/* 슬라이딩 패널 */}
         <div className={`group-sheet-panels${selectedEv ? ' show-detail' : ''}`}>

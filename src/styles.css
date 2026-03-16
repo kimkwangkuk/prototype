@@ -3479,62 +3479,82 @@ textarea {
 
 /* ─── Group Detail Sheet ─── */
 
-/* 바텀시트 overflow 클리핑 */
 .group-sheet {
   overflow: hidden !important;
 }
 
-/* 타이틀바 */
-.group-sheet-titlebar {
+/* Grabber */
+.group-sheet-grabber {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 0;
+  flex-shrink: 0;
+  transition: opacity 0.2s;
+}
+
+.group-sheet-grabber.hidden {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* 앱바 */
+.group-sheet-appbar {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.group-sheet-appbar-side {
+  width: 36px;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
 
-.group-sheet-grabber-area {
-  display: flex;
-  justify-content: center;
-  padding: 12px 0 0;
+.group-sheet-appbar-side--right {
+  justify-content: flex-end;
 }
 
-.group-sheet-titlebar-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px 4px;
+.group-sheet-appbar-title {
+  flex: 1;
+  text-align: center;
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.86);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* 뒤로가기가 있을 때 타이틀바 */
-.group-sheet-titlebar:has(.group-sheet-back-btn) {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 14px 16px 8px;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+.group-sheet-appbar-count {
+  font-weight: 400;
+  color: rgba(0,0,0,0.38);
 }
 
 .group-sheet-back-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 36px;
   background: none;
   border: none;
-  padding: 4px;
-  margin: 0;
+  padding: 0;
   cursor: pointer;
   color: rgba(0,0,0,0.75);
-  flex-shrink: 0;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.group-sheet-titlebar-text {
-  font-family: 'Pretendard Variable', Pretendard, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: rgba(0,0,0,0.86);
-  flex: 1;
-}
-
-.group-sheet-titlebar-spacer {
-  width: 28px;
-  flex-shrink: 0;
+.group-sheet-back-btn:active {
+  background: rgba(0,0,0,0.06);
 }
 
 .group-sheet-close-btn {
@@ -3545,10 +3565,19 @@ textarea {
   font-weight: 500;
   color: rgba(0,0,0,0.45);
   cursor: pointer;
-  padding: 4px 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* 슬라이딩 패널 컨테이너 */
+/* 앱바 하단 구분선 */
+.group-sheet-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.07);
+  flex-shrink: 0;
+  margin: 0 16px;
+}
+
+/* 슬라이딩 패널 */
 .group-sheet-panels {
   display: flex;
   width: 200%;
