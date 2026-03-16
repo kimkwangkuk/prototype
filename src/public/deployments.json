@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-tmpsr0ehc-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 타임라인 연속 이벤트 그룹 블록 합치기 + 개발 시작 시 브랜치 확인 규칙 추가",
+    "createdAt": 1773643612066,
+    "sha": "461dbef"
+  },
+  {
+    "url": "https://prototype-itzku32uw-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773641624237,
+    "sha": "533085a"
+  },
+  {
     "url": "https://prototype-mtjhx81l7-kimkwangkuks-projects.vercel.app",
     "message": "롱탭 시간 경과에 따른 점진적 피드백 효과",
     "createdAt": 1773641555981,
