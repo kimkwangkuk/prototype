@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-f4e3vo67o-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부시간 + 인접 할일 대표 블록 기능 추가",
+    "createdAt": 1773733745389,
+    "sha": "2a07efd"
+  },
+  {
+    "url": "https://prototype-k05cg8blq-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773732241545,
+    "sha": "420797b"
+  },
+  {
     "url": "https://prototype-89fdvg3va-kimkwangkuks-projects.vercel.app",
     "message": "feat: 그룹 바텀시트 할일 체크 기능 추가",
     "createdAt": 1773732173379,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773718128487,
     "sha": "3c878c0"
-  },
-  {
-    "url": "https://prototype-lbegzqljm-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 일정 상세 시트에 편집/삭제 기능 추가",
-    "createdAt": 1773718059014,
-    "sha": "a3b8c04"
-  },
-  {
-    "url": "https://prototype-k8c6px7tv-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773717835984,
-    "sha": "b997b0f"
   }
 ]
