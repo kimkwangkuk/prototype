@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-7boux7l5g-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 시간 편집 시 타임라인 블록 실시간 반영",
+    "createdAt": 1773723627071,
+    "sha": "5b65889"
+  },
+  {
+    "url": "https://prototype-rkselp8w6-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773723490666,
+    "sha": "53b5895"
+  },
+  {
     "url": "https://prototype-revvacjc9-kimkwangkuks-projects.vercel.app",
     "message": "feat: 편집 시트 커스텀 키패드 + 시간 미리보기 오버레이",
     "createdAt": 1773723422097,
@@ -286,17 +298,5 @@
     "message": "홈탭 일정 추가: 풀 페이지 → 바텀시트 70% 타입으로 변경",
     "createdAt": 1773407186813,
     "sha": "a999e55"
-  },
-  {
-    "url": "https://prototype-lbkgiw7n2-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773401331650,
-    "sha": "6bd14af"
-  },
-  {
-    "url": "https://prototype-1ve4wyvjs-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 일정 생성 취소 시 탭바 안보이는 문제 + 종료시간 기본값 보정",
-    "createdAt": 1773401258083,
-    "sha": "525ee14"
   }
 ]
