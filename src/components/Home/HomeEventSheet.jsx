@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight, Target, Square, ChevronDown } from 'lucide-react';
+import { Clock, ArrowRight, Target, Square, BookOpen, ChevronDown } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
 // 타임라인은 AM5 기준 0~1440분. 자정(00:00)은 1140분 → 저녁 이후 시간보다 큼
@@ -164,7 +164,8 @@ export default function HomeEventSheet() {
           {/* 타입 선택 */}
           <div className="hep-section hep-type-row">
             {[
-              { value: 'focus', label: '집중계획', Icon: Target },
+              { value: 'focus', label: '집중계획', Icon: Target   },
+              { value: 'study', label: '공부시간', Icon: BookOpen },
               { value: 'task',  label: '할일',    Icon: Square  },
             ].map(({ value, label, Icon }) => (
               <button

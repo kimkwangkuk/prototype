@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap, BookOpen, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
 import HomeGroupDetailSheet from '../Home/HomeGroupDetailSheet';
@@ -38,7 +38,7 @@ function hourLabel(h) {
 
 function toMin(h, m = 0) { return h * 60 + m; }
 
-const STUDY_TYPES = new Set(['focus', 'task']);
+const STUDY_TYPES = new Set(['focus', 'study', 'task']);
 
 function getStudyFill(ev) {
   const nowTop   = getNowTop();
@@ -78,10 +78,11 @@ const HOUR_EMOJIS = {
 
 // Lucide 아이콘 매핑
 const ICON_MAP = {
-  focus: Target,
-  meal:  Hamburger,
-  task:  Square,
-  game:  Gamepad2,
+  focus:  Target,
+  study:  BookOpen,
+  meal:   Hamburger,
+  task:   Square,
+  game:   Gamepad2,
   custom: Zap,
 };
 
