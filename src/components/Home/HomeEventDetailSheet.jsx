@@ -72,8 +72,8 @@ function scrollTimelineToTime(timeStr) {
 
 // ─── 커스텀 드럼 피커 ───
 const ITEM_H = 44;
-const PICKER_H = 160;
-const PICKER_PAD = (PICKER_H - ITEM_H) / 2; // 58px
+const PICKER_H = ITEM_H * 5; // 220px — 위아래 2개씩 보임
+const PICKER_PAD = (PICKER_H - ITEM_H) / 2; // 88px
 
 const DrumPicker = memo(function DrumPicker({ options, value, onChange }) {
   const scrollRef = useRef(null);
@@ -248,7 +248,8 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
     setEndTime(toTimeStr(event.endH, event.endM));
     setActiveField('title');
     setEditMode(true);
-    requestAnimationFrame(() => requestAnimationFrame(() => scrollTimelineToTime(st)));
+    // 키패드 렌더 + --keypad-h 적용 + 시트 bottom 트랜지션(300ms) 완료 후 스크롤
+    setTimeout(() => scrollTimelineToTime(st), 420);
   };
 
   const handleEditCancel = () => {
