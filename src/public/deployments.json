@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-zs4a1obcv-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 편집 모드 전환 후 바텀시트 레이아웃 확정 뒤 타임라인 스크롤 계산",
+    "createdAt": 1773725800404,
+    "sha": "a4bb2b4"
+  },
+  {
+    "url": "https://prototype-pk0s5pqwy-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773725741976,
+    "sha": "b57aa8c"
+  },
+  {
     "url": "https://prototype-absnvi91f-kimkwangkuks-projects.vercel.app",
     "message": "feat: 편집 버튼 누르면 시작 시간 위치로 타임라인 자동 스크롤",
     "createdAt": 1773725674051,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773644513854,
     "sha": "5e55545"
-  },
-  {
-    "url": "https://prototype-b57rrvrma-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 그룹 바텀시트 내 할일 클릭 시 상세 슬라이드 패널 추가",
-    "createdAt": 1773644446912,
-    "sha": "7d98f6e"
-  },
-  {
-    "url": "https://prototype-mhbl4odwh-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773644219798,
-    "sha": "79c40b5"
   }
 ]
