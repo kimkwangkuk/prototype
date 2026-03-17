@@ -9,6 +9,15 @@ function StudyIcon({ size = 14, color = 'currentColor' }) {
   );
 }
 
+function TaskDoneIcon({ size = 14 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 14 14" fill="none">
+      <rect x="1" y="1" width="12" height="12" rx="3" fill="rgba(0,0,0,0.18)"/>
+      <path d="M4 7L6 9.5L10 4.5" stroke="rgba(0,0,0,0.55)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 function SmallTaskIcon({ checked = false }) {
   if (checked) {
     return (
@@ -531,7 +540,8 @@ export default function HomeView() {
           const { col = 0, numCols = 1 } = layout[ev.id] || {};
           const top    = timeToTop(ev.startH, ev.startM);
           const height = Math.max(timeToTop(ev.endH, ev.endM) - top, 30);
-          const Icon   = ICON_MAP[ev.type] || Square;
+          const isDoneTask = ev.type === 'task' && doneHomeEventIds.has(String(ev.id));
+          const Icon = isDoneTask ? TaskDoneIcon : (ICON_MAP[ev.type] || Square);
 
           const canFill = STUDY_TYPES.has(ev.type);
           const fill   = canFill ? getStudyFill(ev) : 0;
