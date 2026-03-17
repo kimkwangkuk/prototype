@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-hhg565dpk-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 피커 실시간 블록 업데이트 + 바텀시트 초기 스크롤",
+    "createdAt": 1773726776616,
+    "sha": "1d44a9e"
+  },
+  {
+    "url": "https://prototype-r1am3f5m3-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773726375023,
+    "sha": "e6f24e2"
+  },
+  {
     "url": "https://prototype-i1mbb8yz2-kimkwangkuks-projects.vercel.app",
     "message": "fix: 피커 드래그 중 타임라인 블록 실시간 반영 - flushSync 적용",
     "createdAt": 1773726307858,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773652438060,
     "sha": "f96599c"
-  },
-  {
-    "url": "https://prototype-d93te512o-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 그룹 바텀시트 상세 패널에 삭제 버튼 추가",
-    "createdAt": 1773652368790,
-    "sha": "37a4cc4"
-  },
-  {
-    "url": "https://prototype-haxwxy2b0-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773650822678,
-    "sha": "504f408"
   }
 ]
