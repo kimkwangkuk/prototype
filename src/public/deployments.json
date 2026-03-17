@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-mho2h5dlt-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 일정 생성 점멸 개선 - 회색 fade-out + 그룹 블록 점멸 지원",
+    "createdAt": 1773731203932,
+    "sha": "622df20"
+  },
+  {
+    "url": "https://prototype-qsfh3odq4-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773727724516,
+    "sha": "5fa12df"
+  },
+  {
     "url": "https://prototype-ldx9sz3uo-kimkwangkuks-projects.vercel.app",
     "message": "fix: 피커 위아래 2개 표시 + 편집 시 키패드 포함 레이아웃 확정 후 스크롤",
     "createdAt": 1773727650963,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773716880859,
     "sha": "a38855f"
-  },
-  {
-    "url": "https://prototype-6mc0tftsz-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 그룹 블록 디자인 재구현 — has-bar 구조 유지, 합성 제목 표시",
-    "createdAt": 1773716814202,
-    "sha": "2296a38"
-  },
-  {
-    "url": "https://prototype-1n69162es-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773715713153,
-    "sha": "3047b6d"
   }
 ]
