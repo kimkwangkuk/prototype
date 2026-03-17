@@ -160,9 +160,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
               >
                 저장
               </button>
-            ) : (
-              <button className="group-sheet-close-btn" onClick={onClose}>닫기</button>
-            )}
+            ) : null}
           </div>
         </div>
 

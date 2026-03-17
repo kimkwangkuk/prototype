@@ -2601,6 +2601,7 @@ textarea {
   padding: 4px 20px calc(16px + env(safe-area-inset-bottom, 0px));
   width: 100%;
   max-width: 480px;
+  min-height: 280px;
 }
 
 .detail-sheet-body {

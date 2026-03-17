@@ -63,9 +63,7 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
           </div>
 
           {/* 오른쪽 */}
-          <div className="group-sheet-appbar-side group-sheet-appbar-side--right">
-            <button className="group-sheet-close-btn" onClick={handleClose}>닫기</button>
-          </div>
+          <div className="group-sheet-appbar-side group-sheet-appbar-side--right" />
         </div>
 
         {/* 구분선 */}
