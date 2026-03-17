@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Target, Hamburger, Square, Gamepad2, Zap, Users, Layers } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
 import HomeGroupDetailSheet from '../Home/HomeGroupDetailSheet';
@@ -476,29 +476,28 @@ export default function HomeView() {
           return (
             <div
               key={group.id}
-              className={`timeline-event has-bar${pressedId === group.id ? ' pressed' : ''}`}
+              className={`timeline-event${pressedId === group.id ? ' pressed' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(group.id)}
               onPointerUp={() => { setPressedId(null); setSelectedGroup(group); }}
               onPointerLeave={() => setPressedId(null)}
               onPointerCancel={() => setPressedId(null)}
             >
-              <div className="study-time-bar" />
-              <div className="timeline-event-inner">
-                <div className="timeline-event-title-row">
-                  <div className="timeline-event-icon">
-                    <Layers size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
+              <div className="timeline-group-list">
+                {group.events.map(ev => (
+                  <div key={ev.id} className="timeline-group-item">
+                    <div className="timeline-group-item-bar" />
+                    <div className="timeline-group-item-content">
+                      <div className="timeline-group-item-title-row">
+                        <div className="timeline-group-item-checkbox" />
+                        <span className="timeline-group-item-title">{ev.title}</span>
+                      </div>
+                      <span className="timeline-group-item-time">
+                        {formatRange(ev.startH, ev.startM, ev.endH, ev.endM)}
+                      </span>
+                    </div>
                   </div>
-                  <span className="timeline-event-title">
-                    {group.title}
-                    <span className="timeline-event-group-count"> (+{group.extraCount})</span>
-                  </span>
-                </div>
-                <div className="timeline-event-meta">
-                  <span className="timeline-event-time">
-                    {formatRange(group.startH, group.startM, group.endH, group.endM)}
-                  </span>
-                </div>
+                ))}
               </div>
             </div>
           );

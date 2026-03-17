@@ -3477,6 +3477,78 @@ textarea {
   color: rgba(0,0,0,0.38);
 }
 
+/* Group block inner list (피그마 디자인: 3px 바 + 체크박스 + 제목 + 시간) */
+.timeline-group-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.timeline-group-item {
+  display: flex;
+  gap: 5px;
+  padding-right: 8px;
+  align-items: stretch;
+  flex-shrink: 0;
+}
+
+.timeline-group-item-bar {
+  width: 3px;
+  flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.timeline-group-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 5px 0;
+  min-width: 0;
+}
+
+.timeline-group-item-title-row {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.timeline-group-item-checkbox {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border: 0.583px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+}
+
+.timeline-group-item-title {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.039px;
+  color: rgba(0, 0, 0, 0.86);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.timeline-group-item-time {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.036px;
+  color: rgba(0, 0, 0, 0.59);
+  padding-left: 2px;
+  white-space: nowrap;
+}
+
 /* ─── Group Detail Sheet ─── */
 
 .group-sheet {
