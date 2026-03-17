@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-reihptihi-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 편집 중인 타임라인 블록 점멸 효과 (2s 주기, 연한 파란빛)",
+    "createdAt": 1773723908600,
+    "sha": "0c396c7"
+  },
+  {
+    "url": "https://prototype-tff7961o7-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773723882934,
+    "sha": "63925b1"
+  },
+  {
     "url": "https://prototype-kwb4v4jd1-kimkwangkuks-projects.vercel.app",
     "message": "fix: keypad-popup z-index 1002로 상향 (bottom-sheet 1001보다 위)",
     "createdAt": 1773723815222,
@@ -286,17 +298,5 @@
     "message": "롱탭 시간 경과에 따른 점진적 피드백 효과",
     "createdAt": 1773410964342,
     "sha": "f389450"
-  },
-  {
-    "url": "https://prototype-kcqk3tksw-kimkwangkuks-projects.vercel.app",
-    "message": "타임라인 빈 영역: 롱탭(400ms)으로만 pressed 효과 + 시트 호출",
-    "createdAt": 1773410650467,
-    "sha": "5896531"
-  },
-  {
-    "url": "https://prototype-3dqt04kyj-kimkwangkuks-projects.vercel.app",
-    "message": "타임라인 빈 영역 클릭: 추가모드 무관하게 동작 + pressed 효과 추가",
-    "createdAt": 1773409855185,
-    "sha": "f353caf"
   }
 ]
