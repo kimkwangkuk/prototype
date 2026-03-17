@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-dce34rjpx-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부시간 그룹 블록 할일 완료 표시 개선",
+    "createdAt": 1773734801259,
+    "sha": "f33cb15"
+  },
+  {
+    "url": "https://prototype-garhwpkjx-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773734720818,
+    "sha": "945850f"
+  },
+  {
     "url": "https://prototype-i46euqa2i-kimkwangkuks-projects.vercel.app",
     "message": "fix: 공부시간 그룹 블록 범위를 할일+공부시간 전체로 확장",
     "createdAt": 1773734650858,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773718855432,
     "sha": "a9f0c47"
-  },
-  {
-    "url": "https://prototype-i9dgnog9t-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 이벤트 삭제 버그 수정",
-    "createdAt": 1773718786363,
-    "sha": "a1f5a83"
-  },
-  {
-    "url": "https://prototype-dkq251n8f-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773718651436,
-    "sha": "c6080d3"
   }
 ]
