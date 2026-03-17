@@ -3489,6 +3489,11 @@ textarea {
 
 /* ─── Group Detail Sheet ─── */
 
+.event-detail-panel {
+  padding: 12px 16px 24px;
+  width: 100%;
+}
+
 .group-sheet {
   overflow: hidden !important;
   /* .detail-sheet의 좌우 padding(20px)을 제거 — 내부에서 직접 관리 */

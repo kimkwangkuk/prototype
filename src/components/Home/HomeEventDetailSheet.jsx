@@ -167,7 +167,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
         <div className="group-sheet-divider" />
 
         {editMode ? (
-          <div className="group-sheet-panel">
+          <div className="event-detail-panel">
             {/* 이름 편집 */}
             <div className="hep-section">
               <input
@@ -232,7 +232,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
             )}
           </div>
         ) : (
-          <div className="group-sheet-panel">
+          <div className="event-detail-panel">
             <div className="detail-sheet-meta">
               <div className="detail-sheet-meta-row">
                 <Clock size={16} className="detail-meta-icon" strokeWidth={2} />
