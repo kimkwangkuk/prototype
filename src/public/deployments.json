@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-h6aazbzpx-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부시간 이벤트 타입 추가",
+    "createdAt": 1773731479232,
+    "sha": "21bdc5c"
+  },
+  {
+    "url": "https://prototype-b9pzjpjse-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773731273177,
+    "sha": "db6662c"
+  },
+  {
     "url": "https://prototype-mho2h5dlt-kimkwangkuks-projects.vercel.app",
     "message": "feat: 일정 생성 점멸 개선 - 회색 fade-out + 그룹 블록 점멸 지원",
     "createdAt": 1773731203932,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773717093638,
     "sha": "4231c55"
-  },
-  {
-    "url": "https://prototype-e7e1qxyjl-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 그룹 블록 체크박스 보더 1px, 완료 카운트 0/N으로 변경",
-    "createdAt": 1773717025121,
-    "sha": "bc50683"
-  },
-  {
-    "url": "https://prototype-iwz0q7t9f-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773716880859,
-    "sha": "a38855f"
   }
 ]
