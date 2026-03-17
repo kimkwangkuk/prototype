@@ -3494,6 +3494,76 @@ textarea {
   width: 100%;
 }
 
+/* 편집 시트 필드 행 */
+.home-sheet-field-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-sheet-field-row.active {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.home-sheet-field-label {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.5);
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.home-sheet-field-value {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.86);
+}
+
+.home-sheet-field-value.placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.home-sheet-field-value.error {
+  color: #ff3b30;
+}
+
+/* 시간 편집 중 바텀시트 외부 미리보기 */
+.event-time-preview-pill {
+  position: fixed;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.72);
+  border-radius: 20px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10001;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.event-time-preview-start,
+.event-time-preview-end {
+  font-family: 'Pretendard Variable', Pretendard, sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.event-time-preview-end.invalid {
+  color: rgba(255, 80, 70, 0.9);
+}
+
 .group-sheet {
   overflow: hidden !important;
   /* .detail-sheet의 좌우 padding(20px)을 제거 — 내부에서 직접 관리 */

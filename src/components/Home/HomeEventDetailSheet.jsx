@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
 import { Clock, FileText, Users, ArrowRight, ChevronDown } from 'lucide-react';
+import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
 import useTodoStore from '../../store/useTodoStore';
 
 const TIMELINE_START_H = 5;
@@ -42,13 +43,13 @@ function formatLabel(h, m) {
   return `${isPM ? '오후' : '오전'} ${h12}:${String(m).padStart(2, '0')}`;
 }
 
-function toTimeStr(h, m) {
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-}
-
 function formatLabelStr(t) {
   const [h, m] = t.split(':').map(Number);
   return formatLabel(h, m);
+}
+
+function toTimeStr(h, m) {
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
 export default function HomeEventDetailSheet({ event, onClose }) {
@@ -57,9 +58,10 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   const [title, setTitle] = useState('');
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('10:00');
-  const [timeField, setTimeField] = useState(null);
+  const [activeField, setActiveField] = useState(null); // 'title' | 'start' | 'end'
   const [pickerVal, setPickerVal] = useState({ time: '09:00' });
-  const inputRef = useRef(null);
+
+  const keypadRef = useRef(null);
 
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
   const updateHomeEvent = useTodoStore(state => state.updateHomeEvent);
@@ -72,9 +74,30 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     }
   }, [event]);
 
+  // 커스텀 키패드 높이 → CSS 변수로 바텀시트 밀어올리기
+  useLayoutEffect(() => {
+    if (!editMode) {
+      document.documentElement.style.setProperty('--keypad-h', '0px');
+      document.body.classList.remove('home-keypad-open');
+      return;
+    }
+    const isKeypad = activeField === 'title';
+    const h = isKeypad && keypadRef.current ? keypadRef.current.offsetHeight : 0;
+    document.documentElement.style.setProperty('--keypad-h', `${h}px`);
+    if (isKeypad) {
+      document.body.classList.add('home-keypad-open');
+    } else {
+      document.body.classList.remove('home-keypad-open');
+    }
+    return () => {
+      document.body.classList.remove('home-keypad-open');
+      document.documentElement.style.setProperty('--keypad-h', '0px');
+    };
+  }, [editMode, activeField]);
+
   if (!event) return null;
 
-  const isDynamic = typeof event.id === 'number';
+  const isEndValid = toTimelineMins(endTime) > toTimelineMins(startTime);
 
   const handleDelete = () => {
     removeHomeEvent(event.id);
@@ -85,38 +108,34 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     setTitle(event.title);
     setStartTime(toTimeStr(event.startH, event.startM));
     setEndTime(toTimeStr(event.endH, event.endM));
-    setTimeField(null);
+    setActiveField('title');
     setEditMode(true);
-    requestAnimationFrame(() => inputRef.current?.focus());
   };
 
   const handleEditCancel = () => {
     setEditMode(false);
-    setTimeField(null);
-    inputRef.current?.blur();
+    setActiveField(null);
   };
 
   const handleEditSave = () => {
-    if (!title.trim()) return;
+    if (!title.trim() || !isEndValid) return;
     const [sh, sm] = startTime.split(':').map(Number);
     const [eh, em] = endTime.split(':').map(Number);
     updateHomeEvent(event.id, { title: title.trim(), startH: sh, startM: sm, endH: eh, endM: em });
     setEditMode(false);
-    setTimeField(null);
-    inputRef.current?.blur();
+    setActiveField(null);
     onClose();
   };
 
   const handleTimeTap = (field) => {
-    inputRef.current?.blur();
     const t = field === 'start' ? startTime : endTime;
-    setTimeField(prev => prev === field ? null : field);
     setPickerVal({ time: snapSlot(t) });
+    setActiveField(prev => prev === field ? null : field);
   };
 
   const handlePickerChange = (val) => {
     setPickerVal(val);
-    if (timeField === 'start') {
+    if (activeField === 'start') {
       setStartTime(val.time);
       if (toTimelineMins(endTime) <= toTimelineMins(val.time)) {
         setEndTime(addHour(val.time, 1));
@@ -126,7 +145,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     }
   };
 
-  const isEndValid = toTimelineMins(endTime) > toTimelineMins(startTime);
+  const showTimePill = editMode && (activeField === 'start' || activeField === 'end');
 
   return (
     <>
@@ -135,6 +154,16 @@ export default function HomeEventDetailSheet({ event, onClose }) {
         style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
         onClick={editMode ? handleEditCancel : onClose}
       />
+
+      {/* 시간 미리보기 오버레이 (바텀시트 외부) */}
+      {showTimePill && (
+        <div className="event-time-preview-pill">
+          <span className="event-time-preview-start">{formatLabelStr(startTime)}</span>
+          <ArrowRight size={14} color="rgba(255,255,255,0.6)" strokeWidth={2} style={{ flexShrink: 0 }} />
+          <span className={`event-time-preview-end${!isEndValid ? ' invalid' : ''}`}>{formatLabelStr(endTime)}</span>
+        </div>
+      )}
+
       <div className={`bottom-sheet detail-sheet group-sheet${animate ? ' visible' : ''}`}>
 
         <div className="group-sheet-grabber">
@@ -151,7 +180,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
             <span>{editMode ? '편집' : event.title}</span>
           </div>
           <div className="group-sheet-appbar-side group-sheet-appbar-side--right">
-            {editMode ? (
+            {editMode && (
               <button
                 className="group-sheet-close-btn"
                 style={{ color: title.trim() && isEndValid ? 'rgba(0,0,0,0.86)' : 'rgba(0,0,0,0.25)', fontWeight: 600 }}
@@ -160,7 +189,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
               >
                 저장
               </button>
-            ) : null}
+            )}
           </div>
         </div>
 
@@ -168,45 +197,38 @@ export default function HomeEventDetailSheet({ event, onClose }) {
 
         {editMode ? (
           <div className="event-detail-panel">
-            {/* 이름 편집 */}
-            <div className="hep-section">
-              <input
-                ref={inputRef}
-                type="text"
-                className="hep-title-input"
-                placeholder="일정 이름"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
-              />
+            {/* 제목 필드 (커스텀 키패드) */}
+            <div
+              className={`home-sheet-field-row${activeField === 'title' ? ' active' : ''}`}
+              onClick={() => setActiveField('title')}
+            >
+              <span className="home-sheet-field-label">제목</span>
+              <span className={`home-sheet-field-value${!title ? ' placeholder' : ''}`}>
+                {title || '일정 이름 입력'}
+              </span>
             </div>
 
-            {/* 시간 편집 */}
-            <div className="hep-section hep-time-row">
-              <Clock size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
-              <button
-                className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
-                onClick={() => handleTimeTap('start')}
-              >
-                {formatLabelStr(startTime)}
-                <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
-              </button>
-              <ArrowRight size={13} color="rgba(0,0,0,0.25)" strokeWidth={2} style={{ flexShrink: 0 }} />
-              <button
-                className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
-                onClick={() => handleTimeTap('end')}
-              >
-                {formatLabelStr(endTime)}
-                <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
-              </button>
+            {/* 시작 시간 */}
+            <div
+              className={`home-sheet-field-row${activeField === 'start' ? ' active' : ''}`}
+              onClick={() => handleTimeTap('start')}
+            >
+              <span className="home-sheet-field-label">시작</span>
+              <span className="home-sheet-field-value">{formatLabelStr(startTime)}</span>
+            </div>
+
+            {/* 종료 시간 */}
+            <div
+              className={`home-sheet-field-row${activeField === 'end' ? ' active' : ''}${!isEndValid && activeField === 'end' ? ' error' : ''}`}
+              onClick={() => handleTimeTap('end')}
+            >
+              <span className="home-sheet-field-label">종료</span>
+              <span className={`home-sheet-field-value${!isEndValid ? ' error' : ''}`}>{formatLabelStr(endTime)}</span>
             </div>
 
             {/* 드럼 피커 */}
-            {timeField && (
+            {(activeField === 'start' || activeField === 'end') && (
               <div className="hep-picker-section">
-                <div className="hep-picker-label">
-                  {timeField === 'start' ? '시작 시간' : '종료 시간'}
-                </div>
                 <div className="drum-picker-wrapper">
                   <Picker
                     value={pickerVal}
@@ -255,17 +277,26 @@ export default function HomeEventDetailSheet({ event, onClose }) {
             </div>
 
             <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
-                <button className="detail-action-btn detail-action-edit" onClick={handleEditOpen}>
-                  편집
-                </button>
-                <button className="detail-action-btn detail-action-delete" onClick={handleDelete}>
-                  삭제
-                </button>
-              </div>
+              <button className="detail-action-btn detail-action-edit" onClick={handleEditOpen}>
+                편집
+              </button>
+              <button className="detail-action-btn detail-action-delete" onClick={handleDelete}>
+                삭제
+              </button>
+            </div>
           </div>
         )}
 
       </div>
+
+      {/* 커스텀 QWERTY 키패드 */}
+      <KeypadPopup
+        ref={keypadRef}
+        visible={editMode && activeField === 'title'}
+        value={title}
+        onChange={setTitle}
+        onConfirm={() => handleTimeTap('start')}
+      />
     </>
   );
 }
