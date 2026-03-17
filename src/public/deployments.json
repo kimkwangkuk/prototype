@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-7kolhoklb-kimkwangkuks-projects.vercel.app",
+    "message": "chore: 집중계획 블록/바텀시트에서 유저 아이콘 및 할일 개수 제거",
+    "createdAt": 1773735207696,
+    "sha": "18a0a54"
+  },
+  {
+    "url": "https://prototype-9p42szaby-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773734869851,
+    "sha": "cdfcafd"
+  },
+  {
     "url": "https://prototype-dce34rjpx-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부시간 그룹 블록 할일 완료 표시 개선",
     "createdAt": 1773734801259,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773723490666,
     "sha": "53b5895"
-  },
-  {
-    "url": "https://prototype-revvacjc9-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 편집 시트 커스텀 키패드 + 시간 미리보기 오버레이",
-    "createdAt": 1773723422097,
-    "sha": "b8efe7d"
-  },
-  {
-    "url": "https://prototype-24n7ql0kn-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773718855432,
-    "sha": "a9f0c47"
   }
 ]
