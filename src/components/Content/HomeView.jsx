@@ -340,11 +340,20 @@ export default function HomeView() {
     ...homeEvents,
   ].map(e => previewHomeEvent && String(e.id) === String(previewHomeEvent.id) ? previewHomeEvent : e);
 
-  // 연속 이벤트 그룹핑
-  const { singles, merged: mergedGroups } = groupNearbyEvents(allEvents);
-  // 공부시간 + 인접 할일 그룹핑
-  const { studyGroups, pairedStudyIds } = groupStudyWithTasks(singles, doneHomeEventIds);
-  const filteredSingles = singles.filter(e => !pairedStudyIds.has(e.id));
+  // 편집 중에는 그룹핑 해제
+  const isEditing = !!previewHomeEvent;
+  let filteredSingles, mergedGroups, studyGroups;
+  if (isEditing) {
+    filteredSingles = allEvents;
+    mergedGroups = [];
+    studyGroups = [];
+  } else {
+    const { singles, merged } = groupNearbyEvents(allEvents);
+    const { studyGroups: sg, pairedStudyIds } = groupStudyWithTasks(singles, doneHomeEventIds);
+    filteredSingles = singles.filter(e => !pairedStudyIds.has(e.id));
+    mergedGroups = merged;
+    studyGroups = sg;
+  }
   const layoutEvents = [...filteredSingles, ...mergedGroups, ...studyGroups];
 
   // 포인터 위치 → 빈 슬롯 계산 (없으면 null)
