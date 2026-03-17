@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import Picker from 'react-mobile-picker';
 import { Clock, FileText, Users } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
@@ -173,7 +174,9 @@ export default function HomeEventDetailSheet({ event, onClose }) {
       }
       const [sh, sm] = newStart.split(':').map(Number);
       const [eh, em] = newEnd.split(':').map(Number);
-      setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
+      flushSync(() => {
+        setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
+      });
     };
 
     let rafId = null;
