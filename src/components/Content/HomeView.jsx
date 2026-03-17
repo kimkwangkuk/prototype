@@ -211,6 +211,7 @@ const SAMPLE_EVENTS = [
 export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
+  const removedSampleIds = useTodoStore(state => state.removedSampleIds);
   const homeAddMode = useTodoStore(state => state.homeAddMode);
   const openHomeSheet = useTodoStore(state => state.openHomeSheet);
   const newlyAddedHomeEventId = useTodoStore(state => state.newlyAddedHomeEventId);
@@ -243,10 +244,10 @@ export default function HomeView() {
   const nowY    = getNowTop();
   const nowLabel = getNowLabel();
 
-  // 샘플 + 동적 이벤트 합치기
+  // 샘플 + 동적 이벤트 합치기 (삭제된 샘플 제외)
   const allEvents = [
-    ...SAMPLE_EVENTS,
-    ...homeEvents.map(e => ({ ...e, id: String(e.id) })),
+    ...SAMPLE_EVENTS.filter(e => !removedSampleIds.has(e.id)),
+    ...homeEvents,
   ];
 
   // 연속 이벤트 그룹핑

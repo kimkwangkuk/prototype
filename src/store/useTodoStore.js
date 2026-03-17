@@ -497,12 +497,22 @@ const useTodoStore = create((set, get) => ({
     homeSheetInitialEnd: null,
   }),
   newlyAddedHomeEventId: null,
+  removedSampleIds: new Set(),
   addHomeEvent: (event) => set(state => ({
     homeEvents: [...state.homeEvents, event],
     newlyAddedHomeEventId: event.id,
   })),
   clearNewlyAddedHomeEventId: () => set({ newlyAddedHomeEventId: null }),
-  removeHomeEvent: (id) => set(state => ({ homeEvents: state.homeEvents.filter(e => e.id !== id) })),
+  removeHomeEvent: (id) => set(state => {
+    // 동적 이벤트 (숫자 id)
+    if (typeof id === 'number') {
+      return { homeEvents: state.homeEvents.filter(e => e.id !== id) };
+    }
+    // 샘플 이벤트 (문자열 id)
+    const next = new Set(state.removedSampleIds);
+    next.add(id);
+    return { removedSampleIds: next };
+  }),
   updateHomeEvent: (id, patch) => set(state => ({
     homeEvents: state.homeEvents.map(e => e.id === id ? { ...e, ...patch } : e),
   })),
