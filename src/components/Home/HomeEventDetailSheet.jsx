@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
 import { Clock, FileText, Users } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
@@ -78,20 +78,23 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   }, [event]);
 
   // 커스텀 키패드 높이 → CSS 변수로 바텀시트 밀어올리기
-  useLayoutEffect(() => {
-    if (!editMode) {
-      document.documentElement.style.setProperty('--keypad-h', '0px');
-      document.body.classList.remove('home-keypad-open');
-      return;
-    }
-    const isKeypad = activeField === 'title';
-    const h = isKeypad && keypadRef.current ? keypadRef.current.offsetHeight : 0;
-    document.documentElement.style.setProperty('--keypad-h', `${h}px`);
+  useEffect(() => {
+    const isKeypad = editMode && activeField === 'title';
+
+    const apply = () => {
+      const h = isKeypad && keypadRef.current ? keypadRef.current.offsetHeight : 0;
+      document.documentElement.style.setProperty('--keypad-h', `${h}px`);
+    };
+
     if (isKeypad) {
       document.body.classList.add('home-keypad-open');
+      // 키패드가 DOM에 그려진 후 높이 읽기
+      requestAnimationFrame(() => requestAnimationFrame(apply));
     } else {
       document.body.classList.remove('home-keypad-open');
+      document.documentElement.style.setProperty('--keypad-h', '0px');
     }
+
     return () => {
       document.body.classList.remove('home-keypad-open');
       document.documentElement.style.setProperty('--keypad-h', '0px');
