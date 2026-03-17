@@ -473,31 +473,30 @@ export default function HomeView() {
           const { col = 0, numCols = 1 } = layout[group.id] || {};
           const top    = timeToTop(group.startH, group.startM);
           const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
+          const mergedTitle = `${group.events.length}/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
           return (
             <div
               key={group.id}
-              className={`timeline-event${pressedId === group.id ? ' pressed' : ''}`}
+              className={`timeline-event has-bar${pressedId === group.id ? ' pressed' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(group.id)}
               onPointerUp={() => { setPressedId(null); setSelectedGroup(group); }}
               onPointerLeave={() => setPressedId(null)}
               onPointerCancel={() => setPressedId(null)}
             >
-              <div className="timeline-group-list">
-                {group.events.map(ev => (
-                  <div key={ev.id} className="timeline-group-item">
-                    <div className="timeline-group-item-bar" />
-                    <div className="timeline-group-item-content">
-                      <div className="timeline-group-item-title-row">
-                        <div className="timeline-group-item-checkbox" />
-                        <span className="timeline-group-item-title">{ev.title}</span>
-                      </div>
-                      <span className="timeline-group-item-time">
-                        {formatRange(ev.startH, ev.startM, ev.endH, ev.endM)}
-                      </span>
-                    </div>
+              <div className="study-time-bar" />
+              <div className="timeline-event-inner">
+                <div className="timeline-event-title-row">
+                  <div className="timeline-event-icon">
+                    <div className="timeline-event-group-checkbox" />
                   </div>
-                ))}
+                  <span className="timeline-event-title">{mergedTitle}</span>
+                </div>
+                <div className="timeline-event-meta">
+                  <span className="timeline-event-time">
+                    {formatRange(group.startH, group.startM, group.endH, group.endM)}
+                  </span>
+                </div>
               </div>
             </div>
           );
