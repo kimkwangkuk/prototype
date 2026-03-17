@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import { flushSync } from 'react-dom';
+import { useState, useEffect, useRef, memo } from 'react';
 import Picker from 'react-mobile-picker';
 import { Clock, FileText, Users } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
@@ -84,7 +83,7 @@ function scrollTimelineToTime(timeStr) {
   scrollEl.scrollTo({ top: Math.max(0, targetScrollTop), behavior: 'smooth' });
 }
 
-export default function HomeEventDetailSheet({ event, onClose }) {
+const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [title, setTitle] = useState('');
@@ -109,8 +108,11 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   const clearPreviewHomeEvent = useTodoStore(state => state.clearPreviewHomeEvent);
 
   useEffect(() => {
-    if (event) setTimeout(() => setAnimate(true), 10);
-    else {
+    if (event) {
+      setTimeout(() => setAnimate(true), 10);
+      // 시트 애니메이션 완료 후 시작 시간 중앙 스크롤
+      setTimeout(() => scrollTimelineToTime(toTimeStr(event.startH, event.startM)), 380);
+    } else {
       setAnimate(false);
       setEditMode(false);
       clearPreviewHomeEvent();
@@ -174,9 +176,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
       }
       const [sh, sm] = newStart.split(':').map(Number);
       const [eh, em] = newEnd.split(':').map(Number);
-      flushSync(() => {
-        setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
-      });
+      setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
     };
 
     let rafId = null;
@@ -421,4 +421,6 @@ export default function HomeEventDetailSheet({ event, onClose }) {
       />
     </>
   );
-}
+});
+
+export default HomeEventDetailSheet;

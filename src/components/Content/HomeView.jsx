@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
@@ -220,6 +220,8 @@ export default function HomeView() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
+  const handleEventClose = useCallback(() => setSelectedEvent(null), []);
+  const handleGroupClose = useCallback(() => setSelectedGroup(null), []);
   const [pressedId, setPressedId] = useState(null);
   const [pressedSlot, setPressedSlot] = useState(null);      // { startMins, endMins }
   const [pressedConfirmed, setPressedConfirmed] = useState(false); // 롱탭 완료 → 보더 표시
@@ -513,8 +515,8 @@ export default function HomeView() {
       </div>
     </div>
 
-    <HomeEventDetailSheet event={selectedEvent} onClose={() => setSelectedEvent(null)} />
-    <HomeGroupDetailSheet group={selectedGroup} onClose={() => setSelectedGroup(null)} />
+    <HomeEventDetailSheet event={selectedEvent} onClose={handleEventClose} />
+    <HomeGroupDetailSheet group={selectedGroup} onClose={handleGroupClose} />
     <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
     </>
   );
