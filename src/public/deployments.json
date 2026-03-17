@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-kx3u0j1h6-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 이벤트/그룹 바텀시트 앱바 구조 통일 및 그룹 제목 포맷 변경",
+    "createdAt": 1773717673632,
+    "sha": "e8dc56c"
+  },
+  {
+    "url": "https://prototype-dsrl51jtc-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773717451695,
+    "sha": "afc95cf"
+  },
+  {
     "url": "https://prototype-6amtvhy8g-kimkwangkuks-projects.vercel.app",
     "message": "fix: task 타입 이벤트만 그룹핑 — 집중계획 등 다른 타입 제외",
     "createdAt": 1773717382995,
@@ -286,17 +298,5 @@
     "message": "fix: 스터디 타임 게이지 height% → scaleY로 교체 (flex stretch 환경 대응)",
     "createdAt": 1773241677238,
     "sha": "a316201"
-  },
-  {
-    "url": "https://prototype-l1f5kqya9-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773241405589,
-    "sha": "7e2ec0e"
-  },
-  {
-    "url": "https://prototype-muq0o1luo-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 모든 이벤트 타입에 게이지바 표시, 집중계획/할일만 채움",
-    "createdAt": 1773241335950,
-    "sha": "274c236"
   }
 ]
