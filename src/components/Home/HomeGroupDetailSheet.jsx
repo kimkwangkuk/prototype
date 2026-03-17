@@ -58,18 +58,13 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
             {selectedEv ? (
               <span>{selectedEv.title}</span>
             ) : (
-              <span>
-                {group.title}
-                <span className="group-sheet-appbar-count"> (+{group.extraCount})</span>
-              </span>
+              <span>할일 0/{group.events.length}</span>
             )}
           </div>
 
           {/* 오른쪽 */}
           <div className="group-sheet-appbar-side group-sheet-appbar-side--right">
-            {!selectedEv && (
-              <button className="group-sheet-close-btn" onClick={handleClose}>닫기</button>
-            )}
+            <button className="group-sheet-close-btn" onClick={handleClose}>닫기</button>
           </div>
         </div>
 

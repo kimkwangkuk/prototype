@@ -33,14 +33,25 @@ export default function HomeEventDetailSheet({ event, onClose }) {
         style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
         onClick={onClose}
       />
-      <div className={`bottom-sheet detail-sheet${animate ? ' visible' : ''}`}>
-        <div className="toolbar-grabber">
+      <div className={`bottom-sheet detail-sheet group-sheet${animate ? ' visible' : ''}`}>
+
+        <div className="group-sheet-grabber">
           <div className="toolbar-grabber-bar" />
         </div>
 
-        <div className="detail-sheet-body">
-          <p className="detail-sheet-text">{event.title}</p>
+        <div className="group-sheet-appbar">
+          <div className="group-sheet-appbar-side" />
+          <div className="group-sheet-appbar-title">
+            <span>{event.title}</span>
+          </div>
+          <div className="group-sheet-appbar-side group-sheet-appbar-side--right">
+            <button className="group-sheet-close-btn" onClick={onClose}>닫기</button>
+          </div>
+        </div>
 
+        <div className="group-sheet-divider" />
+
+        <div className="group-sheet-panel">
           <div className="detail-sheet-meta">
             <div className="detail-sheet-meta-row">
               <Clock size={16} className="detail-meta-icon" strokeWidth={2} />
@@ -62,17 +73,15 @@ export default function HomeEventDetailSheet({ event, onClose }) {
             )}
           </div>
 
-          <div className="detail-sheet-actions">
-            {isDynamic && (
+          {isDynamic && (
+            <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
               <button className="detail-action-btn detail-action-delete" onClick={handleDelete}>
                 삭제
               </button>
-            )}
-            <button className="detail-action-btn detail-action-edit" onClick={onClose}>
-              닫기
-            </button>
-          </div>
+            </div>
+          )}
         </div>
+
       </div>
     </>
   );
