@@ -64,6 +64,25 @@ function parseLabelToTime(label) {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
+const HOUR_HEIGHT = 60;
+const TIMELINE_START_H_SCROLL = 5;
+
+function scrollTimelineToTime(timeStr) {
+  const scrollEl = document.querySelector('.home-view');
+  const headerEl = document.querySelector('.header');
+  const sheetEl = document.querySelector('.detail-sheet');
+  if (!scrollEl || !headerEl) return;
+  const [h, m] = timeStr.split(':').map(Number);
+  const offsetH = ((h - TIMELINE_START_H_SCROLL + 24) % 24);
+  const timeTop = offsetH * HOUR_HEIGHT + (m / 60) * HOUR_HEIGHT;
+  const headerBottom = headerEl.getBoundingClientRect().bottom;
+  const sheetTop = sheetEl ? sheetEl.getBoundingClientRect().top : window.innerHeight;
+  const visibleHeight = sheetTop - headerBottom;
+  const containerTop = scrollEl.getBoundingClientRect().top;
+  const targetScrollTop = timeTop - (visibleHeight / 2) + (headerBottom - containerTop);
+  scrollEl.scrollTo({ top: Math.max(0, targetScrollTop), behavior: 'smooth' });
+}
+
 export default function HomeEventDetailSheet({ event, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -121,6 +140,13 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     };
   }, [editMode, activeField]);
 
+  // 시작 시간 편집 시 타임라인 스크롤
+  useEffect(() => {
+    if (activeField === 'start') {
+      scrollTimelineToTime(startTimeRef.current);
+    }
+  }, [activeField]);
+
   // 피커 스크롤 중 실시간 반영 (MutationObserver)
   useEffect(() => {
     if (activeField !== 'start' && activeField !== 'end') return;
@@ -144,6 +170,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
         }
       } else {
         newEnd = parsed;
+        scrollTimelineToTime(parsed);
       }
       const [sh, sm] = newStart.split(':').map(Number);
       const [eh, em] = newEnd.split(':').map(Number);
@@ -269,22 +296,23 @@ export default function HomeEventDetailSheet({ event, onClose }) {
               </span>
             </div>
 
-            {/* 시작 시간 */}
-            <div
-              className={`home-sheet-field-row${activeField === 'start' ? ' active' : ''}`}
-              onClick={() => handleTimeTap('start')}
-            >
-              <span className="home-sheet-field-label">시작</span>
-              <span className="home-sheet-field-value">{formatLabelStr(startTime)}</span>
-            </div>
-
-            {/* 종료 시간 */}
-            <div
-              className={`home-sheet-field-row${activeField === 'end' ? ' active' : ''}${!isEndValid && activeField === 'end' ? ' error' : ''}`}
-              onClick={() => handleTimeTap('end')}
-            >
-              <span className="home-sheet-field-label">종료</span>
-              <span className={`home-sheet-field-value${!isEndValid ? ' error' : ''}`}>{formatLabelStr(endTime)}</span>
+            {/* 시작/종료 시간 (좌우 나란히) */}
+            <div className="home-sheet-time-row">
+              <div
+                className={`home-sheet-time-cell${activeField === 'start' ? ' active' : ''}`}
+                onClick={() => handleTimeTap('start')}
+              >
+                <span className="home-sheet-field-label">시작</span>
+                <span className="home-sheet-field-value">{formatLabelStr(startTime)}</span>
+              </div>
+              <div className="home-sheet-time-divider" />
+              <div
+                className={`home-sheet-time-cell${activeField === 'end' ? ' active' : ''}${!isEndValid ? ' error' : ''}`}
+                onClick={() => handleTimeTap('end')}
+              >
+                <span className="home-sheet-field-label">종료</span>
+                <span className={`home-sheet-field-value${!isEndValid ? ' error' : ''}`}>{formatLabelStr(endTime)}</span>
+              </div>
             </div>
 
             {/* 드럼 피커 */}

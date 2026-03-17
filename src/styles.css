@@ -3316,7 +3316,7 @@ textarea {
 
 @keyframes editingPulse {
   0%   { background: rgba(235, 235, 235, 0.6); }
-  50%  { background: rgba(200, 210, 255, 0.85); }
+  50%  { background: rgba(180, 180, 180, 0.75); }
   100% { background: rgba(235, 235, 235, 0.6); }
 }
 
@@ -3518,6 +3518,37 @@ textarea {
 
 .home-sheet-field-row.active {
   background: rgba(0, 0, 0, 0.03);
+}
+
+/* 시작/종료 시간 좌우 나란히 */
+.home-sheet-time-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.home-sheet-time-cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-sheet-time-cell.active {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.home-sheet-time-cell.error .home-sheet-field-label {
+  color: #ff3b30;
+}
+
+.home-sheet-time-divider {
+  width: 1px;
+  background: rgba(0, 0, 0, 0.07);
+  align-self: stretch;
 }
 
 .home-sheet-field-label {
