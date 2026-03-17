@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-5zol1fdpn-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 편집 중 그룹핑 해제, 편집 종료 시 복원",
+    "createdAt": 1773737028154,
+    "sha": "49358fc"
+  },
+  {
+    "url": "https://prototype-7ohoovff4-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773736910422,
+    "sha": "cfd2842"
+  },
+  {
     "url": "https://prototype-l1hjdvhlh-kimkwangkuks-projects.vercel.app",
     "message": "feat: 그룹 바텀시트 할일 상세에 완료/편집/삭제 버튼 추가",
     "createdAt": 1773736841223,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773723977661,
     "sha": "49fb7ad"
-  },
-  {
-    "url": "https://prototype-reihptihi-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 편집 중인 타임라인 블록 점멸 효과 (2s 주기, 연한 파란빛)",
-    "createdAt": 1773723908600,
-    "sha": "0c396c7"
-  },
-  {
-    "url": "https://prototype-tff7961o7-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773723882934,
-    "sha": "63925b1"
   }
 ]
