@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-i46euqa2i-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부시간 그룹 블록 범위를 할일+공부시간 전체로 확장",
+    "createdAt": 1773734650858,
+    "sha": "634de9a"
+  },
+  {
+    "url": "https://prototype-a9qd1e53v-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773734485690,
+    "sha": "813f5b7"
+  },
+  {
     "url": "https://prototype-79day8q0i-kimkwangkuks-projects.vercel.app",
     "message": "feat: 할일 바텀시트에 완료 토글 버튼 추가",
     "createdAt": 1773734418775,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773718651436,
     "sha": "c6080d3"
-  },
-  {
-    "url": "https://prototype-neefw5tse-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 편집/삭제 버튼 모든 이벤트에 표시 (isDynamic 조건 제거)",
-    "createdAt": 1773718580269,
-    "sha": "3c79987"
-  },
-  {
-    "url": "https://prototype-4vgdj9fxu-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773718428562,
-    "sha": "981c1b7"
   }
 ]
