@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-c7citmtff-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 이벤트 편집 시 시작/종료 시간 좌우 배치 + 타임라인 스크롤 + 점멸 회색",
+    "createdAt": 1773724775708,
+    "sha": "3fd83af"
+  },
+  {
+    "url": "https://prototype-3n2hyo616-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773724391516,
+    "sha": "dffcbda"
+  },
+  {
     "url": "https://prototype-itrr7ws4m-kimkwangkuks-projects.vercel.app",
     "message": "feat: 피커 스크롤 중 타임라인 실시간 반영 (MutationObserver)",
     "createdAt": 1773724324488,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773641624237,
     "sha": "533085a"
-  },
-  {
-    "url": "https://prototype-mtjhx81l7-kimkwangkuks-projects.vercel.app",
-    "message": "롱탭 시간 경과에 따른 점진적 피드백 효과",
-    "createdAt": 1773641555981,
-    "sha": "f389450"
-  },
-  {
-    "url": "https://prototype-69jhgco7k-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773641019573,
-    "sha": "e52d0e3"
   }
 ]
