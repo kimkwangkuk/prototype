@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import { Clock, FileText, Users } from 'lucide-react';
+import { Clock, FileText } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
 import useTodoStore from '../../store/useTodoStore';
 
@@ -391,12 +391,6 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
                   {formatLabel(event.startH, event.startM)} – {formatLabel(event.endH, event.endM)}
                 </span>
               </div>
-              {event.todoCount && (
-                <div className="detail-sheet-meta-row">
-                  <Users size={16} className="detail-meta-icon" strokeWidth={2} />
-                  <span className="detail-meta-label">할 일 {event.todoCount}개</span>
-                </div>
-              )}
               {event.note && (
                 <div className="detail-sheet-meta-row">
                   <FileText size={16} className="detail-meta-icon" strokeWidth={2} />

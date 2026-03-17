@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Clock, ChevronLeft, FileText, Users } from 'lucide-react';
+import { Clock, ChevronLeft, FileText } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
 function formatLabel(h, m) {
@@ -154,12 +154,6 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
                       {formatLabel(selectedEv.startH, selectedEv.startM)} – {formatLabel(selectedEv.endH, selectedEv.endM)}
                     </span>
                   </div>
-                  {selectedEv.todoCount && (
-                    <div className="detail-sheet-meta-row">
-                      <Users size={16} className="detail-meta-icon" strokeWidth={2} />
-                      <span className="detail-meta-label">할 일 {selectedEv.todoCount}개</span>
-                    </div>
-                  )}
                   {selectedEv.note && (
                     <div className="detail-sheet-meta-row">
                       <FileText size={16} className="detail-meta-icon" strokeWidth={2} />

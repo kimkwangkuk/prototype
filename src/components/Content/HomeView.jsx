@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
   return (
@@ -548,12 +548,6 @@ export default function HomeView() {
                   <span className="timeline-event-time">
                     {formatRange(ev.startH, ev.startM, ev.endH, ev.endM)}
                   </span>
-                  {ev.todoCount && (
-                    <div className="timeline-event-count-row">
-                      <Users size={12} strokeWidth={1.5} color="rgba(0,0,0,0.4)" />
-                      <span className="timeline-event-time">{ev.todoCount}</span>
-                    </div>
-                  )}
                 </div>
                 {ev.note && (
                   <span className="timeline-event-note">{ev.note}</span>
