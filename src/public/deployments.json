@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-peolsw38k-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 완료된 할일 블록 아이콘 체크 표시",
+    "createdAt": 1773737107406,
+    "sha": "e70ac04"
+  },
+  {
+    "url": "https://prototype-8bg9cgex1-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773737097104,
+    "sha": "c52adc0"
+  },
+  {
     "url": "https://prototype-5zol1fdpn-kimkwangkuks-projects.vercel.app",
     "message": "feat: 편집 중 그룹핑 해제, 편집 종료 시 복원",
     "createdAt": 1773737028154,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773724156236,
     "sha": "92a2d4a"
-  },
-  {
-    "url": "https://prototype-2obfoifag-kimkwangkuks-projects.vercel.app",
-    "message": "fix: keypad 높이 읽기를 rAF 두 번 후로 지연 (레이아웃 완료 후 읽기)",
-    "createdAt": 1773724089641,
-    "sha": "9be8058"
-  },
-  {
-    "url": "https://prototype-f3fqgx0aw-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773723977661,
-    "sha": "49fb7ad"
   }
 ]
