@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-2t8hj5m5d-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부시간 그룹 로직 및 바텀시트 타이틀 개선",
+    "createdAt": 1773734104358,
+    "sha": "f48b4ce"
+  },
+  {
+    "url": "https://prototype-eoo26zilq-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773733812752,
+    "sha": "350a4c5"
+  },
+  {
     "url": "https://prototype-f4e3vo67o-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부시간 + 인접 할일 대표 블록 기능 추가",
     "createdAt": 1773733745389,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773718200099,
     "sha": "d514ea2"
-  },
-  {
-    "url": "https://prototype-k75n36zk3-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 바텀시트 최소 높이 280px, 닫기 버튼 제거",
-    "createdAt": 1773718130594,
-    "sha": "358e5e7"
-  },
-  {
-    "url": "https://prototype-b4rnme161-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773718128487,
-    "sha": "3c878c0"
   }
 ]
