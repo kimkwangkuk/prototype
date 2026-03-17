@@ -52,6 +52,18 @@ function toTimeStr(h, m) {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
+// "오전 9:00" / "오후 2:30" → "09:00" / "14:30"
+function parseLabelToTime(label) {
+  const match = label.match(/(오전|오후)\s+(\d+):(\d+)/);
+  if (!match) return null;
+  const [, ampm, hStr, mStr] = match;
+  let h = parseInt(hStr);
+  const m = parseInt(mStr);
+  if (ampm === '오전') { if (h === 12) h = 0; }
+  else { if (h !== 12) h += 12; }
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+}
+
 export default function HomeEventDetailSheet({ event, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -62,6 +74,14 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   const [pickerVal, setPickerVal] = useState({ time: '09:00' });
 
   const keypadRef = useRef(null);
+  const pickerContainerRef = useRef(null);
+  const startTimeRef = useRef(startTime);
+  const endTimeRef = useRef(endTime);
+  const eventRef = useRef(event);
+
+  useEffect(() => { startTimeRef.current = startTime; }, [startTime]);
+  useEffect(() => { endTimeRef.current = endTime; }, [endTime]);
+  useEffect(() => { eventRef.current = event; }, [event]);
 
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
   const updateHomeEvent = useTodoStore(state => state.updateHomeEvent);
@@ -100,6 +120,39 @@ export default function HomeEventDetailSheet({ event, onClose }) {
       document.documentElement.style.setProperty('--keypad-h', '0px');
     };
   }, [editMode, activeField]);
+
+  // 피커 스크롤 중 실시간 반영 (MutationObserver)
+  useEffect(() => {
+    if (activeField !== 'start' && activeField !== 'end') return;
+    const container = pickerContainerRef.current;
+    if (!container) return;
+
+    let lastTime = '';
+    const observer = new MutationObserver(() => {
+      const selected = container.querySelector('.drum-item.selected');
+      if (!selected) return;
+      const parsed = parseLabelToTime(selected.textContent.trim());
+      if (!parsed || parsed === lastTime) return;
+      lastTime = parsed;
+
+      let newStart = startTimeRef.current;
+      let newEnd = endTimeRef.current;
+      if (activeField === 'start') {
+        newStart = parsed;
+        if (toTimelineMins(endTimeRef.current) <= toTimelineMins(parsed)) {
+          newEnd = addHour(parsed, 1);
+        }
+      } else {
+        newEnd = parsed;
+      }
+      const [sh, sm] = newStart.split(':').map(Number);
+      const [eh, em] = newEnd.split(':').map(Number);
+      setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
+    });
+
+    observer.observe(container, { attributes: true, subtree: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, [activeField, setPreviewHomeEvent]);
 
   if (!event) return null;
 
@@ -237,7 +290,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
             {/* 드럼 피커 */}
             {(activeField === 'start' || activeField === 'end') && (
               <div className="hep-picker-section">
-                <div className="drum-picker-wrapper">
+                <div className="drum-picker-wrapper" ref={pickerContainerRef}>
                   <Picker
                     value={pickerVal}
                     onChange={handlePickerChange}
