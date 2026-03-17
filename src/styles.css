@@ -3309,6 +3309,17 @@ textarea {
   isolation: isolate;
 }
 
+/* 편집 중인 이벤트 점멸 */
+.timeline-event.editing-preview {
+  animation: editingPulse 2s ease-in-out infinite;
+}
+
+@keyframes editingPulse {
+  0%   { background: rgba(235, 235, 235, 0.6); }
+  50%  { background: rgba(200, 210, 255, 0.85); }
+  100% { background: rgba(235, 235, 235, 0.6); }
+}
+
 .timeline-event.newly-added::before {
   content: '';
   position: absolute;

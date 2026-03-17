@@ -436,10 +436,11 @@ export default function HomeView() {
           const fill   = canFill ? getStudyFill(ev) : 0;
 
           const isNew = ev.id === String(newlyAddedHomeEventId);
+          const isEditing = previewHomeEvent && String(ev.id) === String(previewHomeEvent.id);
           return (
             <div
               key={ev.id}
-              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}`}
+              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}${isEditing ? ' editing-preview' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(ev.id)}
               onPointerUp={() => { setPressedId(null); setSelectedEvent(ev); }}
