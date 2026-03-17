@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, FileText, Users, ArrowRight, ChevronDown } from 'lucide-react';
+import { Clock, FileText, Users } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
 import useTodoStore from '../../store/useTodoStore';
 
@@ -65,12 +65,15 @@ export default function HomeEventDetailSheet({ event, onClose }) {
 
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
   const updateHomeEvent = useTodoStore(state => state.updateHomeEvent);
+  const setPreviewHomeEvent = useTodoStore(state => state.setPreviewHomeEvent);
+  const clearPreviewHomeEvent = useTodoStore(state => state.clearPreviewHomeEvent);
 
   useEffect(() => {
     if (event) setTimeout(() => setAnimate(true), 10);
     else {
       setAnimate(false);
       setEditMode(false);
+      clearPreviewHomeEvent();
     }
   }, [event]);
 
@@ -113,6 +116,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   };
 
   const handleEditCancel = () => {
+    clearPreviewHomeEvent();
     setEditMode(false);
     setActiveField(null);
   };
@@ -122,6 +126,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     const [sh, sm] = startTime.split(':').map(Number);
     const [eh, em] = endTime.split(':').map(Number);
     updateHomeEvent(event.id, { title: title.trim(), startH: sh, startM: sm, endH: eh, endM: em });
+    clearPreviewHomeEvent();
     setEditMode(false);
     setActiveField(null);
     onClose();
@@ -135,17 +140,25 @@ export default function HomeEventDetailSheet({ event, onClose }) {
 
   const handlePickerChange = (val) => {
     setPickerVal(val);
+    let newStart = startTime;
+    let newEnd = endTime;
     if (activeField === 'start') {
-      setStartTime(val.time);
+      newStart = val.time;
       if (toTimelineMins(endTime) <= toTimelineMins(val.time)) {
-        setEndTime(addHour(val.time, 1));
+        newEnd = addHour(val.time, 1);
       }
+      setStartTime(newStart);
+      setEndTime(newEnd);
     } else {
-      setEndTime(val.time);
+      newEnd = val.time;
+      setEndTime(newEnd);
     }
+    // 타임라인 블록 실시간 반영
+    const [sh, sm] = newStart.split(':').map(Number);
+    const [eh, em] = newEnd.split(':').map(Number);
+    setPreviewHomeEvent({ ...event, startH: sh, startM: sm, endH: eh, endM: em });
   };
 
-  const showTimePill = editMode && (activeField === 'start' || activeField === 'end');
 
   return (
     <>
@@ -155,14 +168,6 @@ export default function HomeEventDetailSheet({ event, onClose }) {
         onClick={editMode ? handleEditCancel : onClose}
       />
 
-      {/* 시간 미리보기 오버레이 (바텀시트 외부) */}
-      {showTimePill && (
-        <div className="event-time-preview-pill">
-          <span className="event-time-preview-start">{formatLabelStr(startTime)}</span>
-          <ArrowRight size={14} color="rgba(255,255,255,0.6)" strokeWidth={2} style={{ flexShrink: 0 }} />
-          <span className={`event-time-preview-end${!isEndValid ? ' invalid' : ''}`}>{formatLabelStr(endTime)}</span>
-        </div>
-      )}
 
       <div className={`bottom-sheet detail-sheet group-sheet${animate ? ' visible' : ''}`}>
 

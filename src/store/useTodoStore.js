@@ -498,6 +498,7 @@ const useTodoStore = create((set, get) => ({
   }),
   newlyAddedHomeEventId: null,
   removedSampleIds: new Set(),
+  previewHomeEvent: null,
   addHomeEvent: (event) => set(state => ({
     homeEvents: [...state.homeEvents, event],
     newlyAddedHomeEventId: event.id,
@@ -516,6 +517,8 @@ const useTodoStore = create((set, get) => ({
   updateHomeEvent: (id, patch) => set(state => ({
     homeEvents: state.homeEvents.map(e => e.id === id ? { ...e, ...patch } : e),
   })),
+  setPreviewHomeEvent: (event) => set({ previewHomeEvent: event }),
+  clearPreviewHomeEvent: () => set({ previewHomeEvent: null }),
 }));
 
 export default useTodoStore;

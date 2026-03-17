@@ -212,6 +212,7 @@ export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
   const removedSampleIds = useTodoStore(state => state.removedSampleIds);
+  const previewHomeEvent = useTodoStore(state => state.previewHomeEvent);
   const homeAddMode = useTodoStore(state => state.homeAddMode);
   const openHomeSheet = useTodoStore(state => state.openHomeSheet);
   const newlyAddedHomeEventId = useTodoStore(state => state.newlyAddedHomeEventId);
@@ -244,11 +245,11 @@ export default function HomeView() {
   const nowY    = getNowTop();
   const nowLabel = getNowLabel();
 
-  // 샘플 + 동적 이벤트 합치기 (삭제된 샘플 제외)
+  // 샘플 + 동적 이벤트 합치기 (삭제된 샘플 제외, 편집 중인 이벤트는 preview로 교체)
   const allEvents = [
     ...SAMPLE_EVENTS.filter(e => !removedSampleIds.has(e.id)),
     ...homeEvents,
-  ];
+  ].map(e => previewHomeEvent && String(e.id) === String(previewHomeEvent.id) ? previewHomeEvent : e);
 
   // 연속 이벤트 그룹핑
   const { singles, merged: mergedGroups } = groupNearbyEvents(allEvents);
