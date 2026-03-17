@@ -473,7 +473,7 @@ export default function HomeView() {
           const { col = 0, numCols = 1 } = layout[group.id] || {};
           const top    = timeToTop(group.startH, group.startM);
           const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
-          const mergedTitle = `${group.events.length}/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
+          const mergedTitle = `0/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
           return (
             <div
               key={group.id}

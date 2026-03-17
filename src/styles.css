@@ -3481,7 +3481,7 @@ textarea {
 .timeline-event-group-checkbox {
   width: 14px;
   height: 14px;
-  border: 0.583px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 3px;
   flex-shrink: 0;
 }
