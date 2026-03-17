@@ -208,11 +208,13 @@ export default function HomeEventDetailSheet({ event, onClose }) {
   };
 
   const handleEditOpen = () => {
+    const st = toTimeStr(event.startH, event.startM);
     setTitle(event.title);
-    setStartTime(toTimeStr(event.startH, event.startM));
+    setStartTime(st);
     setEndTime(toTimeStr(event.endH, event.endM));
     setActiveField('title');
     setEditMode(true);
+    scrollTimelineToTime(st);
   };
 
   const handleEditCancel = () => {
