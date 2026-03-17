@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-itrr7ws4m-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 피커 스크롤 중 타임라인 실시간 반영 (MutationObserver)",
+    "createdAt": 1773724324488,
+    "sha": "2331329"
+  },
+  {
+    "url": "https://prototype-2ya3ipapr-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773724156236,
+    "sha": "92a2d4a"
+  },
+  {
     "url": "https://prototype-2obfoifag-kimkwangkuks-projects.vercel.app",
     "message": "fix: keypad 높이 읽기를 rAF 두 번 후로 지연 (레이아웃 완료 후 읽기)",
     "createdAt": 1773724089641,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773641019573,
     "sha": "e52d0e3"
-  },
-  {
-    "url": "https://prototype-kdolzh0bo-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 타임라인 빈 영역 롱탭(400ms)으로 일정 추가 기능 복구",
-    "createdAt": 1773640952525,
-    "sha": "8e6863f"
-  },
-  {
-    "url": "https://prototype-3pyx131ut-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773639602004,
-    "sha": "cf55a0e"
   }
 ]
