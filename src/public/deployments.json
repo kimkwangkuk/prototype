@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ee2weq2ka-kimkwangkuks-projects.vercel.app",
+    "message": "fix: HomeEventDetailSheet 패널 너비 100% 수정 (group-sheet-panel 50% 버그)",
+    "createdAt": 1773718361947,
+    "sha": "57e801a"
+  },
+  {
+    "url": "https://prototype-jaod527yr-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773718200099,
+    "sha": "d514ea2"
+  },
+  {
     "url": "https://prototype-k75n36zk3-kimkwangkuks-projects.vercel.app",
     "message": "fix: 바텀시트 최소 높이 280px, 닫기 버튼 제거",
     "createdAt": 1773718130594,
@@ -286,17 +298,5 @@
     "message": "feat: 신규 일정 점멸 애니메이션 + 추가 모드 오버레이 흐림",
     "createdAt": 1773365666953,
     "sha": "1fc664e"
-  },
-  {
-    "url": "https://prototype-r4jau8fa7-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773365163295,
-    "sha": "9a4e09b"
-  },
-  {
-    "url": "https://prototype-33e2u0vby-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 타임라인 5시 표시 / 빈시간 갭 블록 / 일정 생성 전체 페이지",
-    "createdAt": 1773365093996,
-    "sha": "9a8edb8"
   }
 ]
