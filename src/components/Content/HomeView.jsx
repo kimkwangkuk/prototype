@@ -91,26 +91,31 @@ const MAX_MERGE_GAP = 15;
 function groupNearbyEvents(events) {
   if (!events.length) return { singles: [], merged: [] };
 
-  const sorted = [...events].sort(
+  // task 타입만 그룹핑 대상, 나머지는 항상 단독
+  const taskEvents = events.filter(e => e.type === 'task');
+  const nonTaskEvents = events.filter(e => e.type !== 'task');
+
+  const sorted = [...taskEvents].sort(
     (a, b) => toMin(a.startH, a.startM) - toMin(b.startH, b.startM)
   );
 
   const chains = [];
-  let current = [sorted[0]];
-
-  for (let i = 1; i < sorted.length; i++) {
-    const prev = current[current.length - 1];
-    const gap = toMin(sorted[i].startH, sorted[i].startM) - toMin(prev.endH, prev.endM);
-    if (gap >= 0 && gap <= MAX_MERGE_GAP) {
-      current.push(sorted[i]);
-    } else {
-      chains.push([...current]);
-      current = [sorted[i]];
+  if (sorted.length) {
+    let current = [sorted[0]];
+    for (let i = 1; i < sorted.length; i++) {
+      const prev = current[current.length - 1];
+      const gap = toMin(sorted[i].startH, sorted[i].startM) - toMin(prev.endH, prev.endM);
+      if (gap >= 0 && gap <= MAX_MERGE_GAP) {
+        current.push(sorted[i]);
+      } else {
+        chains.push([...current]);
+        current = [sorted[i]];
+      }
     }
+    chains.push([...current]);
   }
-  chains.push([...current]);
 
-  const singles = [];
+  const singles = [...nonTaskEvents];
   const merged = [];
 
   for (const chain of chains) {
