@@ -190,6 +190,8 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
   const updateHomeEvent = useTodoStore(state => state.updateHomeEvent);
   const setPreviewHomeEvent = useTodoStore(state => state.setPreviewHomeEvent);
   const clearPreviewHomeEvent = useTodoStore(state => state.clearPreviewHomeEvent);
+  const doneHomeEventIds = useTodoStore(state => state.doneHomeEventIds);
+  const toggleHomeEventDone = useTodoStore(state => state.toggleHomeEventDone);
 
   useEffect(() => {
     if (event) {
@@ -404,6 +406,17 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
             </div>
 
             <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+              {event.type === 'task' && (() => {
+                const isDone = doneHomeEventIds.has(String(event.id));
+                return (
+                  <button
+                    className={`detail-action-btn detail-action-done${isDone ? ' done' : ''}`}
+                    onClick={() => toggleHomeEventDone(event.id)}
+                  >
+                    {isDone ? '완료됨' : '완료'}
+                  </button>
+                );
+              })()}
               <button className="detail-action-btn detail-action-edit" onClick={handleEditOpen}>
                 편집
               </button>

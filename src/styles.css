@@ -2686,6 +2686,16 @@ textarea {
   color: #000;
 }
 
+.detail-action-done {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.detail-action-done.done {
+  background-color: rgba(34, 197, 94, 0.18);
+  color: #15803d;
+}
+
 /* ===== Versions Button ===== */
 .versions-float-wrap {
   position: fixed;
