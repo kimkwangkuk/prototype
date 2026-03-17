@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-m9tc0oqu2-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 타임라인 그룹 카드 제목에 할일 목록 포함 — 할일 0/N (title1, title2)",
+    "createdAt": 1773717767983,
+    "sha": "10943d5"
+  },
+  {
+    "url": "https://prototype-j8i05hum6-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773717741804,
+    "sha": "5be27d1"
+  },
+  {
     "url": "https://prototype-kx3u0j1h6-kimkwangkuks-projects.vercel.app",
     "message": "feat: 이벤트/그룹 바텀시트 앱바 구조 통일 및 그룹 제목 포맷 변경",
     "createdAt": 1773717673632,
@@ -286,17 +298,5 @@
     "message": "fix: 스터디 게이지 자정 기준 버그 수정 - 분 비교 → 타임라인 y좌표 비교",
     "createdAt": 1773241850597,
     "sha": "e23ac01"
-  },
-  {
-    "url": "https://prototype-7quhhn5wr-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773241747993,
-    "sha": "8c447e1"
-  },
-  {
-    "url": "https://prototype-3be9awkj8-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 스터디 타임 게이지 height% → scaleY로 교체 (flex stretch 환경 대응)",
-    "createdAt": 1773241677238,
-    "sha": "a316201"
   }
 ]
