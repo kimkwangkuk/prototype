@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-6mc0tftsz-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 그룹 블록 디자인 재구현 — has-bar 구조 유지, 합성 제목 표시",
+    "createdAt": 1773716814202,
+    "sha": "2296a38"
+  },
+  {
+    "url": "https://prototype-1n69162es-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773715713153,
+    "sha": "3047b6d"
+  },
+  {
     "url": "https://prototype-8ixoj36pe-kimkwangkuks-projects.vercel.app",
     "message": "feat: 연속 이벤트 그룹 블록 디자인 개선 (피그마 반영)",
     "createdAt": 1773715645333,
@@ -286,17 +298,5 @@
     "message": "chore: 미사용 AttachedSheet 컴포넌트 및 CSS 삭제",
     "createdAt": 1773237305914,
     "sha": "f04e711"
-  },
-  {
-    "url": "https://prototype-rh69ivxzu-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773235632047,
-    "sha": "b04f225"
-  },
-  {
-    "url": "https://prototype-fx6bibmi0-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 홈 바텀시트 일뷰 DetailSheet 스타일로 통일",
-    "createdAt": 1773235561374,
-    "sha": "a59db2d"
   }
 ]
