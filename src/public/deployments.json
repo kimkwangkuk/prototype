@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-9tepp3ev9-kimkwangkuks-projects.vercel.app",
+    "message": "chore: 할일 그룹 블록 타이틀에서 '할일' 텍스트 제거",
+    "createdAt": 1773735344147,
+    "sha": "63ea48b"
+  },
+  {
+    "url": "https://prototype-80sgnewh6-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773735278347,
+    "sha": "847f76c"
+  },
+  {
     "url": "https://prototype-7kolhoklb-kimkwangkuks-projects.vercel.app",
     "message": "chore: 집중계획 블록/바텀시트에서 유저 아이콘 및 할일 개수 제거",
     "createdAt": 1773735207696,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773723697831,
     "sha": "e5e007c"
-  },
-  {
-    "url": "https://prototype-7boux7l5g-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 시간 편집 시 타임라인 블록 실시간 반영",
-    "createdAt": 1773723627071,
-    "sha": "5b65889"
-  },
-  {
-    "url": "https://prototype-rkselp8w6-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773723490666,
-    "sha": "53b5895"
   }
 ]
