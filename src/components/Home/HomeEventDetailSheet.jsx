@@ -254,8 +254,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
               )}
             </div>
 
-            {isDynamic && (
-              <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+            <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
                 <button className="detail-action-btn detail-action-edit" onClick={handleEditOpen}>
                   편집
                 </button>
@@ -263,7 +262,6 @@ export default function HomeEventDetailSheet({ event, onClose }) {
                   삭제
                 </button>
               </div>
-            )}
           </div>
         )}
 
