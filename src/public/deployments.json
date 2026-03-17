@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1nvr7mgtl-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 피커 실시간 반영 - touchmove 대신 rAF 폴링으로 교체",
+    "createdAt": 1773726089336,
+    "sha": "d37a720"
+  },
+  {
+    "url": "https://prototype-npj1b0fse-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773725870084,
+    "sha": "0c67676"
+  },
+  {
     "url": "https://prototype-zs4a1obcv-kimkwangkuks-projects.vercel.app",
     "message": "fix: 편집 모드 전환 후 바텀시트 레이아웃 확정 뒤 타임라인 스크롤 계산",
     "createdAt": 1773725800404,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773646386996,
     "sha": "b21e374"
-  },
-  {
-    "url": "https://prototype-1jdyjj261-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 그룹 바텀시트 앱바 디자인 개선",
-    "createdAt": 1773646317639,
-    "sha": "44e0c52"
-  },
-  {
-    "url": "https://prototype-druk9x10t-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773644513854,
-    "sha": "5e55545"
   }
 ]
