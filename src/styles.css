@@ -1839,6 +1839,11 @@ textarea {
   padding: 0 4px 8px;
 }
 
+/* 커스텀 드럼 피커 스크롤바 숨기기 */
+.drum-picker-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─── Drum Picker ─── */
 .drum-picker-wrapper {
   position: relative;

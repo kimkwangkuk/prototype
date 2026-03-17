@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import Picker from 'react-mobile-picker';
 import { Clock, FileText, Users } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
 import useTodoStore from '../../store/useTodoStore';
@@ -52,18 +51,6 @@ function toTimeStr(h, m) {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
-// "오전 9:00" / "오후 2:30" → "09:00" / "14:30"
-function parseLabelToTime(label) {
-  const match = label.match(/(오전|오후)\s+(\d+):(\d+)/);
-  if (!match) return null;
-  const [, ampm, hStr, mStr] = match;
-  let h = parseInt(hStr);
-  const m = parseInt(mStr);
-  if (ampm === '오전') { if (h === 12) h = 0; }
-  else { if (h !== 12) h += 12; }
-  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
-}
-
 const HOUR_HEIGHT = 60;
 const TIMELINE_START_H_SCROLL = 5;
 
@@ -83,6 +70,102 @@ function scrollTimelineToTime(timeStr) {
   scrollEl.scrollTo({ top: Math.max(0, targetScrollTop), behavior: 'smooth' });
 }
 
+// ─── 커스텀 드럼 피커 ───
+const ITEM_H = 44;
+const PICKER_H = 160;
+const PICKER_PAD = (PICKER_H - ITEM_H) / 2; // 58px
+
+const DrumPicker = memo(function DrumPicker({ options, value, onChange }) {
+  const scrollRef = useRef(null);
+  const prevValueRef = useRef(value);
+  const rafRef = useRef(null);
+
+  // 초기 위치 및 외부에서 value 바뀔 때 스크롤 동기화
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const idx = options.indexOf(value);
+    if (idx === -1) return;
+    // 이미 해당 위치면 스킵 (스크롤 중 외부 업데이트 무시)
+    if (Math.round(el.scrollTop / ITEM_H) === idx) return;
+    el.scrollTop = idx * ITEM_H;
+    prevValueRef.current = value;
+  }, [value, options]);
+
+  const handleScroll = () => {
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const idx = Math.round(el.scrollTop / ITEM_H);
+      const clamped = Math.max(0, Math.min(idx, options.length - 1));
+      const v = options[clamped];
+      if (v !== prevValueRef.current) {
+        prevValueRef.current = v;
+        onChange(v);
+      }
+    });
+  };
+
+  return (
+    <div style={{ position: 'relative', height: PICKER_H, overflow: 'hidden' }}>
+      {/* 선택 영역 표시선 */}
+      <div style={{
+        position: 'absolute', top: PICKER_PAD, left: 0, right: 0,
+        height: ITEM_H, pointerEvents: 'none', zIndex: 1,
+        borderTop: '1px solid rgba(0,0,0,0.1)',
+        borderBottom: '1px solid rgba(0,0,0,0.1)',
+      }} />
+      {/* 상단 페이드 */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: PICKER_PAD,
+        background: 'linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0))',
+        pointerEvents: 'none', zIndex: 1,
+      }} />
+      {/* 하단 페이드 */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: PICKER_PAD,
+        background: 'linear-gradient(to top, #fff 30%, rgba(255,255,255,0))',
+        pointerEvents: 'none', zIndex: 1,
+      }} />
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="drum-picker-scroll"
+        style={{
+          height: PICKER_H,
+          overflowY: 'scroll',
+          scrollSnapType: 'y mandatory',
+          paddingTop: PICKER_PAD,
+          paddingBottom: PICKER_PAD,
+          boxSizing: 'content-box',
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
+        {options.map(opt => (
+          <div
+            key={opt}
+            style={{
+              height: ITEM_H,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              scrollSnapAlign: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <span className={opt === value ? 'drum-item selected' : 'drum-item'}>
+              {formatLabelStr(opt)}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
 const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [editMode, setEditMode] = useState(false);
@@ -90,17 +173,18 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('10:00');
   const [activeField, setActiveField] = useState(null); // 'title' | 'start' | 'end'
-  const [pickerVal, setPickerVal] = useState({ time: '09:00' });
+  const [pickerTime, setPickerTime] = useState('09:00');
 
   const keypadRef = useRef(null);
-  const pickerContainerRef = useRef(null);
   const startTimeRef = useRef(startTime);
   const endTimeRef = useRef(endTime);
   const eventRef = useRef(event);
+  const activeFieldRef = useRef(activeField);
 
   useEffect(() => { startTimeRef.current = startTime; }, [startTime]);
   useEffect(() => { endTimeRef.current = endTime; }, [endTime]);
   useEffect(() => { eventRef.current = event; }, [event]);
+  useEffect(() => { activeFieldRef.current = activeField; }, [activeField]);
 
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
   const updateHomeEvent = useTodoStore(state => state.updateHomeEvent);
@@ -110,7 +194,6 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
   useEffect(() => {
     if (event) {
       setTimeout(() => setAnimate(true), 10);
-      // 시트 애니메이션 완료 후 시작 시간 중앙 스크롤
       setTimeout(() => scrollTimelineToTime(toTimeStr(event.startH, event.startM)), 380);
     } else {
       setAnimate(false);
@@ -130,7 +213,6 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
 
     if (isKeypad) {
       document.body.classList.add('home-keypad-open');
-      // 키패드가 DOM에 그려진 후 높이 읽기
       requestAnimationFrame(() => requestAnimationFrame(apply));
     } else {
       document.body.classList.remove('home-keypad-open');
@@ -143,73 +225,12 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
     };
   }, [editMode, activeField]);
 
-  // 시작 시간 탭 시 타임라인 스크롤 (피커 렌더 후 시트 높이 확정 뒤 계산)
+  // 시작 시간 탭 시 타임라인 스크롤
   useEffect(() => {
     if (activeField === 'start') {
       requestAnimationFrame(() => requestAnimationFrame(() => scrollTimelineToTime(startTimeRef.current)));
     }
   }, [activeField]);
-
-  // 피커 스크롤 중 실시간 반영 (rAF 폴링)
-  useEffect(() => {
-    if (activeField !== 'start' && activeField !== 'end') return;
-    const container = pickerContainerRef.current;
-    if (!container) return;
-
-    const applySelected = () => {
-      const selected = container.querySelector('.drum-item.selected');
-      if (!selected) return;
-      const parsed = parseLabelToTime(selected.textContent.trim());
-      if (!parsed) return;
-
-      let newStart = startTimeRef.current;
-      let newEnd = endTimeRef.current;
-      if (activeField === 'start') {
-        newStart = parsed;
-        scrollTimelineToTime(parsed);
-        if (toTimelineMins(endTimeRef.current) <= toTimelineMins(parsed)) {
-          newEnd = addHour(parsed, 1);
-        }
-      } else {
-        newEnd = parsed;
-        scrollTimelineToTime(parsed);
-      }
-      const [sh, sm] = newStart.split(':').map(Number);
-      const [eh, em] = newEnd.split(':').map(Number);
-      setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
-    };
-
-    let rafId = null;
-    let touching = false;
-
-    const poll = () => {
-      applySelected();
-      if (touching) rafId = requestAnimationFrame(poll);
-    };
-
-    const onTouchStart = () => {
-      touching = true;
-      rafId = requestAnimationFrame(poll);
-    };
-
-    const onTouchEnd = () => {
-      touching = false;
-      cancelAnimationFrame(rafId);
-      applySelected(); // 손 뗀 시점 최종 반영
-    };
-
-    container.addEventListener('touchstart', onTouchStart, { passive: true });
-    container.addEventListener('touchend', onTouchEnd, { passive: true });
-    container.addEventListener('touchcancel', onTouchEnd, { passive: true });
-
-    return () => {
-      touching = false;
-      cancelAnimationFrame(rafId);
-      container.removeEventListener('touchstart', onTouchStart);
-      container.removeEventListener('touchend', onTouchEnd);
-      container.removeEventListener('touchcancel', onTouchEnd);
-    };
-  }, [activeField, setPreviewHomeEvent]);
 
   if (!event) return null;
 
@@ -227,7 +248,6 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
     setEndTime(toTimeStr(event.endH, event.endM));
     setActiveField('title');
     setEditMode(true);
-    // 편집 모드로 바텀시트 레이아웃이 확정된 뒤 스크롤 계산
     requestAnimationFrame(() => requestAnimationFrame(() => scrollTimelineToTime(st)));
   };
 
@@ -250,31 +270,32 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
 
   const handleTimeTap = (field) => {
     const t = field === 'start' ? startTime : endTime;
-    setPickerVal({ time: snapSlot(t) });
+    setPickerTime(snapSlot(t));
     setActiveField(prev => prev === field ? null : field);
   };
 
-  const handlePickerChange = (val) => {
-    setPickerVal(val);
-    let newStart = startTime;
-    let newEnd = endTime;
-    if (activeField === 'start') {
-      newStart = val.time;
-      if (toTimelineMins(endTime) <= toTimelineMins(val.time)) {
-        newEnd = addHour(val.time, 1);
+  // 피커에서 시간 변경될 때마다 즉시 호출 (스크롤 이벤트마다)
+  const handlePickerChange = (newTime) => {
+    setPickerTime(newTime);
+    let newStart = startTimeRef.current;
+    let newEnd = endTimeRef.current;
+    if (activeFieldRef.current === 'start') {
+      newStart = newTime;
+      scrollTimelineToTime(newTime);
+      if (toTimelineMins(endTimeRef.current) <= toTimelineMins(newTime)) {
+        newEnd = addHour(newTime, 1);
       }
       setStartTime(newStart);
       setEndTime(newEnd);
     } else {
-      newEnd = val.time;
+      newEnd = newTime;
+      scrollTimelineToTime(newTime);
       setEndTime(newEnd);
     }
-    // 타임라인 블록 실시간 반영
     const [sh, sm] = newStart.split(':').map(Number);
     const [eh, em] = newEnd.split(':').map(Number);
-    setPreviewHomeEvent({ ...event, startH: sh, startM: sm, endH: eh, endM: em });
+    setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
   };
-
 
   return (
     <>
@@ -283,7 +304,6 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
         style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
         onClick={editMode ? handleEditCancel : onClose}
       />
-
 
       <div className={`bottom-sheet detail-sheet group-sheet${animate ? ' visible' : ''}`}>
 
@@ -318,7 +338,7 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
 
         {editMode ? (
           <div className="event-detail-panel">
-            {/* 제목 필드 (커스텀 키패드) */}
+            {/* 제목 필드 */}
             <div
               className={`home-sheet-field-row${activeField === 'title' ? ' active' : ''}`}
               onClick={() => setActiveField('title')}
@@ -351,27 +371,11 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
             {/* 드럼 피커 */}
             {(activeField === 'start' || activeField === 'end') && (
               <div className="hep-picker-section">
-                <div className="drum-picker-wrapper" ref={pickerContainerRef}>
-                  <Picker
-                    value={pickerVal}
-                    onChange={handlePickerChange}
-                    wheelMode="natural"
-                    height={160}
-                    itemHeight={44}
-                  >
-                    <Picker.Column name="time">
-                      {sortedTimeSlots.map(v => (
-                        <Picker.Item key={v} value={v}>
-                          {({ selected }) => (
-                            <span className={selected ? 'drum-item selected' : 'drum-item'}>
-                              {formatLabelStr(v)}
-                            </span>
-                          )}
-                        </Picker.Item>
-                      ))}
-                    </Picker.Column>
-                  </Picker>
-                </div>
+                <DrumPicker
+                  options={sortedTimeSlots}
+                  value={pickerTime}
+                  onChange={handlePickerChange}
+                />
               </div>
             )}
           </div>
