@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-8ixoj36pe-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 연속 이벤트 그룹 블록 디자인 개선 (피그마 반영)",
+    "createdAt": 1773715645333,
+    "sha": "5624199"
+  },
+  {
+    "url": "https://prototype-ipiov58zz-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773674068355,
+    "sha": "2d5b47f"
+  },
+  {
     "url": "https://prototype-4vocfnamp-kimkwangkuks-projects.vercel.app",
     "message": "feat: 챌린지 바텀시트 슬라이딩 패널 UI 구현 및 빈 슬롯 + 버튼 즉시 오픈",
     "createdAt": 1773673997958,
@@ -61,7 +73,7 @@
   },
   {
     "url": "https://prototype-f13p5nilf-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 그룹 블록 스��일 개선 - 회색 유지, (+N) 포맷, Users 아이콘 제거",
+    "message": "fix: 그룹 블록 스타일 개선 - 회색 유지, (+N) 포맷, Users 아이콘 제거",
     "createdAt": 1773644150925,
     "sha": "9e2b7af"
   },
@@ -163,7 +175,7 @@
   },
   {
     "url": "https://prototype-4rh5kbsed-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 점멸 애니메이션 개선 + 자정 시간 ��록 허용 + 종료시간 유효성 검사",
+    "message": "fix: 점멸 애니메이션 개선 + 자정 시간 등록 허용 + 종료시간 유효성 검사",
     "createdAt": 1773400783178,
     "sha": "1053e0c"
   },
@@ -286,17 +298,5 @@
     "message": "fix: 홈 바텀시트 일뷰 DetailSheet 스타일로 통일",
     "createdAt": 1773235561374,
     "sha": "a59db2d"
-  },
-  {
-    "url": "https://prototype-j515eqe1x-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773235161621,
-    "sha": "54a291d"
-  },
-  {
-    "url": "https://prototype-ncd519d12-kimkwangkuks-projects.vercel.app",
-    "message": "fix: AttachedSheet 좌우 패딩 통일, ChallengeSheet/DetailSheet 모두 AttachedSheet 사용",
-    "createdAt": 1773235090571,
-    "sha": "f01689f"
   }
 ]
