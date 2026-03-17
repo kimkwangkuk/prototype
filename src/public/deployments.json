@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-revvacjc9-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 편집 시트 커스텀 키패드 + 시간 미리보기 오버레이",
+    "createdAt": 1773723422097,
+    "sha": "b8efe7d"
+  },
+  {
+    "url": "https://prototype-24n7ql0kn-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773718855432,
+    "sha": "a9f0c47"
+  },
+  {
     "url": "https://prototype-i9dgnog9t-kimkwangkuks-projects.vercel.app",
     "message": "fix: 이벤트 삭제 버그 수정",
     "createdAt": 1773718786363,
@@ -286,17 +298,5 @@
     "message": "fix: 일정 생성 취소 시 탭바 안보이는 문제 + 종료시간 기본값 보정",
     "createdAt": 1773401258083,
     "sha": "525ee14"
-  },
-  {
-    "url": "https://prototype-6jwesp20l-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773400849673,
-    "sha": "9d40828"
-  },
-  {
-    "url": "https://prototype-4rh5kbsed-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 점멸 애니메이션 개선 + 자정 시간 등록 허용 + 종료시간 유효성 검사",
-    "createdAt": 1773400783178,
-    "sha": "1053e0c"
   }
 ]
