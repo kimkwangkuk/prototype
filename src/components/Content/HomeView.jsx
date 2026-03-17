@@ -159,7 +159,7 @@ function groupNearbyEvents(events) {
   return { singles, merged };
 }
 
-// ─── 공부시간 + 인접 할일 그룹핑 ───
+// ─── 공부시간 + 인접 할일 그룹핑 (완료된 할일만 흡수) ───
 function groupStudyWithTasks(singles, doneHomeEventIds) {
   const studyEvents = singles.filter(e => e.type === 'study');
   if (!studyEvents.length) return { studyGroups: [], pairedStudyIds: new Set() };
@@ -174,25 +174,27 @@ function groupStudyWithTasks(singles, doneHomeEventIds) {
     const studyEndMins = toMin(study.endH, study.endM);
     const studyStartMins = toMin(study.startH, study.startM);
 
-    const nearTasks = taskEvents.filter(task => {
-      if (pairedStudyIds.has(task.id)) return false;
+    // 인접 할일 전체 (완료 여부 무관) — 분모에 사용
+    const allNearTasks = taskEvents.filter(task => {
       const taskStartMins = toMin(task.startH, task.startM);
       const taskEndMins = toMin(task.endH, task.endM);
-      // 할일이 공부 뒤에 오는 경우 (할일 시작 - 공부 종료 ≤ 15분)
       const taskAfterStudy = taskStartMins >= studyEndMins && taskStartMins - studyEndMins <= MAX_MERGE_GAP;
-      // 할일이 공부 앞에 오는 경우 (공부 시작 - 할일 종료 ≤ 15분)
       const taskBeforeStudy = taskEndMins <= studyStartMins && studyStartMins - taskEndMins <= MAX_MERGE_GAP;
       return taskAfterStudy || taskBeforeStudy;
     });
 
-    if (nearTasks.length > 0) {
-      nearTasks.forEach(t => pairedStudyIds.add(t.id));
+    // 완료된 할일만 그룹에 흡수
+    const doneTasks = allNearTasks.filter(t => doneHomeEventIds.has(String(t.id)));
+
+    if (doneTasks.length > 0) {
+      doneTasks.forEach(t => pairedStudyIds.add(t.id));
       pairedStudyIds.add(study.id);
       studyGroups.push({
         id: `study-group-${study.id}`,
         type: 'study-group',
         studyEvent: study,
-        tasks: nearTasks,
+        tasks: doneTasks,
+        totalNearTasks: allNearTasks.length,
         startH: study.startH,
         startM: study.startM,
         endH: study.endH,
@@ -590,7 +592,6 @@ export default function HomeView() {
           const top    = timeToTop(sg.startH, sg.startM);
           const height = Math.max(timeToTop(sg.endH, sg.endM) - top, 30);
           const fill   = getStudyFill(sg);
-          const doneCount = sg.tasks.filter(t => doneHomeEventIds.has(String(t.id))).length;
           const isNew = String(sg.studyEvent.id) === String(newlyAddedHomeEventId) ||
             sg.tasks.some(t => String(t.id) === String(newlyAddedHomeEventId));
           return (
@@ -619,7 +620,7 @@ export default function HomeView() {
                   </span>
                   <div className="timeline-event-count-row">
                     <SmallTaskIcon />
-                    <span className="timeline-event-time">{doneCount}/{sg.tasks.length}</span>
+                    <span className="timeline-event-time">{sg.tasks.length}/{sg.totalNearTasks}</span>
                   </div>
                 </div>
               </div>

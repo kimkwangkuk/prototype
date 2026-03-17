@@ -46,6 +46,7 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
 
   if (!group) return null;
 
+  const anchorEvent = group.events.find(ev => ev.isAnchor);
   const taskEvents = group.events.filter(ev => !ev.isAnchor);
   const doneCount = taskEvents.filter(ev => doneHomeEventIds.has(String(ev.id))).length;
 
@@ -76,6 +77,8 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
           <div className="group-sheet-appbar-title">
             {selectedEv ? (
               <span>{selectedEv.title}</span>
+            ) : anchorEvent ? (
+              <span>{anchorEvent.title}</span>
             ) : (
               <span>할일 {doneCount}/{taskEvents.length}</span>
             )}
