@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-neefw5tse-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 편집/삭제 버튼 모든 이벤트에 표시 (isDynamic 조건 제거)",
+    "createdAt": 1773718580269,
+    "sha": "3c79987"
+  },
+  {
+    "url": "https://prototype-4vgdj9fxu-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773718428562,
+    "sha": "981c1b7"
+  },
+  {
     "url": "https://prototype-ee2weq2ka-kimkwangkuks-projects.vercel.app",
     "message": "fix: HomeEventDetailSheet 패널 너비 100% 수정 (group-sheet-panel 50% 버그)",
     "createdAt": 1773718361947,
@@ -286,17 +298,5 @@
     "message": "fix: 신규 일정 점멸 → 할일 탭과 동일한 배경 펄스 방식으로 교체",
     "createdAt": 1773372722128,
     "sha": "e4c7cd7"
-  },
-  {
-    "url": "https://prototype-2mirogm24-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773365735556,
-    "sha": "7e74434"
-  },
-  {
-    "url": "https://prototype-m8h9nymmn-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 신규 일정 점멸 애니메이션 + 추가 모드 오버레이 흐림",
-    "createdAt": 1773365666953,
-    "sha": "1fc664e"
   }
 ]
