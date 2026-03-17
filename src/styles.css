@@ -3403,6 +3403,11 @@ textarea {
   gap: 2px;
 }
 
+.timeline-event-time.count-done {
+  text-decoration: line-through;
+  color: rgba(0,0,0,0.3);
+}
+
 .timeline-event-note {
   font-size: 12px;
   font-weight: 400;

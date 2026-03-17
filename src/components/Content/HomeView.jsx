@@ -9,7 +9,15 @@ function StudyIcon({ size = 14, color = 'currentColor' }) {
   );
 }
 
-function SmallTaskIcon() {
+function SmallTaskIcon({ checked = false }) {
+  if (checked) {
+    return (
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <rect x="1" y="1" width="10" height="10" rx="2.5" fill="rgba(0,0,0,0.15)"/>
+        <path d="M3.5 6L5 7.5L8.5 4" stroke="rgba(0,0,0,0.5)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+  }
   return (
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
       <rect x="1" y="1" width="10" height="10" rx="2.5" stroke="rgba(0,0,0,0.45)" strokeWidth="0.75"/>
@@ -598,6 +606,7 @@ export default function HomeView() {
           const top    = timeToTop(sg.startH, sg.startM);
           const height = Math.max(timeToTop(sg.endH, sg.endM) - top, 30);
           const fill   = getStudyFill(sg);
+          const allDone = sg.tasks.length === sg.totalNearTasks && sg.totalNearTasks > 0;
           const isNew = String(sg.studyEvent.id) === String(newlyAddedHomeEventId) ||
             sg.tasks.some(t => String(t.id) === String(newlyAddedHomeEventId));
           return (
@@ -625,8 +634,10 @@ export default function HomeView() {
                     {formatRange(sg.startH, sg.startM, sg.endH, sg.endM)}
                   </span>
                   <div className="timeline-event-count-row">
-                    <SmallTaskIcon />
-                    <span className="timeline-event-time">{sg.tasks.length}/{sg.totalNearTasks}</span>
+                    <SmallTaskIcon checked={allDone} />
+                    <span className={`timeline-event-time${allDone ? ' count-done' : ''}`}>
+                      {sg.tasks.length}/{sg.totalNearTasks}
+                    </span>
                   </div>
                 </div>
               </div>
