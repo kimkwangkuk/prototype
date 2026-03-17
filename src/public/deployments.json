@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-lbegzqljm-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 일정 상세 시트에 편집/삭제 기능 추가",
+    "createdAt": 1773718059014,
+    "sha": "a3b8c04"
+  },
+  {
+    "url": "https://prototype-k8c6px7tv-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773717835984,
+    "sha": "b997b0f"
+  },
+  {
     "url": "https://prototype-m9tc0oqu2-kimkwangkuks-projects.vercel.app",
     "message": "fix: 타임라인 그룹 카드 제목에 할일 목록 포함 — 할일 0/N (title1, title2)",
     "createdAt": 1773717767983,
@@ -286,17 +298,5 @@
     "message": "feat: 타임라인 추가 버튼 → 빈 슬롯 점선 블록 선택 후 일정 생성",
     "createdAt": 1773362819111,
     "sha": "c2bcc0c"
-  },
-  {
-    "url": "https://prototype-gtp5en17f-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773241919979,
-    "sha": "b8a8ed3"
-  },
-  {
-    "url": "https://prototype-ale9ac7na-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 스터디 게이지 자정 기준 버그 수정 - 분 비교 → 타임라인 y좌표 비교",
-    "createdAt": 1773241850597,
-    "sha": "e23ac01"
   }
 ]
