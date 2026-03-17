@@ -140,10 +140,10 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     };
   }, [editMode, activeField]);
 
-  // 시작 시간 편집 시 타임라인 스크롤
+  // 시작 시간 탭 시 타임라인 스크롤 (피커 렌더 후 시트 높이 확정 뒤 계산)
   useEffect(() => {
     if (activeField === 'start') {
-      scrollTimelineToTime(startTimeRef.current);
+      requestAnimationFrame(() => requestAnimationFrame(() => scrollTimelineToTime(startTimeRef.current)));
     }
   }, [activeField]);
 
@@ -214,7 +214,8 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     setEndTime(toTimeStr(event.endH, event.endM));
     setActiveField('title');
     setEditMode(true);
-    scrollTimelineToTime(st);
+    // 편집 모드로 바텀시트 레이아웃이 확정된 뒤 스크롤 계산
+    requestAnimationFrame(() => requestAnimationFrame(() => scrollTimelineToTime(st)));
   };
 
   const handleEditCancel = () => {
