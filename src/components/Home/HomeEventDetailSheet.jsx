@@ -147,7 +147,7 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     }
   }, [activeField]);
 
-  // 피커 스크롤 중 실시간 반영 (MutationObserver + touchmove)
+  // 피커 스크롤 중 실시간 반영 (rAF 폴링)
   useEffect(() => {
     if (activeField !== 'start' && activeField !== 'end') return;
     const container = pickerContainerRef.current;
@@ -176,25 +176,35 @@ export default function HomeEventDetailSheet({ event, onClose }) {
       setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
     };
 
-    // touchmove: 손을 떼지 않아도 실시간 반영
-    const handleTouchMove = () => { requestAnimationFrame(applySelected); };
-    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+    let rafId = null;
+    let touching = false;
 
-    // MutationObserver: selected 클래스 변경 감지 (스냅 시점 보완)
-    let lastTime = '';
-    const observer = new MutationObserver(() => {
-      const selected = container.querySelector('.drum-item.selected');
-      if (!selected) return;
-      const parsed = parseLabelToTime(selected.textContent.trim());
-      if (!parsed || parsed === lastTime) return;
-      lastTime = parsed;
+    const poll = () => {
       applySelected();
-    });
+      if (touching) rafId = requestAnimationFrame(poll);
+    };
 
-    observer.observe(container, { attributes: true, subtree: true, attributeFilter: ['class'] });
+    const onTouchStart = () => {
+      touching = true;
+      rafId = requestAnimationFrame(poll);
+    };
+
+    const onTouchEnd = () => {
+      touching = false;
+      cancelAnimationFrame(rafId);
+      applySelected(); // 손 뗀 시점 최종 반영
+    };
+
+    container.addEventListener('touchstart', onTouchStart, { passive: true });
+    container.addEventListener('touchend', onTouchEnd, { passive: true });
+    container.addEventListener('touchcancel', onTouchEnd, { passive: true });
+
     return () => {
-      container.removeEventListener('touchmove', handleTouchMove);
-      observer.disconnect();
+      touching = false;
+      cancelAnimationFrame(rafId);
+      container.removeEventListener('touchstart', onTouchStart);
+      container.removeEventListener('touchend', onTouchEnd);
+      container.removeEventListener('touchcancel', onTouchEnd);
     };
   }, [activeField, setPreviewHomeEvent]);
 
