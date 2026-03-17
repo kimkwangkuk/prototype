@@ -147,24 +147,23 @@ export default function HomeEventDetailSheet({ event, onClose }) {
     }
   }, [activeField]);
 
-  // 피커 스크롤 중 실시간 반영 (MutationObserver)
+  // 피커 스크롤 중 실시간 반영 (MutationObserver + touchmove)
   useEffect(() => {
     if (activeField !== 'start' && activeField !== 'end') return;
     const container = pickerContainerRef.current;
     if (!container) return;
 
-    let lastTime = '';
-    const observer = new MutationObserver(() => {
+    const applySelected = () => {
       const selected = container.querySelector('.drum-item.selected');
       if (!selected) return;
       const parsed = parseLabelToTime(selected.textContent.trim());
-      if (!parsed || parsed === lastTime) return;
-      lastTime = parsed;
+      if (!parsed) return;
 
       let newStart = startTimeRef.current;
       let newEnd = endTimeRef.current;
       if (activeField === 'start') {
         newStart = parsed;
+        scrollTimelineToTime(parsed);
         if (toTimelineMins(endTimeRef.current) <= toTimelineMins(parsed)) {
           newEnd = addHour(parsed, 1);
         }
@@ -175,10 +174,28 @@ export default function HomeEventDetailSheet({ event, onClose }) {
       const [sh, sm] = newStart.split(':').map(Number);
       const [eh, em] = newEnd.split(':').map(Number);
       setPreviewHomeEvent({ ...eventRef.current, startH: sh, startM: sm, endH: eh, endM: em });
+    };
+
+    // touchmove: 손을 떼지 않아도 실시간 반영
+    const handleTouchMove = () => { requestAnimationFrame(applySelected); };
+    container.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    // MutationObserver: selected 클래스 변경 감지 (스냅 시점 보완)
+    let lastTime = '';
+    const observer = new MutationObserver(() => {
+      const selected = container.querySelector('.drum-item.selected');
+      if (!selected) return;
+      const parsed = parseLabelToTime(selected.textContent.trim());
+      if (!parsed || parsed === lastTime) return;
+      lastTime = parsed;
+      applySelected();
     });
 
     observer.observe(container, { attributes: true, subtree: true, attributeFilter: ['class'] });
-    return () => observer.disconnect();
+    return () => {
+      container.removeEventListener('touchmove', handleTouchMove);
+      observer.disconnect();
+    };
   }, [activeField, setPreviewHomeEvent]);
 
   if (!event) return null;

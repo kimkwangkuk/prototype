@@ -2594,7 +2594,8 @@ textarea {
 
 /* ─── Detail Sheet ─── */
 .detail-sheet {
-  bottom: 0 !important;
+  bottom: var(--keypad-h, 0px) !important;
+  transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   border-radius: 24px 24px 0 0;
   background: #fff !important;
   box-shadow: 0px -4px 24px 0px rgba(0, 0, 0, 0.1);
