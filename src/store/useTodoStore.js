@@ -503,6 +503,9 @@ const useTodoStore = create((set, get) => ({
   })),
   clearNewlyAddedHomeEventId: () => set({ newlyAddedHomeEventId: null }),
   removeHomeEvent: (id) => set(state => ({ homeEvents: state.homeEvents.filter(e => e.id !== id) })),
+  updateHomeEvent: (id, patch) => set(state => ({
+    homeEvents: state.homeEvents.map(e => e.id === id ? { ...e, ...patch } : e),
+  })),
 }));
 
 export default useTodoStore;
