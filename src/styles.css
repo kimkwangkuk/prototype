@@ -3312,7 +3312,12 @@ textarea {
 }
 
 .timeline-event.newly-added {
-  isolation: isolate;
+  animation: timelineEventPulse 1s ease-out 1 forwards;
+}
+
+@keyframes timelineEventPulse {
+  0%   { background: rgba(175, 175, 175, 0.7); }
+  100% { background: transparent; }
 }
 
 /* 편집 중인 이벤트 점멸 */
@@ -3324,21 +3329,6 @@ textarea {
   0%   { background: rgba(235, 235, 235, 0.6); }
   50%  { background: rgba(180, 180, 180, 0.75); }
   100% { background: rgba(235, 235, 235, 0.6); }
-}
-
-.timeline-event.newly-added::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  animation: timelineEventPulse 1.4s ease-in-out 1 0.35s forwards;
-}
-
-@keyframes timelineEventPulse {
-  0%   { background: transparent; }
-  35%  { background: rgba(0, 0, 0, 0.13); }
-  100% { background: transparent; }
 }
 
 /* 추가 모드: 기존 이벤트 흐리게, 현재 시간 인디케이터 흐리게 */

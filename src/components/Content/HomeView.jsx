@@ -484,10 +484,12 @@ export default function HomeView() {
           const top    = timeToTop(group.startH, group.startM);
           const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
           const mergedTitle = `할일 0/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
+          const isGroupNew = newlyAddedHomeEventId != null &&
+            group.events.some(e => String(e.id) === String(newlyAddedHomeEventId));
           return (
             <div
               key={group.id}
-              className={`timeline-event has-bar${pressedId === group.id ? ' pressed' : ''}`}
+              className={`timeline-event has-bar${pressedId === group.id ? ' pressed' : ''}${isGroupNew ? ' newly-added' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
               onPointerDown={() => setPressedId(group.id)}
               onPointerUp={() => { setPressedId(null); setSelectedGroup(group); }}
