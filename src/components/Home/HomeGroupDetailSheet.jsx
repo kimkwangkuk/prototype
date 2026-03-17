@@ -16,6 +16,14 @@ function CheckIcon() {
   );
 }
 
+function StudyIcon({ size = 14, color = 'currentColor' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 14 14" fill="none">
+      <path d="M7 2.99602C6.49326 2.23802 5.32556 1.75 3.98894 1.75C2.86104 1.75 1.77201 2.11629 1.12742 2.69577C0.947878 2.85722 0.875 3.08546 0.875 3.31342L0.875 11.7439C0.875037 11.92 1.09764 12.0279 1.27217 11.9471C2.01214 11.6042 2.97726 11.3997 3.98894 11.3997C5.14196 11.3997 6.25825 11.7557 7 12.25M7 2.99602V12.25M7 2.99602C7.50674 2.23802 8.67444 1.75 10.0111 1.75C11.139 1.75 12.228 2.11629 12.8726 2.69577C13.0521 2.85722 13.125 3.08546 13.125 3.31342V11.7439C13.125 11.92 12.9024 12.0279 12.7278 11.9471C11.9879 11.6042 11.0227 11.3997 10.0111 11.3997C8.85804 11.3997 7.74175 11.7557 7 12.25" stroke={color} strokeWidth="1"/>
+    </svg>
+  );
+}
+
 export default function HomeGroupDetailSheet({ group, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [selectedEv, setSelectedEv] = useState(null);
@@ -38,7 +46,8 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
 
   if (!group) return null;
 
-  const doneCount = group.events.filter(ev => doneHomeEventIds.has(String(ev.id))).length;
+  const taskEvents = group.events.filter(ev => !ev.isAnchor);
+  const doneCount = taskEvents.filter(ev => doneHomeEventIds.has(String(ev.id))).length;
 
   return (
     <>
@@ -68,7 +77,7 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
             {selectedEv ? (
               <span>{selectedEv.title}</span>
             ) : (
-              <span>할일 {doneCount}/{group.events.length}</span>
+              <span>할일 {doneCount}/{taskEvents.length}</span>
             )}
           </div>
 
@@ -86,6 +95,26 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
             <div className="group-event-list">
               {group.events.map(ev => {
                 const isDone = doneHomeEventIds.has(String(ev.id));
+                if (ev.isAnchor) {
+                  return (
+                    <div
+                      key={ev.id}
+                      className="group-event-item group-event-item-tappable"
+                      onClick={() => setSelectedEv(ev)}
+                    >
+                      <div className="group-anchor-icon">
+                        <StudyIcon size={14} color="rgba(0,0,0,0.6)" />
+                      </div>
+                      <div className="group-event-item-content">
+                        <span className="group-event-item-title group-event-item-title--anchor">{ev.title}</span>
+                        <div className="group-event-item-time">
+                          <Clock size={12} strokeWidth={2} />
+                          <span>{formatLabel(ev.startH, ev.startM)} – {formatLabel(ev.endH, ev.endM)}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
                 return (
                   <div
                     key={ev.id}

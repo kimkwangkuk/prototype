@@ -3770,6 +3770,20 @@ textarea {
   text-decoration: line-through;
 }
 
+.group-anchor-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.group-event-item-title--anchor {
+  font-weight: 500;
+  color: rgba(0,0,0,0.75);
+}
+
 .group-event-item-tappable {
   cursor: pointer;
   transition: background 0.12s;

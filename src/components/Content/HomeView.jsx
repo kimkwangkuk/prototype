@@ -8,6 +8,14 @@ function StudyIcon({ size = 14, color = 'currentColor' }) {
     </svg>
   );
 }
+
+function SmallTaskIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <rect x="1" y="1" width="10" height="10" rx="2.5" stroke="rgba(0,0,0,0.45)" strokeWidth="0.75"/>
+    </svg>
+  );
+}
 import useTodoStore from '../../store/useTodoStore';
 import HomeEventDetailSheet from '../Home/HomeEventDetailSheet';
 import HomeGroupDetailSheet from '../Home/HomeGroupDetailSheet';
@@ -151,6 +159,51 @@ function groupNearbyEvents(events) {
   return { singles, merged };
 }
 
+// ─── 공부시간 + 인접 할일 그룹핑 ───
+function groupStudyWithTasks(singles, doneHomeEventIds) {
+  const studyEvents = singles.filter(e => e.type === 'study');
+  if (!studyEvents.length) return { studyGroups: [], pairedStudyIds: new Set() };
+
+  const taskEvents = singles.filter(e => e.type === 'task');
+  if (!taskEvents.length) return { studyGroups: [], pairedStudyIds: new Set() };
+
+  const studyGroups = [];
+  const pairedStudyIds = new Set();
+
+  for (const study of studyEvents) {
+    const studyEndMins = toMin(study.endH, study.endM);
+    const studyStartMins = toMin(study.startH, study.startM);
+
+    const nearTasks = taskEvents.filter(task => {
+      if (pairedStudyIds.has(task.id)) return false;
+      const taskStartMins = toMin(task.startH, task.startM);
+      const taskEndMins = toMin(task.endH, task.endM);
+      // 할일이 공부 뒤에 오는 경우 (할일 시작 - 공부 종료 ≤ 15분)
+      const taskAfterStudy = taskStartMins >= studyEndMins && taskStartMins - studyEndMins <= MAX_MERGE_GAP;
+      // 할일이 공부 앞에 오는 경우 (공부 시작 - 할일 종료 ≤ 15분)
+      const taskBeforeStudy = taskEndMins <= studyStartMins && studyStartMins - taskEndMins <= MAX_MERGE_GAP;
+      return taskAfterStudy || taskBeforeStudy;
+    });
+
+    if (nearTasks.length > 0) {
+      nearTasks.forEach(t => pairedStudyIds.add(t.id));
+      pairedStudyIds.add(study.id);
+      studyGroups.push({
+        id: `study-group-${study.id}`,
+        type: 'study-group',
+        studyEvent: study,
+        tasks: nearTasks,
+        startH: study.startH,
+        startM: study.startM,
+        endH: study.endH,
+        endM: study.endM,
+      });
+    }
+  }
+
+  return { studyGroups, pairedStudyIds };
+}
+
 // ─── 겹침 감지 레이아웃 알고리즘 (Google Calendar 방식) ───
 function computeLayout(events) {
   if (!events.length) return {};
@@ -208,6 +261,7 @@ const SAMPLE_EVENTS = [
   { id: 'ev1', type: 'task',  title: '오답노트',    startH: 8,  startM: 0,  endH: 9,  endM: 0  },
   { id: 'ev2', type: 'focus', title: '집중계획',    startH: 8,  startM: 30, endH: 10, endM: 30, todoCount: 3 },
   { id: 'ev3', type: 'task',  title: '영어단어 30개', startH: 9, startM: 30, endH: 10, endM: 30 },
+  { id: 'evS1', type: 'study', title: '수학',       startH: 9,  startM: 10, endH: 10, endM: 30 },
   { id: 'ev4', type: 'focus', title: '집중계획',    startH: 12, startM: 0,  endH: 12, endM: 43, note: '버스에서 줄리아 만남!', todoCount: 3 },
   { id: 'ev5', type: 'task',  title: '영어단어 30개', startH: 12, startM: 0, endH: 12, endM: 43 },
   { id: 'ev6', type: 'meal',  title: '점심식사',    startH: 14, startM: 0,  endH: 14, endM: 40 },
@@ -230,8 +284,10 @@ export default function HomeView() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
+  const [selectedStudyGroup, setSelectedStudyGroup] = useState(null);
   const handleEventClose = useCallback(() => setSelectedEvent(null), []);
   const handleGroupClose = useCallback(() => setSelectedGroup(null), []);
+  const handleStudyGroupClose = useCallback(() => setSelectedStudyGroup(null), []);
   const [pressedId, setPressedId] = useState(null);
   const [pressedSlot, setPressedSlot] = useState(null);      // { startMins, endMins }
   const [pressedConfirmed, setPressedConfirmed] = useState(false); // 롱탭 완료 → 보더 표시
@@ -265,7 +321,10 @@ export default function HomeView() {
 
   // 연속 이벤트 그룹핑
   const { singles, merged: mergedGroups } = groupNearbyEvents(allEvents);
-  const layoutEvents = [...singles, ...mergedGroups];
+  // 공부시간 + 인접 할일 그룹핑
+  const { studyGroups, pairedStudyIds } = groupStudyWithTasks(singles, doneHomeEventIds);
+  const filteredSingles = singles.filter(e => !pairedStudyIds.has(e.id));
+  const layoutEvents = [...filteredSingles, ...mergedGroups, ...studyGroups];
 
   // 포인터 위치 → 빈 슬롯 계산 (없으면 null)
   const getSlotFromPointer = (e) => {
@@ -438,7 +497,7 @@ export default function HomeView() {
         })()}
 
         {/* 단일 이벤트 카드 */}
-        {singles.map(ev => {
+        {filteredSingles.map(ev => {
           const { col = 0, numCols = 1 } = layout[ev.id] || {};
           const top    = timeToTop(ev.startH, ev.startM);
           const height = Math.max(timeToTop(ev.endH, ev.endM) - top, 30);
@@ -525,11 +584,64 @@ export default function HomeView() {
           );
         })}
 
+        {/* 공부시간 + 할일 대표 블록 */}
+        {studyGroups.map(sg => {
+          const { col = 0, numCols = 1 } = layout[sg.id] || {};
+          const top    = timeToTop(sg.startH, sg.startM);
+          const height = Math.max(timeToTop(sg.endH, sg.endM) - top, 30);
+          const fill   = getStudyFill(sg);
+          const doneCount = sg.tasks.filter(t => doneHomeEventIds.has(String(t.id))).length;
+          const isNew = String(sg.studyEvent.id) === String(newlyAddedHomeEventId) ||
+            sg.tasks.some(t => String(t.id) === String(newlyAddedHomeEventId));
+          return (
+            <div
+              key={sg.id}
+              className={`timeline-event has-bar${pressedId === sg.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}`}
+              style={getEventStyle(top, height, col, numCols)}
+              onPointerDown={() => setPressedId(sg.id)}
+              onPointerUp={() => { setPressedId(null); setSelectedStudyGroup(sg); }}
+              onPointerLeave={() => setPressedId(null)}
+              onPointerCancel={() => setPressedId(null)}
+            >
+              <div className="study-time-bar">
+                <div className="study-time-gauge" style={{ transform: `scaleY(${fill})` }} />
+              </div>
+              <div className="timeline-event-inner">
+                <div className="timeline-event-title-row">
+                  <div className="timeline-event-icon">
+                    <StudyIcon size={14} color="rgba(0,0,0,0.75)" />
+                  </div>
+                  <span className="timeline-event-title">{sg.studyEvent.title}</span>
+                </div>
+                <div className="timeline-event-meta">
+                  <span className="timeline-event-time">
+                    {formatRange(sg.startH, sg.startM, sg.endH, sg.endM)}
+                  </span>
+                  <div className="timeline-event-count-row">
+                    <SmallTaskIcon />
+                    <span className="timeline-event-time">{doneCount}/{sg.tasks.length}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
       </div>
     </div>
 
     <HomeEventDetailSheet event={selectedEvent} onClose={handleEventClose} />
     <HomeGroupDetailSheet group={selectedGroup} onClose={handleGroupClose} />
+    <HomeGroupDetailSheet
+      group={selectedStudyGroup ? {
+        ...selectedStudyGroup,
+        events: [
+          { ...selectedStudyGroup.studyEvent, isAnchor: true },
+          ...selectedStudyGroup.tasks,
+        ]
+      } : null}
+      onClose={handleStudyGroupClose}
+    />
     <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
     </>
   );
