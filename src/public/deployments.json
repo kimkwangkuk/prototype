@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ixi88o18g-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부시간 아이콘을 커스텀 SVG로 교체",
+    "createdAt": 1773731600259,
+    "sha": "ddb2c03"
+  },
+  {
+    "url": "https://prototype-e0zyrjh7d-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773731548234,
+    "sha": "6643910"
+  },
+  {
     "url": "https://prototype-h6aazbzpx-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부시간 이벤트 타입 추가",
     "createdAt": 1773731479232,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773717451695,
     "sha": "afc95cf"
-  },
-  {
-    "url": "https://prototype-6amtvhy8g-kimkwangkuks-projects.vercel.app",
-    "message": "fix: task 타입 이벤트만 그룹핑 — 집중계획 등 다른 타입 제외",
-    "createdAt": 1773717382995,
-    "sha": "f418b0f"
-  },
-  {
-    "url": "https://prototype-fhc87k1wq-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773717093638,
-    "sha": "4231c55"
   }
 ]
