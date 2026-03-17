@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-6amtvhy8g-kimkwangkuks-projects.vercel.app",
+    "message": "fix: task 타입 이벤트만 그룹핑 — 집중계획 등 다른 타입 제외",
+    "createdAt": 1773717382995,
+    "sha": "f418b0f"
+  },
+  {
+    "url": "https://prototype-fhc87k1wq-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773717093638,
+    "sha": "4231c55"
+  },
+  {
     "url": "https://prototype-e7e1qxyjl-kimkwangkuks-projects.vercel.app",
     "message": "fix: 그룹 블록 체크박스 보더 1px, 완료 카운트 0/N으로 변경",
     "createdAt": 1773717025121,
@@ -286,17 +298,5 @@
     "message": "feat: 모든 이벤트 타입에 게이지바 표시, 집중계획/할일만 채움",
     "createdAt": 1773241335950,
     "sha": "274c236"
-  },
-  {
-    "url": "https://prototype-g1l9xln9e-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773241251367,
-    "sha": "2f16c5e"
-  },
-  {
-    "url": "https://prototype-kdjfbq1kc-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 스터디 타임바 추가, 이벤트 생성 시 타입 선택(집중계획/할일)",
-    "createdAt": 1773241178761,
-    "sha": "c4c2a1e"
   }
 ]
