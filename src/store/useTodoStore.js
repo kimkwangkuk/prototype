@@ -498,6 +498,7 @@ const useTodoStore = create((set, get) => ({
   }),
   newlyAddedHomeEventId: null,
   removedSampleIds: new Set(),
+  doneHomeEventIds: new Set(),
   previewHomeEvent: null,
   addHomeEvent: (event) => set(state => ({
     homeEvents: [...state.homeEvents, event],
@@ -517,6 +518,12 @@ const useTodoStore = create((set, get) => ({
   updateHomeEvent: (id, patch) => set(state => ({
     homeEvents: state.homeEvents.map(e => e.id === id ? { ...e, ...patch } : e),
   })),
+  toggleHomeEventDone: (id) => set(state => {
+    const next = new Set(state.doneHomeEventIds);
+    const key = String(id);
+    next.has(key) ? next.delete(key) : next.add(key);
+    return { doneHomeEventIds: next };
+  }),
   setPreviewHomeEvent: (event) => set({ previewHomeEvent: event }),
   clearPreviewHomeEvent: () => set({ previewHomeEvent: null }),
 }));

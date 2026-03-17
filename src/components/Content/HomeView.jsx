@@ -221,6 +221,7 @@ export default function HomeView() {
   const scrollRef = useRef(null);
   const homeEvents = useTodoStore(state => state.homeEvents);
   const removedSampleIds = useTodoStore(state => state.removedSampleIds);
+  const doneHomeEventIds = useTodoStore(state => state.doneHomeEventIds);
   const previewHomeEvent = useTodoStore(state => state.previewHomeEvent);
   const homeAddMode = useTodoStore(state => state.homeAddMode);
   const openHomeSheet = useTodoStore(state => state.openHomeSheet);
@@ -492,7 +493,8 @@ export default function HomeView() {
           const { col = 0, numCols = 1 } = layout[group.id] || {};
           const top    = timeToTop(group.startH, group.startM);
           const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
-          const mergedTitle = `할일 0/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
+          const doneCount = group.events.filter(e => doneHomeEventIds.has(String(e.id))).length;
+          const mergedTitle = `할일 ${doneCount}/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
           const isGroupNew = newlyAddedHomeEventId != null &&
             group.events.some(e => String(e.id) === String(newlyAddedHomeEventId));
           return (

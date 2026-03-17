@@ -8,10 +8,20 @@ function formatLabel(h, m) {
   return `${isPM ? '오후' : '오전'} ${h12}:${String(m).padStart(2, '0')}`;
 }
 
+function CheckIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+      <path d="M2 5.5L4.5 8L9 3" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
 export default function HomeGroupDetailSheet({ group, onClose }) {
   const [animate, setAnimate] = useState(false);
   const [selectedEv, setSelectedEv] = useState(null);
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
+  const doneHomeEventIds = useTodoStore(state => state.doneHomeEventIds);
+  const toggleHomeEventDone = useTodoStore(state => state.toggleHomeEventDone);
 
   useEffect(() => {
     if (group) setTimeout(() => setAnimate(true), 10);
@@ -27,6 +37,8 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
   };
 
   if (!group) return null;
+
+  const doneCount = group.events.filter(ev => doneHomeEventIds.has(String(ev.id))).length;
 
   return (
     <>
@@ -44,7 +56,6 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
 
         {/* 앱바 */}
         <div className="group-sheet-appbar">
-          {/* 왼쪽 */}
           <div className="group-sheet-appbar-side">
             {selectedEv && (
               <button className="group-sheet-back-btn" onClick={() => setSelectedEv(null)}>
@@ -53,16 +64,14 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
             )}
           </div>
 
-          {/* 타이틀 */}
           <div className="group-sheet-appbar-title">
             {selectedEv ? (
               <span>{selectedEv.title}</span>
             ) : (
-              <span>할일 0/{group.events.length}</span>
+              <span>할일 {doneCount}/{group.events.length}</span>
             )}
           </div>
 
-          {/* 오른쪽 */}
           <div className="group-sheet-appbar-side group-sheet-appbar-side--right" />
         </div>
 
@@ -75,19 +84,30 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
           {/* 패널 1: 할일 목록 */}
           <div className="group-sheet-panel">
             <div className="group-event-list">
-              {group.events.map(ev => (
-                <div
-                  key={ev.id}
-                  className="group-event-item group-event-item-tappable"
-                  onClick={() => setSelectedEv(ev)}
-                >
-                  <span className="group-event-item-title">{ev.title}</span>
-                  <div className="group-event-item-time">
-                    <Clock size={12} strokeWidth={2} />
-                    <span>{formatLabel(ev.startH, ev.startM)} – {formatLabel(ev.endH, ev.endM)}</span>
+              {group.events.map(ev => {
+                const isDone = doneHomeEventIds.has(String(ev.id));
+                return (
+                  <div
+                    key={ev.id}
+                    className="group-event-item group-event-item-tappable"
+                    onClick={() => setSelectedEv(ev)}
+                  >
+                    <button
+                      className={`group-todo-check${isDone ? ' checked' : ''}`}
+                      onClick={e => { e.stopPropagation(); toggleHomeEventDone(ev.id); }}
+                    >
+                      {isDone && <CheckIcon />}
+                    </button>
+                    <div className="group-event-item-content">
+                      <span className={`group-event-item-title${isDone ? ' done' : ''}`}>{ev.title}</span>
+                      <div className="group-event-item-time">
+                        <Clock size={12} strokeWidth={2} />
+                        <span>{formatLabel(ev.startH, ev.startM)} – {formatLabel(ev.endH, ev.endM)}</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

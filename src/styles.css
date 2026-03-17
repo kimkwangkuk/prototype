@@ -3729,11 +3729,45 @@ textarea {
 
 .group-event-item {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
   padding: 10px 12px;
   background: rgba(0,0,0,0.04);
   border-radius: 10px;
+}
+
+.group-event-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.group-todo-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1.5px solid rgba(0,0,0,0.2);
+  background: transparent;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.group-todo-check.checked {
+  background: rgba(0,0,0,0.75);
+  border-color: transparent;
+}
+
+.group-event-item-title.done {
+  color: rgba(0,0,0,0.3);
+  text-decoration: line-through;
 }
 
 .group-event-item-tappable {
