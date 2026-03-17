@@ -563,7 +563,7 @@ export default function HomeView() {
           const top    = timeToTop(group.startH, group.startM);
           const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
           const doneCount = group.events.filter(e => doneHomeEventIds.has(String(e.id))).length;
-          const mergedTitle = `할일 ${doneCount}/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
+          const mergedTitle = `${doneCount}/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
           const isGroupNew = newlyAddedHomeEventId != null &&
             group.events.some(e => String(e.id) === String(newlyAddedHomeEventId));
           return (
