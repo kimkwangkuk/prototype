@@ -24,7 +24,7 @@ function StudyIcon({ size = 14, color = 'currentColor' }) {
   );
 }
 
-export default function HomeGroupDetailSheet({ group, onClose }) {
+export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
   const [animate, setAnimate] = useState(false);
   const [selectedEv, setSelectedEv] = useState(null);
   const removeHomeEvent = useTodoStore(state => state.removeHomeEvent);
@@ -161,16 +161,35 @@ export default function HomeGroupDetailSheet({ group, onClose }) {
                     </div>
                   )}
                 </div>
-                {typeof selectedEv.id === 'number' && (
-                  <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+                <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+                  {selectedEv.type === 'task' && (() => {
+                    const isDone = doneHomeEventIds.has(String(selectedEv.id));
+                    return (
+                      <button
+                        className={`detail-action-btn detail-action-done${isDone ? ' done' : ''}`}
+                        onClick={() => toggleHomeEventDone(selectedEv.id)}
+                      >
+                        {isDone ? '완료됨' : '완료'}
+                      </button>
+                    );
+                  })()}
+                  {onEditEvent && (
+                    <button
+                      className="detail-action-btn detail-action-edit"
+                      onClick={() => { onEditEvent(selectedEv); handleClose(); }}
+                    >
+                      편집
+                    </button>
+                  )}
+                  {typeof selectedEv.id === 'number' && (
                     <button
                       className="detail-action-btn detail-action-delete"
                       onClick={() => { removeHomeEvent(selectedEv.id); handleClose(); }}
                     >
                       삭제
                     </button>
-                  </div>
-                )}
+                  )}
+                </div>
               </>
             )}
           </div>

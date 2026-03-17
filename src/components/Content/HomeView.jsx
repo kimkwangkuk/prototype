@@ -304,6 +304,11 @@ export default function HomeView() {
   const handleEventClose = useCallback(() => setSelectedEvent(null), []);
   const handleGroupClose = useCallback(() => setSelectedGroup(null), []);
   const handleStudyGroupClose = useCallback(() => setSelectedStudyGroup(null), []);
+  const handleEditGroupEvent = useCallback((ev) => {
+    setSelectedGroup(null);
+    setSelectedStudyGroup(null);
+    setSelectedEvent(ev);
+  }, []);
   const [pressedId, setPressedId] = useState(null);
   const [pressedSlot, setPressedSlot] = useState(null);      // { startMins, endMins }
   const [pressedConfirmed, setPressedConfirmed] = useState(false); // 롱탭 완료 → 보더 표시
@@ -643,7 +648,7 @@ export default function HomeView() {
     </div>
 
     <HomeEventDetailSheet event={selectedEvent} onClose={handleEventClose} />
-    <HomeGroupDetailSheet group={selectedGroup} onClose={handleGroupClose} />
+    <HomeGroupDetailSheet group={selectedGroup} onClose={handleGroupClose} onEditEvent={handleEditGroupEvent} />
     <HomeGroupDetailSheet
       group={selectedStudyGroup ? {
         ...selectedStudyGroup,
@@ -653,6 +658,7 @@ export default function HomeView() {
         ]
       } : null}
       onClose={handleStudyGroupClose}
+      onEditEvent={handleEditGroupEvent}
     />
     <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
     </>
