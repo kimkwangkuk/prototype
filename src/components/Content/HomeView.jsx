@@ -189,16 +189,22 @@ function groupStudyWithTasks(singles, doneHomeEventIds) {
     if (doneTasks.length > 0) {
       doneTasks.forEach(t => pairedStudyIds.add(t.id));
       pairedStudyIds.add(study.id);
+
+      // 공부시간 + 완료된 할일 전체 범위로 블록 크기 결정
+      const allGroupEvents = [study, ...doneTasks];
+      const minStart = Math.min(...allGroupEvents.map(e => toMin(e.startH, e.startM)));
+      const maxEnd   = Math.max(...allGroupEvents.map(e => toMin(e.endH,   e.endM)));
+
       studyGroups.push({
         id: `study-group-${study.id}`,
         type: 'study-group',
         studyEvent: study,
         tasks: doneTasks,
         totalNearTasks: allNearTasks.length,
-        startH: study.startH,
-        startM: study.startM,
-        endH: study.endH,
-        endM: study.endM,
+        startH: Math.floor(minStart / 60),
+        startM: minStart % 60,
+        endH:   Math.floor(maxEnd / 60),
+        endM:   maxEnd % 60,
       });
     }
   }
