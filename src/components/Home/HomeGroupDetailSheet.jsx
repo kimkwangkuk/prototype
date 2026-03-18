@@ -161,7 +161,14 @@ export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
                     </div>
                   )}
                 </div>
-                <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+                {selectedEv.type === 'task' && (
+                  <div className="detail-sheet-actions" style={{ marginTop: 16 }}>
+                    <button className="detail-action-btn detail-action-study">
+                      공부 시작
+                    </button>
+                  </div>
+                )}
+                <div className="detail-sheet-actions" style={{ marginTop: 8 }}>
                   {selectedEv.type === 'task' && (() => {
                     const isDone = doneHomeEventIds.has(String(selectedEv.id));
                     return (
