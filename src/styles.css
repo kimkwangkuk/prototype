@@ -3327,13 +3327,12 @@ textarea {
 }
 
 .timeline-event.newly-added {
-  /* 350ms 딜레이: 바텀시트 닫히는 시간 기다렸다가 점멸 */
-  animation: timelineEventPulse 0.9s ease-in-out 350ms 1;
+  animation: timelineEventPulse 1.8s ease-in-out 350ms 1;
 }
 
 @keyframes timelineEventPulse {
-  0%, 30%, 65%, 100% { background: rgba(235, 235, 235, 0.6); }
-  15%, 48%           { background: rgba(100, 180, 255, 0.65); }
+  0%, 100%  { background: rgba(235, 235, 235, 0.6); }
+  40%       { background: rgba(180, 180, 180, 0.75); }
 }
 
 /* 편집 중인 이벤트 점멸 */
