@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-opxi4nehg-kimkwangkuks-projects.vercel.app",
+    "message": "feat: study-group 바 세그먼트 분리 (빈 시간 구간 제외)",
+    "createdAt": 1773801066364,
+    "sha": "efd343c"
+  },
+  {
+    "url": "https://prototype-a17l0gqy7-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773799960029,
+    "sha": "e27207e"
+  },
+  {
     "url": "https://prototype-2z4x9pyfd-kimkwangkuks-projects.vercel.app",
     "message": "feat: 타임라인 탭 피드백 및 롱탭 드래그 스크롤 방지",
     "createdAt": 1773799892851,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773725360057,
     "sha": "8f92b38"
-  },
-  {
-    "url": "https://prototype-elpa74pok-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 키패드가 바텀시트 가리는 문제 + 시작시간 스크롤 + 피커 mid-scroll 실시간 반영",
-    "createdAt": 1773725290840,
-    "sha": "1366a3e"
-  },
-  {
-    "url": "https://prototype-4b7s4dnld-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773724844286,
-    "sha": "62f9a06"
   }
 ]
