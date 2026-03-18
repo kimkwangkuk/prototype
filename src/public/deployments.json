@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-cwekbtke4-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 신규 이벤트 점멸 효과 수정",
+    "createdAt": 1773801186001,
+    "sha": "9d4c27b"
+  },
+  {
+    "url": "https://prototype-qmigj38vg-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773801133731,
+    "sha": "07caaad"
+  },
+  {
     "url": "https://prototype-opxi4nehg-kimkwangkuks-projects.vercel.app",
     "message": "feat: study-group 바 세그먼트 분리 (빈 시간 구간 제외)",
     "createdAt": 1773801066364,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773725741976,
     "sha": "b57aa8c"
-  },
-  {
-    "url": "https://prototype-absnvi91f-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 편집 버튼 누르면 시작 시간 위치로 타임라인 자동 스크롤",
-    "createdAt": 1773725674051,
-    "sha": "e9ce5e6"
-  },
-  {
-    "url": "https://prototype-pdlmxmsl7-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773725360057,
-    "sha": "8f92b38"
   }
 ]
