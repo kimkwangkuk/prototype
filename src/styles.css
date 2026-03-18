@@ -4080,6 +4080,10 @@ textarea {
   overflow: hidden;
 }
 
+.study-time-bar--group {
+  background: rgba(255, 115, 0, 0.3);
+}
+
 .study-time-gauge {
   position: absolute;
   top: 0;

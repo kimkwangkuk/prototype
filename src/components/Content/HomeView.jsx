@@ -788,7 +788,7 @@ export default function HomeView() {
               onPointerLeave={() => setPressedId(null)}
               onPointerCancel={() => setPressedId(null)}
             >
-              <div className="study-time-bar">
+              <div className="study-time-bar study-time-bar--group">
                 {segments.map((seg, i) => (
                   <div
                     key={i}
