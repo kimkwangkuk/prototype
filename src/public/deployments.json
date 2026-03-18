@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1ga8mze1b-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 신규 이벤트 생성 후 스크롤 + 점멸 수정",
+    "createdAt": 1773812948941,
+    "sha": "38fe526"
+  },
+  {
+    "url": "https://prototype-b48wcdtkk-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773811236291,
+    "sha": "b46d6b8"
+  },
+  {
     "url": "https://prototype-ajegdozro-kimkwangkuks-projects.vercel.app",
     "message": "feat: 드래그 중 기존 블록 레이아웃 실시간 재계산",
     "createdAt": 1773811168739,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773726375023,
     "sha": "e6f24e2"
-  },
-  {
-    "url": "https://prototype-i1mbb8yz2-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 피커 드래그 중 타임라인 블록 실시간 반영 - flushSync 적용",
-    "createdAt": 1773726307858,
-    "sha": "324ce41"
-  },
-  {
-    "url": "https://prototype-as4q2572k-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773726159218,
-    "sha": "5e05657"
   }
 ]
