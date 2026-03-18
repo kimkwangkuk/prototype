@@ -96,7 +96,7 @@ export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
           {/* 패널 1: 할일 목록 */}
           <div className="group-sheet-panel">
             <div className="group-event-list">
-              {group.events.map(ev => {
+              {[...group.events].sort((a, b) => (a.startH * 60 + a.startM) - (b.startH * 60 + b.startM)).map(ev => {
                 const isDone = doneHomeEventIds.has(String(ev.id));
                 if (ev.isAnchor) {
                   return (
