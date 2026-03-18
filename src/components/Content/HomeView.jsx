@@ -268,6 +268,32 @@ function computeLayout(events) {
     result[ev.id].numCols = maxCol + 1;
   }
 
+  // 3단계: 연결된 클러스터 내 모든 이벤트의 numCols를 동일하게 전파
+  // (A↔B, B↔C가 겹치면 A도 C의 열 수를 반영해야 블록이 겹치지 않음)
+  const visited = new Set();
+  for (const ev of sorted) {
+    if (visited.has(ev.id)) continue;
+    const cluster = [];
+    const queue = [ev];
+    while (queue.length) {
+      const curr = queue.shift();
+      if (visited.has(curr.id)) continue;
+      visited.add(curr.id);
+      cluster.push(curr);
+      const cs = toMin(curr.startH, curr.startM);
+      const ce = toMin(curr.endH,   curr.endM);
+      for (const other of sorted) {
+        if (!visited.has(other.id)) {
+          const os = toMin(other.startH, other.startM);
+          const oe = toMin(other.endH,   other.endM);
+          if (cs < oe && ce > os) queue.push(other);
+        }
+      }
+    }
+    const maxNumCols = Math.max(...cluster.map(e => result[e.id].numCols));
+    cluster.forEach(e => { result[e.id].numCols = maxNumCols; });
+  }
+
   return result;
 }
 
@@ -319,12 +345,14 @@ export default function HomeView() {
     setSelectedEvent(ev);
   }, []);
   const [pressedId, setPressedId] = useState(null);
-  const [pressedSlot, setPressedSlot] = useState(null);      // { startMins, endMins }
-  const [pressedConfirmed, setPressedConfirmed] = useState(false); // 롱탭 완료 → 보더 표시
+  const [dragSlot, setDragSlot] = useState(null); // 롱탭 드래그 중인 슬롯 { startMins, endMins }
+  const containerRef = useRef(null);
+  const pointerStartRef = useRef(null);
+  const pointerMovedRef = useRef(false);
   const longPressTimerRef = useRef(null);
-  const longPressSlotRef = useRef(null);
-  const confirmedSlotRef = useRef(null);
-  const pointerStartRef  = useRef(null);
+  const longPressConfirmedRef = useRef(false);
+  const longPressStartMinsRef = useRef(null);
+  const dragSlotRef = useRef(null); // state 동기화용
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -395,29 +423,52 @@ export default function HomeView() {
     return { startMins, endMins };
   };
 
+  // clientY → 타임라인 분(0=AM5 기준)
+  const getTimelineMins = (clientY) => {
+    if (!containerRef.current) return 0;
+    const rect = containerRef.current.getBoundingClientRect();
+    const clickY = clientY - rect.top;
+    const rawMins = (clickY / HOUR_HEIGHT) * 60;
+    return Math.max(0, Math.min(Math.round(rawMins / 10) * 10, 24 * 60));
+  };
+
   const cancelLongPress = () => {
     if (longPressTimerRef.current) {
       clearTimeout(longPressTimerRef.current);
       longPressTimerRef.current = null;
     }
-    longPressSlotRef.current = null;
-    confirmedSlotRef.current = null;
-    pointerStartRef.current = null;
-    setPressedSlot(null);
-    setPressedConfirmed(false);
+    longPressConfirmedRef.current = false;
+    longPressStartMinsRef.current = null;
+    dragSlotRef.current = null;
+    setDragSlot(null);
   };
 
   const handleTimelinePointerDown = (e) => {
-    const slot = getSlotFromPointer(e);
-    if (!slot) return;
+    if (
+      e.target.closest('.timeline-event') ||
+      e.target.closest('.timeline-label-col') ||
+      e.target.closest('.timeline-hour-emojis') ||
+      e.target.closest('.timeline-now-pill')
+    ) return;
+
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
-    longPressSlotRef.current = slot;
-    // 즉시 슬롯 표시 (애니메이션 시작)
-    setPressedSlot(slot);
-    setPressedConfirmed(false);
+    pointerMovedRef.current = false;
+
+    const startMins = getTimelineMins(e.clientY);
+    const intervals = allEvents.map(ev => ({
+      start: toTimelineMins(ev.startH, ev.startM),
+      end: toTimelineMins(ev.endH, ev.endM),
+    }));
+    if (intervals.some(iv => startMins >= iv.start && startMins < iv.end)) return;
+
+    longPressStartMinsRef.current = startMins;
     longPressTimerRef.current = setTimeout(() => {
-      confirmedSlotRef.current = longPressSlotRef.current;
-      setPressedConfirmed(true); // 보더 등장
+      if (pointerMovedRef.current) return;
+      longPressConfirmedRef.current = true;
+      const endMins = Math.min(startMins + 60, 24 * 60);
+      const slot = { startMins, endMins };
+      dragSlotRef.current = slot;
+      setDragSlot(slot);
       longPressTimerRef.current = null;
     }, 400);
   };
@@ -427,15 +478,40 @@ export default function HomeView() {
     const dx = e.clientX - pointerStartRef.current.x;
     const dy = e.clientY - pointerStartRef.current.y;
     if (Math.sqrt(dx * dx + dy * dy) > 8) {
-      cancelLongPress();
+      pointerMovedRef.current = true;
+      if (!longPressConfirmedRef.current) {
+        cancelLongPress();
+        return;
+      }
+    }
+    if (longPressConfirmedRef.current && longPressStartMinsRef.current !== null) {
+      const currentMins = getTimelineMins(e.clientY);
+      const newEndMins = Math.max(longPressStartMinsRef.current + 10, currentMins);
+      const slot = { startMins: longPressStartMinsRef.current, endMins: newEndMins };
+      dragSlotRef.current = slot;
+      setDragSlot(slot);
     }
   };
 
-  const handleTimelinePointerUp = () => {
-    const slot = confirmedSlotRef.current;
-    cancelLongPress();
-    if (slot) {
-      openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
+  const handleTimelinePointerUp = (e) => {
+    clearTimeout(longPressTimerRef.current);
+    longPressTimerRef.current = null;
+
+    if (longPressConfirmedRef.current) {
+      const slot = dragSlotRef.current;
+      cancelLongPress();
+      if (slot) {
+        openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
+      }
+      return;
+    }
+
+    longPressStartMinsRef.current = null;
+    if (!pointerMovedRef.current) {
+      const slot = getSlotFromPointer(e);
+      if (slot) {
+        openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
+      }
     }
   };
 
@@ -470,11 +546,12 @@ export default function HomeView() {
     <>
     <div className="home-view" ref={scrollRef}>
       <div
+        ref={containerRef}
         className={`timeline-container${homeAddMode ? ' adding-mode' : ''}`}
         onPointerDown={handleTimelinePointerDown}
         onPointerMove={handleTimelinePointerMove}
         onPointerUp={handleTimelinePointerUp}
-        onPointerCancel={cancelLongPress}
+        style={{ touchAction: 'pan-y' }}
       >
 
         {/* 시간 그리드 (25행: AM5 ~ AM5 다음날) */}
@@ -523,15 +600,19 @@ export default function HomeView() {
           );
         })}
 
-        {/* 빈 영역 pressed 효과 */}
-        {pressedSlot && (() => {
-          const top = (pressedSlot.startMins / 60) * HOUR_HEIGHT;
-          const height = ((pressedSlot.endMins - pressedSlot.startMins) / 60) * HOUR_HEIGHT;
+        {/* 롱탭 드래그 슬롯 */}
+        {dragSlot && (() => {
+          const top = (dragSlot.startMins / 60) * HOUR_HEIGHT;
+          const height = Math.max(((dragSlot.endMins - dragSlot.startMins) / 60) * HOUR_HEIGHT, 10);
           return (
             <div
-              className={`timeline-pressed-slot${pressedConfirmed ? ' confirmed' : ''}`}
+              className="timeline-drag-slot"
               style={getEventStyle(top, height, 0, 1)}
-            />
+            >
+              <span className="timeline-drag-slot-time">
+                {minsToTimeStr(dragSlot.startMins)} ~ {minsToTimeStr(Math.min(dragSlot.endMins, 24 * 60))}
+              </span>
+            </div>
           );
         })()}
 

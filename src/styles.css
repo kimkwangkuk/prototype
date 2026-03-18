@@ -3495,6 +3495,24 @@ textarea {
   transition: border-color 0.12s ease-out;
 }
 
+/* ─── 롱탭 드래그 슬롯 ─── */
+.timeline-drag-slot {
+  border-radius: 8px;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.07);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-drag-slot-time {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.55);
+  letter-spacing: -0.2px;
+}
+
 /* ─── Group block on timeline ─── */
 .timeline-event-group-count {
   color: rgba(0,0,0,0.38);
