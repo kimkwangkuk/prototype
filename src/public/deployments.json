@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-kfeaiin6a-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 그룹 바텀시트 리스트 시간순 정렬",
+    "createdAt": 1773810474427,
+    "sha": "671992f"
+  },
+  {
+    "url": "https://prototype-2vk4qb385-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773801253410,
+    "sha": "6ac4b6b"
+  },
+  {
     "url": "https://prototype-cwekbtke4-kimkwangkuks-projects.vercel.app",
     "message": "fix: 신규 이벤트 점멸 효과 수정",
     "createdAt": 1773801186001,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773725870084,
     "sha": "0c67676"
-  },
-  {
-    "url": "https://prototype-zs4a1obcv-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 편집 모드 전환 후 바텀시트 레이아웃 확정 뒤 타임라인 스크롤 계산",
-    "createdAt": 1773725800404,
-    "sha": "a4bb2b4"
-  },
-  {
-    "url": "https://prototype-pk0s5pqwy-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773725741976,
-    "sha": "b57aa8c"
   }
 ]
