@@ -82,6 +82,23 @@ function getStudyFill(ev) {
   return (nowTop - startTop) / (endTop - startTop);
 }
 
+// study-group 바 세그먼트: 각 이벤트 구간별 { topPct, heightPct, fill }
+function getStudyGroupBarSegments(sg) {
+  const blockStartMins = toMin(sg.startH, sg.startM);
+  const blockDurMins   = toMin(sg.endH, sg.endM) - blockStartMins;
+  if (blockDurMins <= 0) return [];
+  const allEvents = [sg.studyEvent, ...sg.tasks];
+  return allEvents.map(ev => {
+    const evStartMins = toMin(ev.startH, ev.startM);
+    const evDurMins   = toMin(ev.endH, ev.endM) - evStartMins;
+    return {
+      topPct:    (evStartMins - blockStartMins) / blockDurMins * 100,
+      heightPct: evDurMins / blockDurMins * 100,
+      fill:      getStudyFill(ev),
+    };
+  });
+}
+
 function timeToTop(h, m = 0) {
   return ((h - START_HOUR + 24) % 24) * HOUR_HEIGHT + (m / 60) * HOUR_HEIGHT;
 }
@@ -723,9 +740,9 @@ export default function HomeView() {
         {/* 공부시간 + 할일 대표 블록 */}
         {studyGroups.map(sg => {
           const { col = 0, numCols = 1 } = layout[sg.id] || {};
-          const top    = timeToTop(sg.startH, sg.startM);
-          const height = Math.max(timeToTop(sg.endH, sg.endM) - top, 30);
-          const fill   = getStudyFill(sg);
+          const top      = timeToTop(sg.startH, sg.startM);
+          const height   = Math.max(timeToTop(sg.endH, sg.endM) - top, 30);
+          const segments = getStudyGroupBarSegments(sg);
           const allDone = sg.tasks.length === sg.totalNearTasks && sg.totalNearTasks > 0;
           const isNew = String(sg.studyEvent.id) === String(newlyAddedHomeEventId) ||
             sg.tasks.some(t => String(t.id) === String(newlyAddedHomeEventId));
@@ -740,7 +757,15 @@ export default function HomeView() {
               onPointerCancel={() => setPressedId(null)}
             >
               <div className="study-time-bar">
-                <div className="study-time-gauge" style={{ transform: `scaleY(${fill})` }} />
+                {segments.map((seg, i) => (
+                  <div
+                    key={i}
+                    className="study-time-segment"
+                    style={{ top: `${seg.topPct}%`, height: `${seg.heightPct}%` }}
+                  >
+                    <div className="study-time-gauge" style={{ transform: `scaleY(${seg.fill})` }} />
+                  </div>
+                ))}
               </div>
               <div className="timeline-event-inner">
                 <div className="timeline-event-title-row">

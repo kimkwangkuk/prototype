@@ -4085,6 +4085,14 @@ textarea {
   transform-origin: top center;
 }
 
+.study-time-segment {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .timeline-event-inner {
   flex: 1;
   display: flex;
