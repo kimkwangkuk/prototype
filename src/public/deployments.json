@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-qxb3dgto9-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 집중계획 내 할일 그루핑 및 포커스 아이콘 추가",
+    "createdAt": 1773820456684,
+    "sha": "9312fbe"
+  },
+  {
+    "url": "https://prototype-ljcal3q4e-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773820140641,
+    "sha": "26edd18"
+  },
+  {
     "url": "https://prototype-ck58ptt0c-kimkwangkuks-projects.vercel.app",
     "message": "feat: 편집 저장 시 점멸 추가, 애니메이션 2회 피크로 변경",
     "createdAt": 1773820072811,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773731748755,
     "sha": "a2289b6"
-  },
-  {
-    "url": "https://prototype-bx9hyyxpw-kimkwangkuks-projects.vercel.app",
-    "message": "fix: StudyIcon strokeWidth 0.58 → 1px",
-    "createdAt": 1773731680376,
-    "sha": "ec1c478"
-  },
-  {
-    "url": "https://prototype-5zykwj5tk-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773731668284,
-    "sha": "fde4fbc"
   }
 ]
