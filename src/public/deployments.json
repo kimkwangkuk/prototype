@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-guolkst6g-kimkwangkuks-projects.vercel.app",
+    "message": "design: study-group 바 빈 시간 포인트 컬러 30% 적용",
+    "createdAt": 1773819527723,
+    "sha": "c9a2413"
+  },
+  {
+    "url": "https://prototype-g65tw3enw-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773819477975,
+    "sha": "30c8716"
+  },
+  {
     "url": "https://prototype-laav4255d-kimkwangkuks-projects.vercel.app",
     "message": "fix: 그룹 시트 편집 버튼이 편집 모드를 바로 열도록 수정",
     "createdAt": 1773819406092,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773731548234,
     "sha": "6643910"
-  },
-  {
-    "url": "https://prototype-h6aazbzpx-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부시간 이벤트 타입 추가",
-    "createdAt": 1773731479232,
-    "sha": "21bdc5c"
-  },
-  {
-    "url": "https://prototype-b9pzjpjse-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773731273177,
-    "sha": "db6662c"
   }
 ]
