@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-2z4x9pyfd-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 타임라인 탭 피드백 및 롱탭 드래그 스크롤 방지",
+    "createdAt": 1773799892851,
+    "sha": "8b9f8f2"
+  },
+  {
+    "url": "https://prototype-6brkkz4sp-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773799661103,
+    "sha": "388f66e"
+  },
+  {
     "url": "https://prototype-qewrk3od8-kimkwangkuks-projects.vercel.app",
     "message": "feat: 타임라인 탭으로 즉시 추가, 롱탭 드래그로 시간 조절",
     "createdAt": 1773799589853,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773724844286,
     "sha": "62f9a06"
-  },
-  {
-    "url": "https://prototype-c7citmtff-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 이벤트 편집 시 시작/종료 시간 좌우 배치 + 타임라인 스크롤 + 점멸 회색",
-    "createdAt": 1773724775708,
-    "sha": "3fd83af"
-  },
-  {
-    "url": "https://prototype-3n2hyo616-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773724391516,
-    "sha": "dffcbda"
   }
 ]
