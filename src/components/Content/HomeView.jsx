@@ -421,7 +421,26 @@ export default function HomeView() {
     mergedGroups = merged;
     studyGroups = sg;
   }
-  const layoutEvents = [...filteredSingles, ...mergedGroups, ...studyGroups];
+  // 드래그 슬롯을 가상 이벤트로 변환 → computeLayout에 포함해 실시간 레이아웃 반영
+  let dragVirtualEvent = null;
+  if (dragSlot) {
+    const sActual = (dragSlot.startMins + START_HOUR * 60) % (24 * 60);
+    const eCapped  = Math.min(dragSlot.endMins, 24 * 60 - 1);
+    const eActual  = (eCapped + START_HOUR * 60) % (24 * 60);
+    if (eActual > sActual) {
+      dragVirtualEvent = {
+        id: 'drag-virtual',
+        type: 'drag',
+        startH: Math.floor(sActual / 60), startM: sActual % 60,
+        endH:   Math.floor(eActual / 60), endM:   eActual % 60,
+      };
+    }
+  }
+
+  const layoutEvents = [
+    ...filteredSingles, ...mergedGroups, ...studyGroups,
+    ...(dragVirtualEvent ? [dragVirtualEvent] : []),
+  ];
 
   // 포인터 위치 → 빈 슬롯 계산 (없으면 null)
   const getSlotFromPointer = (e) => {
@@ -642,10 +661,11 @@ export default function HomeView() {
         {dragSlot && (() => {
           const top = (dragSlot.startMins / 60) * HOUR_HEIGHT;
           const height = Math.max(((dragSlot.endMins - dragSlot.startMins) / 60) * HOUR_HEIGHT, 10);
+          const { col = 0, numCols = 1 } = layout['drag-virtual'] || {};
           return (
             <div
               className="timeline-drag-slot"
-              style={getEventStyle(top, height, 0, 1)}
+              style={getEventStyle(top, height, col, numCols)}
             >
               <span className="timeline-drag-slot-time">
                 {minsToTimeStr(dragSlot.startMins)} ~ {minsToTimeStr(Math.min(dragSlot.endMins, 24 * 60))}
