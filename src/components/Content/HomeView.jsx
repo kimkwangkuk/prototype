@@ -350,15 +350,17 @@ export default function HomeView() {
   const newlyAddedHomeEventId = useTodoStore(state => state.newlyAddedHomeEventId);
   const clearNewlyAddedHomeEventId = useTodoStore(state => state.clearNewlyAddedHomeEventId);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEventEditMode, setSelectedEventEditMode] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [selectedStudyGroup, setSelectedStudyGroup] = useState(null);
-  const handleEventClose = useCallback(() => setSelectedEvent(null), []);
+  const handleEventClose = useCallback(() => { setSelectedEvent(null); setSelectedEventEditMode(false); }, []);
   const handleGroupClose = useCallback(() => setSelectedGroup(null), []);
   const handleStudyGroupClose = useCallback(() => setSelectedStudyGroup(null), []);
   const handleEditGroupEvent = useCallback((ev) => {
     setSelectedGroup(null);
     setSelectedStudyGroup(null);
+    setSelectedEventEditMode(true);
     setSelectedEvent(ev);
   }, []);
   const [pressedId, setPressedId] = useState(null);
@@ -823,7 +825,7 @@ export default function HomeView() {
       </div>
     </div>
 
-    <HomeEventDetailSheet event={selectedEvent} onClose={handleEventClose} />
+    <HomeEventDetailSheet event={selectedEvent} openInEditMode={selectedEventEditMode} onClose={handleEventClose} />
     <HomeGroupDetailSheet group={selectedGroup} onClose={handleGroupClose} onEditEvent={handleEditGroupEvent} />
     <HomeGroupDetailSheet
       group={selectedStudyGroup ? {

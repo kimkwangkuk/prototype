@@ -166,7 +166,7 @@ const DrumPicker = memo(function DrumPicker({ options, value, onChange }) {
   );
 });
 
-const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose }) {
+const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose, openInEditMode = false }) {
   const [animate, setAnimate] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [title, setTitle] = useState('');
@@ -196,7 +196,16 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
   useEffect(() => {
     if (event) {
       setTimeout(() => setAnimate(true), 10);
-      setTimeout(() => scrollTimelineToTime(toTimeStr(event.startH, event.startM)), 380);
+      if (openInEditMode) {
+        setTitle(event.title);
+        setStartTime(toTimeStr(event.startH, event.startM));
+        setEndTime(toTimeStr(event.endH, event.endM));
+        setActiveField('title');
+        setEditMode(true);
+        setTimeout(() => scrollTimelineToTime(toTimeStr(event.startH, event.startM)), 420);
+      } else {
+        setTimeout(() => scrollTimelineToTime(toTimeStr(event.startH, event.startM)), 380);
+      }
     } else {
       setAnimate(false);
       setEditMode(false);
