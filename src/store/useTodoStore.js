@@ -517,6 +517,7 @@ const useTodoStore = create((set, get) => ({
   }),
   updateHomeEvent: (id, patch) => set(state => ({
     homeEvents: state.homeEvents.map(e => e.id === id ? { ...e, ...patch } : e),
+    newlyAddedHomeEventId: id,
   })),
   toggleHomeEventDone: (id) => set(state => {
     const next = new Set(state.doneHomeEventIds);

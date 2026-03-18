@@ -404,8 +404,8 @@ export default function HomeView() {
       const viewH = scrollRef.current.clientHeight;
       scrollRef.current.scrollTo({ top: Math.max(0, eventTop - viewH / 2), behavior: 'smooth' });
     }, 350);
-    // 1500ms 후: 점멸 클래스 제거
-    const clearTimer = setTimeout(clearNewlyAddedHomeEventId, 1500);
+    // 350(delay) + 1100(animation) + 여유 = 1600ms 후 점멸 클래스 제거
+    const clearTimer = setTimeout(clearNewlyAddedHomeEventId, 1600);
     return () => { clearTimeout(scrollTimer); clearTimeout(clearTimer); };
   }, [newlyAddedHomeEventId]);
 

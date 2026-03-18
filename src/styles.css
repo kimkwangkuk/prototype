@@ -3327,12 +3327,14 @@ textarea {
 }
 
 .timeline-event.newly-added {
-  animation: timelineEventPulse 1.8s ease-in-out 350ms 1;
+  animation: timelineEventPulse 1.1s ease-in-out 350ms 1;
 }
 
 @keyframes timelineEventPulse {
-  0%, 100%  { background: rgba(235, 235, 235, 0.6); }
-  40%       { background: rgba(180, 180, 180, 0.75); }
+  0%, 38%, 100% { background: rgba(235, 235, 235, 0.6); }
+  19%           { background: rgba(165, 165, 165, 0.9); }
+  62%           { background: rgba(165, 165, 165, 0.9); }
+  80%           { background: rgba(235, 235, 235, 0.6); }
 }
 
 /* 편집 중인 이벤트 점멸 */
