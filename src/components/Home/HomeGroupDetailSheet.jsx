@@ -47,6 +47,7 @@ export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
   if (!group) return null;
 
   const anchorEvent = group.events.find(ev => ev.isAnchor);
+  const isFocusGroup = anchorEvent?.type === 'focus';
   const taskEvents = group.events.filter(ev => !ev.isAnchor);
   const doneCount = taskEvents.filter(ev => doneHomeEventIds.has(String(ev.id))).length;
 
@@ -78,7 +79,14 @@ export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
             {selectedEv ? (
               <span>{selectedEv.title}</span>
             ) : anchorEvent ? (
-              <span>{anchorEvent.title}</span>
+              <>
+                <span>{anchorEvent.title}</span>
+                {isFocusGroup && !selectedEv && (
+                  <span className="group-sheet-appbar-time">
+                    {formatLabel(anchorEvent.startH, anchorEvent.startM)} – {formatLabel(anchorEvent.endH, anchorEvent.endM)}
+                  </span>
+                )}
+              </>
             ) : (
               <span>할일 {doneCount}/{taskEvents.length}</span>
             )}
@@ -96,7 +104,9 @@ export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
           {/* 패널 1: 할일 목록 */}
           <div className="group-sheet-panel">
             <div className="group-event-list">
-              {[...group.events].sort((a, b) => (a.startH * 60 + a.startM) - (b.startH * 60 + b.startM)).map(ev => {
+              {[...group.events]
+                .filter(ev => !(isFocusGroup && ev.isAnchor))
+                .sort((a, b) => (a.startH * 60 + a.startM) - (b.startH * 60 + b.startM)).map(ev => {
                 const isDone = doneHomeEventIds.has(String(ev.id));
                 if (ev.isAnchor) {
                   return (

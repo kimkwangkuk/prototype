@@ -382,6 +382,7 @@ export default function HomeView() {
   const openHomeSheet = useTodoStore(state => state.openHomeSheet);
   const newlyAddedHomeEventId = useTodoStore(state => state.newlyAddedHomeEventId);
   const clearNewlyAddedHomeEventId = useTodoStore(state => state.clearNewlyAddedHomeEventId);
+  const updateHomeEvent = useTodoStore(state => state.updateHomeEvent);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [selectedEventEditMode, setSelectedEventEditMode] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(null);
@@ -410,6 +411,17 @@ export default function HomeView() {
   const longPressStartMinsRef = useRef(null);
   const dragSlotRef = useRef(null);
   const tapSlotRef = useRef(null); // pointerDown 에서 계산한 슬롯 저장
+
+  // ── 이벤트 이동 드래그 ──
+  const moveLongPressTimerRef = useRef(null);
+  const moveConfirmedRef = useRef(false);
+  const moveEventRef = useRef(null);
+  const moveOffsetMinsRef = useRef(0);
+  const moveDragStateRef = useRef(null);
+  const tapEventRef = useRef(null);
+  const movePointerStartRef = useRef(null);
+  const movePointerMovedRef = useRef(false);
+  const [moveDragState, setMoveDragState] = useState(null);
 
   useEffect(() => {
     if (!scrollRef.current) return;
@@ -489,9 +501,28 @@ export default function HomeView() {
     }
   }
 
+  // 이동 드래그 가상 이벤트 (레이아웃 실시간 반영용)
+  let moveDragVirtualEvent = null;
+  if (moveDragState) {
+    const ev = moveDragState.event;
+    const dur = toTimelineMins(ev.endH, ev.endM) - toTimelineMins(ev.startH, ev.startM);
+    const sTimeline = moveDragState.currentStartMins;
+    const eTimeline = Math.min(sTimeline + dur, 24 * 60);
+    const sActual = (sTimeline + START_HOUR * 60) % (24 * 60);
+    const eActual = (eTimeline + START_HOUR * 60) % (24 * 60);
+    moveDragVirtualEvent = {
+      id: 'move-drag-virtual',
+      type: ev.type,
+      startH: Math.floor(sActual / 60), startM: sActual % 60,
+      endH:   Math.floor(eActual / 60) % 24, endM: eActual % 60,
+    };
+  }
+
   const layoutEvents = [
-    ...filteredSingles, ...mergedGroups, ...studyGroups, ...focusGroups,
+    ...filteredSingles.filter(ev => !moveDragState || String(ev.id) !== String(moveDragState.event.id)),
+    ...mergedGroups, ...studyGroups, ...focusGroups,
     ...(dragVirtualEvent ? [dragVirtualEvent] : []),
+    ...(moveDragVirtualEvent ? [moveDragVirtualEvent] : []),
   ];
 
   // 포인터 위치 → 빈 슬롯 계산 (없으면 null)
@@ -533,6 +564,20 @@ export default function HomeView() {
     return Math.max(0, Math.min(Math.round(rawMins / 10) * 10, 24 * 60));
   };
 
+  const cancelMoveAll = useCallback(() => {
+    clearTimeout(moveLongPressTimerRef.current);
+    moveLongPressTimerRef.current = null;
+    moveConfirmedRef.current = false;
+    moveEventRef.current = null;
+    moveOffsetMinsRef.current = 0;
+    movePointerStartRef.current = null;
+    moveDragStateRef.current = null;
+    tapEventRef.current = null;
+    longPressConfirmedRef.current = false;
+    setMoveDragState(null);
+    setPressedId(null);
+  }, []);
+
   const cancelAll = () => {
     if (longPressTimerRef.current) {
       clearTimeout(longPressTimerRef.current);
@@ -573,6 +618,36 @@ export default function HomeView() {
   };
 
   const handleTimelinePointerMove = (e) => {
+    // ① 이벤트 이동 드래그 중
+    if (moveConfirmedRef.current && moveEventRef.current) {
+      const tapMins = getTimelineMins(e.clientY);
+      const ev = moveEventRef.current;
+      const dur = toTimelineMins(ev.endH, ev.endM) - toTimelineMins(ev.startH, ev.startM);
+      const rawStart = tapMins - moveOffsetMinsRef.current;
+      const snapped = Math.round(Math.max(0, Math.min(rawStart, 24 * 60 - dur)) / 10) * 10;
+      const val = { event: ev, currentStartMins: snapped };
+      moveDragStateRef.current = val;
+      setMoveDragState(val);
+      return;
+    }
+
+    // ② 이벤트 롱탭 대기 중 → 손가락 많이 움직이면 취소
+    if (moveLongPressTimerRef.current && movePointerStartRef.current) {
+      const dx = e.clientX - movePointerStartRef.current.x;
+      const dy = e.clientY - movePointerStartRef.current.y;
+      if (Math.sqrt(dx * dx + dy * dy) > 8) {
+        movePointerMovedRef.current = true;
+        clearTimeout(moveLongPressTimerRef.current);
+        moveLongPressTimerRef.current = null;
+        tapEventRef.current = null;
+        moveEventRef.current = null;
+        setPressedId(null);
+        try { e.currentTarget.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+      return;
+    }
+
+    // ③ 빈 영역 롱탭 드래그 (새 이벤트 생성)
     if (!pointerStartRef.current) return;
     const dx = e.clientX - pointerStartRef.current.x;
     const dy = e.clientY - pointerStartRef.current.y;
@@ -593,6 +668,35 @@ export default function HomeView() {
   };
 
   const handleTimelinePointerUp = (e) => {
+    // ① 이벤트 이동 완료
+    if (moveConfirmedRef.current) {
+      const drag = moveDragStateRef.current;
+      cancelMoveAll();
+      if (drag) {
+        const ev = drag.event;
+        const dur = toTimelineMins(ev.endH, ev.endM) - toTimelineMins(ev.startH, ev.startM);
+        const newStartActual = (drag.currentStartMins + START_HOUR * 60) % (24 * 60);
+        const newEndTimelineMins = Math.min(drag.currentStartMins + dur, 24 * 60);
+        const newEndActual = (newEndTimelineMins + START_HOUR * 60) % (24 * 60);
+        updateHomeEvent(ev.id, {
+          startH: Math.floor(newStartActual / 60),
+          startM: newStartActual % 60,
+          endH:   Math.floor(newEndActual / 60) % 24,
+          endM:   newEndActual % 60,
+        });
+      }
+      return;
+    }
+
+    // ② 이벤트 빠른 탭 → 상세 시트
+    if (tapEventRef.current) {
+      const ev = tapEventRef.current;
+      cancelMoveAll();
+      setSelectedEvent(ev);
+      return;
+    }
+
+    // ③ 빈 영역 (새 이벤트 생성)
     clearTimeout(longPressTimerRef.current);
     longPressTimerRef.current = null;
 
@@ -648,6 +752,7 @@ export default function HomeView() {
         onPointerDown={handleTimelinePointerDown}
         onPointerMove={handleTimelinePointerMove}
         onPointerUp={handleTimelinePointerUp}
+        onPointerCancel={cancelMoveAll}
         style={{ touchAction: 'pan-y' }}
       >
 
@@ -739,15 +844,37 @@ export default function HomeView() {
 
           const isNew = String(ev.id) === String(newlyAddedHomeEventId);
           const isEditing = previewHomeEvent && String(ev.id) === String(previewHomeEvent.id);
+          const isMovingGhost = moveDragState && String(ev.id) === String(moveDragState.event.id);
+          const isMovable = typeof ev.id === 'number';
           return (
             <div
               key={ev.id}
-              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}${isEditing ? ' editing-preview' : ''}`}
+              className={`timeline-event has-bar${pressedId === ev.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}${isEditing ? ' editing-preview' : ''}${isMovingGhost ? ' moving-ghost' : ''}`}
               style={getEventStyle(top, height, col, numCols)}
-              onPointerDown={() => setPressedId(ev.id)}
-              onPointerUp={() => { setPressedId(null); setSelectedEvent(ev); }}
-              onPointerLeave={() => setPressedId(null)}
-              onPointerCancel={() => setPressedId(null)}
+              onPointerDown={isMovable ? (e => {
+                setPressedId(ev.id);
+                moveEventRef.current = ev;
+                movePointerStartRef.current = { x: e.clientX, y: e.clientY };
+                movePointerMovedRef.current = false;
+                tapEventRef.current = ev;
+                const containerRect = containerRef.current.getBoundingClientRect();
+                const tapMins = (e.clientY - containerRect.top) / HOUR_HEIGHT * 60;
+                const evStartMins = toTimelineMins(ev.startH, ev.startM);
+                moveOffsetMinsRef.current = Math.max(0, tapMins - evStartMins);
+                containerRef.current.setPointerCapture(e.pointerId);
+                moveLongPressTimerRef.current = setTimeout(() => {
+                  if (movePointerMovedRef.current) return;
+                  moveConfirmedRef.current = true;
+                  const val = { event: ev, currentStartMins: evStartMins };
+                  moveDragStateRef.current = val;
+                  setMoveDragState(val);
+                  setPressedId(null);
+                  longPressConfirmedRef.current = true;
+                }, 400);
+              }) : (() => setPressedId(ev.id))}
+              onPointerUp={isMovable ? undefined : (() => { setPressedId(null); setSelectedEvent(ev); })}
+              onPointerLeave={isMovable ? undefined : (() => setPressedId(null))}
+              onPointerCancel={isMovable ? undefined : (() => setPressedId(null))}
             >
               <div className="study-time-bar">
                 <div className="study-time-gauge" style={{ transform: `scaleY(${fill})` }} />
@@ -771,6 +898,40 @@ export default function HomeView() {
             </div>
           );
         })}
+
+        {/* 이벤트 이동 드래그 블록 */}
+        {moveDragState && moveDragVirtualEvent && (() => {
+          const { col = 0, numCols = 1 } = layout['move-drag-virtual'] || {};
+          const ev = moveDragState.event;
+          const origTop = timeToTop(ev.startH, ev.startM);
+          const height = Math.max(timeToTop(ev.endH, ev.endM) - origTop, 30);
+          const top = timeToTop(moveDragVirtualEvent.startH, moveDragVirtualEvent.startM);
+          const isDoneTask = ev.type === 'task' && doneHomeEventIds.has(String(ev.id));
+          const Icon = isDoneTask ? TaskDoneIcon : (ICON_MAP[ev.type] || Square);
+          return (
+            <div
+              key="move-drag-block"
+              className="timeline-event has-bar move-dragging"
+              style={getEventStyle(top, height, col, numCols)}
+            >
+              <div className="study-time-bar" />
+              <div className="timeline-event-inner">
+                <div className="timeline-event-title-row">
+                  <div className="timeline-event-icon">
+                    <Icon size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
+                  </div>
+                  <span className="timeline-event-title">{ev.title}</span>
+                </div>
+                <div className="timeline-event-meta">
+                  <span className="timeline-event-time">
+                    {formatRange(moveDragVirtualEvent.startH, moveDragVirtualEvent.startM,
+                                 moveDragVirtualEvent.endH, moveDragVirtualEvent.endM)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* 그룹 블록 (0~15분 이내 연속 이벤트 합치기) */}
         {mergedGroups.map(group => {

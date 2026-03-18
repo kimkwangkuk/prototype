@@ -3496,6 +3496,18 @@ textarea {
   border: 1.5px solid rgba(0, 0, 0, 0.14);
 }
 
+/* ─── 이벤트 이동 드래그 ─── */
+.timeline-event.moving-ghost {
+  opacity: 0.25;
+  pointer-events: none;
+}
+.timeline-event.move-dragging {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  opacity: 0.92;
+  z-index: 10;
+  pointer-events: none;
+}
+
 /* ─── 롱탭 드래그 슬롯 ─── */
 .timeline-drag-slot {
   border-radius: 8px;
@@ -3691,6 +3703,16 @@ textarea {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.group-sheet-appbar-time {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
 }
 
 .group-sheet-appbar-count {
