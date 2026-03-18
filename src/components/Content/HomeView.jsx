@@ -246,6 +246,39 @@ function groupStudyWithTasks(singles, doneHomeEventIds) {
   return { studyGroups, pairedStudyIds };
 }
 
+// ─── 집중계획 + 내부 할일 그룹핑 (완전히 포함되는 할일, 완료 여부 무관) ───
+function groupFocusWithTasks(events) {
+  const focusEvents = events.filter(e => e.type === 'focus');
+  const taskEvents  = events.filter(e => e.type === 'task');
+  if (!focusEvents.length || !taskEvents.length) return { focusGroups: [], pairedIds: new Set() };
+
+  const focusGroups = [];
+  const pairedIds   = new Set();
+
+  for (const focus of focusEvents) {
+    const fs = toMin(focus.startH, focus.startM);
+    const fe = toMin(focus.endH,   focus.endM);
+    const contained = taskEvents.filter(t => {
+      const ts = toMin(t.startH, t.startM);
+      const te = toMin(t.endH,   t.endM);
+      return ts >= fs && te <= fe;
+    });
+    if (contained.length > 0) {
+      pairedIds.add(focus.id);
+      contained.forEach(t => pairedIds.add(t.id));
+      focusGroups.push({
+        id: `focus-group-${focus.id}`,
+        type: 'focus-group',
+        focusEvent: focus,
+        tasks: contained,
+        startH: focus.startH, startM: focus.startM,
+        endH:   focus.endH,   endM:   focus.endM,
+      });
+    }
+  }
+  return { focusGroups, pairedIds };
+}
+
 // ─── 겹침 감지 레이아웃 알고리즘 (Google Calendar 방식) ───
 function computeLayout(events) {
   if (!events.length) return {};
@@ -354,12 +387,15 @@ export default function HomeView() {
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [challengeOpen, setChallengeOpen] = useState(false);
   const [selectedStudyGroup, setSelectedStudyGroup] = useState(null);
+  const [selectedFocusGroup, setSelectedFocusGroup] = useState(null);
   const handleEventClose = useCallback(() => { setSelectedEvent(null); setSelectedEventEditMode(false); }, []);
   const handleGroupClose = useCallback(() => setSelectedGroup(null), []);
   const handleStudyGroupClose = useCallback(() => setSelectedStudyGroup(null), []);
+  const handleFocusGroupClose = useCallback(() => setSelectedFocusGroup(null), []);
   const handleEditGroupEvent = useCallback((ev) => {
     setSelectedGroup(null);
     setSelectedStudyGroup(null);
+    setSelectedFocusGroup(null);
     setSelectedEventEditMode(true);
     setSelectedEvent(ev);
   }, []);
@@ -420,17 +456,22 @@ export default function HomeView() {
 
   // 편집 중에는 그룹핑 해제
   const isEditing = !!previewHomeEvent;
-  let filteredSingles, mergedGroups, studyGroups;
+  let filteredSingles, mergedGroups, studyGroups, focusGroups;
   if (isEditing) {
     filteredSingles = allEvents;
     mergedGroups = [];
-    studyGroups = [];
+    studyGroups  = [];
+    focusGroups  = [];
   } else {
-    const { singles, merged } = groupNearbyEvents(allEvents);
+    // 집중계획 내부 할일 먼저 분리
+    const { focusGroups: fg, pairedIds: focusPairedIds } = groupFocusWithTasks(allEvents);
+    focusGroups = fg;
+    const remaining = allEvents.filter(e => !focusPairedIds.has(e.id));
+    const { singles, merged } = groupNearbyEvents(remaining);
     const { studyGroups: sg, pairedStudyIds } = groupStudyWithTasks(singles, doneHomeEventIds);
     filteredSingles = singles.filter(e => !pairedStudyIds.has(e.id));
     mergedGroups = merged;
-    studyGroups = sg;
+    studyGroups  = sg;
   }
   // 드래그 슬롯을 가상 이벤트로 변환 → computeLayout에 포함해 실시간 레이아웃 반영
   let dragVirtualEvent = null;
@@ -449,7 +490,7 @@ export default function HomeView() {
   }
 
   const layoutEvents = [
-    ...filteredSingles, ...mergedGroups, ...studyGroups,
+    ...filteredSingles, ...mergedGroups, ...studyGroups, ...focusGroups,
     ...(dragVirtualEvent ? [dragVirtualEvent] : []),
   ];
 
@@ -822,6 +863,52 @@ export default function HomeView() {
           );
         })}
 
+        {/* 집중계획 + 할일 그룹 블록 */}
+        {focusGroups.map(fg => {
+          const { col = 0, numCols = 1 } = layout[fg.id] || {};
+          const top    = timeToTop(fg.startH, fg.startM);
+          const height = Math.max(timeToTop(fg.endH, fg.endM) - top, 30);
+          const fill   = getStudyFill(fg.focusEvent);
+          const doneCount = fg.tasks.filter(t => doneHomeEventIds.has(String(t.id))).length;
+          const allDone = doneCount === fg.tasks.length;
+          const isNew = String(fg.focusEvent.id) === String(newlyAddedHomeEventId) ||
+            fg.tasks.some(t => String(t.id) === String(newlyAddedHomeEventId));
+          return (
+            <div
+              key={fg.id}
+              className={`timeline-event has-bar${pressedId === fg.id ? ' pressed' : ''}${isNew ? ' newly-added' : ''}`}
+              style={getEventStyle(top, height, col, numCols)}
+              onPointerDown={() => setPressedId(fg.id)}
+              onPointerUp={() => { setPressedId(null); setSelectedFocusGroup(fg); }}
+              onPointerLeave={() => setPressedId(null)}
+              onPointerCancel={() => setPressedId(null)}
+            >
+              <div className="study-time-bar">
+                <div className="study-time-gauge" style={{ transform: `scaleY(${fill})` }} />
+              </div>
+              <div className="timeline-event-inner">
+                <div className="timeline-event-title-row">
+                  <div className="timeline-event-icon">
+                    <Target size={14} strokeWidth={1.8} color="rgba(0,0,0,0.75)" />
+                  </div>
+                  <span className={`timeline-event-title${allDone ? ' done' : ''}`}>{fg.focusEvent.title}</span>
+                </div>
+                <div className="timeline-event-meta">
+                  <span className="timeline-event-time">
+                    {formatRange(fg.startH, fg.startM, fg.endH, fg.endM)}
+                  </span>
+                  <div className="timeline-event-count-row">
+                    <SmallTaskIcon checked={allDone} />
+                    <span className={`timeline-event-time${allDone ? ' count-done' : ''}`}>
+                      {doneCount}/{fg.tasks.length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
       </div>
     </div>
 
@@ -836,6 +923,17 @@ export default function HomeView() {
         ]
       } : null}
       onClose={handleStudyGroupClose}
+      onEditEvent={handleEditGroupEvent}
+    />
+    <HomeGroupDetailSheet
+      group={selectedFocusGroup ? {
+        ...selectedFocusGroup,
+        events: [
+          { ...selectedFocusGroup.focusEvent, isAnchor: true },
+          ...selectedFocusGroup.tasks,
+        ]
+      } : null}
+      onClose={handleFocusGroupClose}
       onEditEvent={handleEditGroupEvent}
     />
     <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />

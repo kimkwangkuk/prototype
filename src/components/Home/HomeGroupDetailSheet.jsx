@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Clock, ChevronLeft, FileText } from 'lucide-react';
+import { Clock, ChevronLeft, FileText, Target } from 'lucide-react';
 import useTodoStore from '../../store/useTodoStore';
 
 function formatLabel(h, m) {
@@ -106,7 +106,10 @@ export default function HomeGroupDetailSheet({ group, onClose, onEditEvent }) {
                       onClick={() => setSelectedEv(ev)}
                     >
                       <div className="group-anchor-icon">
-                        <StudyIcon size={14} color="rgba(0,0,0,0.6)" />
+                        {ev.type === 'focus'
+                          ? <Target size={14} strokeWidth={1.8} color="rgba(0,0,0,0.6)" />
+                          : <StudyIcon size={14} color="rgba(0,0,0,0.6)" />
+                        }
                       </div>
                       <div className="group-event-item-content">
                         <span className="group-event-item-title group-event-item-title--anchor">{ev.title}</span>
