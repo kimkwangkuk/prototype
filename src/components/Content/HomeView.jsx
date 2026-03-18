@@ -391,11 +391,20 @@ export default function HomeView() {
     return () => el.removeEventListener('touchmove', onTouchMove);
   }, []);
 
-  // 신규 이벤트 점멸 후 플래그 해제 (페이지 닫힘 350ms + 점멸 750ms)
+  // 신규 이벤트: 바텀시트 닫힌 후 해당 이벤트 중앙 스크롤 + 점멸
   useEffect(() => {
     if (!newlyAddedHomeEventId) return;
-    const t = setTimeout(clearNewlyAddedHomeEventId, 1500);
-    return () => clearTimeout(t);
+    const ev = homeEvents.find(e => String(e.id) === String(newlyAddedHomeEventId));
+    // 350ms 후 (바텀시트 닫힘): 이벤트 시작 시간을 뷰 중앙으로 스크롤
+    const scrollTimer = setTimeout(() => {
+      if (!ev || !scrollRef.current) return;
+      const eventTop = timeToTop(ev.startH, ev.startM);
+      const viewH = scrollRef.current.clientHeight;
+      scrollRef.current.scrollTo({ top: Math.max(0, eventTop - viewH / 2), behavior: 'smooth' });
+    }, 350);
+    // 1500ms 후: 점멸 클래스 제거
+    const clearTimer = setTimeout(clearNewlyAddedHomeEventId, 1500);
+    return () => { clearTimeout(scrollTimer); clearTimeout(clearTimer); };
   }, [newlyAddedHomeEventId]);
 
   const nowY    = getNowTop();
@@ -685,7 +694,7 @@ export default function HomeView() {
           const canFill = STUDY_TYPES.has(ev.type);
           const fill   = canFill ? getStudyFill(ev) : 0;
 
-          const isNew = ev.id === String(newlyAddedHomeEventId);
+          const isNew = String(ev.id) === String(newlyAddedHomeEventId);
           const isEditing = previewHomeEvent && String(ev.id) === String(previewHomeEvent.id);
           return (
             <div
