@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-kb1z4e9xp-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 할일 상세에 공부 시작 버튼 추가 (full-width, 완료/편집/삭제 위)",
+    "createdAt": 1773817093933,
+    "sha": "7614e8f"
+  },
+  {
+    "url": "https://prototype-d2jaqi9i8-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773816457785,
+    "sha": "7616abd"
+  },
+  {
     "url": "https://prototype-e9i4no6uq-kimkwangkuks-projects.vercel.app",
     "message": "feat: 그룹 블록 전체 완료 시 타이틀 취소선 표시",
     "createdAt": 1773816387074,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773727334308,
     "sha": "4b1e1f4"
-  },
-  {
-    "url": "https://prototype-6f7ah3rar-kimkwangkuks-projects.vercel.app",
-    "message": "refactor: react-mobile-picker → 네이티브 스크롤스냅 커스텀 DrumPicker로 교체",
-    "createdAt": 1773727266927,
-    "sha": "39591c5"
-  },
-  {
-    "url": "https://prototype-n6kvs228n-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773726845051,
-    "sha": "b1c7789"
   }
 ]
