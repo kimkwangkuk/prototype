@@ -735,6 +735,7 @@ export default function HomeView() {
           const top    = timeToTop(group.startH, group.startM);
           const height = Math.max(timeToTop(group.endH, group.endM) - top, 30);
           const doneCount = group.events.filter(e => doneHomeEventIds.has(String(e.id))).length;
+          const allDone = doneCount === group.events.length;
           const mergedTitle = `${doneCount}/${group.events.length} (${group.events.map(e => e.title).join(', ')})`;
           const isGroupNew = newlyAddedHomeEventId != null &&
             group.events.some(e => String(e.id) === String(newlyAddedHomeEventId));
@@ -754,7 +755,7 @@ export default function HomeView() {
                   <div className="timeline-event-icon">
                     <div className="timeline-event-group-checkbox" />
                   </div>
-                  <span className="timeline-event-title">{mergedTitle}</span>
+                  <span className={`timeline-event-title${allDone ? ' done' : ''}`}>{mergedTitle}</span>
                 </div>
                 <div className="timeline-event-meta">
                   <span className="timeline-event-time">
