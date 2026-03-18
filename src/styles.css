@@ -3485,14 +3485,8 @@ textarea {
 .timeline-pressed-slot {
   border-radius: 8px;
   pointer-events: none;
-  border: 1.5px solid transparent;
-  animation: longpress-fill 400ms cubic-bezier(0.25, 0, 0.5, 1) forwards;
-}
-
-.timeline-pressed-slot.confirmed {
   background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.16);
-  transition: border-color 0.12s ease-out;
+  border: 1.5px solid rgba(0, 0, 0, 0.14);
 }
 
 /* ─── 롱탭 드래그 슬롯 ─── */

@@ -345,20 +345,33 @@ export default function HomeView() {
     setSelectedEvent(ev);
   }, []);
   const [pressedId, setPressedId] = useState(null);
-  const [dragSlot, setDragSlot] = useState(null); // 롱탭 드래그 중인 슬롯 { startMins, endMins }
+  const [pressedSlot, setPressedSlot] = useState(null);       // 탭 피드백용 하이라이트
+  const [dragSlot, setDragSlot] = useState(null);             // 롱탭 드래그 슬롯
   const containerRef = useRef(null);
   const pointerStartRef = useRef(null);
   const pointerMovedRef = useRef(false);
   const longPressTimerRef = useRef(null);
   const longPressConfirmedRef = useRef(false);
   const longPressStartMinsRef = useRef(null);
-  const dragSlotRef = useRef(null); // state 동기화용
+  const dragSlotRef = useRef(null);
+  const tapSlotRef = useRef(null); // pointerDown 에서 계산한 슬롯 저장
 
   useEffect(() => {
     if (!scrollRef.current) return;
     const top = getNowTop();
     const h = scrollRef.current.clientHeight;
     scrollRef.current.scrollTop = Math.max(0, top - h / 3);
+  }, []);
+
+  // 롱탭 확정 후 touchmove 스크롤 방지 (passive:false 필요)
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const onTouchMove = (e) => {
+      if (longPressConfirmedRef.current) e.preventDefault();
+    };
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    return () => el.removeEventListener('touchmove', onTouchMove);
   }, []);
 
   // 신규 이벤트 점멸 후 플래그 해제 (페이지 닫힘 350ms + 점멸 750ms)
@@ -432,7 +445,7 @@ export default function HomeView() {
     return Math.max(0, Math.min(Math.round(rawMins / 10) * 10, 24 * 60));
   };
 
-  const cancelLongPress = () => {
+  const cancelAll = () => {
     if (longPressTimerRef.current) {
       clearTimeout(longPressTimerRef.current);
       longPressTimerRef.current = null;
@@ -440,35 +453,33 @@ export default function HomeView() {
     longPressConfirmedRef.current = false;
     longPressStartMinsRef.current = null;
     dragSlotRef.current = null;
+    tapSlotRef.current = null;
+    pointerStartRef.current = null;
     setDragSlot(null);
+    setPressedSlot(null);
   };
 
   const handleTimelinePointerDown = (e) => {
-    if (
-      e.target.closest('.timeline-event') ||
-      e.target.closest('.timeline-label-col') ||
-      e.target.closest('.timeline-hour-emojis') ||
-      e.target.closest('.timeline-now-pill')
-    ) return;
+    const slot = getSlotFromPointer(e);
+    if (!slot) return;
+
+    // 포인터 캡처: 롱탭 드래그 중 포인터가 벗어나도 이벤트 수신
+    e.currentTarget.setPointerCapture(e.pointerId);
 
     pointerStartRef.current = { x: e.clientX, y: e.clientY };
     pointerMovedRef.current = false;
+    tapSlotRef.current = slot;
+    setPressedSlot(slot); // 탭 피드백 하이라이트
 
-    const startMins = getTimelineMins(e.clientY);
-    const intervals = allEvents.map(ev => ({
-      start: toTimelineMins(ev.startH, ev.startM),
-      end: toTimelineMins(ev.endH, ev.endM),
-    }));
-    if (intervals.some(iv => startMins >= iv.start && startMins < iv.end)) return;
-
-    longPressStartMinsRef.current = startMins;
+    longPressStartMinsRef.current = slot.startMins;
     longPressTimerRef.current = setTimeout(() => {
       if (pointerMovedRef.current) return;
       longPressConfirmedRef.current = true;
-      const endMins = Math.min(startMins + 60, 24 * 60);
-      const slot = { startMins, endMins };
-      dragSlotRef.current = slot;
-      setDragSlot(slot);
+      const endMins = Math.min(slot.startMins + 60, 24 * 60);
+      const dragSlotVal = { startMins: slot.startMins, endMins };
+      dragSlotRef.current = dragSlotVal;
+      setDragSlot(dragSlotVal);
+      setPressedSlot(null); // 드래그 슬롯으로 교체
       longPressTimerRef.current = null;
     }, 400);
   };
@@ -480,7 +491,7 @@ export default function HomeView() {
     if (Math.sqrt(dx * dx + dy * dy) > 8) {
       pointerMovedRef.current = true;
       if (!longPressConfirmedRef.current) {
-        cancelLongPress();
+        cancelAll();
         return;
       }
     }
@@ -499,19 +510,17 @@ export default function HomeView() {
 
     if (longPressConfirmedRef.current) {
       const slot = dragSlotRef.current;
-      cancelLongPress();
+      cancelAll();
       if (slot) {
         openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
       }
       return;
     }
 
-    longPressStartMinsRef.current = null;
-    if (!pointerMovedRef.current) {
-      const slot = getSlotFromPointer(e);
-      if (slot) {
-        openHomeSheet(minsToTimeStr(slot.startMins), minsToTimeStr(Math.min(slot.endMins, 24 * 60)));
-      }
+    const tapped = tapSlotRef.current;
+    cancelAll();
+    if (tapped) {
+      openHomeSheet(minsToTimeStr(tapped.startMins), minsToTimeStr(Math.min(tapped.endMins, 24 * 60)));
     }
   };
 
@@ -599,6 +608,18 @@ export default function HomeView() {
             </div>
           );
         })}
+
+        {/* 탭 피드백 하이라이트 */}
+        {pressedSlot && (() => {
+          const top = (pressedSlot.startMins / 60) * HOUR_HEIGHT;
+          const height = Math.max(((pressedSlot.endMins - pressedSlot.startMins) / 60) * HOUR_HEIGHT, 10);
+          return (
+            <div
+              className="timeline-pressed-slot"
+              style={getEventStyle(top, height, 0, 1)}
+            />
+          );
+        })()}
 
         {/* 롱탭 드래그 슬롯 */}
         {dragSlot && (() => {
