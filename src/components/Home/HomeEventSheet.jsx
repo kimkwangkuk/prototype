@@ -25,7 +25,7 @@ function formatLabel(t) {
   const isPM = h >= 12;
   const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
   const base = `${isPM ? '오후' : '오전'} ${h12}:${String(m).padStart(2, '0')}`;
-  return h < TIMELINE_START_H ? `${base} (다음날)` : base;
+  return base;
 }
 
 const timeSlots = [];
