@@ -319,14 +319,10 @@ export default function HomeEventSheet() {
             </div>
 
             {/* ── Panel 2: 생성 완료 ── */}
-            <div className="hep-slide">
-              <div className="hep-header">
-                <span />
-                <span className="hep-created-panel-title">함께하기</span>
-                <button className="hep-cancel-btn" onClick={closeHomeSheet}>
-                  <X size={20} strokeWidth={2} />
-                </button>
-              </div>
+            <div className="hep-slide" style={{ position: 'relative' }}>
+              <button className="hep-created-close-btn" onClick={closeHomeSheet}>
+                <X size={20} strokeWidth={2} />
+              </button>
               <div className="hep-created-panel-body">
                 <div className="hep-created-panel-icon">
                   <Users size={28} strokeWidth={1.5} color="rgba(0,0,0,0.6)" />
