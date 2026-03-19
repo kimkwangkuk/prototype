@@ -3468,74 +3468,18 @@ textarea {
 /* ─── Time Picker Sheet (htp) ─── */
 .htp-overlay {
   position: fixed;
-  inset: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 1002;
-  display: flex;
-  flex-direction: column;
   pointer-events: none;
 }
 
-/* 피커 카드 영역 */
-.htp-pickers-area {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20px;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.22s ease 0.12s, transform 0.22s ease 0.12s;
-}
-
-.htp-overlay.visible .htp-pickers-area {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.htp-pickers-card {
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
-  padding: 16px 12px 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  max-width: 340px;
-  pointer-events: auto;
-}
-
-.htp-picker-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  min-width: 0;
-}
-
-.htp-picker-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--label-tertiary, rgba(0,0,0,0.35));
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.htp-arrow {
-  flex-shrink: 0;
-  padding-top: 22px;
-  color: rgba(0,0,0,0.25);
-}
-
-/* 하단 시트 바 */
+/* 시트: 피커 포함 바텀시트 */
 .htp-sheet {
   background: var(--bg-primary);
   border-radius: 24px 24px 0 0;
-  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.12);
   transform: translateY(100%);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   pointer-events: auto;
@@ -3546,10 +3490,41 @@ textarea {
   transform: translateY(0);
 }
 
-.htp-sheet-row {
+.htp-sheet-header {
   display: flex;
   justify-content: flex-end;
-  padding: 4px 16px 16px;
+  padding: 0 16px 8px;
+}
+
+.htp-pickers-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 16px 24px;
+  gap: 0;
+}
+
+.htp-picker-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.htp-picker-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--label-tertiary, rgba(0,0,0,0.35));
+  letter-spacing: 0.04em;
+}
+
+.htp-arrow {
+  flex-shrink: 0;
+  padding-top: 30px;
+  padding-left: 4px;
+  padding-right: 4px;
+  color: rgba(0,0,0,0.25);
 }
 
 .htp-close-btn {

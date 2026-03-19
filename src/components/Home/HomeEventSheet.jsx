@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import Picker from 'react-mobile-picker';
+import { useState, useEffect, useRef, memo } from 'react';
 import { Clock, ArrowRight, Target, Square, Users, User, X, Copy, Check } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
@@ -14,6 +13,9 @@ import useTodoStore from '../../store/useTodoStore';
 
 const TIMELINE_START_H = 5;
 const HOUR_HEIGHT = 60;
+const ITEM_H = 44;
+const PICKER_H = ITEM_H * 5;   // 220px
+const PICKER_PAD = (PICKER_H - ITEM_H) / 2; // 88px
 
 function toTimelineMins(timeStr) {
   const [h, m] = timeStr.split(':').map(Number);
@@ -55,19 +57,93 @@ function addHour(t, hours = 1) {
   return `${String((h + hours) % 24).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
 
-function scrollToPreview(st, et) {
+// DetailSheet와 동일한 실시간 드럼 피커
+const DrumPicker = memo(function DrumPicker({ options, value, onChange }) {
+  const scrollRef   = useRef(null);
+  const prevValRef  = useRef(value);
+  const rafRef      = useRef(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const idx = options.indexOf(value);
+    if (idx === -1) return;
+    if (Math.round(el.scrollTop / ITEM_H) === idx) return;
+    el.scrollTop = idx * ITEM_H;
+    prevValRef.current = value;
+  }, [value, options]);
+
+  const handleScroll = () => {
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const el = scrollRef.current;
+      if (!el) return;
+      const idx = Math.max(0, Math.min(Math.round(el.scrollTop / ITEM_H), options.length - 1));
+      const v = options[idx];
+      if (v !== prevValRef.current) {
+        prevValRef.current = v;
+        onChange(v);
+      }
+    });
+  };
+
+  return (
+    <div style={{ position: 'relative', height: PICKER_H, overflow: 'hidden' }}>
+      {/* 선택선 */}
+      <div style={{
+        position: 'absolute', top: PICKER_PAD, left: 0, right: 0, height: ITEM_H,
+        pointerEvents: 'none', zIndex: 1,
+        borderTop: '1px solid rgba(0,0,0,0.1)', borderBottom: '1px solid rgba(0,0,0,0.1)',
+      }} />
+      {/* 상단 페이드 */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: PICKER_PAD,
+        background: 'linear-gradient(to bottom, var(--bg-primary, #fff) 30%, rgba(255,255,255,0))',
+        pointerEvents: 'none', zIndex: 1,
+      }} />
+      {/* 하단 페이드 */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: PICKER_PAD,
+        background: 'linear-gradient(to top, var(--bg-primary, #fff) 30%, rgba(255,255,255,0))',
+        pointerEvents: 'none', zIndex: 1,
+      }} />
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="drum-picker-scroll"
+        style={{
+          height: PICKER_H, overflowY: 'scroll',
+          scrollSnapType: 'y mandatory',
+          paddingTop: PICKER_PAD, paddingBottom: PICKER_PAD,
+          boxSizing: 'content-box', scrollbarWidth: 'none',
+          msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch',
+        }}
+      >
+        {options.map(opt => (
+          <div key={opt} style={{
+            height: ITEM_H, display: 'flex', alignItems: 'center',
+            justifyContent: 'center', scrollSnapAlign: 'center', flexShrink: 0,
+          }}>
+            <span className={opt === value ? 'drum-item selected' : 'drum-item'}>
+              {formatLabel(opt)}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
+function scrollTimelineToTime(timeStr) {
   const scrollEl = document.querySelector('.home-view');
-  if (!scrollEl) return;
-  const [sh, sm] = st.split(':').map(Number);
-  const [eh, em] = et.split(':').map(Number);
-  const startOff = ((sh - TIMELINE_START_H + 24) % 24) * 60 + sm;
-  const endOff   = ((eh - TIMELINE_START_H + 24) % 24) * 60 + em;
-  const midOff   = (startOff + endOff) / 2;
-  const timeTop  = (midOff / 60) * HOUR_HEIGHT;
-  const sheetEl  = document.querySelector('.htp-sheet');
   const headerEl = document.querySelector('.header');
-  const headerBottom = headerEl ? headerEl.getBoundingClientRect().bottom : 56;
-  const sheetTop     = sheetEl  ? sheetEl.getBoundingClientRect().top    : window.innerHeight * 0.75;
+  const sheetEl  = document.querySelector('.htp-sheet');
+  if (!scrollEl || !headerEl) return;
+  const [h, m] = timeStr.split(':').map(Number);
+  const offsetH = ((h - TIMELINE_START_H + 24) % 24);
+  const timeTop = offsetH * HOUR_HEIGHT + (m / 60) * HOUR_HEIGHT;
+  const headerBottom = headerEl.getBoundingClientRect().bottom;
+  const sheetTop     = sheetEl ? sheetEl.getBoundingClientRect().top : window.innerHeight;
   const visibleH     = sheetTop - headerBottom;
   const containerTop = scrollEl.getBoundingClientRect().top;
   const targetScroll = timeTop - visibleH / 2 + (headerBottom - containerTop);
@@ -83,23 +159,32 @@ export default function HomeEventSheet() {
   const setPreviewHomeEvent   = useTodoStore(s => s.setPreviewHomeEvent);
   const clearPreviewHomeEvent = useTodoStore(s => s.clearPreviewHomeEvent);
 
-  const [mounted, setMounted]               = useState(false);
-  const [animate, setAnimate]               = useState(false);
-  const [title, setTitle]                   = useState('');
-  const [eventType, setEventType]           = useState('focus');
-  const [startTime, setStartTime]           = useState('09:00');
-  const [endTime, setEndTime]               = useState('10:00');
-  const [studyMode, setStudyMode]           = useState('solo');
-  const [peopleCount, setPeopleCount]       = useState(4);
-  const [created, setCreated]               = useState(false);
-  const [copied, setCopied]                 = useState(false);
-  const [showToast, setShowToast]           = useState(false);
+  const [mounted, setMounted]         = useState(false);
+  const [animate, setAnimate]         = useState(false);
+  const [title, setTitle]             = useState('');
+  const [eventType, setEventType]     = useState('focus');
+  const [startTime, setStartTime]     = useState('09:00');
+  const [endTime, setEndTime]         = useState('10:00');
+  const [studyMode, setStudyMode]     = useState('solo');
+  const [peopleCount, setPeopleCount] = useState(4);
+  const [created, setCreated]         = useState(false);
+  const [copied, setCopied]           = useState(false);
+  const [showToast, setShowToast]     = useState(false);
 
-  // time picker sheet state
-  const [tpMounted, setTpMounted]           = useState(false);
-  const [tpVisible, setTpVisible]           = useState(false);
-  const [startPickerVal, setStartPickerVal] = useState({ time: '09:00' });
-  const [endPickerVal, setEndPickerVal]     = useState({ time: '10:00' });
+  // 시간 피커 시트
+  const [tpMounted, setTpMounted]   = useState(false);
+  const [tpVisible, setTpVisible]   = useState(false);
+
+  // 실시간 업데이트용 refs (DetailSheet 패턴)
+  const startTimeRef  = useRef(startTime);
+  const endTimeRef    = useRef(endTime);
+  const eventTypeRef  = useRef(eventType);
+  const studyModeRef  = useRef(studyMode);
+
+  useEffect(() => { startTimeRef.current  = startTime;  }, [startTime]);
+  useEffect(() => { endTimeRef.current    = endTime;    }, [endTime]);
+  useEffect(() => { eventTypeRef.current  = eventType;  }, [eventType]);
+  useEffect(() => { studyModeRef.current  = studyMode;  }, [studyMode]);
 
   const inputRef = useRef(null);
 
@@ -112,8 +197,8 @@ export default function HomeEventSheet() {
       }
       setTitle('');
       setEventType('focus');
-      setStartTime(initStart);
-      setEndTime(initEnd);
+      setStartTime(initStart);      startTimeRef.current = initStart;
+      setEndTime(initEnd);          endTimeRef.current   = initEnd;
       setStudyMode('solo');
       setPeopleCount(4);
       setCreated(false);
@@ -139,17 +224,10 @@ export default function HomeEventSheet() {
 
   if (!mounted) return null;
 
-  const isTogether  = studyMode === 'together';
-  const isEndValid  = toTimelineMins(endTime) > toTimelineMins(startTime);
+  const isTogether = studyMode === 'together';
+  const isEndValid = toTimelineMins(endTime) > toTimelineMins(startTime);
 
-  // ── helpers ──
-  const applyPreview = (st, et, type) => {
-    const [sh, sm] = st.split(':').map(Number);
-    const [eh, em] = et.split(':').map(Number);
-    setPreviewHomeEvent({ id: 'new-preview', startH: sh, startM: sm, endH: eh, endM: em, type: type || 'focus', title: '' });
-  };
-
-  // ── main sheet actions ──
+  // ── 메인 시트 액션 ──
   const handleSave = () => {
     if (!isTogether) {
       if (title.trim()) {
@@ -177,16 +255,21 @@ export default function HomeEventSheet() {
     setTimeout(() => setShowToast(false), 2500);
   };
 
-  // ── time picker sheet ──
+  // ── 시간 피커 시트 ──
+  const applyPreview = (st, et) => {
+    const [sh, sm] = st.split(':').map(Number);
+    const [eh, em] = et.split(':').map(Number);
+    const type = studyModeRef.current === 'together' ? 'together' : eventTypeRef.current;
+    setPreviewHomeEvent({ id: 'new-preview', startH: sh, startM: sm, endH: eh, endM: em, type, title: '' });
+  };
+
   const openTimePicker = () => {
     inputRef.current?.blur();
-    setStartPickerVal({ time: snapSlot(startTime) });
-    setEndPickerVal({ time: snapSlot(endTime) });
-    applyPreview(startTime, endTime, isTogether ? 'together' : eventType);
+    applyPreview(startTimeRef.current, endTimeRef.current);
     setAnimate(false);
     setTpMounted(true);
     requestAnimationFrame(() => requestAnimationFrame(() => setTpVisible(true)));
-    setTimeout(() => scrollToPreview(startTime, endTime), 380);
+    setTimeout(() => scrollTimelineToTime(startTimeRef.current), 380);
   };
 
   const closeTimePicker = () => {
@@ -198,24 +281,25 @@ export default function HomeEventSheet() {
     }, 300);
   };
 
-  const handleStartPickerChange = (val) => {
-    setStartPickerVal(val);
-    setStartTime(val.time);
-    let newEnd = endTime;
-    if (toTimelineMins(endTime) <= toTimelineMins(val.time)) {
-      newEnd = addHour(val.time, 1);
+  // 실시간 피커 변경 (refs 사용 → 스크롤 중 stale closure 방지)
+  const handleStartPickerChange = (newTime) => {
+    startTimeRef.current = newTime;
+    let newEnd = endTimeRef.current;
+    if (toTimelineMins(newEnd) <= toTimelineMins(newTime)) {
+      newEnd = addHour(newTime, 1);
+      endTimeRef.current = newEnd;
       setEndTime(newEnd);
-      setEndPickerVal({ time: snapSlot(newEnd) });
     }
-    applyPreview(val.time, newEnd, isTogether ? 'together' : eventType);
-    scrollToPreview(val.time, newEnd);
+    setStartTime(newTime);
+    applyPreview(newTime, newEnd);
+    scrollTimelineToTime(newTime);
   };
 
-  const handleEndPickerChange = (val) => {
-    setEndPickerVal(val);
-    setEndTime(val.time);
-    applyPreview(startTime, val.time, isTogether ? 'together' : eventType);
-    scrollToPreview(startTime, val.time);
+  const handleEndPickerChange = (newTime) => {
+    endTimeRef.current = newTime;
+    setEndTime(newTime);
+    applyPreview(startTimeRef.current, newTime);
+    scrollTimelineToTime(newTime);
   };
 
   return (
@@ -235,7 +319,7 @@ export default function HomeEventSheet() {
         <div className="hep-slides-wrap">
           <div className={`hep-slides${created ? ' hep-slides--next' : ''}`}>
 
-            {/* ── Panel 1: 폼 ── */}
+            {/* Panel 1: 폼 */}
             <div className="hep-slide">
               <div className="hep-header">
                 <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
@@ -265,7 +349,6 @@ export default function HomeEventSheet() {
               </div>
 
               <div className="hep-body">
-                {/* 제목 입력 */}
                 <div className="hep-section">
                   <input
                     ref={inputRef}
@@ -278,7 +361,6 @@ export default function HomeEventSheet() {
                   />
                 </div>
 
-                {/* 타입 선택 (혼자하기 전용) */}
                 {!isTogether && (
                   <div className="hep-section hep-type-row">
                     {[
@@ -298,7 +380,6 @@ export default function HomeEventSheet() {
                   </div>
                 )}
 
-                {/* 함께하기: 인원 설정 */}
                 {isTogether && (
                   <div className="hep-section hep-form-row">
                     <Users size={20} color="rgba(0,0,0,0.28)" strokeWidth={1.8} style={{ flexShrink: 0 }} />
@@ -328,22 +409,15 @@ export default function HomeEventSheet() {
                   </div>
                 )}
 
-                {/* 시간 설정 */}
                 <div className="hep-section hep-form-row">
                   <Clock size={20} color="rgba(0,0,0,0.28)" strokeWidth={1.8} style={{ flexShrink: 0 }} />
                   <span className="hep-time-label">시간</span>
                   <div className="hep-time-buttons">
-                    <button
-                      className="hep-time-btn"
-                      onClick={openTimePicker}
-                    >
+                    <button className="hep-time-btn" onClick={openTimePicker}>
                       {formatLabel(startTime)}
                     </button>
                     <ArrowRight size={13} color="rgba(0,0,0,0.2)" strokeWidth={2} style={{ flexShrink: 0 }} />
-                    <button
-                      className={`hep-time-btn${!isEndValid ? ' invalid' : ''}`}
-                      onClick={openTimePicker}
-                    >
+                    <button className={`hep-time-btn${!isEndValid ? ' invalid' : ''}`} onClick={openTimePicker}>
                       {formatLabel(endTime)}
                     </button>
                   </div>
@@ -351,7 +425,7 @@ export default function HomeEventSheet() {
               </div>
             </div>
 
-            {/* ── Panel 2: 생성 완료 ── */}
+            {/* Panel 2: 생성 완료 */}
             <div className="hep-slide" style={{ position: 'relative' }}>
               <button className="hep-created-close-btn" onClick={closeHomeSheet}>
                 <X size={20} strokeWidth={2} />
@@ -375,79 +449,40 @@ export default function HomeEventSheet() {
         </div>
       </div>
 
-      {/* ── 시간 설정 시트 ── */}
+      {/* ── 시간 설정 바텀시트 ── */}
       {tpMounted && (
         <div className={`htp-overlay${tpVisible ? ' visible' : ''}`}>
-
-          {/* 피커 카드 (타임라인 위 중앙) */}
-          <div className="htp-pickers-area">
-            <div className="htp-pickers-card" onClick={e => e.stopPropagation()}>
+          <div className="htp-sheet" onClick={e => e.stopPropagation()}>
+            <div className="toolbar-grabber">
+              <div className="toolbar-grabber-bar" />
+            </div>
+            <div className="htp-sheet-header">
+              <button className="htp-close-btn" onClick={closeTimePicker}>
+                <X size={20} strokeWidth={2} />
+              </button>
+            </div>
+            <div className="htp-pickers-row">
               <div className="htp-picker-col">
                 <div className="htp-picker-label">시작</div>
-                <div className="drum-picker-wrapper">
-                  <Picker
-                    value={startPickerVal}
-                    onChange={handleStartPickerChange}
-                    wheelMode="natural"
-                    height={180}
-                    itemHeight={44}
-                  >
-                    <Picker.Column name="time">
-                      {sortedTimeSlots.map(v => (
-                        <Picker.Item key={v} value={v}>
-                          {({ selected }) => (
-                            <span className={selected ? 'drum-item selected' : 'drum-item'}>
-                              {formatLabel(v)}
-                            </span>
-                          )}
-                        </Picker.Item>
-                      ))}
-                    </Picker.Column>
-                  </Picker>
-                </div>
+                <DrumPicker
+                  options={sortedTimeSlots}
+                  value={snapSlot(startTime)}
+                  onChange={handleStartPickerChange}
+                />
               </div>
               <div className="htp-arrow">
                 <ArrowRight size={14} strokeWidth={2} color="rgba(0,0,0,0.25)" />
               </div>
               <div className="htp-picker-col">
                 <div className="htp-picker-label">종료</div>
-                <div className="drum-picker-wrapper">
-                  <Picker
-                    value={endPickerVal}
-                    onChange={handleEndPickerChange}
-                    wheelMode="natural"
-                    height={180}
-                    itemHeight={44}
-                  >
-                    <Picker.Column name="time">
-                      {sortedTimeSlots.map(v => (
-                        <Picker.Item key={v} value={v}>
-                          {({ selected }) => (
-                            <span className={selected ? 'drum-item selected' : 'drum-item'}>
-                              {formatLabel(v)}
-                            </span>
-                          )}
-                        </Picker.Item>
-                      ))}
-                    </Picker.Column>
-                  </Picker>
-                </div>
+                <DrumPicker
+                  options={sortedTimeSlots}
+                  value={snapSlot(endTime)}
+                  onChange={handleEndPickerChange}
+                />
               </div>
             </div>
           </div>
-
-          {/* 작은 하단 시트 */}
-          <div className="htp-sheet" onClick={e => e.stopPropagation()}>
-            <div className="toolbar-grabber">
-              <div className="toolbar-grabber-bar" />
-            </div>
-            <div className="htp-sheet-row">
-              <button className="htp-close-btn" onClick={closeTimePicker}>
-                <X size={20} strokeWidth={2} />
-              </button>
-            </div>
-          </div>
-
         </div>
       )}
 
