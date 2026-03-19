@@ -3255,85 +3255,31 @@ textarea {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
-/* ─── HEP Together Section ─── */
-.hep-together-section {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-}
-
-.hep-together-banner {
+/* ─── HEP People Row (iOS Settings style) ─── */
+.hep-people-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 16px 12px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(168, 85, 247, 0.08) 100%);
 }
 
-.hep-together-banner-text {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.hep-together-banner-title {
+.hep-people-label {
   font-size: 15px;
-  font-weight: 600;
-  color: var(--label-primary);
-  letter-spacing: -0.04px;
-}
-
-.hep-together-banner-sub {
-  font-size: 12px;
   font-weight: 400;
-  color: rgba(99, 102, 241, 0.9);
-  letter-spacing: -0.02px;
-}
-
-.hep-together-avatars {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.hep-together-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid var(--bg-primary);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hep-together-avatar-more {
-  background: rgba(0, 0, 0, 0.12);
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--label-secondary);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid var(--bg-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--label-primary);
 }
 
 .hep-people-stepper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 16px 16px 8px;
+  gap: 10px;
 }
 
 .hep-stepper-btn {
-  width: 40px;
-  height: 40px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0, 0, 0, 0.12);
-  background: var(--bg-primary);
+  border: none;
+  background: rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3349,59 +3295,15 @@ textarea {
 }
 
 .hep-stepper-btn:not(:disabled):active {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.14);
 }
 
-.hep-stepper-display {
-  display: flex;
-  align-items: baseline;
-  gap: 3px;
-  min-width: 64px;
-  justify-content: center;
-}
-
-.hep-stepper-count {
-  font-size: 36px;
-  font-weight: 700;
+.hep-stepper-value {
+  font-size: 15px;
+  font-weight: 500;
   color: var(--label-primary);
-  letter-spacing: -1px;
-  line-height: 1;
-}
-
-.hep-stepper-unit {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--label-secondary);
-}
-
-.hep-people-chips {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px 16px 16px;
-  flex-wrap: wrap;
-}
-
-.hep-people-chip {
-  padding: 5px 12px;
-  border-radius: 20px;
-  border: 1.5px solid rgba(0, 0, 0, 0.1);
-  background: transparent;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--label-secondary);
-  cursor: pointer;
-  font-family: inherit;
-  -webkit-tap-highlight-color: transparent;
-  transition: border-color 0.15s, background 0.15s, color 0.15s;
-}
-
-.hep-people-chip.active {
-  border-color: rgba(99, 102, 241, 0.6);
-  background: rgba(99, 102, 241, 0.1);
-  color: rgba(99, 102, 241, 1);
-  font-weight: 600;
+  min-width: 28px;
+  text-align: center;
 }
 
 /* ─── Home View – Timeline ─── */

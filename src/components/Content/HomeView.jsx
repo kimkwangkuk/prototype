@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Target, Hamburger, Square, Gamepad2, Zap } from 'lucide-react';
+import { Target, Hamburger, Square, Gamepad2, Zap, Users } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
   return (
@@ -128,12 +128,13 @@ const HOUR_EMOJIS = {
 
 // Lucide 아이콘 매핑
 const ICON_MAP = {
-  focus:  Target,
-  study:  StudyIcon,
-  meal:   Hamburger,
-  task:   Square,
-  game:   Gamepad2,
-  custom: Zap,
+  focus:    Target,
+  study:    StudyIcon,
+  meal:     Hamburger,
+  task:     Square,
+  game:     Gamepad2,
+  custom:   Zap,
+  together: Users,
 };
 
 // ─── 연속 이벤트 그룹핑 (종료~시작 0~15분 이내면 하나의 블록으로 합침) ───

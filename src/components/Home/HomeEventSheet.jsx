@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight, Target, Square, ChevronDown } from 'lucide-react';
+import { Clock, ArrowRight, Target, Square, ChevronDown, Users } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
   return (
@@ -33,7 +33,6 @@ function TogetherIcon() {
 
 import useTodoStore from '../../store/useTodoStore';
 
-// 타임라인은 AM5 기준 0~1440분. 자정(00:00)은 1140분 → 저녁 이후 시간보다 큼
 const TIMELINE_START_H = 5;
 function toTimelineMins(timeStr) {
   const [h, m] = timeStr.split(':').map(Number);
@@ -42,7 +41,6 @@ function toTimelineMins(timeStr) {
   return offset * 60 + m;
 }
 
-// 00:00~04:50 → "다음날" 레이블 추가
 function formatLabel(t) {
   const [h, m] = t.split(':').map(Number);
   const isPM = h >= 12;
@@ -58,7 +56,6 @@ for (let h = 0; h < 24; h++) {
   }
 }
 
-// AM5 기준으로 정렬된 슬롯 순서 (5:00 → 4:50)
 const sortedTimeSlots = [
   ...timeSlots.filter(t => parseInt(t) >= TIMELINE_START_H),
   ...timeSlots.filter(t => parseInt(t) < TIMELINE_START_H),
@@ -77,16 +74,6 @@ function addHour(t, hours = 1) {
   const [h, m] = t.split(':').map(Number);
   return `${String((h + hours) % 24).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
 }
-
-const TOGETHER_MESSAGES = {
-  2: '둘이라서 더 특별해요 ✨',
-  3: '셋이 모이면 뭐든 가능해요 💪',
-  4: '네 명의 시너지, 기대되지 않나요? 🔥',
-  5: '다섯 명이 함께, 최고의 팀이에요! ⚡',
-  6: '여섯 명의 열정이 모였어요 🚀',
-  7: '일곱 명의 에너지, 멈출 수 없어요 🌟',
-  8: '여덟 명이 함께라면 무적이에요 🏆',
-};
 
 export default function HomeEventSheet() {
   const visible = useTodoStore(state => state.homeSheetVisible);
@@ -110,7 +97,6 @@ export default function HomeEventSheet() {
   useEffect(() => {
     if (visible) {
       const initStart = homeSheetInitialStart || '09:00';
-      // 종료 시간이 시작 시간 이전이면 시작+1시간으로 보정
       let initEnd = homeSheetInitialEnd || addHour(initStart, 1);
       if (toTimelineMins(initEnd) <= toTimelineMins(initStart)) {
         initEnd = addHour(initStart, 1);
@@ -123,13 +109,11 @@ export default function HomeEventSheet() {
       setStudyMode('solo');
       setPeopleCount(4);
       setMounted(true);
-      // 포커스를 먼저 → iOS가 유저 제스처로 인식해 키보드 표시
       requestAnimationFrame(() => {
         inputRef.current?.focus();
         requestAnimationFrame(() => setAnimate(true));
       });
     } else {
-      // 닫힐 때 키보드 해제 + keyboard-open 클래스 명시적 제거 → 탭바 복원
       inputRef.current?.blur();
       document.body.classList.remove('keyboard-open');
       setAnimate(false);
@@ -144,7 +128,8 @@ export default function HomeEventSheet() {
     if (title.trim()) {
       const [sh, sm] = startTime.split(':').map(Number);
       const [eh, em] = endTime.split(':').map(Number);
-      addHomeEvent({ id: Date.now(), title, startH: sh, startM: sm, endH: eh, endM: em, type: eventType });
+      const type = isTogether ? 'together' : eventType;
+      addHomeEvent({ id: Date.now(), title, startH: sh, startM: sm, endH: eh, endM: em, type, ...(isTogether ? { peopleCount } : {}) });
     }
     closeHomeSheet();
   };
@@ -160,7 +145,6 @@ export default function HomeEventSheet() {
     setPickerVal(val);
     if (timeField === 'start') {
       setStartTime(val.time);
-      // 타임라인 기준으로 종료가 시작 이후인지 확인 (자정 포함)
       if (toTimelineMins(endTime) <= toTimelineMins(val.time)) {
         setEndTime(addHour(val.time, 1));
       }
@@ -226,93 +210,65 @@ export default function HomeEventSheet() {
             />
           </div>
 
-          {/* 함께하기 인원 설정 */}
-          {isTogether && (
-            <div className="hep-together-section">
-              <div className="hep-together-banner">
-                <div className="hep-together-banner-text">
-                  <span className="hep-together-banner-title">함께 공부할 인원</span>
-                  <span className="hep-together-banner-sub">{TOGETHER_MESSAGES[peopleCount]}</span>
-                </div>
-                <div className="hep-together-avatars">
-                  {Array.from({ length: Math.min(peopleCount, 5) }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="hep-together-avatar"
-                      style={{ zIndex: 10 - i, marginLeft: i === 0 ? 0 : -10 }}
-                    >
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <circle cx="10" cy="10" r="10" fill={`hsl(${(i * 47 + 210) % 360}, 70%, 75%)`}/>
-                        <circle cx="10" cy="8" r="3.5" fill="rgba(255,255,255,0.85)"/>
-                        <path d="M3 18C3 14.134 6.134 12 10 12C13.866 12 17 14.134 17 18" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" strokeLinecap="round"/>
-                      </svg>
-                    </div>
-                  ))}
-                  {peopleCount > 5 && (
-                    <div className="hep-together-avatar hep-together-avatar-more" style={{ zIndex: 5, marginLeft: -10 }}>
-                      +{peopleCount - 5}
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="hep-people-stepper">
+          {/* 타입 선택 (혼자하기 전용) */}
+          {!isTogether && (
+            <div className="hep-section hep-type-row">
+              {[
+                { value: 'focus',   label: '집중계획',  Icon: Target    },
+                { value: 'study',   label: '공부시간',  Icon: StudyIcon },
+                { value: 'task',    label: '할일',     Icon: Square    },
+              ].map(({ value, label, Icon }) => (
                 <button
-                  className="hep-stepper-btn"
-                  onClick={() => setPeopleCount(c => Math.max(2, c - 1))}
-                  disabled={peopleCount <= 2}
+                  key={value}
+                  className={`hep-type-btn${eventType === value ? ' active' : ''}`}
+                  onClick={() => setEventType(value)}
                 >
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
+                  <Icon size={13} strokeWidth={1.8} />
+                  {label}
                 </button>
-                <div className="hep-stepper-display">
-                  <span className="hep-stepper-count">{peopleCount}</span>
-                  <span className="hep-stepper-unit">명</span>
-                </div>
-                <button
-                  className="hep-stepper-btn"
-                  onClick={() => setPeopleCount(c => Math.min(8, c + 1))}
-                  disabled={peopleCount >= 8}
-                >
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <line x1="9" y1="4" x2="9" y2="14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    <line x1="4" y1="9" x2="14" y2="9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </button>
-              </div>
-
-              <div className="hep-people-chips">
-                {[2, 3, 4, 5, 6, 7, 8].map(n => (
-                  <button
-                    key={n}
-                    className={`hep-people-chip${peopleCount === n ? ' active' : ''}`}
-                    onClick={() => setPeopleCount(n)}
-                  >
-                    {n}명
-                  </button>
-                ))}
-              </div>
+              ))}
             </div>
           )}
 
-          {/* 타입 선택 */}
-          <div className="hep-section hep-type-row">
-            {[
-              { value: 'focus', label: '집중계획', Icon: Target   },
-              { value: 'study', label: '공부시간', Icon: StudyIcon },
-              { value: 'task',  label: '할일',    Icon: Square  },
-            ].map(({ value, label, Icon }) => (
-              <button
-                key={value}
-                className={`hep-type-btn${eventType === value ? ' active' : ''}`}
-                onClick={() => setEventType(value)}
-              >
-                <Icon size={13} strokeWidth={1.8} />
-                {label}
-              </button>
-            ))}
-          </div>
+          {/* 함께하기 타입 표시 + 인원 설정 */}
+          {isTogether && (
+            <>
+              {/* 타입 표시 행 (고정: 함께공부) */}
+              <div className="hep-section hep-type-row">
+                <button className="hep-type-btn active" style={{ pointerEvents: 'none' }}>
+                  <Users size={13} strokeWidth={1.8} />
+                  함께공부
+                </button>
+              </div>
+
+              {/* 인원 설정 — iOS Settings 스타일 */}
+              <div className="hep-section hep-people-row">
+                <span className="hep-people-label">함께 공부할 인원</span>
+                <div className="hep-people-stepper">
+                  <button
+                    className="hep-stepper-btn"
+                    onClick={() => setPeopleCount(c => Math.max(2, c - 1))}
+                    disabled={peopleCount <= 2}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  </button>
+                  <span className="hep-stepper-value">{peopleCount}명</span>
+                  <button
+                    className="hep-stepper-btn"
+                    onClick={() => setPeopleCount(c => Math.min(8, c + 1))}
+                    disabled={peopleCount >= 8}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                      <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
 
           {/* 시간 설정 */}
           <div className="hep-section hep-time-row">
