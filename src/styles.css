@@ -3069,6 +3069,7 @@ textarea {
   transform: translateY(100%);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
   overflow: hidden;
+  overflow: hidden;
 }
 
 .home-event-page.visible {
@@ -3332,50 +3333,52 @@ textarea {
   flex-shrink: 0;
 }
 
-/* ─── HEP Created Dialog ─── */
-.hep-dialog-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 1200;
+/* ─── HEP Slide Panels ─── */
+.hep-slides-wrap {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.hep-dialog {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% - 64px);
-  max-width: 300px;
-  background: var(--bg-primary);
-  border-radius: 20px;
-  z-index: 1201;
+.hep-slides {
+  display: flex;
+  width: 200%;
+  flex: 1;
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.hep-slides--next {
+  transform: translateX(-50%);
+}
+
+.hep-slide {
+  width: 50%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ── 완료 패널 ── */
+.hep-created-panel-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--label-primary);
+  letter-spacing: -0.04px;
+}
+
+.hep-created-panel-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 24px 28px;
-  gap: 6px;
-  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.18);
-}
-
-.hep-dialog-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(0, 0, 0, 0.07);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  cursor: pointer;
-  color: var(--label-secondary);
-  -webkit-tap-highlight-color: transparent;
+  gap: 6px;
+  padding: 0 32px 48px;
 }
 
-.hep-dialog-icon {
+.hep-created-panel-icon {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -3386,8 +3389,8 @@ textarea {
   margin-bottom: 10px;
 }
 
-.hep-dialog-title {
-  font-size: 16px;
+.hep-created-panel-title-text {
+  font-size: 17px;
   font-weight: 600;
   color: var(--label-primary);
   letter-spacing: -0.04px;
@@ -3395,12 +3398,12 @@ textarea {
   margin: 0;
 }
 
-.hep-dialog-sub {
+.hep-created-panel-sub {
   font-size: 13px;
   font-weight: 400;
   color: var(--label-secondary);
   text-align: center;
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 }
 
 .hep-copy-btn {
