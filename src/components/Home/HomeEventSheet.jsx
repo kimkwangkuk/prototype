@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight, Target, Square, ChevronDown, Users, User, X, Copy, Check } from 'lucide-react';
+import { Clock, ArrowRight, Target, Square, Users, User, X, Copy, Check } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
   return (
@@ -276,7 +276,6 @@ export default function HomeEventSheet() {
                       onClick={() => handleTimeTap('start')}
                     >
                       {formatLabel(startTime)}
-                      <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
                     </button>
                     <ArrowRight size={13} color="rgba(0,0,0,0.2)" strokeWidth={2} style={{ flexShrink: 0 }} />
                     <button
@@ -284,7 +283,6 @@ export default function HomeEventSheet() {
                       onClick={() => handleTimeTap('end')}
                     >
                       {formatLabel(endTime)}
-                      <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
                     </button>
                   </div>
                 </div>
