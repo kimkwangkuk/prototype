@@ -3306,6 +3306,90 @@ textarea {
   text-align: center;
 }
 
+/* ─── HEP Created Screen ─── */
+.hep-created {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.hep-created-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--label-secondary);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hep-created-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px 60px;
+  gap: 8px;
+}
+
+.hep-created-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.hep-created-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--label-primary);
+  letter-spacing: -0.04px;
+  text-align: center;
+  margin: 0;
+}
+
+.hep-created-sub {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--label-secondary);
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.hep-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: 12px;
+  border: none;
+  background: var(--label-primary);
+  color: var(--bg-primary);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity 0.12s;
+}
+
+.hep-copy-btn:active {
+  opacity: 0.75;
+}
+
 /* ─── Home View – Timeline ─── */
 .home-view {
   height: 100%;
