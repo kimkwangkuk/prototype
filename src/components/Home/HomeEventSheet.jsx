@@ -73,6 +73,7 @@ export default function HomeEventSheet() {
   const [peopleCount, setPeopleCount] = useState(4);
   const [created, setCreated] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -133,6 +134,8 @@ export default function HomeEventSheet() {
     navigator.clipboard?.writeText(fakeLink).catch(() => {});
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 2500);
   };
 
   const handleTimeTap = (field) => {
@@ -340,6 +343,11 @@ export default function HomeEventSheet() {
 
           </div>
         </div>
+      </div>
+
+      {/* 토스트 */}
+      <div className={`hep-toast${showToast ? ' hep-toast--show' : ''}`}>
+        초대 링크를 복사했어요. 함께할 친구를 초대하세요
       </div>
     </>
   );
