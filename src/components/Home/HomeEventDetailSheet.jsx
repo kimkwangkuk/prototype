@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, memo } from 'react';
-import { Clock, FileText } from 'lucide-react';
+import { Clock, FileText, Users, Link, Copy, Check } from 'lucide-react';
 import KeypadPopup from '../BottomSheet/Popup/KeypadPopup';
 import useTodoStore from '../../store/useTodoStore';
 
@@ -174,6 +174,7 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
   const [endTime, setEndTime] = useState('10:00');
   const [activeField, setActiveField] = useState(null); // 'title' | 'start' | 'end'
   const [pickerTime, setPickerTime] = useState('09:00');
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const keypadRef = useRef(null);
   const startTimeRef = useRef(startTime);
@@ -400,6 +401,32 @@ const HomeEventDetailSheet = memo(function HomeEventDetailSheet({ event, onClose
                   {formatLabel(event.startH, event.startM)} – {formatLabel(event.endH, event.endM)}
                 </span>
               </div>
+              {event.type === 'together' && (
+                <div className="detail-sheet-meta-row">
+                  <Users size={16} className="detail-meta-icon" strokeWidth={2} />
+                  <span className="detail-meta-label">총 {event.peopleCount ?? 4}명</span>
+                </div>
+              )}
+              {event.type === 'together' && (
+                <div className="detail-sheet-meta-row detail-sheet-meta-row--link">
+                  <Link size={16} className="detail-meta-icon" strokeWidth={2} />
+                  <span className="detail-meta-label detail-meta-link">초대 링크</span>
+                  <button
+                    className="detail-link-copy-btn"
+                    onClick={() => {
+                      const fakeLink = `https://studytogether.app/join/${Math.random().toString(36).slice(2, 8)}`;
+                      navigator.clipboard?.writeText(fakeLink).catch(() => {});
+                      setLinkCopied(true);
+                      setTimeout(() => setLinkCopied(false), 2000);
+                    }}
+                  >
+                    {linkCopied
+                      ? <><Check size={13} strokeWidth={2.5} />복사됨</>
+                      : <><Copy size={13} strokeWidth={2} />복사</>
+                    }
+                  </button>
+                </div>
+              )}
               {event.note && (
                 <div className="detail-sheet-meta-row">
                   <FileText size={16} className="detail-meta-icon" strokeWidth={2} />

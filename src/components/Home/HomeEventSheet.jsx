@@ -1,32 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight, Target, Square, ChevronDown, Users, X, Copy, Check } from 'lucide-react';
+import { Clock, ArrowRight, Target, Square, ChevronDown, Users, User, X, Copy, Check, Type } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 14 14" fill="none">
       <path d="M7 2.99602C6.49326 2.23802 5.32556 1.75 3.98894 1.75C2.86104 1.75 1.77201 2.11629 1.12742 2.69577C0.947878 2.85722 0.875 3.08546 0.875 3.31342L0.875 11.7439C0.875037 11.92 1.09764 12.0279 1.27217 11.9471C2.01214 11.6042 2.97726 11.3997 3.98894 11.3997C5.14196 11.3997 6.25825 11.7557 7 12.25M7 2.99602V12.25M7 2.99602C7.50674 2.23802 8.67444 1.75 10.0111 1.75C11.139 1.75 12.228 2.11629 12.8726 2.69577C13.0521 2.85722 13.125 3.08546 13.125 3.31342V11.7439C13.125 11.92 12.9024 12.0279 12.7278 11.9471C11.9879 11.6042 11.0227 11.3997 10.0111 11.3997C8.85804 11.3997 7.74175 11.7557 7 12.25" stroke={color} strokeWidth="1"/>
-    </svg>
-  );
-}
-
-function SoloIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <circle cx="7" cy="4.5" r="2.5" stroke="currentColor" strokeWidth="1.4"/>
-      <path d="M2 12.5C2 10.015 4.239 8 7 8C9.761 8 12 10.015 12 12.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
-function TogetherIcon() {
-  return (
-    <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
-      <circle cx="6" cy="4" r="2.2" stroke="currentColor" strokeWidth="1.4"/>
-      <circle cx="11" cy="4" r="2.2" stroke="currentColor" strokeWidth="1.4"/>
-      <path d="M1 12.5C1 10.29 3.239 8.5 6 8.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-      <path d="M11 8.5C13.761 8.5 16 10.29 16 12.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
-      <path d="M6 8.5C6 8.5 6.5 8.35 8.5 8.35C10.5 8.35 11 8.5 11 8.5C11 10.29 9.985 12.5 8.5 12.5C7.015 12.5 6 10.29 6 8.5Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/>
     </svg>
   );
 }
@@ -141,7 +120,6 @@ export default function HomeEventSheet() {
       closeHomeSheet();
       return;
     }
-    // 함께하기: 이벤트 저장 후 생성 완료 화면으로 전환
     if (title.trim()) {
       const [sh, sm] = startTime.split(':').map(Number);
       const [eh, em] = endTime.split(':').map(Number);
@@ -181,180 +159,178 @@ export default function HomeEventSheet() {
       <div
         className="bottom-sheet-overlay"
         style={{ backgroundColor: 'rgba(0,0,0,0.2)' }}
-        onClick={created ? undefined : closeHomeSheet}
+        onClick={closeHomeSheet}
       />
       <div className={`home-event-page${animate ? ' visible' : ''}`}>
-        {/* 그래버 */}
         <div className="toolbar-grabber">
           <div className="toolbar-grabber-bar" />
         </div>
 
-        {created ? (
-          /* ── 생성 완료 화면 ── */
-          <div className="hep-created">
-            <button className="hep-created-close" onClick={closeHomeSheet}>
-              <X size={20} strokeWidth={2} />
+        {/* 헤더 */}
+        <div className="hep-header">
+          <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
+          <div className="hep-segment-control">
+            <button
+              className={`hep-segment-btn${!isTogether ? ' active' : ''}`}
+              onClick={() => setStudyMode('solo')}
+            >
+              <User size={14} strokeWidth={1.8} />
+              혼자하기
             </button>
-            <div className="hep-created-body">
-              <div className="hep-created-icon">
-                <Users size={28} strokeWidth={1.5} color="rgba(0,0,0,0.65)" />
-              </div>
-              <p className="hep-created-title">함께하기 일정이 생성되었어요</p>
-              <p className="hep-created-sub">초대 링크를 공유하세요</p>
-              <button className="hep-copy-btn" onClick={handleCopy}>
-                {copied
-                  ? <><Check size={15} strokeWidth={2.5} /> 복사됨</>
-                  : <><Copy size={15} strokeWidth={2} /> 복사하기</>
-                }
-              </button>
-            </div>
+            <button
+              className={`hep-segment-btn${isTogether ? ' active' : ''}`}
+              onClick={() => setStudyMode('together')}
+            >
+              <Users size={14} strokeWidth={1.8} />
+              함께하기
+            </button>
           </div>
-        ) : (
-          <>
-            {/* 헤더 */}
-            <div className="hep-header">
-              <button className="hep-cancel-btn" onClick={closeHomeSheet}>취소</button>
+          <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim() || !isEndValid}>
+            {isTogether ? '생성하기' : '저장'}
+          </button>
+        </div>
 
-              {/* 세그먼트 컨트롤 */}
-              <div className="hep-segment-control">
-                <button
-                  className={`hep-segment-btn${!isTogether ? ' active' : ''}`}
-                  onClick={() => setStudyMode('solo')}
-                >
-                  <SoloIcon />
-                  혼자하기
-                </button>
-                <button
-                  className={`hep-segment-btn${isTogether ? ' active' : ''}`}
-                  onClick={() => setStudyMode('together')}
-                >
-                  <TogetherIcon />
-                  함께하기
-                </button>
-              </div>
+        {/* 본문 */}
+        <div className="hep-body">
 
-              <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim() || !isEndValid}>
-                {isTogether ? '생성하기' : '저장'}
-              </button>
+          {/* 제목 입력 */}
+          <div className="hep-section hep-form-row">
+            <Type size={15} color="rgba(0,0,0,0.28)" strokeWidth={2} style={{ flexShrink: 0 }} />
+            <input
+              ref={inputRef}
+              type="text"
+              className="hep-title-input"
+              placeholder={isTogether ? '각자 열공 타임' : '일정 이름'}
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
+            />
+          </div>
+
+          {/* 타입 선택 (혼자하기 전용) */}
+          {!isTogether && (
+            <div className="hep-section hep-type-row">
+              {[
+                { value: 'focus', label: '집중계획', Icon: Target    },
+                { value: 'study', label: '공부시간', Icon: StudyIcon },
+                { value: 'task',  label: '할일',    Icon: Square    },
+              ].map(({ value, label, Icon }) => (
+                <button
+                  key={value}
+                  className={`hep-type-btn${eventType === value ? ' active' : ''}`}
+                  onClick={() => setEventType(value)}
+                >
+                  <Icon size={13} strokeWidth={1.8} />
+                  {label}
+                </button>
+              ))}
             </div>
+          )}
 
-            {/* 본문 */}
-            <div className="hep-body">
-              {/* 일정 이름 */}
-              <div className="hep-section">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  className="hep-title-input"
-                  placeholder={isTogether ? '각자 열공 타임' : '일정 이름'}
-                  value={title}
-                  onChange={e => setTitle(e.target.value)}
-                  onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
-                />
-              </div>
-
-              {/* 타입 선택 (혼자하기 전용) */}
-              {!isTogether && (
-                <div className="hep-section hep-type-row">
-                  {[
-                    { value: 'focus', label: '집중계획', Icon: Target    },
-                    { value: 'study', label: '공부시간', Icon: StudyIcon },
-                    { value: 'task',  label: '할일',    Icon: Square    },
-                  ].map(({ value, label, Icon }) => (
-                    <button
-                      key={value}
-                      className={`hep-type-btn${eventType === value ? ' active' : ''}`}
-                      onClick={() => setEventType(value)}
-                    >
-                      <Icon size={13} strokeWidth={1.8} />
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* 함께하기: 인원 설정 — iOS Settings 스타일 */}
-              {isTogether && (
-                <div className="hep-section hep-people-row">
-                  <span className="hep-people-label">함께 공부할 인원</span>
-                  <div className="hep-people-stepper">
-                    <button
-                      className="hep-stepper-btn"
-                      onClick={() => setPeopleCount(c => Math.max(2, c - 1))}
-                      disabled={peopleCount <= 2}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                      </svg>
-                    </button>
-                    <span className="hep-stepper-value">{peopleCount}명</span>
-                    <button
-                      className="hep-stepper-btn"
-                      onClick={() => setPeopleCount(c => Math.min(8, c + 1))}
-                      disabled={peopleCount >= 8}
-                    >
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                        <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* 시간 설정 */}
-              <div className="hep-section hep-time-row">
-                <Clock size={14} color="rgba(0,0,0,0.35)" strokeWidth={2} style={{ flexShrink: 0 }} />
+          {/* 함께하기: 인원 설정 */}
+          {isTogether && (
+            <div className="hep-section hep-form-row">
+              <Users size={15} color="rgba(0,0,0,0.28)" strokeWidth={2} style={{ flexShrink: 0 }} />
+              <span className="hep-people-label">함께 공부할 인원</span>
+              <div className="hep-people-stepper">
                 <button
-                  className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
-                  onClick={() => handleTimeTap('start')}
+                  className="hep-stepper-btn"
+                  onClick={() => setPeopleCount(c => Math.max(2, c - 1))}
+                  disabled={peopleCount <= 2}
                 >
-                  {formatLabel(startTime)}
-                  <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
                 </button>
-                <ArrowRight size={13} color="rgba(0,0,0,0.25)" strokeWidth={2} style={{ flexShrink: 0 }} />
+                <span className="hep-stepper-value">{peopleCount}명</span>
                 <button
-                  className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
-                  onClick={() => handleTimeTap('end')}
+                  className="hep-stepper-btn"
+                  onClick={() => setPeopleCount(c => Math.min(8, c + 1))}
+                  disabled={peopleCount >= 8}
                 >
-                  {formatLabel(endTime)}
-                  <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                    <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+                  </svg>
                 </button>
               </div>
-
-              {/* 드럼 피커 */}
-              {timeField && (
-                <div className="hep-picker-section">
-                  <div className="hep-picker-label">
-                    {timeField === 'start' ? '시작 시간' : '종료 시간'}
-                  </div>
-                  <div className="drum-picker-wrapper">
-                    <Picker
-                      value={pickerVal}
-                      onChange={handlePickerChange}
-                      wheelMode="natural"
-                      height={160}
-                      itemHeight={44}
-                    >
-                      <Picker.Column name="time">
-                        {sortedTimeSlots.map(v => (
-                          <Picker.Item key={v} value={v}>
-                            {({ selected }) => (
-                              <span className={selected ? 'drum-item selected' : 'drum-item'}>
-                                {formatLabel(v)}
-                              </span>
-                            )}
-                          </Picker.Item>
-                        ))}
-                      </Picker.Column>
-                    </Picker>
-                  </div>
-                </div>
-              )}
             </div>
-          </>
-        )}
+          )}
+
+          {/* 시간 설정 */}
+          <div className="hep-section hep-form-row">
+            <Clock size={15} color="rgba(0,0,0,0.28)" strokeWidth={2} style={{ flexShrink: 0 }} />
+            <button
+              className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
+              onClick={() => handleTimeTap('start')}
+            >
+              {formatLabel(startTime)}
+              <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+            </button>
+            <ArrowRight size={13} color="rgba(0,0,0,0.2)" strokeWidth={2} style={{ flexShrink: 0 }} />
+            <button
+              className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
+              onClick={() => handleTimeTap('end')}
+            >
+              {formatLabel(endTime)}
+              <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+            </button>
+          </div>
+
+          {/* 드럼 피커 */}
+          {timeField && (
+            <div className="hep-picker-section">
+              <div className="hep-picker-label">
+                {timeField === 'start' ? '시작 시간' : '종료 시간'}
+              </div>
+              <div className="drum-picker-wrapper">
+                <Picker
+                  value={pickerVal}
+                  onChange={handlePickerChange}
+                  wheelMode="natural"
+                  height={160}
+                  itemHeight={44}
+                >
+                  <Picker.Column name="time">
+                    {sortedTimeSlots.map(v => (
+                      <Picker.Item key={v} value={v}>
+                        {({ selected }) => (
+                          <span className={selected ? 'drum-item selected' : 'drum-item'}>
+                            {formatLabel(v)}
+                          </span>
+                        )}
+                      </Picker.Item>
+                    ))}
+                  </Picker.Column>
+                </Picker>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* 생성 완료 다이얼로그 */}
+      {created && (
+        <>
+          <div className="hep-dialog-overlay" onClick={closeHomeSheet} />
+          <div className="hep-dialog">
+            <button className="hep-dialog-close" onClick={closeHomeSheet}>
+              <X size={18} strokeWidth={2} />
+            </button>
+            <div className="hep-dialog-icon">
+              <Users size={26} strokeWidth={1.5} color="rgba(0,0,0,0.6)" />
+            </div>
+            <p className="hep-dialog-title">함께하기 일정이 생성되었어요</p>
+            <p className="hep-dialog-sub">초대 링크를 공유하세요</p>
+            <button className="hep-copy-btn" onClick={handleCopy}>
+              {copied
+                ? <><Check size={15} strokeWidth={2.5} /> 복사됨</>
+                : <><Copy size={15} strokeWidth={2} /> 복사하기</>
+              }
+            </button>
+          </div>
+        </>
+      )}
     </>
   );
 }

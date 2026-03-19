@@ -3306,20 +3306,53 @@ textarea {
   text-align: center;
 }
 
-/* ─── HEP Created Screen ─── */
-.hep-created {
-  flex: 1;
+/* ─── HEP Form Row (icon + content 일관 레이아웃) ─── */
+.hep-form-row {
   display: flex;
-  flex-direction: column;
-  position: relative;
+  align-items: center;
+  gap: 12px;
 }
 
-.hep-created-close {
+.hep-form-row .hep-title-input {
+  flex: 1;
+}
+
+.hep-form-row .hep-people-label {
+  flex: 1;
+}
+
+/* ─── HEP Created Dialog ─── */
+.hep-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1200;
+}
+
+.hep-dialog {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 64px);
+  max-width: 300px;
+  background: var(--bg-primary);
+  border-radius: 20px;
+  z-index: 1201;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px 28px;
+  gap: 6px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.18);
+}
+
+.hep-dialog-close {
   position: absolute;
-  top: 10px;
+  top: 12px;
   right: 12px;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   border: none;
   background: rgba(0, 0, 0, 0.07);
@@ -3331,29 +3364,19 @@ textarea {
   -webkit-tap-highlight-color: transparent;
 }
 
-.hep-created-body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 32px 60px;
-  gap: 8px;
-}
-
-.hep-created-icon {
-  width: 60px;
-  height: 60px;
+.hep-dialog-icon {
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
-.hep-created-title {
-  font-size: 17px;
+.hep-dialog-title {
+  font-size: 16px;
   font-weight: 600;
   color: var(--label-primary);
   letter-spacing: -0.04px;
@@ -3361,12 +3384,12 @@ textarea {
   margin: 0;
 }
 
-.hep-created-sub {
-  font-size: 14px;
+.hep-dialog-sub {
+  font-size: 13px;
   font-weight: 400;
   color: var(--label-secondary);
   text-align: center;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
 }
 
 .hep-copy-btn {
@@ -3388,6 +3411,32 @@ textarea {
 
 .hep-copy-btn:active {
   opacity: 0.75;
+}
+
+/* ─── Detail Sheet – Together 링크 복사 ─── */
+.detail-sheet-meta-row--link {
+  gap: 8px;
+}
+
+.detail-meta-link {
+  flex: 1;
+}
+
+.detail-link-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--label-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
 
 /* ─── Home View – Timeline ─── */
