@@ -465,6 +465,7 @@ export default function HomeView() {
   const allEvents = [
     ...SAMPLE_EVENTS.filter(e => !removedSampleIds.has(e.id)),
     ...homeEvents,
+    ...(previewHomeEvent?.id === 'new-preview' ? [previewHomeEvent] : []),
   ].map(e => previewHomeEvent && String(e.id) === String(previewHomeEvent.id) ? previewHomeEvent : e);
 
   // 편집 중에는 그룹핑 해제
