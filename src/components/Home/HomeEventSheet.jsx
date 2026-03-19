@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Picker from 'react-mobile-picker';
-import { Clock, ArrowRight, Target, Square, ChevronDown, Users, User, X, Copy, Check, Type } from 'lucide-react';
+import { Clock, ArrowRight, Target, Square, ChevronDown, Users, User, X, Copy, Check } from 'lucide-react';
 
 function StudyIcon({ size = 14, color = 'currentColor' }) {
   return (
@@ -185,7 +185,11 @@ export default function HomeEventSheet() {
               함께하기
             </button>
           </div>
-          <button className="hep-save-btn" onClick={handleSave} disabled={!title.trim() || !isEndValid}>
+          <button
+            className={`hep-save-btn${isTogether && title.trim() && isEndValid ? ' hep-save-btn--together' : ''}`}
+            onClick={handleSave}
+            disabled={!title.trim() || !isEndValid}
+          >
             {isTogether ? '생성하기' : '저장'}
           </button>
         </div>
@@ -194,8 +198,7 @@ export default function HomeEventSheet() {
         <div className="hep-body">
 
           {/* 제목 입력 */}
-          <div className="hep-section hep-form-row">
-            <Type size={15} color="rgba(0,0,0,0.28)" strokeWidth={2} style={{ flexShrink: 0 }} />
+          <div className="hep-section">
             <input
               ref={inputRef}
               type="text"
@@ -230,8 +233,8 @@ export default function HomeEventSheet() {
           {/* 함께하기: 인원 설정 */}
           {isTogether && (
             <div className="hep-section hep-form-row">
-              <Users size={15} color="rgba(0,0,0,0.28)" strokeWidth={2} style={{ flexShrink: 0 }} />
-              <span className="hep-people-label">함께 공부할 인원</span>
+              <Users size={20} color="rgba(0,0,0,0.28)" strokeWidth={1.8} style={{ flexShrink: 0 }} />
+              <span className="hep-people-label">초대 인원</span>
               <div className="hep-people-stepper">
                 <button
                   className="hep-stepper-btn"
@@ -259,22 +262,25 @@ export default function HomeEventSheet() {
 
           {/* 시간 설정 */}
           <div className="hep-section hep-form-row">
-            <Clock size={15} color="rgba(0,0,0,0.28)" strokeWidth={2} style={{ flexShrink: 0 }} />
-            <button
-              className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
-              onClick={() => handleTimeTap('start')}
-            >
-              {formatLabel(startTime)}
-              <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
-            </button>
-            <ArrowRight size={13} color="rgba(0,0,0,0.2)" strokeWidth={2} style={{ flexShrink: 0 }} />
-            <button
-              className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
-              onClick={() => handleTimeTap('end')}
-            >
-              {formatLabel(endTime)}
-              <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
-            </button>
+            <Clock size={20} color="rgba(0,0,0,0.28)" strokeWidth={1.8} style={{ flexShrink: 0 }} />
+            <span className="hep-time-label">시간</span>
+            <div className="hep-time-buttons">
+              <button
+                className={`hep-time-btn${timeField === 'start' ? ' active' : ''}`}
+                onClick={() => handleTimeTap('start')}
+              >
+                {formatLabel(startTime)}
+                <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+              </button>
+              <ArrowRight size={13} color="rgba(0,0,0,0.2)" strokeWidth={2} style={{ flexShrink: 0 }} />
+              <button
+                className={`hep-time-btn${timeField === 'end' ? ' active' : ''}${!isEndValid ? ' invalid' : ''}`}
+                onClick={() => handleTimeTap('end')}
+              >
+                {formatLabel(endTime)}
+                <ChevronDown size={12} strokeWidth={2} style={{ marginLeft: 2, opacity: 0.4 }} />
+              </button>
+            </div>
           </div>
 
           {/* 드럼 피커 */}

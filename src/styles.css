@@ -3123,6 +3123,10 @@ textarea {
   opacity: 0.3;
 }
 
+.hep-save-btn--together {
+  color: #f97316;
+}
+
 .hep-body {
   flex: 1;
   overflow-y: auto;
@@ -3266,6 +3270,7 @@ textarea {
   font-size: 15px;
   font-weight: 400;
   color: var(--label-primary);
+  flex: 1;
 }
 
 .hep-people-stepper {
@@ -3300,9 +3305,9 @@ textarea {
 
 .hep-stepper-value {
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--label-primary);
-  min-width: 28px;
+  min-width: 32px;
   text-align: center;
 }
 
@@ -3313,12 +3318,18 @@ textarea {
   gap: 12px;
 }
 
-.hep-form-row .hep-title-input {
+.hep-time-label {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--label-primary);
   flex: 1;
 }
 
-.hep-form-row .hep-people-label {
-  flex: 1;
+.hep-time-buttons {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
 }
 
 /* ─── HEP Created Dialog ─── */
