@@ -462,9 +462,15 @@ export default function HomeView() {
         if (ch.done) return;
         const el = challengeElemRefs.current[i];
         if (!el) return;
+        const rawTop = scrollTop + LABEL_OFFSET;
+        // 시간 레이블 영역(정시 ~ +LABEL_OFFSET px)에 걸리면 즉시 아래로 점프
+        const offsetInHour = rawTop % HOUR_HEIGHT;
+        const skipped = offsetInHour < LABEL_OFFSET
+          ? rawTop - offsetInHour + LABEL_OFFSET
+          : rawTop;
         const minTop = (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
         const maxTop = (ch.endH - 1 - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
-        el.style.top = `${Math.max(minTop, Math.min(scrollTop + LABEL_OFFSET, maxTop))}px`;
+        el.style.top = `${Math.max(minTop, Math.min(skipped, maxTop))}px`;
       });
     };
     scrollEl.addEventListener('scroll', update, { passive: true });
