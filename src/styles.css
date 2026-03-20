@@ -3619,7 +3619,7 @@ textarea {
 /* ─── 챌린지 sticky 오버레이 ─── */
 .challenge-sticky-inner {
   position: sticky;
-  top: 8px;
+  top: 18px;
   background: var(--bg-primary);
   border-radius: 6px;
   width: fit-content;

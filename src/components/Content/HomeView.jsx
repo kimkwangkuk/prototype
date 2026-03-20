@@ -780,13 +780,15 @@ export default function HomeView() {
         {CHALLENGE_RANGES.map((ch, i) => {
           const rangeTop = (ch.startH - START_HOUR) * HOUR_HEIGHT;
           const rangeH   = (ch.endH   - ch.startH)  * HOUR_HEIGHT;
+          // 시간 레이블 텍스트(~15px) 아래에서 시작하도록 오프셋
+          const LABEL_OFFSET = 18;
 
           if (ch.done) {
-            // 완료: 완료한 시간대에 고정 (sticky 없음)
+            // 완료: 완료한 시간대 레이블 아래에 고정
             return (
               <div
                 key={`ch-${i}`}
-                style={{ position: 'absolute', top: rangeTop, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}
+                style={{ position: 'absolute', top: rangeTop + LABEL_OFFSET, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}
               >
                 <button className="challenge-emoji-btn challenge-emoji-btn--done" onClick={() => setChallengeOpen(true)}>
                   {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
@@ -795,11 +797,11 @@ export default function HomeView() {
             );
           }
 
-          // 미완료: 범위 내 sticky
+          // 미완료: 범위 내 sticky (paddingTop으로 시간 레이블과 겹침 방지)
           return (
             <div
               key={`ch-${i}`}
-              style={{ position: 'absolute', top: rangeTop, left: CONT_PAD, width: LABEL_W, height: rangeH, zIndex: 4 }}
+              style={{ position: 'absolute', top: rangeTop, left: CONT_PAD, width: LABEL_W, height: rangeH, paddingTop: LABEL_OFFSET, boxSizing: 'border-box', zIndex: 4 }}
             >
               <div className="challenge-sticky-inner">
                 <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
