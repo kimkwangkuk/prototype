@@ -130,6 +130,7 @@ const HOUR_EMOJIS = {
 const CHALLENGE_RANGES = [
   { emojis: ['🌞', '💧'], startH: 5,  endH: 8,  done: true  },
   { emojis: ['🏃🏻‍♂️'],     startH: 9,  endH: 12, done: false },
+  { emojis: ['🥗'],        startH: 12, endH: 15, done: false },
   { emojis: ['🌃'],        startH: 20, endH: 23, done: false },
   { emojis: ['🛏️'],        startH: 22, endH: 25, done: false },
 ];

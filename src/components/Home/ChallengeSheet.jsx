@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
 const RANGE_DATA = [
   { startH: 5,  endH: 8  },
   { startH: 9,  endH: 12 },
+  { startH: 12, endH: 15 },
   { startH: 20, endH: 23 },
   { startH: 22, endH: 25 },
 ];
@@ -24,8 +25,9 @@ const CHALLENGES = [
   { id: 1, emoji: '🌞', title: '기상인증',      time: '오전 5:00',  done: true,  rangeIndex: 0 },
   { id: 2, emoji: '💧', title: '물마시기 인증',  time: '오전 5:00',  done: true,  rangeIndex: 0 },
   { id: 3, emoji: '🏃🏻‍♂️', title: '러닝 인증',     time: '오전 9:00',  done: false, rangeIndex: 1 },
-  { id: 4, emoji: '🌃', title: '별밤 인증',      time: '오후 9:00',  done: false, rangeIndex: 2 },
-  { id: 5, emoji: '🛏️', title: '취침 인증',      time: '오후 11:00', done: false, rangeIndex: 3 },
+  { id: 6, emoji: '🥗', title: '점심 인증',      time: '오후 12:00', done: false, rangeIndex: 2 },
+  { id: 4, emoji: '🌃', title: '별밤 인증',      time: '오후 9:00',  done: false, rangeIndex: 3 },
+  { id: 5, emoji: '🛏️', title: '취침 인증',      time: '오후 11:00', done: false, rangeIndex: 4 },
 ];
 
 export default function ChallengeSheet({ visible, onClose, onCertify }) {
