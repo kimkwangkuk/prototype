@@ -3616,13 +3616,9 @@ textarea {
   line-height: 1;
 }
 
-/* ─── 챌린지 sticky 오버레이 ─── */
-.challenge-sticky-inner {
-  position: sticky;
-  top: 18px;
-  background: var(--bg-primary);
-  border-radius: 6px;
-  width: fit-content;
+/* ─── 챌린지 슬롯 이동 ─── */
+.challenge-slot-elem {
+  transition: top 0.12s ease-out;
 }
 
 .challenge-emoji-btn {

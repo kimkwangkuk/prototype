@@ -416,6 +416,7 @@ export default function HomeView() {
   const pointerStartRef = useRef(null);
   const pointerMovedRef = useRef(false);
   const longPressTimerRef = useRef(null);
+  const challengeElemRefs = useRef({});
   const longPressConfirmedRef = useRef(false);
   const longPressStartMinsRef = useRef(null);
   const dragSlotRef = useRef(null);
@@ -448,6 +449,27 @@ export default function HomeView() {
     };
     el.addEventListener('touchmove', onTouchMove, { passive: false });
     return () => el.removeEventListener('touchmove', onTouchMove);
+  }, []);
+
+  // 챌린지: 스크롤에 맞춰 시간 칸 단위로 이동 (시간 레이블 가리지 않도록)
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+    const LABEL_OFFSET = 20; // 시간 레이블 텍스트 아래 여백
+    const update = () => {
+      const scrollTop = scrollEl.scrollTop;
+      const topHour = START_HOUR + Math.floor(scrollTop / HOUR_HEIGHT);
+      CHALLENGE_RANGES.forEach((ch, i) => {
+        if (ch.done) return;
+        const el = challengeElemRefs.current[i];
+        if (!el) return;
+        const slotHour = Math.max(ch.startH, Math.min(topHour, ch.endH - 1));
+        el.style.top = `${(slotHour - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET}px`;
+      });
+    };
+    scrollEl.addEventListener('scroll', update, { passive: true });
+    update();
+    return () => scrollEl.removeEventListener('scroll', update);
   }, []);
 
   // 신규 이벤트: 바텀시트 닫힌 후 해당 이벤트 중앙 스크롤 + 점멸
@@ -776,38 +798,32 @@ export default function HomeView() {
           </div>
         ))}
 
-        {/* 챌린지 sticky 오버레이: 범위 안에서 scroll 따라다님, 완료는 시간에 고정 */}
+        {/* 챌린지 오버레이: 미완료는 스크롤마다 시간 칸 단위로 이동, 완료는 고정 */}
         {CHALLENGE_RANGES.map((ch, i) => {
-          const rangeTop = (ch.startH - START_HOUR) * HOUR_HEIGHT;
-          const rangeH   = (ch.endH   - ch.startH)  * HOUR_HEIGHT;
-          // 시간 레이블 텍스트(~15px) 아래에서 시작하도록 오프셋
-          const LABEL_OFFSET = 18;
-
+          const LABEL_OFFSET = 20;
           if (ch.done) {
-            // 완료: 완료한 시간대 레이블 아래에 고정
+            // 완료: 해당 시간 칸에 고정
+            const top = (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
             return (
-              <div
-                key={`ch-${i}`}
-                style={{ position: 'absolute', top: rangeTop + LABEL_OFFSET, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}
-              >
+              <div key={`ch-${i}`} style={{ position: 'absolute', top, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}>
                 <button className="challenge-emoji-btn challenge-emoji-btn--done" onClick={() => setChallengeOpen(true)}>
                   {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
                 </button>
               </div>
             );
           }
-
-          // 미완료: 범위 내 sticky (paddingTop으로 시간 레이블과 겹침 방지)
+          // 미완료: 초기 위치는 rangeStartH, 이후 scroll 이벤트가 직접 top 갱신
+          const initialTop = (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
           return (
             <div
               key={`ch-${i}`}
-              style={{ position: 'absolute', top: rangeTop, left: CONT_PAD, width: LABEL_W, height: rangeH, paddingTop: LABEL_OFFSET, boxSizing: 'border-box', zIndex: 4 }}
+              ref={el => { challengeElemRefs.current[i] = el; }}
+              style={{ position: 'absolute', top: initialTop, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}
+              className="challenge-slot-elem"
             >
-              <div className="challenge-sticky-inner">
-                <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
-                  {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
-                </button>
-              </div>
+              <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
+                {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
+              </button>
             </div>
           );
         })}
