@@ -1,6 +1,25 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
 
+const RANGE_DATA = [
+  { startH: 5,  endH: 8  },
+  { startH: 9,  endH: 12 },
+  { startH: 20, endH: 23 },
+  { startH: 22, endH: 25 },
+];
+
+function fmtHour(h) {
+  const h24 = h % 24;
+  const period = h24 < 12 ? '오전' : '오후';
+  const hour = h24 % 12 || 12;
+  return `${period} ${hour}:00`;
+}
+
+function rangeLabel(rangeIndex) {
+  const r = RANGE_DATA[rangeIndex];
+  return `${fmtHour(r.startH)}~${fmtHour(r.endH)}`;
+}
+
 const CHALLENGES = [
   { id: 1, emoji: '🌞', title: '기상인증',      time: '오전 5:00',  done: true,  rangeIndex: 0 },
   { id: 2, emoji: '💧', title: '물마시기 인증',  time: '오전 5:00',  done: true,  rangeIndex: 0 },
@@ -85,7 +104,7 @@ export default function ChallengeSheet({ visible, onClose, onCertify }) {
                     <div className="challenge-info">
                       <span className="challenge-name">{ch.title}</span>
                       <div className="challenge-time-row">
-                        <span className="challenge-time">{ch.time}</span>
+                        <span className="challenge-time">{rangeLabel(ch.rangeIndex)}</span>
                         {isDone && <span className="challenge-done-badge">✓완료</span>}
                       </div>
                     </div>
@@ -102,7 +121,7 @@ export default function ChallengeSheet({ visible, onClose, onCertify }) {
               <div className="challenge-detail">
                 <div className="challenge-detail-emoji">{selectedChallenge.emoji}</div>
                 <p className="challenge-detail-title">{selectedChallenge.title}</p>
-                <p className="challenge-detail-time">{selectedChallenge.time}</p>
+                <p className="challenge-detail-time">{rangeLabel(selectedChallenge.rangeIndex)}</p>
                 {certified[selectedChallenge.id] || selectedChallenge.done ? (
                   <div className="challenge-certified-badge">
                     <CheckCircle size={20} strokeWidth={2} color="#00b13b" />
