@@ -817,12 +817,13 @@ export default function HomeView() {
         {CHALLENGE_RANGES.map((ch, i) => {
           const LABEL_OFFSET = 20;
           const isDone = ch.done || certifiedRanges[i] !== undefined;
+          const emojiRowStyle = ch.emojis.length > 1 ? { flexDirection: 'row' } : undefined;
           if (isDone) {
             // 완료: 인증한 위치에 고정 (없으면 startH 기본 위치)
             const top = certifiedRanges[i] ?? (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
             return (
               <div key={`ch-${i}`} style={{ position: 'absolute', top, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}>
-                <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
+                <button className="challenge-emoji-btn" style={emojiRowStyle} onClick={() => setChallengeOpen(true)}>
                   {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
                 </button>
               </div>
@@ -837,7 +838,7 @@ export default function HomeView() {
               style={{ position: 'absolute', top: initialTop, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}
               className="challenge-slot-elem"
             >
-              <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
+              <button className="challenge-emoji-btn" style={emojiRowStyle} onClick={() => setChallengeOpen(true)}>
                 {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
               </button>
             </div>
