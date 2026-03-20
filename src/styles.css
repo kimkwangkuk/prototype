@@ -3617,9 +3617,6 @@ textarea {
 }
 
 /* ─── 챌린지 슬롯 이동 ─── */
-.challenge-slot-elem {
-  transition: top 0.12s ease-out;
-}
 
 .challenge-emoji-btn {
   display: flex;

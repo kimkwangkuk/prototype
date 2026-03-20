@@ -451,20 +451,20 @@ export default function HomeView() {
     return () => el.removeEventListener('touchmove', onTouchMove);
   }, []);
 
-  // 챌린지: 스크롤에 맞춰 시간 칸 단위로 이동 (시간 레이블 가리지 않도록)
+  // 챌린지: 범위 내에서는 스크롤과 1:1 이동, 범위 밖은 즉시 클램프
   useEffect(() => {
     const scrollEl = scrollRef.current;
     if (!scrollEl) return;
-    const LABEL_OFFSET = 20; // 시간 레이블 텍스트 아래 여백
+    const LABEL_OFFSET = 20;
     const update = () => {
       const scrollTop = scrollEl.scrollTop;
-      const topHour = START_HOUR + Math.floor(scrollTop / HOUR_HEIGHT);
       CHALLENGE_RANGES.forEach((ch, i) => {
         if (ch.done) return;
         const el = challengeElemRefs.current[i];
         if (!el) return;
-        const slotHour = Math.max(ch.startH, Math.min(topHour, ch.endH - 1));
-        el.style.top = `${(slotHour - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET}px`;
+        const minTop = (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
+        const maxTop = (ch.endH - 1 - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
+        el.style.top = `${Math.max(minTop, Math.min(scrollTop + LABEL_OFFSET, maxTop))}px`;
       });
     };
     scrollEl.addEventListener('scroll', update, { passive: true });
