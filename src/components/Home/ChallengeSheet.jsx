@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, CheckCircle } from 'lucide-react';
 
 const CHALLENGES = [
-  { id: 1, emoji: '🌞', title: '기상인증',      time: '오전 5:00', done: true },
-  { id: 2, emoji: '💧', title: '물마시기 인증',  time: '오전 5:00', done: true },
-  { id: 3, emoji: '🏃🏻‍♂️', title: '러닝 인증',     time: '오전 9:00', done: false },
-  { id: 4, emoji: '🌃', title: '별밤 인증',      time: '오후 9:00', done: false },
-  { id: 5, emoji: '🛏️', title: '취침 인증',      time: '오후 11:00', done: false },
+  { id: 1, emoji: '🌞', title: '기상인증',      time: '오전 5:00',  done: true,  rangeIndex: 0 },
+  { id: 2, emoji: '💧', title: '물마시기 인증',  time: '오전 5:00',  done: true,  rangeIndex: 0 },
+  { id: 3, emoji: '🏃🏻‍♂️', title: '러닝 인증',     time: '오전 9:00',  done: false, rangeIndex: 1 },
+  { id: 4, emoji: '🌃', title: '별밤 인증',      time: '오후 9:00',  done: false, rangeIndex: 2 },
+  { id: 5, emoji: '🛏️', title: '취침 인증',      time: '오후 11:00', done: false, rangeIndex: 3 },
 ];
 
-export default function ChallengeSheet({ visible, onClose }) {
+export default function ChallengeSheet({ visible, onClose, onCertify }) {
   const [animate, setAnimate] = useState(false);
   const [selectedChallenge, setSelectedChallenge] = useState(null);
   const [certified, setCertified] = useState({});
@@ -111,7 +111,10 @@ export default function ChallengeSheet({ visible, onClose }) {
                 ) : (
                   <button
                     className="challenge-cert-action-btn"
-                    onClick={() => setCertified(prev => ({ ...prev, [selectedChallenge.id]: true }))}
+                    onClick={() => {
+                      setCertified(prev => ({ ...prev, [selectedChallenge.id]: true }));
+                      onCertify?.(selectedChallenge.rangeIndex);
+                    }}
                   >
                     인증하기
                   </button>

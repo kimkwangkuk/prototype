@@ -130,8 +130,8 @@ const HOUR_EMOJIS = {
 const CHALLENGE_RANGES = [
   { emojis: ['🌞', '💧'], startH: 5,  endH: 8,  done: true  },
   { emojis: ['🏃🏻‍♂️'],     startH: 9,  endH: 12, done: false },
-  { emojis: ['🌃'],        startH: 21, endH: 23, done: false },
-  { emojis: ['🛏️'],        startH: 23, endH: 25, done: false },
+  { emojis: ['🌃'],        startH: 20, endH: 23, done: false },
+  { emojis: ['🛏️'],        startH: 22, endH: 25, done: false },
 ];
 
 // Lucide 아이콘 매핑
@@ -417,6 +417,8 @@ export default function HomeView() {
   const pointerMovedRef = useRef(false);
   const longPressTimerRef = useRef(null);
   const challengeElemRefs = useRef({});
+  const certifiedTopRef = useRef({});   // scroll handler에서 읽는 고정 위치
+  const [certifiedRanges, setCertifiedRanges] = useState({}); // 렌더링용
   const longPressConfirmedRef = useRef(false);
   const longPressStartMinsRef = useRef(null);
   const dragSlotRef = useRef(null);
@@ -459,7 +461,7 @@ export default function HomeView() {
     const update = () => {
       const scrollTop = scrollEl.scrollTop;
       CHALLENGE_RANGES.forEach((ch, i) => {
-        if (ch.done) return;
+        if (ch.done || certifiedTopRef.current[i] !== undefined) return;
         const el = challengeElemRefs.current[i];
         if (!el) return;
         const rawTop = scrollTop + LABEL_OFFSET;
@@ -814,12 +816,13 @@ export default function HomeView() {
         {/* 챌린지 오버레이: 미완료는 스크롤마다 시간 칸 단위로 이동, 완료는 고정 */}
         {CHALLENGE_RANGES.map((ch, i) => {
           const LABEL_OFFSET = 20;
-          if (ch.done) {
-            // 완료: 해당 시간 칸에 고정
-            const top = (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
+          const isDone = ch.done || certifiedRanges[i] !== undefined;
+          if (isDone) {
+            // 완료: 인증한 위치에 고정 (없으면 startH 기본 위치)
+            const top = certifiedRanges[i] ?? (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
             return (
               <div key={`ch-${i}`} style={{ position: 'absolute', top, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}>
-                <button className="challenge-emoji-btn challenge-emoji-btn--done" onClick={() => setChallengeOpen(true)}>
+                <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
                   {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
                 </button>
               </div>
@@ -1165,7 +1168,16 @@ export default function HomeView() {
       onClose={handleFocusGroupClose}
       onEditEvent={handleEditGroupEvent}
     />
-    <ChallengeSheet visible={challengeOpen} onClose={() => setChallengeOpen(false)} />
+    <ChallengeSheet
+      visible={challengeOpen}
+      onClose={() => setChallengeOpen(false)}
+      onCertify={(rangeIndex) => {
+        const el = challengeElemRefs.current[rangeIndex];
+        const top = el ? parseInt(el.style.top, 10) : (CHALLENGE_RANGES[rangeIndex].startH - START_HOUR) * HOUR_HEIGHT + 20;
+        certifiedTopRef.current[rangeIndex] = top;
+        setCertifiedRanges(prev => ({ ...prev, [rangeIndex]: top }));
+      }}
+    />
     </>
   );
 }
