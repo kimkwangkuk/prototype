@@ -3616,6 +3616,30 @@ textarea {
   line-height: 1;
 }
 
+/* ─── 챌린지 sticky 오버레이 ─── */
+.challenge-sticky-inner {
+  position: sticky;
+  top: 8px;
+  background: var(--bg-primary);
+  border-radius: 6px;
+  width: fit-content;
+}
+
+.challenge-emoji-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: none;
+  border: none;
+  padding: 2px 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.challenge-emoji-btn--done {
+  opacity: 0.45;
+}
+
 .timeline-content-col {
   flex: 1;
   min-width: 0;

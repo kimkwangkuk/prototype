@@ -126,6 +126,14 @@ const HOUR_EMOJIS = {
   9: ['🏃🏻‍♂️'],
 };
 
+// 챌린지 sticky 범위 정의 (startH ~ endH 사이에서 scroll 따라다님, done이면 고정)
+const CHALLENGE_RANGES = [
+  { emojis: ['🌞', '💧'], startH: 5,  endH: 8,  done: true  },
+  { emojis: ['🏃🏻‍♂️'],     startH: 9,  endH: 12, done: false },
+  { emojis: ['🌃'],        startH: 21, endH: 23, done: false },
+  { emojis: ['🛏️'],        startH: 23, endH: 25, done: false },
+];
+
 // Lucide 아이콘 매핑
 const ICON_MAP = {
   focus:    Target,
@@ -763,17 +771,44 @@ export default function HomeView() {
           <div key={idx} className="timeline-row">
             <div className="timeline-label-col">
               <span className="timeline-time-label">{hourLabel(h)}</span>
-              {idx < 24 && HOUR_EMOJIS[h] && (
-                <button className="timeline-hour-emojis" onClick={() => setChallengeOpen(true)}>
-                  {HOUR_EMOJIS[h].map((emoji, i) => (
-                    <span key={i} className="timeline-hour-emoji">{emoji}</span>
-                  ))}
-                </button>
-              )}
             </div>
             <div className="timeline-content-col" />
           </div>
         ))}
+
+        {/* 챌린지 sticky 오버레이: 범위 안에서 scroll 따라다님, 완료는 시간에 고정 */}
+        {CHALLENGE_RANGES.map((ch, i) => {
+          const rangeTop = (ch.startH - START_HOUR) * HOUR_HEIGHT;
+          const rangeH   = (ch.endH   - ch.startH)  * HOUR_HEIGHT;
+
+          if (ch.done) {
+            // 완료: 완료한 시간대에 고정 (sticky 없음)
+            return (
+              <div
+                key={`ch-${i}`}
+                style={{ position: 'absolute', top: rangeTop, left: CONT_PAD, width: LABEL_W, zIndex: 4 }}
+              >
+                <button className="challenge-emoji-btn challenge-emoji-btn--done" onClick={() => setChallengeOpen(true)}>
+                  {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
+                </button>
+              </div>
+            );
+          }
+
+          // 미완료: 범위 내 sticky
+          return (
+            <div
+              key={`ch-${i}`}
+              style={{ position: 'absolute', top: rangeTop, left: CONT_PAD, width: LABEL_W, height: rangeH, zIndex: 4 }}
+            >
+              <div className="challenge-sticky-inner">
+                <button className="challenge-emoji-btn" onClick={() => setChallengeOpen(true)}>
+                  {ch.emojis.map((e, j) => <span key={j} className="timeline-hour-emoji">{e}</span>)}
+                </button>
+              </div>
+            </div>
+          );
+        })}
 
         {/* 현재 시각 인디케이터 */}
         <div className="timeline-now-pill" style={{ top: nowY - 9 }}>
