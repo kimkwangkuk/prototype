@@ -463,11 +463,18 @@ export default function HomeView() {
         const el = challengeElemRefs.current[i];
         if (!el) return;
         const rawTop = scrollTop + LABEL_OFFSET;
-        // 시간 레이블 영역(정시 ~ +LABEL_OFFSET px)에 걸리면 즉시 아래로 점프
         const offsetInHour = rawTop % HOUR_HEIGHT;
-        const skipped = offsetInHour < LABEL_OFFSET
-          ? rawTop - offsetInHour + LABEL_OFFSET
-          : rawTop;
+        const EMOJI_HEIGHT = 17; // font-size 17px, line-height 1
+        let skipped;
+        if (offsetInHour < LABEL_OFFSET) {
+          // 이미 다음 시간 레이블 구간 안 → 레이블 아래로 스냅
+          skipped = rawTop - offsetInHour + LABEL_OFFSET;
+        } else if (offsetInHour >= HOUR_HEIGHT - EMOJI_HEIGHT) {
+          // 이모지 하단이 다음 시간 레이블에 닿기 전에 미리 점프
+          skipped = rawTop - offsetInHour + HOUR_HEIGHT + LABEL_OFFSET;
+        } else {
+          skipped = rawTop;
+        }
         const minTop = (ch.startH - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
         const maxTop = (ch.endH - 1 - START_HOUR) * HOUR_HEIGHT + LABEL_OFFSET;
         el.style.top = `${Math.max(minTop, Math.min(skipped, maxTop))}px`;
