@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-brhn1ac0e-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 모드 UI 영역 스크롤 가능하도록 변경",
+    "createdAt": 1775031711819,
+    "sha": "b089295"
+  },
+  {
+    "url": "https://prototype-q2qiapgwf-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775031368895,
+    "sha": "721ed9a"
+  },
+  {
     "url": "https://prototype-c28l7xw71-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부시작 플로팅 버튼 및 공부 모드 화면 추가",
     "createdAt": 1775031300946,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773801133731,
     "sha": "07caaad"
-  },
-  {
-    "url": "https://prototype-opxi4nehg-kimkwangkuks-projects.vercel.app",
-    "message": "feat: study-group 바 세그먼트 분리 (빈 시간 구간 제외)",
-    "createdAt": 1773801066364,
-    "sha": "efd343c"
-  },
-  {
-    "url": "https://prototype-a17l0gqy7-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773799960029,
-    "sha": "e27207e"
   }
 ]
