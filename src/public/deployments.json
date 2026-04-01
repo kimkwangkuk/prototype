@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-a38ohxsk0-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 우측에 프로그레스바 + 정지/일시중지 버튼 2개로 교체",
+    "createdAt": 1775041705935,
+    "sha": "209c6f2"
+  },
+  {
+    "url": "https://prototype-cm3gzx490-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775041042573,
+    "sha": "f14e8f7"
+  },
+  {
     "url": "https://prototype-ljqn0w9m0-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 화면 애니메이션 속도 조정 및 오버랩 타이밍으로 변경",
     "createdAt": 1775040972551,
@@ -286,17 +298,5 @@
     "message": "feat: 할일 상세에 공부 시작 버튼 추가 (full-width, 완료/편집/삭제 위)",
     "createdAt": 1773817093933,
     "sha": "7614e8f"
-  },
-  {
-    "url": "https://prototype-d2jaqi9i8-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773816457785,
-    "sha": "7616abd"
-  },
-  {
-    "url": "https://prototype-e9i4no6uq-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 그룹 블록 전체 완료 시 타이틀 취소선 표시",
-    "createdAt": 1773816387074,
-    "sha": "d89ce3d"
   }
 ]
