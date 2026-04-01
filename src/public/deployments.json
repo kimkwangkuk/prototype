@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-gsgsn8grt-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 카드 블러 GPU 레이어 강제 적용, 비행기 1.8s 등장·슬라이드업 1.1s로 조정",
+    "createdAt": 1775045936517,
+    "sha": "f268c85"
+  },
+  {
+    "url": "https://prototype-5ynmbcfve-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775045810156,
+    "sha": "44bbf62"
+  },
+  {
     "url": "https://prototype-593oedpb1-kimkwangkuks-projects.vercel.app",
     "message": "fix: 배경 타일 두 번째 스트립 좌우 반전(scaleX(-1)) 적용",
     "createdAt": 1775045742591,
@@ -286,17 +298,5 @@
     "message": "Remove chevron dropdown icon from time buttons",
     "createdAt": 1773928932935,
     "sha": "ed7182b"
-  },
-  {
-    "url": "https://prototype-1khfff8pl-kimkwangkuks-projects.vercel.app",
-    "message": "Add toast message on invite link copy",
-    "createdAt": 1773928744957,
-    "sha": "b8a47da"
-  },
-  {
-    "url": "https://prototype-huzupg3xq-kimkwangkuks-projects.vercel.app",
-    "message": "Remove '다음날' indicator from time display in event sheet",
-    "createdAt": 1773928545786,
-    "sha": "5088e39"
   }
 ]
