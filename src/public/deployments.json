@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-huihtf2fd-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 배경 스크롤 경계면 제거 - 원본+뒤집기 이어붙여 seamless 루프",
+    "createdAt": 1775042477435,
+    "sha": "0f29cbc"
+  },
+  {
+    "url": "https://prototype-d86l348eo-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775042265298,
+    "sha": "4beedab"
+  },
+  {
     "url": "https://prototype-77o6zz1a6-kimkwangkuks-projects.vercel.app",
     "message": "fix: 공부 화면 스크롤 시 UI 상단 잘림 수정",
     "createdAt": 1775042196652,
@@ -286,17 +298,5 @@
     "message": "feat: 편집 저장 시 점멸 추가, 애니메이션 2회 피크로 변경",
     "createdAt": 1773820072811,
     "sha": "a963480"
-  },
-  {
-    "url": "https://prototype-4gr4dn7bx-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773819597234,
-    "sha": "8e13a1a"
-  },
-  {
-    "url": "https://prototype-guolkst6g-kimkwangkuks-projects.vercel.app",
-    "message": "design: study-group 바 빈 시간 포인트 컬러 30% 적용",
-    "createdAt": 1773819527723,
-    "sha": "c9a2413"
   }
 ]
