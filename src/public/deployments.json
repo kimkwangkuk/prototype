@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-qrbkwzg09-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 진입 시 비행기→타이머→카드 순 슬라이드업 애니메이션",
+    "createdAt": 1775032932802,
+    "sha": "3d90dc9"
+  },
+  {
+    "url": "https://prototype-7rmkwk8ak-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775032173791,
+    "sha": "f448bc6"
+  },
+  {
     "url": "https://prototype-1mfkcax0i-kimkwangkuks-projects.vercel.app",
     "message": "fix: 공부 화면 스테이터스바 배경 흰색 방지 (sky blue fallback)",
     "createdAt": 1775032106043,
@@ -286,17 +298,5 @@
     "message": "fix: 신규 이벤트 생성 후 스크롤 + 점멸 수정",
     "createdAt": 1773812948941,
     "sha": "38fe526"
-  },
-  {
-    "url": "https://prototype-b48wcdtkk-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773811236291,
-    "sha": "b46d6b8"
-  },
-  {
-    "url": "https://prototype-ajegdozro-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 드래그 중 기존 블록 레이아웃 실시간 재계산",
-    "createdAt": 1773811168739,
-    "sha": "9d2b759"
   }
 ]
