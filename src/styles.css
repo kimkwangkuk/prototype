@@ -4606,7 +4606,7 @@ textarea {
 }
 
 .study-bg-strip-flip {
-  transform: rotate(180deg);
+  transform: scaleX(-1);
 }
 
 .study-view-airplane {
