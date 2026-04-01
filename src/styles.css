@@ -4554,8 +4554,8 @@ textarea {
 
 /* ===== 공부 모드 뷰 ===== */
 @keyframes study-bg-scroll {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-50%); }
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
 }
 
 @keyframes study-fadein {
