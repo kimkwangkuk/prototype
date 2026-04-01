@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-3dgoigs26-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 배경 타일 변환 scaleY(-1) → rotate(180deg) scaleX(-1)",
+    "createdAt": 1775044361276,
+    "sha": "3ff6e4c"
+  },
+  {
+    "url": "https://prototype-qrrgtl6ad-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775044122726,
+    "sha": "8186da2"
+  },
+  {
     "url": "https://prototype-4ifzr3xdk-kimkwangkuks-projects.vercel.app",
     "message": "fix: 카드 backdrop-filter 블러 적용 - overflow:hidden 제거",
     "createdAt": 1775044053328,
@@ -286,17 +298,5 @@
     "message": "Add together creation success screen with invite link copy",
     "createdAt": 1773926293454,
     "sha": "ce02d04"
-  },
-  {
-    "url": "https://prototype-25t36xnqu-kimkwangkuks-projects.vercel.app",
-    "message": "Simplify together mode UI to iOS Settings style",
-    "createdAt": 1773925613515,
-    "sha": "461466e"
-  },
-  {
-    "url": "https://prototype-egc1geuhq-kimkwangkuks-projects.vercel.app",
-    "message": "Add segment control and together mode to HomeEventSheet",
-    "createdAt": 1773925065694,
-    "sha": "cf59346"
   }
 ]
