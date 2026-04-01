@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-77o6zz1a6-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부 화면 스크롤 시 UI 상단 잘림 수정",
+    "createdAt": 1775042196652,
+    "sha": "50bc340"
+  },
+  {
+    "url": "https://prototype-n53kyo0sj-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775042081279,
+    "sha": "8eddc70"
+  },
+  {
     "url": "https://prototype-6kstu0639-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 화면 배경 이미지 무한 스크롤 애니메이션 추가",
     "createdAt": 1775042013739,
@@ -286,17 +298,5 @@
     "message": "design: study-group 바 빈 시간 포인트 컬러 30% 적용",
     "createdAt": 1773819527723,
     "sha": "c9a2413"
-  },
-  {
-    "url": "https://prototype-g65tw3enw-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773819477975,
-    "sha": "30c8716"
-  },
-  {
-    "url": "https://prototype-laav4255d-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 그룹 시트 편집 버튼이 편집 모드를 바로 열도록 수정",
-    "createdAt": 1773819406092,
-    "sha": "50c029d"
   }
 ]
