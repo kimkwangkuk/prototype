@@ -4560,6 +4560,7 @@ textarea {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #a8c8e8;
 }
 
 .study-view-bg {
