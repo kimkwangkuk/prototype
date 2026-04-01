@@ -166,8 +166,22 @@ function PauseIcon() {
 
 function PlaneIcon() {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2L4.5 13.5H9V22L12 20.5L15 22V13.5H19.5L12 2Z" fill="white" />
+    <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g filter="url(#filter0_d_1122_9628)">
+        <path d="M26.512 20.3729L18.0727 14.9718V9.06426C18.0727 6.53247 16.8068 4.42264 15.5409 4.00067C14.275 4.42264 13.0091 6.53247 13.0091 9.06426L13.0091 14.9718L4.56979 20.3729C4.06343 20.7105 3.89464 21.2169 4.06343 21.7232L4.23222 22.3984C4.4854 22.9891 4.99176 23.3267 5.58251 23.2423L13.0091 21.7232L13.853 25.9429L11.3212 28.4747V30.1626L15.5409 29.3186L19.7606 30.1626L19.7606 28.4747L17.2288 25.9429L18.0727 21.7232L25.4993 23.2423C26.09 23.3267 26.5964 22.9891 26.8496 22.3984L27.1028 21.8076C27.1872 21.2169 27.0184 20.7105 26.512 20.3729Z" fill="white"/>
+      </g>
+      <defs>
+        <filter id="filter0_d_1122_9628" x="0" y="0" width="31.1235" height="34.1621" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feComposite in2="hardAlpha" operator="out"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1122_9628"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1122_9628" result="shape"/>
+        </filter>
+      </defs>
     </svg>
   );
 }
