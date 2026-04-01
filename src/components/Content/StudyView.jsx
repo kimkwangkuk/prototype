@@ -34,10 +34,8 @@ export default function StudyView() {
 
   return (
     <div className="study-view">
-      {/* 배경 이미지 */}
-      <div className="study-view-bg">
-        <img src={BG_IMAGE} alt="" />
-      </div>
+      {/* 배경 이미지 - 무한 스크롤 */}
+      <div className="study-view-bg" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
 
       {/* 비행기 이미지 */}
       <div className="study-view-airplane">
