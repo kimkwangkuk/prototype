@@ -65,10 +65,42 @@ export default function StudyView() {
               </div>
             </div>
           </div>
-          {/* 일시중지 버튼 */}
-          <button className="study-pause-btn" onClick={() => setStudyModeActive(false)}>
-            <PauseIcon />
-          </button>
+          {/* 우측: 프로그레스바 + 버튼 */}
+          <div className="study-right-controls">
+            <div className="study-time-range">
+              <div className="study-time-range-labels">
+                <div className="study-range-time">
+                  <span className="study-range-label">End</span>
+                  <span className="study-range-value">5:25</span>
+                </div>
+                <span className="study-range-dot" />
+                <span className="study-range-dot" />
+                <span className="study-range-dot" />
+                <span className="study-range-dot" />
+                <span className="study-range-dot" />
+                <div className="study-range-time">
+                  <span className="study-range-label">Start</span>
+                  <span className="study-range-value">5:00</span>
+                </div>
+              </div>
+              <div className="study-progress-bar-wrap">
+                <div className="study-progress-bar-bg">
+                  <div className="study-progress-fill" style={{ height: `${Math.min(100, (elapsed / (25 * 60)) * 100)}%` }} />
+                </div>
+                <div className="study-progress-plane" style={{ bottom: `${Math.min(100, (elapsed / (25 * 60)) * 100)}%` }}>
+                  <PlaneIcon />
+                </div>
+              </div>
+            </div>
+            <div className="study-btn-row">
+              <button className="study-ctrl-btn" onClick={() => setStudyModeActive(false)}>
+                <StopIcon />
+              </button>
+              <button className="study-ctrl-btn">
+                <PauseIcon />
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* 태스크 카드 */}
@@ -115,11 +147,27 @@ export default function StudyView() {
   );
 }
 
+function StopIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <rect x="4.5" y="4.5" width="11" height="11" rx="2.5" fill="white" />
+    </svg>
+  );
+}
+
 function PauseIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <rect x="4" y="3" width="4" height="14" rx="1.5" fill="white" />
       <rect x="12" y="3" width="4" height="14" rx="1.5" fill="white" />
+    </svg>
+  );
+}
+
+function PlaneIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2L4.5 13.5H9V22L12 20.5L15 22V13.5H19.5L12 2Z" fill="white" />
     </svg>
   );
 }
