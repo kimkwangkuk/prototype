@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1mfkcax0i-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부 화면 스테이터스바 배경 흰색 방지 (sky blue fallback)",
+    "createdAt": 1775032106043,
+    "sha": "2c89864"
+  },
+  {
+    "url": "https://prototype-ori9r4wiv-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775031929433,
+    "sha": "cc842a6"
+  },
+  {
     "url": "https://prototype-6crbq236v-kimkwangkuks-projects.vercel.app",
     "message": "feat: iOS standalone 스테이터스바 black-translucent 적용",
     "createdAt": 1775031860884,
@@ -286,17 +298,5 @@
     "message": "feat: 드래그 중 기존 블록 레이아웃 실시간 재계산",
     "createdAt": 1773811168739,
     "sha": "9d2b759"
-  },
-  {
-    "url": "https://prototype-4km7pzpst-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773810541456,
-    "sha": "10004e2"
-  },
-  {
-    "url": "https://prototype-kfeaiin6a-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 그룹 바텀시트 리스트 시간순 정렬",
-    "createdAt": 1773810474427,
-    "sha": "671992f"
   }
 ]
