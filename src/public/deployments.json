@@ -1,5 +1,23 @@
 [
   {
+    "url": "https://prototype-6crbq236v-kimkwangkuks-projects.vercel.app",
+    "message": "feat: iOS standalone 스테이터스바 black-translucent 적용",
+    "createdAt": 1775031860884,
+    "sha": "66e9342"
+  },
+  {
+    "url": "https://prototype-g15hwqcrb-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 비행기 이미지 크기 및 포지셔닝 수정 (Figma 원본 기준)",
+    "createdAt": 1775031802144,
+    "sha": "9d58560"
+  },
+  {
+    "url": "https://prototype-9h5oftge0-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775031780304,
+    "sha": "498e181"
+  },
+  {
     "url": "https://prototype-brhn1ac0e-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 모드 UI 영역 스크롤 가능하도록 변경",
     "createdAt": 1775031711819,
@@ -280,23 +298,5 @@
     "message": "feat: 그룹 바텀시트 리스트 시간순 정렬",
     "createdAt": 1773810474427,
     "sha": "671992f"
-  },
-  {
-    "url": "https://prototype-2vk4qb385-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773801253410,
-    "sha": "6ac4b6b"
-  },
-  {
-    "url": "https://prototype-cwekbtke4-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 신규 이벤트 점멸 효과 수정",
-    "createdAt": 1773801186001,
-    "sha": "9d4c27b"
-  },
-  {
-    "url": "https://prototype-qmigj38vg-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773801133731,
-    "sha": "07caaad"
   }
 ]
