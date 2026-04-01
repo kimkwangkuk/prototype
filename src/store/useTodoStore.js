@@ -12,6 +12,7 @@ const useTodoStore = create((set, get) => ({
   currentVariant: 'b', // 'a' or 'b'
   currentView: 'day', // 'day' | 'week'
   currentTab: 'home', // 'todo' | 'calendar' | 'home'
+  studyModeActive: false,
   homeSheetVisible: false,
   homeAddMode: false,
   homeSheetInitialStart: null,
@@ -482,6 +483,7 @@ const useTodoStore = create((set, get) => ({
   setVariant: (variant) => set({ currentVariant: variant }),
   setView: (view) => set({ currentView: view }),
   setTab: (tab) => set({ currentTab: tab }),
+  setStudyModeActive: (active) => set({ studyModeActive: active }),
   setBaseDate: (date) => set({ baseDate: date }),
   enterHomeAddMode: () => set({ homeAddMode: true }),
   exitHomeAddMode: () => set({ homeAddMode: false }),

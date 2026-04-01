@@ -1146,6 +1146,11 @@ export default function HomeView() {
       </div>
     </div>
 
+    {/* 공부시작 플로팅 버튼 */}
+    <button className="study-start-fab" onClick={() => useTodoStore.getState().setStudyModeActive(true)}>
+      공부시작
+    </button>
+
     <HomeEventDetailSheet event={selectedEvent} openInEditMode={selectedEventEditMode} onClose={handleEventClose} />
     <HomeGroupDetailSheet group={selectedGroup} onClose={handleGroupClose} onEditEvent={handleEditGroupEvent} />
     <HomeGroupDetailSheet

@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Content from './components/Content/Content';
 import CalendarContent from './components/Content/CalendarContent';
 import HomeView from './components/Content/HomeView';
+import StudyView from './components/Content/StudyView';
 import HomeEventSheet from './components/Home/HomeEventSheet';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Tabbar from './components/Tabbar/Tabbar';
@@ -16,6 +17,7 @@ export default function App() {
   const todos = useTodoStore(state => state.todos);
   const nextId = useTodoStore(state => state.nextId);
   const currentTab = useTodoStore(state => state.currentTab);
+  const studyModeActive = useTodoStore(state => state.studyModeActive);
 
   // 샘플 데이터 로드 (최초 1회)
   useEffect(() => {
@@ -110,6 +112,7 @@ export default function App() {
       <Tabbar />
       {currentTab !== 'calendar' && currentTab !== 'home' && <BottomSheet />}
       {currentTab === 'home' && <HomeEventSheet />}
+      {studyModeActive && <StudyView />}
     </>
   );
 }
