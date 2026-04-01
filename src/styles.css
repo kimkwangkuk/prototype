@@ -4581,13 +4581,14 @@ textarea {
   display: flex;
   flex-direction: column;
   background-color: #a8c8e8;
+  animation: study-fadein 0.8s ease both;
 }
 
 .study-view-bg {
   position: absolute;
   inset: 0;
   overflow: hidden;
-  animation: study-fadein 1.2s ease both;
+  animation: study-fadein 1.0s ease 0.5s both;
 }
 
 .study-bg-inner {
