@@ -1,5 +1,35 @@
 [
   {
+    "url": "https://prototype-593oedpb1-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 배경 타일 두 번째 스트립 좌우 반전(scaleX(-1)) 적용",
+    "createdAt": 1775045742591,
+    "sha": "ac4625b"
+  },
+  {
+    "url": "https://prototype-5afcqocei-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 진입 시 배경 서서히 등장 (opacity fade-in 1.2s)",
+    "createdAt": 1775045714854,
+    "sha": "f088d62"
+  },
+  {
+    "url": "https://prototype-bk4s16daz-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 배경 스크롤 방향 반전",
+    "createdAt": 1775045665425,
+    "sha": "9f2bf71"
+  },
+  {
+    "url": "https://prototype-9ins1zg81-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 배경 타일 두 번째 스트립 rotate(180deg) 단독 적용",
+    "createdAt": 1775045602563,
+    "sha": "e9157aa"
+  },
+  {
+    "url": "https://prototype-4tnp7g9ye-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775044430286,
+    "sha": "73ec4b3"
+  },
+  {
     "url": "https://prototype-3dgoigs26-kimkwangkuks-projects.vercel.app",
     "message": "fix: 배경 타일 변환 scaleY(-1) → rotate(180deg) scaleX(-1)",
     "createdAt": 1775044361276,
@@ -268,35 +298,5 @@
     "message": "Remove '다음날' indicator from time display in event sheet",
     "createdAt": 1773928545786,
     "sha": "5088e39"
-  },
-  {
-    "url": "https://prototype-6p1kuc3da-kimkwangkuks-projects.vercel.app",
-    "message": "Remove title bar from completion panel, fix X button position",
-    "createdAt": 1773928150778,
-    "sha": "7c2d1b8"
-  },
-  {
-    "url": "https://prototype-5uy8ba5li-kimkwangkuks-projects.vercel.app",
-    "message": "Replace creation dialog with in-sheet slide transition",
-    "createdAt": 1773927959968,
-    "sha": "4b6ac3c"
-  },
-  {
-    "url": "https://prototype-qn3tqypnb-kimkwangkuks-projects.vercel.app",
-    "message": "Polish HomeEventSheet form layout and button styles",
-    "createdAt": 1773927573107,
-    "sha": "aec631d"
-  },
-  {
-    "url": "https://prototype-44x1hjkqj-kimkwangkuks-projects.vercel.app",
-    "message": "Refine together mode UX across sheet and detail view",
-    "createdAt": 1773927003871,
-    "sha": "1e4fafe"
-  },
-  {
-    "url": "https://prototype-3cgg9bgs9-kimkwangkuks-projects.vercel.app",
-    "message": "Add together creation success screen with invite link copy",
-    "createdAt": 1773926293454,
-    "sha": "ce02d04"
   }
 ]
