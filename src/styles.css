@@ -4588,6 +4588,7 @@ textarea {
   position: absolute;
   inset: 0;
   overflow: hidden;
+  animation: study-fadein 1.2s ease both;
 }
 
 .study-bg-inner {
