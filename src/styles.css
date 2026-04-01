@@ -4845,7 +4845,6 @@ textarea {
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   border-radius: 24px;
-  overflow: hidden;
 }
 
 /* 태스크 카드 */
