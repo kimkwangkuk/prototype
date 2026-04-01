@@ -4591,14 +4591,22 @@ textarea {
 
 .study-view-container {
   position: absolute;
+  top: 260px;
   bottom: 0;
   left: 0;
   right: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  z-index: 3;
+}
+
+.study-view-scroll-inner {
   display: flex;
   flex-direction: column;
   padding-top: 50px;
-  padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
-  z-index: 3;
+  padding-bottom: max(40px, env(safe-area-inset-bottom, 40px));
+  min-height: calc(100% + 1px);
 }
 
 /* 집중 시간 섹션 */

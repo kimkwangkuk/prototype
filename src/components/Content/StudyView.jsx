@@ -44,8 +44,9 @@ export default function StudyView() {
         <img src={AIRPLANE_IMAGE} alt="" />
       </div>
 
-      {/* 하단 컨테이너 */}
+      {/* 하단 컨테이너 (스크롤 영역) */}
       <div className="study-view-container">
+        <div className="study-view-scroll-inner">
         {/* 집중 시간 섹션 */}
         <div className="study-time-section">
           <div className="study-time-left">
@@ -108,6 +109,7 @@ export default function StudyView() {
             </div>
           </div>
         </div>
+        </div> {/* study-view-scroll-inner */}
       </div>
     </div>
   );
