@@ -4554,8 +4554,8 @@ textarea {
 
 /* ===== 공부 모드 뷰 ===== */
 @keyframes study-bg-scroll {
-  from { background-position-y: 0; }
-  to   { background-position-y: 100%; }
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
 
 @keyframes study-fadein {
@@ -4587,9 +4587,25 @@ textarea {
 .study-view-bg {
   position: absolute;
   inset: 0;
-  background-size: 100% auto;
-  background-repeat: repeat-y;
+  overflow: hidden;
+}
+
+.study-bg-inner {
+  display: flex;
+  flex-direction: column;
   animation: study-bg-scroll 30s linear infinite;
+}
+
+.study-bg-strip {
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.study-bg-strip-flip {
+  transform: scaleY(-1);
 }
 
 .study-view-airplane {
