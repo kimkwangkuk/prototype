@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-4ifzr3xdk-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 카드 backdrop-filter 블러 적용 - overflow:hidden 제거",
+    "createdAt": 1775044053328,
+    "sha": "78eb0fa"
+  },
+  {
+    "url": "https://prototype-k7wgb88so-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775043974650,
+    "sha": "5988f1a"
+  },
+  {
     "url": "https://prototype-drocvmyxt-kimkwangkuks-projects.vercel.app",
     "message": "feat: 비행기 등장 딜레이 2.5s로 조정",
     "createdAt": 1775043907678,
@@ -286,17 +298,5 @@
     "message": "Add segment control and together mode to HomeEventSheet",
     "createdAt": 1773925065694,
     "sha": "cf59346"
-  },
-  {
-    "url": "https://prototype-3z8ne2t2v-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773821207786,
-    "sha": "e3a5898"
-  },
-  {
-    "url": "https://prototype-485rcikpu-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 일정 롱탭 이동 + 집중계획 그룹 시트 개선",
-    "createdAt": 1773821138360,
-    "sha": "983097a"
   }
 ]
