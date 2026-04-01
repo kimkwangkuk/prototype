@@ -1,5 +1,149 @@
 [
   {
+    "url": "https://prototype-c28l7xw71-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부시작 플로팅 버튼 및 공부 모드 화면 추가",
+    "createdAt": 1775031300946,
+    "sha": "042dbed"
+  },
+  {
+    "url": "https://prototype-g6qhjvl2b-kimkwangkuks-projects.vercel.app",
+    "message": "Add 🥗 점심 인증 challenge (오후 12:00~3:00, rangeIndex 2)",
+    "createdAt": 1773980040923,
+    "sha": "363aba2"
+  },
+  {
+    "url": "https://prototype-ekwce6i8l-kimkwangkuks-projects.vercel.app",
+    "message": "ChallengeSheet: show time range (e.g. 오전 5:00~8:00) for each challenge",
+    "createdAt": 1773979856318,
+    "sha": "a3211ac"
+  },
+  {
+    "url": "https://prototype-ope1m7wxm-kimkwangkuks-projects.vercel.app",
+    "message": "Challenge emoji: show multiple emojis in row (🌞💧 side by side)",
+    "createdAt": 1773977812748,
+    "sha": "2d08e58"
+  },
+  {
+    "url": "https://prototype-1qus94d20-kimkwangkuks-projects.vercel.app",
+    "message": "Challenge emoji: position fixes and certified position locking",
+    "createdAt": 1773977520744,
+    "sha": "9b982df"
+  },
+  {
+    "url": "https://prototype-r3llemjev-kimkwangkuks-projects.vercel.app",
+    "message": "Challenge emoji: pre-jump before emoji bottom reaches next hour label",
+    "createdAt": 1773976797998,
+    "sha": "3ca1495"
+  },
+  {
+    "url": "https://prototype-ppu2v0jnp-kimkwangkuks-projects.vercel.app",
+    "message": "Challenge emoji: skip over hour label zone instantly when crossing hour boundary",
+    "createdAt": 1773976443264,
+    "sha": "df18f87"
+  },
+  {
+    "url": "https://prototype-notc5vud0-kimkwangkuks-projects.vercel.app",
+    "message": "Challenge emoji: continuous scroll tracking within range, instant clamp at boundary",
+    "createdAt": 1773975430253,
+    "sha": "8d5f23d"
+  },
+  {
+    "url": "https://prototype-j9zq8x7h9-kimkwangkuks-projects.vercel.app",
+    "message": "Challenge: snap to hour slot on scroll instead of CSS sticky",
+    "createdAt": 1773974937914,
+    "sha": "a45a605"
+  },
+  {
+    "url": "https://prototype-k8nur9mn1-kimkwangkuks-projects.vercel.app",
+    "message": "Fix challenge emoji overlapping time labels",
+    "createdAt": 1773973486973,
+    "sha": "3d5ed53"
+  },
+  {
+    "url": "https://prototype-1kggignli-kimkwangkuks-projects.vercel.app",
+    "message": "Add sticky-within-range behavior for left-side challenges",
+    "createdAt": 1773966829118,
+    "sha": "6c165b4"
+  },
+  {
+    "url": "https://prototype-ef9xzm313-kimkwangkuks-projects.vercel.app",
+    "message": "Move time pickers into bottom sheet, add real-time preview",
+    "createdAt": 1773930426206,
+    "sha": "d3e1927"
+  },
+  {
+    "url": "https://prototype-862g00ay8-kimkwangkuks-projects.vercel.app",
+    "message": "Add separate time picker bottom sheet with timeline preview",
+    "createdAt": 1773929798498,
+    "sha": "f678b64"
+  },
+  {
+    "url": "https://prototype-3iq7y341u-kimkwangkuks-projects.vercel.app",
+    "message": "Remove chevron dropdown icon from time buttons",
+    "createdAt": 1773928932935,
+    "sha": "ed7182b"
+  },
+  {
+    "url": "https://prototype-1khfff8pl-kimkwangkuks-projects.vercel.app",
+    "message": "Add toast message on invite link copy",
+    "createdAt": 1773928744957,
+    "sha": "b8a47da"
+  },
+  {
+    "url": "https://prototype-huzupg3xq-kimkwangkuks-projects.vercel.app",
+    "message": "Remove '다음날' indicator from time display in event sheet",
+    "createdAt": 1773928545786,
+    "sha": "5088e39"
+  },
+  {
+    "url": "https://prototype-6p1kuc3da-kimkwangkuks-projects.vercel.app",
+    "message": "Remove title bar from completion panel, fix X button position",
+    "createdAt": 1773928150778,
+    "sha": "7c2d1b8"
+  },
+  {
+    "url": "https://prototype-5uy8ba5li-kimkwangkuks-projects.vercel.app",
+    "message": "Replace creation dialog with in-sheet slide transition",
+    "createdAt": 1773927959968,
+    "sha": "4b6ac3c"
+  },
+  {
+    "url": "https://prototype-qn3tqypnb-kimkwangkuks-projects.vercel.app",
+    "message": "Polish HomeEventSheet form layout and button styles",
+    "createdAt": 1773927573107,
+    "sha": "aec631d"
+  },
+  {
+    "url": "https://prototype-44x1hjkqj-kimkwangkuks-projects.vercel.app",
+    "message": "Refine together mode UX across sheet and detail view",
+    "createdAt": 1773927003871,
+    "sha": "1e4fafe"
+  },
+  {
+    "url": "https://prototype-3cgg9bgs9-kimkwangkuks-projects.vercel.app",
+    "message": "Add together creation success screen with invite link copy",
+    "createdAt": 1773926293454,
+    "sha": "ce02d04"
+  },
+  {
+    "url": "https://prototype-25t36xnqu-kimkwangkuks-projects.vercel.app",
+    "message": "Simplify together mode UI to iOS Settings style",
+    "createdAt": 1773925613515,
+    "sha": "461466e"
+  },
+  {
+    "url": "https://prototype-egc1geuhq-kimkwangkuks-projects.vercel.app",
+    "message": "Add segment control and together mode to HomeEventSheet",
+    "createdAt": 1773925065694,
+    "sha": "cf59346"
+  },
+  {
+    "url": "https://prototype-3z8ne2t2v-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1773821207786,
+    "sha": "e3a5898"
+  },
+  {
     "url": "https://prototype-485rcikpu-kimkwangkuks-projects.vercel.app",
     "message": "feat: 일정 롱탭 이동 + 집중계획 그룹 시트 개선",
     "createdAt": 1773821138360,
@@ -154,149 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1773799960029,
     "sha": "e27207e"
-  },
-  {
-    "url": "https://prototype-2z4x9pyfd-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 타임라인 탭 피드백 및 롱탭 드래그 스크롤 방지",
-    "createdAt": 1773799892851,
-    "sha": "8b9f8f2"
-  },
-  {
-    "url": "https://prototype-6brkkz4sp-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773799661103,
-    "sha": "388f66e"
-  },
-  {
-    "url": "https://prototype-qewrk3od8-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 타임라인 탭으로 즉시 추가, 롱탭 드래그로 시간 조절",
-    "createdAt": 1773799589853,
-    "sha": "bc56b75"
-  },
-  {
-    "url": "https://prototype-9ysidxy8t-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773737178259,
-    "sha": "fb0d6a5"
-  },
-  {
-    "url": "https://prototype-peolsw38k-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 완료된 할일 블록 아이콘 체크 표시",
-    "createdAt": 1773737107406,
-    "sha": "e70ac04"
-  },
-  {
-    "url": "https://prototype-8bg9cgex1-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773737097104,
-    "sha": "c52adc0"
-  },
-  {
-    "url": "https://prototype-5zol1fdpn-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 편집 중 그룹핑 해제, 편집 종료 시 복원",
-    "createdAt": 1773737028154,
-    "sha": "49358fc"
-  },
-  {
-    "url": "https://prototype-7ohoovff4-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773736910422,
-    "sha": "cfd2842"
-  },
-  {
-    "url": "https://prototype-l1hjdvhlh-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 그룹 바텀시트 할일 상세에 완료/편집/삭제 버튼 추가",
-    "createdAt": 1773736841223,
-    "sha": "2df854c"
-  },
-  {
-    "url": "https://prototype-lbyxoejly-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773735414487,
-    "sha": "ac34c62"
-  },
-  {
-    "url": "https://prototype-9tepp3ev9-kimkwangkuks-projects.vercel.app",
-    "message": "chore: 할일 그룹 블록 타이틀에서 '할일' 텍스트 제거",
-    "createdAt": 1773735344147,
-    "sha": "63ea48b"
-  },
-  {
-    "url": "https://prototype-80sgnewh6-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773735278347,
-    "sha": "847f76c"
-  },
-  {
-    "url": "https://prototype-7kolhoklb-kimkwangkuks-projects.vercel.app",
-    "message": "chore: 집중계획 블록/바텀시트에서 유저 아이콘 및 할일 개수 제거",
-    "createdAt": 1773735207696,
-    "sha": "18a0a54"
-  },
-  {
-    "url": "https://prototype-9p42szaby-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773734869851,
-    "sha": "cdfcafd"
-  },
-  {
-    "url": "https://prototype-dce34rjpx-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부시간 그룹 블록 할일 완료 표시 개선",
-    "createdAt": 1773734801259,
-    "sha": "f33cb15"
-  },
-  {
-    "url": "https://prototype-garhwpkjx-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773734720818,
-    "sha": "945850f"
-  },
-  {
-    "url": "https://prototype-i46euqa2i-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 공부시간 그룹 블록 범위를 할일+공부시간 전체로 확장",
-    "createdAt": 1773734650858,
-    "sha": "634de9a"
-  },
-  {
-    "url": "https://prototype-a9qd1e53v-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773734485690,
-    "sha": "813f5b7"
-  },
-  {
-    "url": "https://prototype-79day8q0i-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 할일 바텀시트에 완료 토글 버튼 추가",
-    "createdAt": 1773734418775,
-    "sha": "8724d56"
-  },
-  {
-    "url": "https://prototype-mpok46xrs-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773734173973,
-    "sha": "bc37599"
-  },
-  {
-    "url": "https://prototype-2t8hj5m5d-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 공부시간 그룹 로직 및 바텀시트 타이틀 개선",
-    "createdAt": 1773734104358,
-    "sha": "f48b4ce"
-  },
-  {
-    "url": "https://prototype-eoo26zilq-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773733812752,
-    "sha": "350a4c5"
-  },
-  {
-    "url": "https://prototype-f4e3vo67o-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부시간 + 인접 할일 대표 블록 기능 추가",
-    "createdAt": 1773733745389,
-    "sha": "2a07efd"
-  },
-  {
-    "url": "https://prototype-k05cg8blq-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1773732241545,
-    "sha": "420797b"
   }
 ]
