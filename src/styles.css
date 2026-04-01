@@ -4615,7 +4615,7 @@ textarea {
 
 .study-view-container {
   position: absolute;
-  top: 260px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
@@ -4628,7 +4628,7 @@ textarea {
 .study-view-scroll-inner {
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
+  padding-top: 310px;
   padding-bottom: max(40px, env(safe-area-inset-bottom, 40px));
   min-height: calc(100% + 1px);
 }
