@@ -4553,6 +4553,21 @@ textarea {
 }
 
 /* ===== 공부 모드 뷰 ===== */
+@keyframes study-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes study-slideup {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes study-airplane-slideup {
+  from { opacity: 0; transform: translateX(-50%) translateY(32px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
 .study-view {
   position: fixed;
   inset: 0;
@@ -4561,6 +4576,7 @@ textarea {
   display: flex;
   flex-direction: column;
   background-color: #a8c8e8;
+  animation: study-fadein 0.5s ease both;
 }
 
 .study-view-bg {
@@ -4583,6 +4599,7 @@ textarea {
   height: 120px;
   overflow: hidden;
   z-index: 2;
+  animation: study-airplane-slideup 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
 .study-view-airplane img {
@@ -4620,6 +4637,7 @@ textarea {
   align-items: flex-end;
   justify-content: space-between;
   padding: 0 20px 20px 20px;
+  animation: study-slideup 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
 .study-time-left {
@@ -4703,6 +4721,7 @@ textarea {
   flex-direction: column;
   gap: 12px;
   padding: 0 12px;
+  animation: study-slideup 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
 }
 
 .study-glass-card {
