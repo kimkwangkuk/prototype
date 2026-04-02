@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-nql00agpp-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 UI 등장 타이밍 앞당겨 비행기와 오버랩",
+    "createdAt": 1775124970255,
+    "sha": "126d097"
+  },
+  {
+    "url": "https://prototype-d7msii0lo-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775124403699,
+    "sha": "e2d8364"
+  },
+  {
     "url": "https://prototype-ju7juvvbu-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 화면 비행기 등장 빠르게 + UI 오버랩 등장 타이밍 조정",
     "createdAt": 1775124334685,
@@ -286,17 +298,5 @@
     "message": "Challenge emoji: show multiple emojis in row (🌞💧 side by side)",
     "createdAt": 1773977812748,
     "sha": "2d08e58"
-  },
-  {
-    "url": "https://prototype-1qus94d20-kimkwangkuks-projects.vercel.app",
-    "message": "Challenge emoji: position fixes and certified position locking",
-    "createdAt": 1773977520744,
-    "sha": "9b982df"
-  },
-  {
-    "url": "https://prototype-r3llemjev-kimkwangkuks-projects.vercel.app",
-    "message": "Challenge emoji: pre-jump before emoji bottom reaches next hour label",
-    "createdAt": 1773976797998,
-    "sha": "3ca1495"
   }
 ]
