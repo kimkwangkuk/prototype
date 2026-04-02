@@ -4672,7 +4672,7 @@ textarea {
   display: flex;
   width: 200%;
   height: 100%;
-  animation: study-table-landscape-scroll 36s linear infinite;
+  animation: study-table-landscape-scroll 80s linear infinite;
 }
 
 .study-table-landscape-inner img {
