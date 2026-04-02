@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-kt1lg0i1y-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 테이블 모드 창문 프레임+풍경 가로 무한스크롤, 뷰모드 전환 페이드, 타이머 폰트 수정",
+    "createdAt": 1775127295951,
+    "sha": "cd40538"
+  },
+  {
+    "url": "https://prototype-rmnbj5v7r-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775127026206,
+    "sha": "495b9b1"
+  },
+  {
     "url": "https://prototype-hxraibdtf-kimkwangkuks-projects.vercel.app",
     "message": "design: 공부 화면 배경 컬러 #a8c8e8 (하늘색)으로 복원",
     "createdAt": 1775126957679,
@@ -286,17 +298,5 @@
     "message": "fix: 공부 화면 스테이터스바 배경 흰색 방지 (sky blue fallback)",
     "createdAt": 1775032106043,
     "sha": "2c89864"
-  },
-  {
-    "url": "https://prototype-ori9r4wiv-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775031929433,
-    "sha": "cc842a6"
-  },
-  {
-    "url": "https://prototype-6crbq236v-kimkwangkuks-projects.vercel.app",
-    "message": "feat: iOS standalone 스테이터스바 black-translucent 적용",
-    "createdAt": 1775031860884,
-    "sha": "66e9342"
   }
 ]
