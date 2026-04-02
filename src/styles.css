@@ -4651,6 +4651,7 @@ textarea {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  animation: study-fadein 0.7s ease both;
 }
 
 /* 풍경 이미지 - 창문 위치에 클리핑 */
@@ -4729,6 +4730,7 @@ textarea {
 
 .study-table-appbar {
   z-index: 2;
+  animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
 }
 
 .study-table-bottom {
@@ -4742,6 +4744,7 @@ textarea {
   justify-content: space-between;
   padding: 0 20px;
   padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
 }
 
 .study-table-time-left {
