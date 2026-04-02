@@ -4646,11 +4646,11 @@ textarea {
 /* 창문 프레임 영역 (정사각형, 중앙 정렬) */
 .study-table-frame-area {
   position: absolute;
-  height: 100%;
-  aspect-ratio: 1 / 1;
-  top: 0;
+  width: max(100%, 100vh);
+  height: max(100%, 100vw);
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   opacity: 0;
 }
 
