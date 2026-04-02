@@ -285,9 +285,9 @@ export default function StudyView() {
 
 function ViewToggleIcon() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <rect x="3" y="3" width="12" height="18" rx="3" stroke="white" strokeWidth="2" />
-      <rect x="10" y="3" width="12" height="18" rx="3" fill="rgba(255,255,255,0.15)" stroke="white" strokeWidth="2" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2.5" y="3" width="12" height="18" rx="3" stroke="white" strokeWidth="2"/>
+      <path d="M18.5 2C20.7091 2 22.5 3.79086 22.5 6V18C22.5 20.2091 20.7091 22 18.5 22H15C15.6863 21.4844 16.2351 20.7962 16.583 20H18.5C19.6046 20 20.5 19.1046 20.5 18V6C20.5 4.89543 19.6046 4 18.5 4H16.583C16.2351 3.20378 15.6863 2.51557 15 2H18.5Z" fill="white" fillOpacity="0.5"/>
     </svg>
   );
 }
