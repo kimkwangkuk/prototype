@@ -4585,7 +4585,7 @@ textarea {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: #20272E;
+  background-color: #a8c8e8;
   animation: study-fadein 0.8s ease both;
 }
 
