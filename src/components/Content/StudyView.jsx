@@ -26,14 +26,20 @@ function formatTimer(seconds) {
 export default function StudyView() {
   const setStudyModeActive = useTodoStore(state => state.setStudyModeActive);
   const [elapsed, setElapsed] = useState(0);
+  const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
     return () => clearInterval(timer);
   }, []);
 
+  function handleExit() {
+    setIsExiting(true);
+    setTimeout(() => setStudyModeActive(false), 600);
+  }
+
   return (
-    <div className="study-view">
+    <div className={`study-view${isExiting ? ' exiting' : ''}`}>
       {/* 배경 이미지 - 원본 + 뒤집은 이미지 이어붙여 무한 스크롤 */}
       <div className="study-view-bg">
         <div className="study-bg-inner">
@@ -96,7 +102,7 @@ export default function StudyView() {
               </div>
             </div>
             <div className="study-btn-row">
-              <button className="study-ctrl-btn" onClick={() => setStudyModeActive(false)}>
+              <button className="study-ctrl-btn" onClick={handleExit}>
                 <StopIcon />
               </button>
               <button className="study-ctrl-btn">
