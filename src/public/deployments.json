@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-mwaawoiu0-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 뷰모드 토글 추가 (기본뷰 ↔ 테이블모드)",
+    "createdAt": 1775126013474,
+    "sha": "c5319cc"
+  },
+  {
+    "url": "https://prototype-5zi2ddsvh-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775125443137,
+    "sha": "fce8754"
+  },
+  {
     "url": "https://prototype-gkl1twn0q-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 화면 상단 앱바 추가 (copy, dots 아이콘)",
     "createdAt": 1775125373482,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775031368895,
     "sha": "721ed9a"
-  },
-  {
-    "url": "https://prototype-c28l7xw71-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부시작 플로팅 버튼 및 공부 모드 화면 추가",
-    "createdAt": 1775031300946,
-    "sha": "042dbed"
-  },
-  {
-    "url": "https://prototype-g6qhjvl2b-kimkwangkuks-projects.vercel.app",
-    "message": "Add 🥗 점심 인증 challenge (오후 12:00~3:00, rangeIndex 2)",
-    "createdAt": 1773980040923,
-    "sha": "363aba2"
   }
 ]
