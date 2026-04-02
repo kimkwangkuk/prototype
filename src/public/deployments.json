@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-6pq6sqyga-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 테이블 모드 진입 시 이미지 페이드인 후 UI 슬라이드업 애니메이션",
+    "createdAt": 1775127528101,
+    "sha": "a8c8f5a"
+  },
+  {
+    "url": "https://prototype-5pmdp8liq-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775127481404,
+    "sha": "cd28bce"
+  },
+  {
     "url": "https://prototype-h0hcxas91-kimkwangkuks-projects.vercel.app",
     "message": "fix: 테이블 모드 프레임 이미지 상하 채움으로 변경",
     "createdAt": 1775127413631,
@@ -73,7 +85,7 @@
   },
   {
     "url": "https://prototype-nql00agpp-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 UI 등장 타이밍 앞당겨 비행기와 오버랩",
+    "message": "feat: 공부 화면 UI 등장 타이밍 앞당겨 비��기와 오버랩",
     "createdAt": 1775124970255,
     "sha": "126d097"
   },
@@ -286,17 +298,5 @@
     "message": "feat: 공부 화면 애니메이션 속도 조정 및 오버랩 타이밍으로 변경",
     "createdAt": 1775040972551,
     "sha": "ef484cd"
-  },
-  {
-    "url": "https://prototype-qbxgog3gb-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775033001302,
-    "sha": "f571fc3"
-  },
-  {
-    "url": "https://prototype-qrbkwzg09-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 진입 시 비행기→타이머→카드 순 슬라이드업 애니메이션",
-    "createdAt": 1775032932802,
-    "sha": "3d90dc9"
   }
 ]
