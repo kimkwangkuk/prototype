@@ -4,7 +4,8 @@ import useTodoStore from '../../store/useTodoStore';
 const BG_IMAGE = 'https://www.figma.com/api/mcp/asset/fa511f46-f34c-4aa5-9ada-9d76e1e7f114';
 const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/cd75c6bc-a1e5-4890-8eff-b3a4599037e8';
 const MEMBER_ICON = 'https://www.figma.com/api/mcp/asset/b90d4708-0a13-48da-b779-763445e4f462';
-const TABLE_BG_IMAGE = 'https://www.figma.com/api/mcp/asset/de80c28b-9f4b-4fe6-a33d-84a5783828b3';
+const TABLE_FRAME_IMAGE = 'https://www.figma.com/api/mcp/asset/7f064995-250e-4569-a855-e5ed29c5771d';
+const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/0bb79a9b-816f-49bd-9e5f-accceb022dbf';
 
 const MEMBERS = [
   { name: '꽃길만걷자', time: '12:23:43' },
@@ -29,6 +30,7 @@ export default function StudyView() {
   const [elapsed, setElapsed] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
   const [viewMode, setViewMode] = useState('default');
+  const [isViewTransitioning, setIsViewTransitioning] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
@@ -41,7 +43,11 @@ export default function StudyView() {
   }
 
   function toggleViewMode() {
-    setViewMode(v => v === 'default' ? 'table' : 'default');
+    setIsViewTransitioning(true);
+    setTimeout(() => {
+      setViewMode(v => v === 'default' ? 'table' : 'default');
+      setTimeout(() => setIsViewTransitioning(false), 300);
+    }, 300);
   }
 
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
@@ -175,8 +181,18 @@ export default function StudyView() {
       ) : (
         /* 테이블 모드 */
         <div className="study-table-mode">
-          {/* 배경 이미지 */}
-          <img src={TABLE_BG_IMAGE} alt="" className="study-table-bg" />
+          {/* 비행기 창문 프레임 영역 */}
+          <div className="study-table-frame-area">
+            {/* 풍경 이미지 - 가로 무한 스크롤 */}
+            <div className="study-table-landscape-container">
+              <div className="study-table-landscape-inner">
+                <img src={LANDSCAPE_IMAGE} alt="" />
+                <img src={LANDSCAPE_IMAGE} alt="" />
+              </div>
+            </div>
+            {/* 창문 프레임 (위에 올라감) */}
+            <img src={TABLE_FRAME_IMAGE} alt="" className="study-table-frame" />
+          </div>
 
           {/* 상단 그라데이션 */}
           <div className="study-table-gradient-top" />
@@ -251,6 +267,8 @@ export default function StudyView() {
           </div>
         </div>
       )}
+      {/* 뷰모드 전환 오버레이 */}
+      {isViewTransitioning && <div className="study-view-transition-overlay" />}
     </div>
   );
 }
