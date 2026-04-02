@@ -30,7 +30,7 @@ export default function StudyView() {
   const [elapsed, setElapsed] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
   const [viewMode, setViewMode] = useState('default');
-  const [transitionColor, setTransitionColor] = useState('dark');
+  const [transitionColor, setTransitionColor] = useState(null);
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
 
   useEffect(() => {
