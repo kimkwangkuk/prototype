@@ -30,7 +30,7 @@ export default function StudyView() {
   const [elapsed, setElapsed] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
   const [viewMode, setViewMode] = useState('default');
-  const [isViewTransitioning, setIsViewTransitioning] = useState(false);
+  const [transitionColor, setTransitionColor] = useState('dark');
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
 
   useEffect(() => {
@@ -52,11 +52,12 @@ export default function StudyView() {
   }
 
   function toggleViewMode() {
-    setIsViewTransitioning(true);
+    const goingToTable = viewMode === 'default';
+    setTransitionColor(goingToTable ? 'dark' : 'sky');
+    setTableLoadedCount(0);
     setTimeout(() => {
-      setTableLoadedCount(0);
-      setViewMode(v => v === 'default' ? 'table' : 'default');
-      setTimeout(() => setIsViewTransitioning(false), 300);
+      setViewMode(goingToTable ? 'table' : 'default');
+      setTimeout(() => setTransitionColor(null), 300);
     }, 300);
   }
 
@@ -278,7 +279,7 @@ export default function StudyView() {
         </div>
       )}
       {/* 뷰모드 전환 오버레이 */}
-      {isViewTransitioning && <div className="study-view-transition-overlay" />}
+      {transitionColor && <div className={`study-view-transition-overlay study-view-transition-${transitionColor}`} />}
     </div>
   );
 }
