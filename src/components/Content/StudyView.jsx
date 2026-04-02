@@ -48,6 +48,15 @@ export default function StudyView() {
         </div>
       </div>
 
+      {/* 앱바 */}
+      <div className="study-appbar">
+        <span className="study-appbar-title">Work {formatTimer(elapsed)}</span>
+        <div className="study-appbar-icons">
+          <button className="study-appbar-btn"><CopyIcon /></button>
+          <button className="study-appbar-btn"><DotsIcon /></button>
+        </div>
+      </div>
+
       {/* 비행기 이미지 */}
       <div className="study-view-airplane">
         <img src={AIRPLANE_IMAGE} alt="" />
@@ -153,6 +162,25 @@ export default function StudyView() {
         </div> {/* study-view-scroll-inner */}
       </div>
     </div>
+  );
+}
+
+function CopyIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="2.25" y="2.25" width="9" height="13.5" rx="3" stroke="white" strokeWidth="1.5" />
+      <rect x="7.5" y="6" width="9" height="13.5" rx="3" fill="rgba(168,200,232,0.3)" stroke="white" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+function DotsIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="5" r="1.5" fill="white" />
+      <circle cx="12" cy="12" r="1.5" fill="white" />
+      <circle cx="12" cy="19" r="1.5" fill="white" />
+    </svg>
   );
 }
 
