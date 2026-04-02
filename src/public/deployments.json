@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-e5cgtnzxo-kimkwangkuks-projects.vercel.app",
+    "message": "design: 공부 화면 배경 컬러 #20272E로 변경",
+    "createdAt": 1775126528447,
+    "sha": "27dcdf1"
+  },
+  {
+    "url": "https://prototype-4710n42tt-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775126082359,
+    "sha": "a81424d"
+  },
+  {
     "url": "https://prototype-mwaawoiu0-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 화면 뷰모드 토글 추가 (기본뷰 ↔ 테이블모드)",
     "createdAt": 1775126013474,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775031780304,
     "sha": "498e181"
-  },
-  {
-    "url": "https://prototype-brhn1ac0e-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 모드 UI 영역 스크롤 가능하도록 변경",
-    "createdAt": 1775031711819,
-    "sha": "b089295"
-  },
-  {
-    "url": "https://prototype-q2qiapgwf-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775031368895,
-    "sha": "721ed9a"
   }
 ]
