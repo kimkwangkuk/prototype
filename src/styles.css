@@ -4635,6 +4635,95 @@ textarea {
   cursor: pointer;
 }
 
+/* 테이블 모드 */
+.study-table-mode {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  overflow: hidden;
+}
+
+.study-table-bg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.study-table-gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+}
+
+.study-table-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+}
+
+.study-table-appbar {
+  z-index: 2;
+}
+
+.study-table-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 20px;
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
+}
+
+.study-table-time-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: white;
+}
+
+.study-table-time-label {
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.045px;
+  color: white;
+  margin: 0;
+}
+
+.study-table-time-value {
+  font-family: 'SF Pro Rounded', 'SF Pro Display', -apple-system, sans-serif;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 1;
+  color: white;
+  margin: 0;
+}
+
+.study-table-progress-fill {
+  background: #7c3aed !important;
+}
+
+.study-table-ctrl-btn {
+  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,0.4) !important;
+}
+
 .study-view-bg {
   position: absolute;
   inset: 0;
