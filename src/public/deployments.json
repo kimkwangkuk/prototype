@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-inxyjtxec-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부 화면 오버레이 초기값 null로 수정 (버튼 클릭 불가 버그)",
+    "createdAt": 1775132826264,
+    "sha": "1cc9cf1"
+  },
+  {
+    "url": "https://prototype-3mj7c2u78-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775132501456,
+    "sha": "d5105d2"
+  },
+  {
     "url": "https://prototype-p2d49tec2-kimkwangkuks-projects.vercel.app",
     "message": "feat: 뷰모드 복귀 시 하늘색 전환 오버레이 적용",
     "createdAt": 1775132432935,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775045810156,
     "sha": "44bbf62"
-  },
-  {
-    "url": "https://prototype-593oedpb1-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 배경 타일 두 번째 스트립 좌우 반전(scaleX(-1)) 적용",
-    "createdAt": 1775045742591,
-    "sha": "ac4625b"
-  },
-  {
-    "url": "https://prototype-5afcqocei-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 진입 시 배경 서서히 등장 (opacity fade-in 1.2s)",
-    "createdAt": 1775045714854,
-    "sha": "f088d62"
   }
 ]
