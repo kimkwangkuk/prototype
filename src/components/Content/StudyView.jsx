@@ -286,10 +286,8 @@ export default function StudyView() {
 function ViewToggleIcon() {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <rect x="3" y="3" width="8" height="8" rx="2" stroke="white" strokeWidth="1.5" />
-      <rect x="13" y="3" width="8" height="8" rx="2" stroke="white" strokeWidth="1.5" />
-      <rect x="3" y="13" width="8" height="8" rx="2" stroke="white" strokeWidth="1.5" />
-      <rect x="13" y="13" width="8" height="8" rx="2" stroke="white" strokeWidth="1.5" />
+      <rect x="3" y="3" width="12" height="18" rx="3" stroke="white" strokeWidth="2" />
+      <rect x="10" y="3" width="12" height="18" rx="3" fill="rgba(255,255,255,0.15)" stroke="white" strokeWidth="2" />
     </svg>
   );
 }
