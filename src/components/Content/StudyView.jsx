@@ -31,10 +31,19 @@ export default function StudyView() {
   const [isExiting, setIsExiting] = useState(false);
   const [viewMode, setViewMode] = useState('default');
   const [isViewTransitioning, setIsViewTransitioning] = useState(false);
+  const [tableFrameLoaded, setTableFrameLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
     return () => clearInterval(timer);
+  }, []);
+
+  // 테이블 모드 이미지 미리 로드
+  useEffect(() => {
+    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE].forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
   }, []);
 
   function handleExit() {
@@ -45,6 +54,7 @@ export default function StudyView() {
   function toggleViewMode() {
     setIsViewTransitioning(true);
     setTimeout(() => {
+      setTableFrameLoaded(false);
       setViewMode(v => v === 'default' ? 'table' : 'default');
       setTimeout(() => setIsViewTransitioning(false), 300);
     }, 300);
@@ -182,7 +192,7 @@ export default function StudyView() {
         /* 테이블 모드 */
         <div className="study-table-mode">
           {/* 비행기 창문 프레임 영역 */}
-          <div className="study-table-frame-area">
+          <div className={`study-table-frame-area${tableFrameLoaded ? ' loaded' : ''}`}>
             {/* 풍경 이미지 - 가로 무한 스크롤 */}
             <div className="study-table-landscape-container">
               <div className="study-table-landscape-inner">
@@ -191,7 +201,7 @@ export default function StudyView() {
               </div>
             </div>
             {/* 창문 프레임 (위에 올라감) */}
-            <img src={TABLE_FRAME_IMAGE} alt="" className="study-table-frame" />
+            <img src={TABLE_FRAME_IMAGE} alt="" className="study-table-frame" onLoad={() => setTableFrameLoaded(true)} />
           </div>
 
           {/* 상단 그라데이션 */}

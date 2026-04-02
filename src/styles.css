@@ -4651,7 +4651,11 @@ textarea {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  animation: study-fadein 0.7s ease both;
+  opacity: 0;
+}
+
+.study-table-frame-area.loaded {
+  animation: study-fadein 0.7s ease forwards;
 }
 
 /* 풍경 이미지 - 창문 위치에 클리핑 */
