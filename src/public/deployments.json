@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-rfzkjalu6-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 글래스 카드 transform/will-change 제거로 크롬 backdrop-filter 수정",
+    "createdAt": 1775132195360,
+    "sha": "214c0dd"
+  },
+  {
+    "url": "https://prototype-5hvy5dfrz-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775131893792,
+    "sha": "a7c1da4"
+  },
+  {
     "url": "https://prototype-roe9saev7-kimkwangkuks-projects.vercel.app",
     "message": "fix: 공부 화면 backdrop-filter 크롬 미작동 수정 (overflow: hidden → clip)",
     "createdAt": 1775131826034,
@@ -286,17 +298,5 @@
     "message": "fix: 배경 타일 두 번째 스트립 rotate(180deg) 단독 적용",
     "createdAt": 1775045602563,
     "sha": "e9157aa"
-  },
-  {
-    "url": "https://prototype-4tnp7g9ye-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775044430286,
-    "sha": "73ec4b3"
-  },
-  {
-    "url": "https://prototype-3dgoigs26-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 배경 타일 변환 scaleY(-1) → rotate(180deg) scaleX(-1)",
-    "createdAt": 1775044361276,
-    "sha": "3ff6e4c"
   }
 ]
