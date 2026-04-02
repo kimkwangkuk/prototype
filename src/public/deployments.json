@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-eplk4jm0r-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 이탈 시 페이드아웃 효과 추가",
+    "createdAt": 1775122289576,
+    "sha": "9956f00"
+  },
+  {
+    "url": "https://prototype-gyembb0ah-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775048019651,
+    "sha": "6f419cd"
+  },
+  {
     "url": "https://prototype-76thvwihf-kimkwangkuks-projects.vercel.app",
     "message": "feat: 타임라인 페이드아웃 + 배경 이미지 서서히 페이드인 전환",
     "createdAt": 1775047951654,
@@ -286,17 +298,5 @@
     "message": "Challenge emoji: continuous scroll tracking within range, instant clamp at boundary",
     "createdAt": 1773975430253,
     "sha": "8d5f23d"
-  },
-  {
-    "url": "https://prototype-j9zq8x7h9-kimkwangkuks-projects.vercel.app",
-    "message": "Challenge: snap to hour slot on scroll instead of CSS sticky",
-    "createdAt": 1773974937914,
-    "sha": "a45a605"
-  },
-  {
-    "url": "https://prototype-k8nur9mn1-kimkwangkuks-projects.vercel.app",
-    "message": "Fix challenge emoji overlapping time labels",
-    "createdAt": 1773973486973,
-    "sha": "3d5ed53"
   }
 ]
