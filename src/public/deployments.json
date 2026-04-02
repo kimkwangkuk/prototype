@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ndz53hi4k-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 테이블 모드 프레임+풍경 이미지 둘 다 로드 완료 후 페이드인",
+    "createdAt": 1775128259973,
+    "sha": "e2e705a"
+  },
+  {
+    "url": "https://prototype-605q2m0yr-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775128017829,
+    "sha": "9233a91"
+  },
+  {
     "url": "https://prototype-gx2da5euc-kimkwangkuks-projects.vercel.app",
     "message": "fix: 테이블 모드 프레임 이미지 화면 크기에 따라 중앙 기준 스케일 확장",
     "createdAt": 1775127950337,
@@ -286,17 +298,5 @@
     "message": "feat: 공부 화면 배경 이미지 무한 스크롤 애니메이션 추가",
     "createdAt": 1775042013739,
     "sha": "d910f90"
-  },
-  {
-    "url": "https://prototype-3ffabfezy-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775041953991,
-    "sha": "4b9ea43"
-  },
-  {
-    "url": "https://prototype-4rmoyoedv-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 프로그레스바 비행기 아이콘 실제 SVG로 교체",
-    "createdAt": 1775041884719,
-    "sha": "87b6942"
   }
 ]
