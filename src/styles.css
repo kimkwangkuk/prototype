@@ -4646,10 +4646,11 @@ textarea {
 /* 창문 프레임 영역 (정사각형, 중앙 정렬) */
 .study-table-frame-area {
   position: absolute;
-  width: 100%;
-  padding-bottom: 100%;
-  top: 50%;
-  transform: translateY(-50%);
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 /* 풍경 이미지 - 창문 위치에 클리핑 */
