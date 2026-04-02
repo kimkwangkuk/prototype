@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-5czs83hpi-kimkwangkuks-projects.vercel.app",
+    "message": "design: 공부 화면 하늘 배경 스크롤 속도 통일 (30s→80s)",
+    "createdAt": 1775130639561,
+    "sha": "a4117a2"
+  },
+  {
+    "url": "https://prototype-axrgi70sw-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775130413585,
+    "sha": "eb42ba4"
+  },
+  {
     "url": "https://prototype-e0oywafdt-kimkwangkuks-projects.vercel.app",
     "message": "design: 테이블 모드 풍경 스크롤 속도 더 감소 (36s→80s)",
     "createdAt": 1775130344533,
@@ -85,7 +97,7 @@
   },
   {
     "url": "https://prototype-kt1lg0i1y-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 테이��� 모드 창문 프레임+풍경 가로 무한스크롤, 뷰모드 전환 페이드, 타이머 폰트 수정",
+    "message": "feat: 테이블 모드 창문 프레임+풍경 가로 무한스크롤, 뷰모드 전환 페이드, 타이머 폰트 수정",
     "createdAt": 1775127295951,
     "sha": "cd40538"
   },
@@ -286,17 +298,5 @@
     "message": "feat: 공부 화면 진입 시 배경 먼저, UI 트랜지션 1.5s 뒤 시작",
     "createdAt": 1775043306407,
     "sha": "7fc1b3f"
-  },
-  {
-    "url": "https://prototype-jx0o8oqrv-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775042544413,
-    "sha": "e66f025"
-  },
-  {
-    "url": "https://prototype-huihtf2fd-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 배경 스크롤 경계면 제거 - 원본+뒤집기 이어붙여 seamless 루프",
-    "createdAt": 1775042477435,
-    "sha": "0f29cbc"
   }
 ]
