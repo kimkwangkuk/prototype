@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ju7juvvbu-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부 화면 비행기 등장 빠르게 + UI 오버랩 등장 타이밍 조정",
+    "createdAt": 1775124334685,
+    "sha": "fdb8793"
+  },
+  {
+    "url": "https://prototype-5y9gfh1qg-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775122360605,
+    "sha": "3bf7741"
+  },
+  {
     "url": "https://prototype-eplk4jm0r-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부 화면 이탈 시 페이드아웃 효과 추가",
     "createdAt": 1775122289576,
@@ -286,17 +298,5 @@
     "message": "Challenge emoji: pre-jump before emoji bottom reaches next hour label",
     "createdAt": 1773976797998,
     "sha": "3ca1495"
-  },
-  {
-    "url": "https://prototype-ppu2v0jnp-kimkwangkuks-projects.vercel.app",
-    "message": "Challenge emoji: skip over hour label zone instantly when crossing hour boundary",
-    "createdAt": 1773976443264,
-    "sha": "df18f87"
-  },
-  {
-    "url": "https://prototype-notc5vud0-kimkwangkuks-projects.vercel.app",
-    "message": "Challenge emoji: continuous scroll tracking within range, instant clamp at boundary",
-    "createdAt": 1773975430253,
-    "sha": "8d5f23d"
   }
 ]
