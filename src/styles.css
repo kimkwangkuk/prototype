@@ -4795,7 +4795,7 @@ textarea {
 .study-bg-inner {
   display: flex;
   flex-direction: column;
-  animation: study-bg-scroll 30s linear infinite;
+  animation: study-bg-scroll 80s linear infinite;
 }
 
 .study-bg-strip {
