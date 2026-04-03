@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-2546mmu6o-kimkwangkuks-projects.vercel.app",
+    "message": "design: 공부화면/비행기/탁상모드 이미지 피그마 최신 리소스로 교체",
+    "createdAt": 1775197840067,
+    "sha": "a2163c0"
+  },
+  {
+    "url": "https://prototype-etimjxjsk-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775185401476,
+    "sha": "63f2d15"
+  },
+  {
     "url": "https://prototype-gjyjpxhm7-kimkwangkuks-projects.vercel.app",
     "message": "fix: 뷰모드 전환 오버레이 페이드아웃 시간 300ms → 600ms로 연장",
     "createdAt": 1775185333589,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775122360605,
     "sha": "3bf7741"
-  },
-  {
-    "url": "https://prototype-eplk4jm0r-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 이탈 시 페이드아웃 효과 추가",
-    "createdAt": 1775122289576,
-    "sha": "9956f00"
-  },
-  {
-    "url": "https://prototype-gyembb0ah-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775048019651,
-    "sha": "6f419cd"
   }
 ]
