@@ -77,6 +77,9 @@ export default function StudyView() {
             </div>
           </div>
 
+          {/* 딤드 레이어 */}
+          <div className="study-dim-layer" />
+
           {/* 앱바 */}
           <div className="study-appbar">
             <span className="study-appbar-title">Work {formatTimer(elapsed)}</span>
