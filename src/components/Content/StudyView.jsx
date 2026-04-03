@@ -65,12 +65,12 @@ export default function StudyView() {
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
 
   return (
-    <div className={`study-view${bgLoaded ? ' bg-loaded' : ''}${isExiting ? ' exiting' : ''}`}>
+    <div className={`study-view${isExiting ? ' exiting' : ''}`}>
       <img src={BG_IMAGE} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} />
       {viewMode === 'default' ? (
         <>
           {/* 배경 이미지 */}
-          <div className="study-view-bg">
+          <div className={`study-view-bg${bgLoaded ? ' loaded' : ''}`}>
             <div className="study-bg-inner">
               <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
               <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
