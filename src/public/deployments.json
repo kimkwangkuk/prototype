@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-gjyjpxhm7-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 뷰모드 전환 오버레이 페이드아웃 시간 300ms → 600ms로 연장",
+    "createdAt": 1775185333589,
+    "sha": "5dd1a01"
+  },
+  {
+    "url": "https://prototype-knj21x2ow-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775178490598,
+    "sha": "c577c5a"
+  },
+  {
     "url": "https://prototype-3brd2km20-kimkwangkuks-projects.vercel.app",
     "message": "fix: toggleViewMode에서 goingToTable 변수 미선언 버그 수정",
     "createdAt": 1775178422335,
@@ -85,7 +97,7 @@
   },
   {
     "url": "https://prototype-96xsn7e9r-kimkwangkuks-projects.vercel.app",
-    "message": "design: 뷰모드 토글 아이콘 피그마 ���자인으로 교체",
+    "message": "design: 뷰모드 토글 아이콘 피그마 디자인으로 교체",
     "createdAt": 1775130987273,
     "sha": "db24c3c"
   },
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775048019651,
     "sha": "6f419cd"
-  },
-  {
-    "url": "https://prototype-76thvwihf-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 타임라인 페이드아웃 + 배경 이미지 서서히 페이드인 전환",
-    "createdAt": 1775047951654,
-    "sha": "b1926e4"
-  },
-  {
-    "url": "https://prototype-j8ihp0e7c-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775046450922,
-    "sha": "92857f5"
   }
 ]
