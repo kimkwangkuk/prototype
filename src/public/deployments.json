@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-2rayyqrrp-kimkwangkuks-projects.vercel.app",
+    "message": "design: 그룹 카드 남은 높이 채우도록 flex: 1 적용",
+    "createdAt": 1775198912116,
+    "sha": "6ada094"
+  },
+  {
+    "url": "https://prototype-h7lbmn18v-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775198804693,
+    "sha": "ca68833"
+  },
+  {
     "url": "https://prototype-40m4tt4ve-kimkwangkuks-projects.vercel.app",
     "message": "design: 타이머 텍스트에 text-shadow 0px 0px 4px rgba(0,0,0,0.3) 추가",
     "createdAt": 1775198737161,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775126595844,
     "sha": "4fc1d4d"
-  },
-  {
-    "url": "https://prototype-e5cgtnzxo-kimkwangkuks-projects.vercel.app",
-    "message": "design: 공부 화면 배경 컬러 #20272E로 변경",
-    "createdAt": 1775126528447,
-    "sha": "27dcdf1"
-  },
-  {
-    "url": "https://prototype-4710n42tt-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775126082359,
-    "sha": "a81424d"
   }
 ]
