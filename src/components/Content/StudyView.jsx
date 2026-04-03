@@ -29,6 +29,7 @@ export default function StudyView() {
   const setStudyModeActive = useTodoStore(state => state.setStudyModeActive);
   const [elapsed, setElapsed] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
   const [viewMode, setViewMode] = useState('default');
   const [transitionColor, setTransitionColor] = useState(null);
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
@@ -64,7 +65,8 @@ export default function StudyView() {
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
 
   return (
-    <div className={`study-view${isExiting ? ' exiting' : ''}`}>
+    <div className={`study-view${bgLoaded ? ' bg-loaded' : ''}${isExiting ? ' exiting' : ''}`}>
+      <img src={BG_IMAGE} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} />
       {viewMode === 'default' ? (
         <>
           {/* 배경 이미지 */}

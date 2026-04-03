@@ -4586,6 +4586,10 @@ textarea {
   display: flex;
   flex-direction: column;
   background-color: #121C1F;
+  opacity: 0;
+}
+
+.study-view.bg-loaded {
   animation: study-fadein 0.8s ease both;
 }
 
