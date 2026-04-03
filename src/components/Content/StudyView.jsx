@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 
-const BG_IMAGE = 'https://www.figma.com/api/mcp/asset/fa511f46-f34c-4aa5-9ada-9d76e1e7f114';
-const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/cd75c6bc-a1e5-4890-8eff-b3a4599037e8';
+const BG_IMAGE = 'https://www.figma.com/api/mcp/asset/87424965-ec77-43fe-9181-0a9f8ca2d069';
+const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/1aeff471-75b4-4547-99b4-812720fdd960';
 const MEMBER_ICON = 'https://www.figma.com/api/mcp/asset/b90d4708-0a13-48da-b779-763445e4f462';
 const TABLE_FRAME_IMAGE = 'https://www.figma.com/api/mcp/asset/7f064995-250e-4569-a855-e5ed29c5771d';
-const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/0bb79a9b-816f-49bd-9e5f-accceb022dbf';
+const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/c709279c-860f-42dd-a86f-3cc58e8f8b49';
 
 const MEMBERS = [
   { name: '꽃길만걷자', time: '12:23:43' },
