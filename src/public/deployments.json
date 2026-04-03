@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-a2lc23z34-kimkwangkuks-projects.vercel.app",
+    "message": "design: 공부화면 배경 컬러 #121C1F으로 변경",
+    "createdAt": 1775199131009,
+    "sha": "9af6d57"
+  },
+  {
+    "url": "https://prototype-dis3bmy53-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775198980055,
+    "sha": "1923dab"
+  },
+  {
     "url": "https://prototype-2rayyqrrp-kimkwangkuks-projects.vercel.app",
     "message": "design: 그룹 카드 남은 높이 채우도록 flex: 1 적용",
     "createdAt": 1775198912116,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775127026206,
     "sha": "495b9b1"
-  },
-  {
-    "url": "https://prototype-hxraibdtf-kimkwangkuks-projects.vercel.app",
-    "message": "design: 공부 화면 배경 컬러 #a8c8e8 (하늘색)으로 복원",
-    "createdAt": 1775126957679,
-    "sha": "031bd9b"
-  },
-  {
-    "url": "https://prototype-1601ui9gi-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775126595844,
-    "sha": "4fc1d4d"
   }
 ]
