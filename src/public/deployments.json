@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-40m4tt4ve-kimkwangkuks-projects.vercel.app",
+    "message": "design: 타이머 텍스트에 text-shadow 0px 0px 4px rgba(0,0,0,0.3) 추가",
+    "createdAt": 1775198737161,
+    "sha": "0b366d2"
+  },
+  {
+    "url": "https://prototype-4pxzqv6jd-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775198531652,
+    "sha": "11335dc"
+  },
+  {
     "url": "https://prototype-qhhls3o00-kimkwangkuks-projects.vercel.app",
     "message": "fix: 스터디 타임 섹션 앱바로부터 50px 아래 배치",
     "createdAt": 1775198462997,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775126082359,
     "sha": "a81424d"
-  },
-  {
-    "url": "https://prototype-mwaawoiu0-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 뷰모드 토글 추가 (기본뷰 ↔ 테이블모드)",
-    "createdAt": 1775126013474,
-    "sha": "c5319cc"
-  },
-  {
-    "url": "https://prototype-5zi2ddsvh-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775125443137,
-    "sha": "fce8754"
   }
 ]
