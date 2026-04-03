@@ -4880,6 +4880,7 @@ textarea {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.045px;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.4;
   color: white;
 }
@@ -4891,6 +4892,7 @@ textarea {
   color: white;
   letter-spacing: -0.5px;
   font-variant-numeric: tabular-nums;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 
 .study-time-stats {
@@ -4910,6 +4912,7 @@ textarea {
   color: rgba(255, 255, 255, 0.8);
   letter-spacing: -0.039px;
   line-height: 1.4;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 
 .study-stat-value {
@@ -4918,6 +4921,7 @@ textarea {
   color: white;
   letter-spacing: -0.048px;
   line-height: 1.4;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* 우측 컨트롤 영역 */
