@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-fuho3ibcz-kimkwangkuks-projects.vercel.app",
+    "message": "design: 비행기→타이머 등장 간격 단축 (2.4s→2.15s, 2.55s→2.3s)",
+    "createdAt": 1775214755684,
+    "sha": "8f11cb8"
+  },
+  {
+    "url": "https://prototype-kk4wg3j9u-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775207301367,
+    "sha": "72ba93c"
+  },
+  {
     "url": "https://prototype-ft7jtxwmd-kimkwangkuks-projects.vercel.app",
     "message": "fix: 화면 즉시 진입 후 배경 이미지 로드 완료 시 페이드인",
     "createdAt": 1775207233396,
@@ -286,17 +298,5 @@
     "message": "fix: 테이블 모드 프레임+풍경 이미지 둘 다 로드 완료 후 페이드인",
     "createdAt": 1775128259973,
     "sha": "e2e705a"
-  },
-  {
-    "url": "https://prototype-605q2m0yr-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775128017829,
-    "sha": "9233a91"
-  },
-  {
-    "url": "https://prototype-gx2da5euc-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 테이블 모드 프레임 이미지 화면 크기에 따라 중앙 기준 스케일 확장",
-    "createdAt": 1775127950337,
-    "sha": "39acca5"
   }
 ]
