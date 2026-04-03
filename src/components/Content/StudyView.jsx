@@ -52,6 +52,7 @@ export default function StudyView() {
   }
 
   function toggleViewMode() {
+    const goingToTable = viewMode === 'default';
     setTransitionColor('dark');
     setTableLoadedCount(0);
     setTimeout(() => {
