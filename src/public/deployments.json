@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-k0lwzbssy-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 공부화면 배경 반전(scaleX) 스펙 제거",
+    "createdAt": 1775198320397,
+    "sha": "932f1b0"
+  },
+  {
+    "url": "https://prototype-1ogfwyul1-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775198130473,
+    "sha": "25db2aa"
+  },
+  {
     "url": "https://prototype-f76vp4j1g-kimkwangkuks-projects.vercel.app",
     "message": "fix: 비행기 이미지 CSS 크롭 제거, object-fit: contain으로 교체",
     "createdAt": 1775198061961,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775125039825,
     "sha": "bcefe4a"
-  },
-  {
-    "url": "https://prototype-nql00agpp-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 UI 등장 타이밍 앞당겨 비행기와 오버랩",
-    "createdAt": 1775124970255,
-    "sha": "126d097"
-  },
-  {
-    "url": "https://prototype-d7msii0lo-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775124403699,
-    "sha": "e2d8364"
   }
 ]
