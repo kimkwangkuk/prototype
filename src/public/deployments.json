@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-f76vp4j1g-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 비행기 이미지 CSS 크롭 제거, object-fit: contain으로 교체",
+    "createdAt": 1775198061961,
+    "sha": "fec0a8c"
+  },
+  {
+    "url": "https://prototype-3kk0z64ke-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775197908836,
+    "sha": "ae05a3b"
+  },
+  {
     "url": "https://prototype-2546mmu6o-kimkwangkuks-projects.vercel.app",
     "message": "design: 공부화면/비행기/탁상모드 이미지 피그마 최신 리소스로 교체",
     "createdAt": 1775197840067,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775124403699,
     "sha": "e2d8364"
-  },
-  {
-    "url": "https://prototype-ju7juvvbu-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부 화면 비행기 등장 빠르게 + UI 오버랩 등장 타이밍 조정",
-    "createdAt": 1775124334685,
-    "sha": "fdb8793"
-  },
-  {
-    "url": "https://prototype-5y9gfh1qg-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775122360605,
-    "sha": "3bf7741"
   }
 ]
