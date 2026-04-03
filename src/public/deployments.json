@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ft7jtxwmd-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 화면 즉시 진입 후 배경 이미지 로드 완료 시 페이드인",
+    "createdAt": 1775207233396,
+    "sha": "aa0c58c"
+  },
+  {
+    "url": "https://prototype-a1ofa7xx9-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775200504164,
+    "sha": "d9b1f75"
+  },
+  {
     "url": "https://prototype-by1h70zzr-kimkwangkuks-projects.vercel.app",
     "message": "design: 앱바로부터 80px 아래 딤드 그라데이션 레이어 추가 (0→40%)",
     "createdAt": 1775200436882,
@@ -286,17 +298,5 @@
     "message": "fix: 테이블 모드 프레임 이미지 화면 크기에 따라 중앙 기준 스케일 확장",
     "createdAt": 1775127950337,
     "sha": "39acca5"
-  },
-  {
-    "url": "https://prototype-8uz8r3qqu-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775127921078,
-    "sha": "26cf7f3"
-  },
-  {
-    "url": "https://prototype-52am2bked-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 테이블 모드 이미지 로드 완료 후 페이드인 + 진입 시 미리 로드",
-    "createdAt": 1775127853279,
-    "sha": "92071c1"
   }
 ]
