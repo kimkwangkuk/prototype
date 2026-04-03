@@ -4874,7 +4874,7 @@ textarea {
   align-items: flex-end;
   justify-content: space-between;
   padding: 0 20px 20px 20px;
-  animation: study-slideup 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.4s both;
+  animation: study-slideup 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.15s both;
 }
 
 .study-time-left {
@@ -5061,7 +5061,7 @@ textarea {
   flex: 1;
   gap: 12px;
   padding: 0 12px;
-  animation: study-slideup 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.55s both;
+  animation: study-slideup 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.3s both;
 }
 
 .study-glass-card {
