@@ -4813,9 +4813,6 @@ textarea {
   flex-shrink: 0;
 }
 
-.study-bg-strip-flip {
-  transform: scaleX(-1);
-}
 
 .study-view-airplane {
   position: absolute;

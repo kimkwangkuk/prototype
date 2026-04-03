@@ -71,7 +71,7 @@ export default function StudyView() {
           <div className="study-view-bg">
             <div className="study-bg-inner">
               <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
-              <div className="study-bg-strip study-bg-strip-flip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
+              <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
             </div>
           </div>
 
