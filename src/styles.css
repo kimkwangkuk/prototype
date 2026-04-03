@@ -4848,7 +4848,7 @@ textarea {
 .study-view-scroll-inner {
   display: flex;
   flex-direction: column;
-  padding-top: 310px;
+  padding-top: calc(44px + env(safe-area-inset-top, 0px) + 50px);
   padding-bottom: max(40px, env(safe-area-inset-bottom, 40px));
   min-height: calc(100% + 1px);
 }
