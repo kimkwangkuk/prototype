@@ -4808,7 +4808,7 @@ textarea {
   inset: 0;
   overflow: clip;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 1.2s ease;
 }
 
 .study-bg-inner {
@@ -4836,7 +4836,7 @@ textarea {
   overflow: hidden;
   z-index: 2;
   animation: study-airplane-slideup 1.1s cubic-bezier(0.22, 1, 0.36, 1) 2.0s both;
-  transition: opacity 0.6s ease;
+  transition: opacity 1.0s ease;
 }
 
 .study-view-airplane img {

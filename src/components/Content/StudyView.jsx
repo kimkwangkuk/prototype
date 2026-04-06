@@ -38,8 +38,14 @@ export default function StudyView() {
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
-  const [airplaneAnimDone, setAirplaneAnimDone] = useState(false);
+  const [airplaneReady, setAirplaneReady] = useState(false);
   const bgIndexRef = useRef(0);
+
+  // 비행기 slideup 애니메이션 완료 후 (delay 2s + duration 1.1s) fade 제어 활성화
+  useEffect(() => {
+    const t = setTimeout(() => setAirplaneReady(true), 3200);
+    return () => clearTimeout(t);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
@@ -60,16 +66,18 @@ export default function StudyView() {
     const interval = setInterval(() => {
       setBgFading(true);
       const nextIndex = (bgIndexRef.current + 1) % BG_IMAGES.length;
-      // 이미지 로드 완료 후 전환
-      const img = new window.Image();
-      const applyNext = () => {
-        bgIndexRef.current = nextIndex;
-        setBgIndex(nextIndex);
-        requestAnimationFrame(() => requestAnimationFrame(() => setBgFading(false)));
-      };
-      img.onload = applyNext;
-      img.src = BG_IMAGES[nextIndex];
-      if (img.complete) applyNext();
+      // 페이드 아웃(1.2s) 완료 후 이미지 교체 → 페이드 인
+      setTimeout(() => {
+        const img = new window.Image();
+        const applyNext = () => {
+          bgIndexRef.current = nextIndex;
+          setBgIndex(nextIndex);
+          requestAnimationFrame(() => requestAnimationFrame(() => setBgFading(false)));
+        };
+        img.onload = applyNext;
+        img.src = BG_IMAGES[nextIndex];
+        if (img.complete) applyNext();
+      }, 1200);
     }, 10000);
     return () => clearInterval(interval);
   }, [viewMode]);
@@ -122,8 +130,7 @@ export default function StudyView() {
           {/* 비행기 이미지 */}
           <div
             className="study-view-airplane"
-            style={airplaneAnimDone ? { opacity: bgFading ? 0 : 1 } : undefined}
-            onAnimationEnd={() => setAirplaneAnimDone(true)}
+            style={airplaneReady ? { opacity: bgFading ? 0 : 1 } : undefined}
           >
             <img src={AIRPLANE_IMAGE} alt="" />
           </div>
