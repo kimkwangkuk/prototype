@@ -72,7 +72,8 @@ export default function StudyView() {
         const applyNext = () => {
           bgIndexRef.current = nextIndex;
           setBgIndex(nextIndex);
-          requestAnimationFrame(() => requestAnimationFrame(() => setBgFading(false)));
+          // 브라우저가 새 이미지를 그린 후 fade in
+          setTimeout(() => setBgFading(false), 100);
         };
         img.onload = applyNext;
         img.src = BG_IMAGES[nextIndex];
