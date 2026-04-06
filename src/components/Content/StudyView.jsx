@@ -66,7 +66,7 @@ export default function StudyView() {
     const interval = setInterval(() => {
       setBgFading(true);
       const nextIndex = (bgIndexRef.current + 1) % BG_IMAGES.length;
-      // 페이드 아웃(1.8s) 완료 후 이미지 교체 → 페이드 인
+      // 페이드 아웃(2.2s) 완료 후 이미지 교체 → 페이드 인
       setTimeout(() => {
         const img = new window.Image();
         const applyNext = () => {
@@ -78,7 +78,7 @@ export default function StudyView() {
         img.onload = applyNext;
         img.src = BG_IMAGES[nextIndex];
         if (img.complete) applyNext();
-      }, 1800);
+      }, 2200);
     }, 10000);
     return () => clearInterval(interval);
   }, [viewMode]);

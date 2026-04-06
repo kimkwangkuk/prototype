@@ -4808,7 +4808,7 @@ textarea {
   inset: 0;
   overflow: clip;
   opacity: 0;
-  transition: opacity 1.8s ease;
+  transition: opacity 2.2s ease-in-out;
 }
 
 .study-bg-inner {
@@ -4835,7 +4835,7 @@ textarea {
   width: 120px;
   height: 120px;
   z-index: 2;
-  transition: opacity 1.4s ease;
+  transition: opacity 2.2s ease-in-out;
 }
 
 /* 슬라이드업 애니메이션은 inner에만 */
