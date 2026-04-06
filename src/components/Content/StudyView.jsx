@@ -66,7 +66,7 @@ export default function StudyView() {
     const interval = setInterval(() => {
       setBgFading(true);
       const nextIndex = (bgIndexRef.current + 1) % BG_IMAGES.length;
-      // 페이드 아웃(1.2s) 완료 후 이미지 교체 → 페이드 인
+      // 페이드 아웃(1.8s) 완료 후 이미지 교체 → 페이드 인
       setTimeout(() => {
         const img = new window.Image();
         const applyNext = () => {
@@ -78,7 +78,7 @@ export default function StudyView() {
         img.onload = applyNext;
         img.src = BG_IMAGES[nextIndex];
         if (img.complete) applyNext();
-      }, 1200);
+      }, 1800);
     }, 10000);
     return () => clearInterval(interval);
   }, [viewMode]);
@@ -130,10 +130,12 @@ export default function StudyView() {
 
           {/* 비행기 이미지 */}
           <div
-            className="study-view-airplane"
+            className="study-view-airplane-wrap"
             style={airplaneReady ? { opacity: bgFading ? 0 : 1 } : undefined}
           >
-            <img src={AIRPLANE_IMAGE} alt="" />
+            <div className="study-view-airplane">
+              <img src={AIRPLANE_IMAGE} alt="" />
+            </div>
           </div>
 
           {/* 하단 컨테이너 (스크롤 영역) */}
