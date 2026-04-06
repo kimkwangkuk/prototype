@@ -4808,15 +4808,7 @@ textarea {
   inset: 0;
   overflow: clip;
   opacity: 0;
-  transition: opacity 0.6s ease;
-}
-
-.study-view-bg.loaded {
-  animation: study-fadein 1.0s ease both;
-}
-
-.study-bg-fading {
-  opacity: 0 !important;
+  transition: opacity 0.8s ease;
 }
 
 .study-bg-inner {

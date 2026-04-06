@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 
 const BG_IMAGES = [
@@ -38,6 +38,8 @@ export default function StudyView() {
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
+  const [airplaneAnimDone, setAirplaneAnimDone] = useState(false);
+  const bgIndexRef = useRef(0);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
@@ -57,10 +59,17 @@ export default function StudyView() {
     if (viewMode !== 'default') return;
     const interval = setInterval(() => {
       setBgFading(true);
-      setTimeout(() => {
-        setBgIndex(i => (i + 1) % BG_IMAGES.length);
-        setBgFading(false);
-      }, 600);
+      const nextIndex = (bgIndexRef.current + 1) % BG_IMAGES.length;
+      // 이미지 로드 완료 후 전환
+      const img = new window.Image();
+      const applyNext = () => {
+        bgIndexRef.current = nextIndex;
+        setBgIndex(nextIndex);
+        requestAnimationFrame(() => requestAnimationFrame(() => setBgFading(false)));
+      };
+      img.onload = applyNext;
+      img.src = BG_IMAGES[nextIndex];
+      if (img.complete) applyNext();
     }, 10000);
     return () => clearInterval(interval);
   }, [viewMode]);
@@ -88,7 +97,10 @@ export default function StudyView() {
       {viewMode === 'default' ? (
         <>
           {/* 배경 이미지 */}
-          <div className={`study-view-bg${bgLoaded ? ' loaded' : ''}${bgFading ? ' study-bg-fading' : ''}`}>
+          <div
+            className="study-view-bg"
+            style={{ opacity: bgLoaded && !bgFading ? 1 : 0 }}
+          >
             <div className="study-bg-inner">
               <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGES[bgIndex]})` }} />
               <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGES[bgIndex]})` }} />
@@ -108,7 +120,11 @@ export default function StudyView() {
           </div>
 
           {/* 비행기 이미지 */}
-          <div className={`study-view-airplane${bgFading ? ' study-bg-fading' : ''}`}>
+          <div
+            className="study-view-airplane"
+            style={airplaneAnimDone ? { opacity: bgFading ? 0 : 1 } : undefined}
+            onAnimationEnd={() => setAirplaneAnimDone(true)}
+          >
             <img src={AIRPLANE_IMAGE} alt="" />
           </div>
 
