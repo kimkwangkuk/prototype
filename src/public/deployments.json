@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-j8tiia6pg-kimkwangkuks-projects.vercel.app",
+    "message": "fix: BG_IMAGE → BG_IMAGES[0] 참조 수정 (흰화면 버그)",
+    "createdAt": 1775441560060,
+    "sha": "f9a3d83"
+  },
+  {
+    "url": "https://prototype-n5k504u59-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775441514876,
+    "sha": "b6bdaef"
+  },
+  {
     "url": "https://prototype-97j2az42j-kimkwangkuks-projects.vercel.app",
     "message": "feat: 공부화면 배경 이미지 10초마다 순환 (페이드 아웃/인 전환)",
     "createdAt": 1775441446446,
@@ -286,17 +298,5 @@
     "message": "design: 테이블 모드 풍경 스크롤 속도 더 감소 (36s→80s)",
     "createdAt": 1775130344533,
     "sha": "df26c11"
-  },
-  {
-    "url": "https://prototype-h7s0hfd4t-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775128832818,
-    "sha": "7b6c181"
-  },
-  {
-    "url": "https://prototype-3d1hyyvjm-kimkwangkuks-projects.vercel.app",
-    "message": "design: 테이블 모드 풍경 스크롤 속도 절반으로 감소 (18s→36s)",
-    "createdAt": 1775128764975,
-    "sha": "1a30e75"
   }
 ]
