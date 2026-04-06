@@ -84,7 +84,7 @@ export default function StudyView() {
 
   return (
     <div className={`study-view${isExiting ? ' exiting' : ''}`}>
-      <img src={BG_IMAGE} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} />
+      <img src={BG_IMAGES[0]} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} />
       {viewMode === 'default' ? (
         <>
           {/* 배경 이미지 */}
