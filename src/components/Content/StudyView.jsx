@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 
-const BG_IMAGE = 'https://www.figma.com/api/mcp/asset/87424965-ec77-43fe-9181-0a9f8ca2d069';
+const BG_IMAGES = [
+  'https://www.figma.com/api/mcp/asset/87424965-ec77-43fe-9181-0a9f8ca2d069',
+  'https://www.figma.com/api/mcp/asset/087d7626-f42d-4073-9361-9ba73c823fab',
+];
 const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/1aeff471-75b4-4547-99b4-812720fdd960';
 const MEMBER_ICON = 'https://www.figma.com/api/mcp/asset/b90d4708-0a13-48da-b779-763445e4f462';
 const TABLE_FRAME_IMAGE = 'https://www.figma.com/api/mcp/asset/7f064995-250e-4569-a855-e5ed29c5771d';
@@ -33,6 +36,8 @@ export default function StudyView() {
   const [viewMode, setViewMode] = useState('default');
   const [transitionColor, setTransitionColor] = useState(null);
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
+  const [bgIndex, setBgIndex] = useState(0);
+  const [bgFading, setBgFading] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
@@ -41,11 +46,24 @@ export default function StudyView() {
 
   // 테이블 모드 이미지 미리 로드
   useEffect(() => {
-    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE].forEach(src => {
+    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE, ...BG_IMAGES].forEach(src => {
       const img = new Image();
       img.src = src;
     });
   }, []);
+
+  // 10초마다 배경 이미지 순환
+  useEffect(() => {
+    if (viewMode !== 'default') return;
+    const interval = setInterval(() => {
+      setBgFading(true);
+      setTimeout(() => {
+        setBgIndex(i => (i + 1) % BG_IMAGES.length);
+        setBgFading(false);
+      }, 600);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [viewMode]);
 
   function handleExit() {
     setIsExiting(true);
@@ -70,10 +88,10 @@ export default function StudyView() {
       {viewMode === 'default' ? (
         <>
           {/* 배경 이미지 */}
-          <div className={`study-view-bg${bgLoaded ? ' loaded' : ''}`}>
+          <div className={`study-view-bg${bgLoaded ? ' loaded' : ''}${bgFading ? ' study-bg-fading' : ''}`}>
             <div className="study-bg-inner">
-              <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
-              <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGE})` }} />
+              <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGES[bgIndex]})` }} />
+              <div className="study-bg-strip" style={{ backgroundImage: `url(${BG_IMAGES[bgIndex]})` }} />
             </div>
           </div>
 
@@ -90,7 +108,7 @@ export default function StudyView() {
           </div>
 
           {/* 비행기 이미지 */}
-          <div className="study-view-airplane">
+          <div className={`study-view-airplane${bgFading ? ' study-bg-fading' : ''}`}>
             <img src={AIRPLANE_IMAGE} alt="" />
           </div>
 
