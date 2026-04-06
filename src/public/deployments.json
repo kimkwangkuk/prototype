@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-c5bscfcp8-kimkwangkuks-projects.vercel.app",
+    "message": "fix: rAF→setTimeout(100ms)으로 교체하여 fade in 전환 정상화",
+    "createdAt": 1775478744442,
+    "sha": "0897bdb"
+  },
+  {
+    "url": "https://prototype-33l5o7e2i-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775453460744,
+    "sha": "2547788"
+  },
+  {
     "url": "https://prototype-6f071mphm-kimkwangkuks-projects.vercel.app",
     "message": "fix: 비행기 페이드 setTimeout으로 안정화, 전환 duration 연장 (1.2s/1.0s)",
     "createdAt": 1775453391310,
@@ -286,17 +298,5 @@
     "message": "design: 뷰모드 토글 아이콘 SVG 교체",
     "createdAt": 1775131503568,
     "sha": "d0d47d8"
-  },
-  {
-    "url": "https://prototype-4ctdb6byl-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775131055152,
-    "sha": "1f701d4"
-  },
-  {
-    "url": "https://prototype-96xsn7e9r-kimkwangkuks-projects.vercel.app",
-    "message": "design: 뷰모드 토글 아이콘 피그마 디자인으로 교체",
-    "createdAt": 1775130987273,
-    "sha": "db24c3c"
   }
 ]
