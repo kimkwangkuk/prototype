@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-97j2az42j-kimkwangkuks-projects.vercel.app",
+    "message": "feat: 공부화면 배경 이미지 10초마다 순환 (페이드 아웃/인 전환)",
+    "createdAt": 1775441446446,
+    "sha": "ef2ae99"
+  },
+  {
+    "url": "https://prototype-lls25eyjr-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775214822653,
+    "sha": "e5ffbaf"
+  },
+  {
     "url": "https://prototype-fuho3ibcz-kimkwangkuks-projects.vercel.app",
     "message": "design: 비행기→타이머 등장 간격 단축 (2.4s→2.15s, 2.55s→2.3s)",
     "createdAt": 1775214755684,
@@ -286,17 +298,5 @@
     "message": "design: 테이블 모드 풍경 스크롤 속도 절반으로 감소 (18s→36s)",
     "createdAt": 1775128764975,
     "sha": "1a30e75"
-  },
-  {
-    "url": "https://prototype-8t7f49o7c-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775128328078,
-    "sha": "27b5721"
-  },
-  {
-    "url": "https://prototype-ndz53hi4k-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 테이블 모드 프레임+풍경 이미지 둘 다 로드 완료 후 페이드인",
-    "createdAt": 1775128259973,
-    "sha": "e2e705a"
   }
 ]
