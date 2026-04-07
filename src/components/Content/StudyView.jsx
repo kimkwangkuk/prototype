@@ -38,14 +38,17 @@ export default function StudyView() {
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
+  const [airplaneVisible, setAirplaneVisible] = useState(false);
   const [airplaneReady, setAirplaneReady] = useState(false);
   const bgIndexRef = useRef(0);
 
-  // 비행기 slideup 애니메이션 완료 후 (delay 2s + duration 1.1s) fade 제어 활성화
+  // 배경 페이드인(2.2s) 완료 후 비행기 등장, 비행기 애니메이션(1.1s) 후 fade 제어 활성화
   useEffect(() => {
-    const t = setTimeout(() => setAirplaneReady(true), 3200);
-    return () => clearTimeout(t);
-  }, []);
+    if (!bgLoaded) return;
+    const t1 = setTimeout(() => setAirplaneVisible(true), 2200);
+    const t2 = setTimeout(() => setAirplaneReady(true), 2200 + 1200);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [bgLoaded]);
 
   useEffect(() => {
     const timer = setInterval(() => setElapsed(e => e + 1), 1000);
@@ -129,14 +132,16 @@ export default function StudyView() {
           </div>
 
           {/* 비행기 이미지 */}
-          <div
-            className="study-view-airplane-wrap"
-            style={airplaneReady ? { opacity: bgFading ? 0 : 1 } : undefined}
-          >
-            <div className="study-view-airplane">
-              <img src={AIRPLANE_IMAGE} alt="" />
+          {airplaneVisible && (
+            <div
+              className="study-view-airplane-wrap"
+              style={airplaneReady ? { opacity: bgFading ? 0 : 1 } : undefined}
+            >
+              <div className="study-view-airplane">
+                <img src={AIRPLANE_IMAGE} alt="" />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 하단 컨테이너 (스크롤 영역) */}
           <div className="study-view-container">
