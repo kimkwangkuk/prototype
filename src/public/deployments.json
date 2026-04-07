@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-dmtr7klvr-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 이미지 순환 타이머를 입장 애니메이션 완료 후 시작",
+    "createdAt": 1775531122360,
+    "sha": "355590f"
+  },
+  {
+    "url": "https://prototype-nkteburbx-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775480583266,
+    "sha": "646aa0f"
+  },
+  {
     "url": "https://prototype-1egoxyb5i-kimkwangkuks-projects.vercel.app",
     "message": "design: 배경/비행기 페이드 속도 통일 2.2s ease-in-out",
     "createdAt": 1775480514582,
@@ -286,17 +298,5 @@
     "message": "feat: 뷰모드 복귀 시 하늘색 전환 오버레이 적용",
     "createdAt": 1775132432935,
     "sha": "92e2c69"
-  },
-  {
-    "url": "https://prototype-i16d1h4bn-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775132263085,
-    "sha": "56e7205"
-  },
-  {
-    "url": "https://prototype-rfzkjalu6-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 글래스 카드 transform/will-change 제거로 크롬 backdrop-filter 수정",
-    "createdAt": 1775132195360,
-    "sha": "214c0dd"
   }
 ]
