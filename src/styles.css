@@ -4706,7 +4706,7 @@ textarea {
   position: absolute;
   inset: 0;
   z-index: 100;
-  animation: study-view-transition 2.2s ease both;
+  animation: study-view-transition 3s ease both;
 }
 
 .study-view-transition-dark {
@@ -4719,7 +4719,7 @@ textarea {
 
 @keyframes study-view-transition {
   0%   { opacity: 0; }
-  28%  { opacity: 1; }
+  20%  { opacity: 1; }
   100% { opacity: 0; }
 }
 

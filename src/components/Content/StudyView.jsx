@@ -117,7 +117,7 @@ export default function StudyView() {
     setTableLoadedCount(0);
     setTimeout(() => {
       setViewMode(goingToTable ? 'table' : 'default');
-      setTimeout(() => setTransitionColor(null), 1600);
+      setTimeout(() => setTransitionColor(null), 2400);
     }, 600);
   }
 
