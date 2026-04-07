@@ -97,8 +97,8 @@ export default function StudyView() {
     setTableLoadedCount(0);
     setTimeout(() => {
       setViewMode(goingToTable ? 'table' : 'default');
-      setTimeout(() => setTransitionColor(null), 600);
-    }, 300);
+      setTimeout(() => setTransitionColor(null), 900);
+    }, 900);
   }
 
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
