@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-hkehsafgy-kimkwangkuks-projects.vercel.app",
+    "message": "fix: UI 애니메이션을 비행기 완료(airplaneReady) 후 순차 등장으로 변경",
+    "createdAt": 1775547588615,
+    "sha": "79ecf3c"
+  },
+  {
+    "url": "https://prototype-azipbeguk-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775546549526,
+    "sha": "81d4bb1"
+  },
+  {
     "url": "https://prototype-hhz52rzan-kimkwangkuks-projects.vercel.app",
     "message": "fix: 비행기 슬라이드업 overflow:hidden 제거, 거리 60px·1.4s로 확대",
     "createdAt": 1775546481186,
@@ -286,17 +298,5 @@
     "message": "fix: 뷰모드 전환 오버레이 페이드아웃 시간 300ms → 600ms로 연장",
     "createdAt": 1775185333589,
     "sha": "5dd1a01"
-  },
-  {
-    "url": "https://prototype-knj21x2ow-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775178490598,
-    "sha": "c577c5a"
-  },
-  {
-    "url": "https://prototype-3brd2km20-kimkwangkuks-projects.vercel.app",
-    "message": "fix: toggleViewMode에서 goingToTable 변수 미선언 버그 수정",
-    "createdAt": 1775178422335,
-    "sha": "efce351"
   }
 ]
