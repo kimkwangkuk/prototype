@@ -46,7 +46,7 @@ export default function StudyView() {
   useEffect(() => {
     if (!bgLoaded) return;
     const t1 = setTimeout(() => setAirplaneVisible(true), 2200);
-    const t2 = setTimeout(() => setAirplaneReady(true), 2200 + 1500);
+    const t2 = setTimeout(() => setAirplaneReady(true), 2200 + 1400);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [bgLoaded]);
 

@@ -4609,7 +4609,7 @@ textarea {
   opacity: 0;
 }
 .airplane-ready .study-appbar {
-  animation: study-fadein 0.8s ease 0s both;
+  animation: study-fadein 0.6s ease 0s both;
 }
 
 .study-appbar-title {
@@ -4885,7 +4885,7 @@ textarea {
   opacity: 0;
 }
 .airplane-ready .study-time-section {
-  animation: study-slideup 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  animation: study-slideup 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0s both;
 }
 
 .study-time-left {
@@ -5075,7 +5075,7 @@ textarea {
   padding: 0 12px;
 }
 .airplane-ready .study-cards-wrapper {
-  animation: study-slideup 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  animation: study-slideup 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
 .study-glass-card {
