@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-lbjv07ejr-kimkwangkuks-projects.vercel.app",
+    "message": "design: 집중모드 전환 오버레이 페이드 속도 조정 (비대칭 키프레임 + JS 타이밍)",
+    "createdAt": 1775549671916,
+    "sha": "97080a2"
+  },
+  {
+    "url": "https://prototype-m66cy1yov-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775549137487,
+    "sha": "4d17ed7"
+  },
+  {
     "url": "https://prototype-pfehjvi28-kimkwangkuks-projects.vercel.app",
     "message": "fix: UI 애니메이션 비행기 등장 중(400ms 후) 시작",
     "createdAt": 1775549066872,
@@ -286,17 +298,5 @@
     "message": "fix: 공부화면 배경 반전(scaleX) 스펙 제거",
     "createdAt": 1775198320397,
     "sha": "932f1b0"
-  },
-  {
-    "url": "https://prototype-1ogfwyul1-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775198130473,
-    "sha": "25db2aa"
-  },
-  {
-    "url": "https://prototype-f76vp4j1g-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 비행기 이미지 CSS 크롭 제거, object-fit: contain으로 교체",
-    "createdAt": 1775198061961,
-    "sha": "fec0a8c"
   }
 ]
