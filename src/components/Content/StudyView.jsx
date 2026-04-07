@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import useTodoStore from '../../store/useTodoStore';
 
 const BG_IMAGES = [
-  'https://www.figma.com/api/mcp/asset/87424965-ec77-43fe-9181-0a9f8ca2d069',
+  'https://www.figma.com/api/mcp/asset/30b3331a-d2a4-410a-95c9-436bba05c869',
   'https://www.figma.com/api/mcp/asset/087d7626-f42d-4073-9361-9ba73c823fab',
 ];
-const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/1aeff471-75b4-4547-99b4-812720fdd960';
+const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/0f2c93ae-2884-4229-8f97-085199f2b2da';
 const MEMBER_ICON = 'https://www.figma.com/api/mcp/asset/b90d4708-0a13-48da-b779-763445e4f462';
 const TABLE_FRAME_IMAGE = 'https://www.figma.com/api/mcp/asset/7f064995-250e-4569-a855-e5ed29c5771d';
 const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/c709279c-860f-42dd-a86f-3cc58e8f8b49';
@@ -46,7 +46,7 @@ export default function StudyView() {
   useEffect(() => {
     if (!bgLoaded) return;
     const t1 = setTimeout(() => setAirplaneVisible(true), 2200);
-    const t2 = setTimeout(() => setAirplaneReady(true), 2200 + 1200);
+    const t2 = setTimeout(() => setAirplaneReady(true), 2200 + 1500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [bgLoaded]);
 
