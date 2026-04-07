@@ -60,9 +60,9 @@ export default function StudyView() {
     });
   }, []);
 
-  // 10초마다 배경 이미지 순환
+  // 10초마다 배경 이미지 순환 (입장 애니메이션 완료 후 시작)
   useEffect(() => {
-    if (viewMode !== 'default') return;
+    if (viewMode !== 'default' || !airplaneReady) return;
     const interval = setInterval(() => {
       setBgFading(true);
       const nextIndex = (bgIndexRef.current + 1) % BG_IMAGES.length;
@@ -81,7 +81,7 @@ export default function StudyView() {
       }, 2200);
     }, 10000);
     return () => clearInterval(interval);
-  }, [viewMode]);
+  }, [viewMode, airplaneReady]);
 
   function handleExit() {
     setIsExiting(true);
