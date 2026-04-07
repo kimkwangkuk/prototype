@@ -41,13 +41,33 @@ export default function StudyView() {
   const [airplaneVisible, setAirplaneVisible] = useState(false);
   const [airplaneReady, setAirplaneReady] = useState(false);
   const bgIndexRef = useRef(0);
+  const airplaneTimerFiredRef = useRef(false);
+  const airplaneImgLoadedRef = useRef(false);
+  const airplaneStartedRef = useRef(false);
 
-  // 배경 페이드인(2.2s) 완료 후 비행기 등장, 비행기 애니메이션(1.1s) 후 fade 제어 활성화
+  function tryStartAirplane() {
+    if (airplaneTimerFiredRef.current && airplaneImgLoadedRef.current && !airplaneStartedRef.current) {
+      airplaneStartedRef.current = true;
+      setAirplaneVisible(true);
+      setTimeout(() => setAirplaneReady(true), 300);
+    }
+  }
+
+  // 비행기 이미지 미리 로드
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => { airplaneImgLoadedRef.current = true; tryStartAirplane(); };
+    img.src = AIRPLANE_IMAGE;
+  }, []);
+
+  // 배경 페이드인(1.6s) 완료 후 비행기 등장 시도
   useEffect(() => {
     if (!bgLoaded) return;
-    const t1 = setTimeout(() => setAirplaneVisible(true), 2200);
-    const t2 = setTimeout(() => setAirplaneReady(true), 2200 + 400);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    const t = setTimeout(() => {
+      airplaneTimerFiredRef.current = true;
+      tryStartAirplane();
+    }, 1600);
+    return () => clearTimeout(t);
   }, [bgLoaded]);
 
   useEffect(() => {
@@ -69,7 +89,7 @@ export default function StudyView() {
     const interval = setInterval(() => {
       setBgFading(true);
       const nextIndex = (bgIndexRef.current + 1) % BG_IMAGES.length;
-      // 페이드 아웃(2.2s) 완료 후 이미지 교체 → 페이드 인
+      // 페이드 아웃(1.6s) 완료 후 이미지 교체 → 페이드 인
       setTimeout(() => {
         const img = new window.Image();
         const applyNext = () => {
@@ -81,7 +101,7 @@ export default function StudyView() {
         img.onload = applyNext;
         img.src = BG_IMAGES[nextIndex];
         if (img.complete) applyNext();
-      }, 2200);
+      }, 1600);
     }, 10000);
     return () => clearInterval(interval);
   }, [viewMode, airplaneReady]);
