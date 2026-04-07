@@ -104,7 +104,7 @@ export default function StudyView() {
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
 
   return (
-    <div className={`study-view${isExiting ? ' exiting' : ''}`}>
+    <div className={`study-view${isExiting ? ' exiting' : ''}${airplaneReady ? ' airplane-ready' : ''}`}>
       <img src={BG_IMAGES[0]} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} />
       {viewMode === 'default' ? (
         <>
