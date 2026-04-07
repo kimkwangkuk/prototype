@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-1fvzszsn5-kimkwangkuks-projects.vercel.app",
+    "message": "design: 뷰 전환 오버레이 대칭(50/50) 1.8s로 통일",
+    "createdAt": 1775536884624,
+    "sha": "8f0d7a2"
+  },
+  {
+    "url": "https://prototype-7h9iu8mg5-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775531715846,
+    "sha": "9fbeaff"
+  },
+  {
     "url": "https://prototype-ifw6tluza-kimkwangkuks-projects.vercel.app",
     "message": "fix: 배경 페이드인 완료 후 비행기 등장, CSS 애니메이션 딜레이 제거",
     "createdAt": 1775531648498,
@@ -286,17 +298,5 @@
     "message": "fix: 뷰모드 전환 오버레이 양방향 모두 어두운색으로 통일",
     "createdAt": 1775133158209,
     "sha": "4adf4d7"
-  },
-  {
-    "url": "https://prototype-pcs1vuqre-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775132894123,
-    "sha": "06ce7b0"
-  },
-  {
-    "url": "https://prototype-inxyjtxec-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 공부 화면 오버레이 초기값 null로 수정 (버튼 클릭 불가 버그)",
-    "createdAt": 1775132826264,
-    "sha": "1cc9cf1"
   }
 ]
