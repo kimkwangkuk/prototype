@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-pfehjvi28-kimkwangkuks-projects.vercel.app",
+    "message": "fix: UI 애니메이션 비행기 등장 중(400ms 후) 시작",
+    "createdAt": 1775549066872,
+    "sha": "c134197"
+  },
+  {
+    "url": "https://prototype-kj2po3s25-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775548554572,
+    "sha": "9d45e38"
+  },
+  {
     "url": "https://prototype-5j5aeo1dl-kimkwangkuks-projects.vercel.app",
     "message": "fix: UI 등장 딜레이 단축 - airplaneReady 타이머 1400ms, UI delay 0s/0.15s",
     "createdAt": 1775548485518,
@@ -286,17 +298,5 @@
     "message": "fix: 비행기 이미지 CSS 크롭 제거, object-fit: contain으로 교체",
     "createdAt": 1775198061961,
     "sha": "fec0a8c"
-  },
-  {
-    "url": "https://prototype-3kk0z64ke-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775197908836,
-    "sha": "ae05a3b"
-  },
-  {
-    "url": "https://prototype-2546mmu6o-kimkwangkuks-projects.vercel.app",
-    "message": "design: 공부화면/비행기/탁상모드 이미지 피그마 최신 리소스로 교체",
-    "createdAt": 1775197840067,
-    "sha": "a2163c0"
   }
 ]
