@@ -8,7 +8,7 @@ const BG_IMAGES = [
 const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/0f2c93ae-2884-4229-8f97-085199f2b2da';
 const MEMBER_ICON = 'https://www.figma.com/api/mcp/asset/b90d4708-0a13-48da-b779-763445e4f462';
 const TABLE_FRAME_IMAGE = 'https://www.figma.com/api/mcp/asset/7f064995-250e-4569-a855-e5ed29c5771d';
-const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/c709279c-860f-42dd-a86f-3cc58e8f8b49';
+const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/c254ddae-0a22-421d-aa40-c7b2a6b6cc2f';
 const IN_FLIGHT_IMAGE = 'https://www.figma.com/api/mcp/asset/397b499c-5912-4d61-87b5-707e2d9b6c77';
 
 const MEMBERS = [
