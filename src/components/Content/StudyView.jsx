@@ -127,7 +127,7 @@ export default function StudyView() {
 
   return (
     <div className={`study-view${isExiting ? ' exiting' : ''}${airplaneReady ? ' airplane-ready' : ''}`}>
-      <img src={BG_IMAGES[0]} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} />
+      <img src={BG_IMAGES[0]} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} onError={() => setBgLoaded(true)} />
       {viewMode === 'default' ? (
         <>
           {/* 배경 이미지 */}
