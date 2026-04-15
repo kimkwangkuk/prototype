@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-ov2pp9cng-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 두 이미지 동시 fadein — inFlightVisible 상태로 동기화",
+    "createdAt": 1776242694733,
+    "sha": "ac5b1f2"
+  },
+  {
+    "url": "https://prototype-258nx7xcj-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776242616102,
+    "sha": "ad25635"
+  },
+  {
     "url": "https://prototype-fgj18s6dn-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 기내 이미지 onLoad 후 fadein — CSS animation → state transition",
     "createdAt": 1776242546162,
@@ -49,7 +61,7 @@
   },
   {
     "url": "https://prototype-4o69hjzba-kimkwangkuks-projects.vercel.app",
-    "message": "design: 공부화면 배경 페��드인 1.6s → 0.8s 통일",
+    "message": "design: 공부화면 배경 페이드인 1.6s → 0.8s 통일",
     "createdAt": 1776241868084,
     "sha": "c8e0306"
   },
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775548554572,
     "sha": "9d45e38"
-  },
-  {
-    "url": "https://prototype-5j5aeo1dl-kimkwangkuks-projects.vercel.app",
-    "message": "fix: UI 등장 딜레이 단축 - airplaneReady 타이머 1400ms, UI delay 0s/0.15s",
-    "createdAt": 1775548485518,
-    "sha": "85de76b"
-  },
-  {
-    "url": "https://prototype-5s7jh84q4-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775547657165,
-    "sha": "81ced06"
   }
 ]
