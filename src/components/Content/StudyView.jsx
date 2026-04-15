@@ -46,6 +46,7 @@ export default function StudyView() {
   const airplaneImgLoadedRef = useRef(false);
   const airplaneStartedRef = useRef(false);
   const inFlightLoadedRef = useRef(false);
+  const landscapeLoadedRef = useRef(false);
 
   function tryStartAirplane() {
     if (airplaneTimerFiredRef.current && airplaneImgLoadedRef.current && !airplaneStartedRef.current) {
@@ -88,6 +89,12 @@ export default function StudyView() {
     inFlightImg.onerror = () => { inFlightLoadedRef.current = true; };
     inFlightImg.src = IN_FLIGHT_IMAGE;
     if (inFlightImg.complete) inFlightLoadedRef.current = true;
+
+    const landscapeImg = new Image();
+    landscapeImg.onload = () => { landscapeLoadedRef.current = true; };
+    landscapeImg.onerror = () => { landscapeLoadedRef.current = true; };
+    landscapeImg.src = LANDSCAPE_IMAGE;
+    if (landscapeImg.complete) landscapeLoadedRef.current = true;
   }, []);
 
   // 10초마다 배경 이미지 순환 (입장 애니메이션 완료 후 시작)
@@ -122,18 +129,24 @@ export default function StudyView() {
     if (viewMode === 'default') {
       setIsLeavingDefault(true);
       let fadeoutDone = false;
-      let imageReady = inFlightLoadedRef.current;
+      let inFlightReady = inFlightLoadedRef.current;
+      let landscapeReady = landscapeLoadedRef.current;
       const trySwitch = () => {
-        if (fadeoutDone && imageReady) {
+        if (fadeoutDone && inFlightReady && landscapeReady) {
           setViewMode('table');
           setIsLeavingDefault(false);
         }
       };
       setTimeout(() => { fadeoutDone = true; trySwitch(); }, 800);
-      if (!imageReady) {
+      if (!inFlightReady) {
         const img = new Image();
-        img.onload = img.onerror = () => { imageReady = true; trySwitch(); };
+        img.onload = img.onerror = () => { inFlightReady = true; trySwitch(); };
         img.src = IN_FLIGHT_IMAGE;
+      }
+      if (!landscapeReady) {
+        const img = new Image();
+        img.onload = img.onerror = () => { landscapeReady = true; trySwitch(); };
+        img.src = LANDSCAPE_IMAGE;
       }
     } else {
       setIsLeavingTable(true);
