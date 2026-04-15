@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-8588q3y7z-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 진입·이탈 트랜지션 추가 및 appbar 애니메이션 명시도 수정",
+    "createdAt": 1776228460911,
+    "sha": "e2aa343"
+  },
+  {
+    "url": "https://prototype-d43i6rhx4-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776225614466,
+    "sha": "4d9aa98"
+  },
+  {
     "url": "https://prototype-9nsqfc7ze-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 기내 이미지 z-index 조정 — frame-area를 inflight-bg 위로",
     "createdAt": 1776225547726,
@@ -253,7 +265,7 @@
   },
   {
     "url": "https://prototype-97j2az42j-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부화면 배경 이미지 10초마다 순환 (페이드 아웃/인 ���환)",
+    "message": "feat: 공부화면 배경 이미지 10초마다 순환 (페이드 아웃/인 전환)",
     "createdAt": 1775441446446,
     "sha": "ef2ae99"
   },
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775200504164,
     "sha": "d9b1f75"
-  },
-  {
-    "url": "https://prototype-by1h70zzr-kimkwangkuks-projects.vercel.app",
-    "message": "design: 앱바로부터 80px 아래 딤드 그라데이션 레이어 추가 (0→40%)",
-    "createdAt": 1775200436882,
-    "sha": "3e06fd1"
-  },
-  {
-    "url": "https://prototype-2n316wqyf-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775199871920,
-    "sha": "e03a4f2"
   }
 ]
