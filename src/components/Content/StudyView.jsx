@@ -35,7 +35,6 @@ export default function StudyView() {
   const [isExiting, setIsExiting] = useState(false);
   const [bgLoaded, setBgLoaded] = useState(false);
   const [viewMode, setViewMode] = useState('default');
-  const [tableLoadedCount, setTableLoadedCount] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
   const [airplaneVisible, setAirplaneVisible] = useState(false);
@@ -113,7 +112,6 @@ export default function StudyView() {
 
   function toggleViewMode() {
     const goingToTable = viewMode === 'default';
-    setTableLoadedCount(0);
     setViewMode(goingToTable ? 'table' : 'default');
   }
 
@@ -265,16 +263,16 @@ export default function StudyView() {
           {/* 기내 배경 이미지 */}
           <img src={IN_FLIGHT_IMAGE} alt="" className="study-table-inflight-bg" />
           {/* 비행기 창문 프레임 영역 */}
-          <div className={`study-table-frame-area${tableLoadedCount >= 2 ? ' loaded' : ''}`}>
+          <div className="study-table-frame-area loaded">
             {/* 풍경 이미지 - 가로 무한 스크롤 */}
             <div className="study-table-landscape-container">
               <div className="study-table-landscape-inner">
-                <img src={LANDSCAPE_IMAGE} alt="" onLoad={() => setTableLoadedCount(c => c + 1)} />
+                <img src={LANDSCAPE_IMAGE} alt="" />
                 <img src={LANDSCAPE_IMAGE} alt="" />
               </div>
             </div>
             {/* 창문 프레임 (위에 올라감) */}
-            <img src={TABLE_FRAME_IMAGE} alt="" className="study-table-frame" onLoad={() => setTableLoadedCount(c => c + 1)} />
+            <img src={TABLE_FRAME_IMAGE} alt="" className="study-table-frame" />
           </div>
 
           {/* 상단 그라데이션 */}
