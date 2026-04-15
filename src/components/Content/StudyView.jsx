@@ -62,13 +62,13 @@ export default function StudyView() {
     img.src = AIRPLANE_IMAGE;
   }, []);
 
-  // 배경 페이드인(1.6s) 완료 후 비행기 등장 시도
+  // 배경 페이드인(0.8s) 완료 후 비행기 등장 시도
   useEffect(() => {
     if (!bgLoaded) return;
     const t = setTimeout(() => {
       airplaneTimerFiredRef.current = true;
       tryStartAirplane();
-    }, 1600);
+    }, 800);
     return () => clearTimeout(t);
   }, [bgLoaded]);
 
@@ -108,7 +108,7 @@ export default function StudyView() {
         img.onload = applyNext;
         img.src = BG_IMAGES[nextIndex];
         if (img.complete) applyNext();
-      }, 1600);
+      }, 800);
     }, 10000);
     return () => clearInterval(interval);
   }, [viewMode, airplaneReady]);

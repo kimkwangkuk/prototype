@@ -4827,7 +4827,7 @@ textarea {
   inset: 0;
   overflow: clip;
   opacity: 0;
-  transition: opacity 1.6s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 .study-bg-inner {
