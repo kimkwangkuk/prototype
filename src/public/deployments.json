@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-aq3rjwv4y-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 UI를 이미지 fadein 완료 후 마운트",
+    "createdAt": 1776251257385,
+    "sha": "3e9dc3f"
+  },
+  {
+    "url": "https://prototype-mfdh1ywhz-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776242763417,
+    "sha": "fa71880"
+  },
+  {
     "url": "https://prototype-ov2pp9cng-kimkwangkuks-projects.vercel.app",
     "message": "design: 탁상모드 두 이미지 동시 fadein — inFlightVisible 상태로 동기화",
     "createdAt": 1776242694733,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775549137487,
     "sha": "4d17ed7"
-  },
-  {
-    "url": "https://prototype-pfehjvi28-kimkwangkuks-projects.vercel.app",
-    "message": "fix: UI 애니메이션 비행기 등장 중(400ms 후) 시작",
-    "createdAt": 1775549066872,
-    "sha": "c134197"
-  },
-  {
-    "url": "https://prototype-kj2po3s25-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775548554572,
-    "sha": "9d45e38"
   }
 ]
