@@ -45,6 +45,7 @@ export default function StudyView() {
   const airplaneTimerFiredRef = useRef(false);
   const airplaneImgLoadedRef = useRef(false);
   const airplaneStartedRef = useRef(false);
+  const inFlightLoadedRef = useRef(false);
 
   function tryStartAirplane() {
     if (airplaneTimerFiredRef.current && airplaneImgLoadedRef.current && !airplaneStartedRef.current) {
@@ -78,10 +79,15 @@ export default function StudyView() {
 
   // 테이블 모드 이미지 미리 로드
   useEffect(() => {
-    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE, IN_FLIGHT_IMAGE, ...BG_IMAGES].forEach(src => {
+    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE, ...BG_IMAGES].forEach(src => {
       const img = new Image();
       img.src = src;
     });
+    const inFlightImg = new Image();
+    inFlightImg.onload = () => { inFlightLoadedRef.current = true; };
+    inFlightImg.onerror = () => { inFlightLoadedRef.current = true; };
+    inFlightImg.src = IN_FLIGHT_IMAGE;
+    if (inFlightImg.complete) inFlightLoadedRef.current = true;
   }, []);
 
   // 10초마다 배경 이미지 순환 (입장 애니메이션 완료 후 시작)
@@ -115,10 +121,20 @@ export default function StudyView() {
   function toggleViewMode() {
     if (viewMode === 'default') {
       setIsLeavingDefault(true);
-      setTimeout(() => {
-        setViewMode('table');
-        setIsLeavingDefault(false);
-      }, 800);
+      let fadeoutDone = false;
+      let imageReady = inFlightLoadedRef.current;
+      const trySwitch = () => {
+        if (fadeoutDone && imageReady) {
+          setViewMode('table');
+          setIsLeavingDefault(false);
+        }
+      };
+      setTimeout(() => { fadeoutDone = true; trySwitch(); }, 800);
+      if (!imageReady) {
+        const img = new Image();
+        img.onload = img.onerror = () => { imageReady = true; trySwitch(); };
+        img.src = IN_FLIGHT_IMAGE;
+      }
     } else {
       setIsLeavingTable(true);
       setTimeout(() => {
