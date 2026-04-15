@@ -263,7 +263,7 @@ export default function StudyView() {
           {/* 기내 배경 이미지 */}
           <img src={IN_FLIGHT_IMAGE} alt="" className="study-table-inflight-bg" />
           {/* 비행기 창문 프레임 영역 */}
-          <div className="study-table-frame-area loaded">
+          <div className="study-table-frame-area">
             {/* 풍경 이미지 - 가로 무한 스크롤 */}
             <div className="study-table-landscape-container">
               <div className="study-table-landscape-inner">
