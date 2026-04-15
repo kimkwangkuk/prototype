@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-k6u3qjldb-kimkwangkuks-projects.vercel.app",
+    "message": "design: 공부→탁상 전환 시 fadeout 0.4s 추가",
+    "createdAt": 1776236395417,
+    "sha": "ed21512"
+  },
+  {
+    "url": "https://prototype-2qkxa41le-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776235867397,
+    "sha": "d0d6704"
+  },
+  {
     "url": "https://prototype-6bgmqe7ru-kimkwangkuks-projects.vercel.app",
     "message": "design: 공부·탁상모드 앱바 트랜지션 제거 — 항상 고정 표시",
     "createdAt": 1776235799243,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775445624720,
     "sha": "e746491"
-  },
-  {
-    "url": "https://prototype-cs9o9wvx2-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 배경/비행기 페이드 전환 - animation fill 충돌 제거, inline opacity+transition으로 교체",
-    "createdAt": 1775445557228,
-    "sha": "317687e"
-  },
-  {
-    "url": "https://prototype-d58ia25zg-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775441629628,
-    "sha": "a377743"
   }
 ]
