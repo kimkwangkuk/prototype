@@ -36,6 +36,7 @@ export default function StudyView() {
   const [bgLoaded, setBgLoaded] = useState(false);
   const [viewMode, setViewMode] = useState('default');
   const [isLeavingTable, setIsLeavingTable] = useState(false);
+  const [isLeavingDefault, setIsLeavingDefault] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
   const [airplaneVisible, setAirplaneVisible] = useState(false);
@@ -113,7 +114,11 @@ export default function StudyView() {
 
   function toggleViewMode() {
     if (viewMode === 'default') {
-      setViewMode('table');
+      setIsLeavingDefault(true);
+      setTimeout(() => {
+        setViewMode('table');
+        setIsLeavingDefault(false);
+      }, 400);
     } else {
       setIsLeavingTable(true);
       setTimeout(() => {
@@ -129,7 +134,7 @@ export default function StudyView() {
     <div className={`study-view${isExiting ? ' exiting' : ''}${airplaneReady ? ' airplane-ready' : ''}`}>
       <img src={BG_IMAGES[0]} alt="" style={{ display: 'none' }} onLoad={() => setBgLoaded(true)} onError={() => setBgLoaded(true)} />
       {viewMode === 'default' ? (
-        <>
+        <div className={`study-default-mode${isLeavingDefault ? ' leaving' : ''}`}>
           {/* 배경 이미지 */}
           <div
             className="study-view-bg"
@@ -264,7 +269,7 @@ export default function StudyView() {
               </div>
             </div>
           </div>
-        </>
+        </div>
       ) : (
         /* 테이블 모드 */
         <div className={`study-table-mode${isLeavingTable ? ' leaving' : ''}`}>
