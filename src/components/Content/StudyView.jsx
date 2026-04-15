@@ -9,6 +9,7 @@ const AIRPLANE_IMAGE = 'https://www.figma.com/api/mcp/asset/0f2c93ae-2884-4229-8
 const MEMBER_ICON = 'https://www.figma.com/api/mcp/asset/b90d4708-0a13-48da-b779-763445e4f462';
 const TABLE_FRAME_IMAGE = 'https://www.figma.com/api/mcp/asset/7f064995-250e-4569-a855-e5ed29c5771d';
 const LANDSCAPE_IMAGE = 'https://www.figma.com/api/mcp/asset/c709279c-860f-42dd-a86f-3cc58e8f8b49';
+const IN_FLIGHT_IMAGE = 'https://www.figma.com/api/mcp/asset/397b499c-5912-4d61-87b5-707e2d9b6c77';
 
 const MEMBERS = [
   { name: '꽃길만걷자', time: '12:23:43' },
@@ -34,7 +35,6 @@ export default function StudyView() {
   const [isExiting, setIsExiting] = useState(false);
   const [bgLoaded, setBgLoaded] = useState(false);
   const [viewMode, setViewMode] = useState('default');
-  const [transitionColor, setTransitionColor] = useState(null);
   const [tableLoadedCount, setTableLoadedCount] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
@@ -77,7 +77,7 @@ export default function StudyView() {
 
   // 테이블 모드 이미지 미리 로드
   useEffect(() => {
-    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE, ...BG_IMAGES].forEach(src => {
+    [TABLE_FRAME_IMAGE, LANDSCAPE_IMAGE, IN_FLIGHT_IMAGE, ...BG_IMAGES].forEach(src => {
       const img = new Image();
       img.src = src;
     });
@@ -113,12 +113,8 @@ export default function StudyView() {
 
   function toggleViewMode() {
     const goingToTable = viewMode === 'default';
-    setTransitionColor('dark');
     setTableLoadedCount(0);
-    setTimeout(() => {
-      setViewMode(goingToTable ? 'table' : 'default');
-      setTimeout(() => setTransitionColor(null), 2400);
-    }, 600);
+    setViewMode(goingToTable ? 'table' : 'default');
   }
 
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
@@ -266,6 +262,8 @@ export default function StudyView() {
       ) : (
         /* 테이블 모드 */
         <div className="study-table-mode">
+          {/* 기내 배경 이미지 */}
+          <img src={IN_FLIGHT_IMAGE} alt="" className="study-table-inflight-bg" />
           {/* 비행기 창문 프레임 영역 */}
           <div className={`study-table-frame-area${tableLoadedCount >= 2 ? ' loaded' : ''}`}>
             {/* 풍경 이미지 - 가로 무한 스크롤 */}
@@ -352,8 +350,6 @@ export default function StudyView() {
           </div>
         </div>
       )}
-      {/* 뷰모드 전환 오버레이 */}
-      {transitionColor && <div className={`study-view-transition-overlay study-view-transition-${transitionColor}`} />}
     </div>
   );
 }
