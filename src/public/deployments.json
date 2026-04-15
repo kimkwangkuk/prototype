@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-9nsqfc7ze-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탁상모드 기내 이미지 z-index 조정 — frame-area를 inflight-bg 위로",
+    "createdAt": 1776225547726,
+    "sha": "4efa226"
+  },
+  {
+    "url": "https://prototype-axd0rebjg-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776218535913,
+    "sha": "a3f6b15"
+  },
+  {
     "url": "https://prototype-pxmutt2ri-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 풍경 프레임 opacity 0 제거 — animation only로 단순화",
     "createdAt": 1776218468808,
@@ -241,7 +253,7 @@
   },
   {
     "url": "https://prototype-97j2az42j-kimkwangkuks-projects.vercel.app",
-    "message": "feat: 공부화면 배경 이미지 10초마다 순환 (페이드 아웃/인 전환)",
+    "message": "feat: 공부화면 배경 이미지 10초마다 순환 (페이드 아웃/인 ���환)",
     "createdAt": 1775441446446,
     "sha": "ef2ae99"
   },
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775199871920,
     "sha": "e03a4f2"
-  },
-  {
-    "url": "https://prototype-rb9muj44n-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 공부화면 배경 이미지 로드 완료 후 페이드인 시작",
-    "createdAt": 1775199803853,
-    "sha": "04b4a49"
-  },
-  {
-    "url": "https://prototype-bgmdo4v47-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775199775202,
-    "sha": "e71d76e"
   }
 ]
