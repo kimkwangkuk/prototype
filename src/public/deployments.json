@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-mt8r69ren-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상→공부 복귀 시 첫 진입과 동일한 시퀀스 재생",
+    "createdAt": 1776242049043,
+    "sha": "e7fdfec"
+  },
+  {
+    "url": "https://prototype-h1yzm6855-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776241936947,
+    "sha": "24af6de"
+  },
+  {
     "url": "https://prototype-4o69hjzba-kimkwangkuks-projects.vercel.app",
     "message": "design: 공부화면 배경 페이드인 1.6s → 0.8s 통일",
     "createdAt": 1776241868084,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775531715846,
     "sha": "9fbeaff"
-  },
-  {
-    "url": "https://prototype-ifw6tluza-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 배경 페이드인 완료 후 비행기 등장, CSS 애니메이션 딜레이 제거",
-    "createdAt": 1775531648498,
-    "sha": "a3d7238"
-  },
-  {
-    "url": "https://prototype-7d8pdx777-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775531191209,
-    "sha": "6771d23"
   }
 ]
