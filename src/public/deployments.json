@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-9imribyx6-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탁상→공부 복귀 시 비행기 재애니메이션 제거 — 즉시 표시",
+    "createdAt": 1776239576068,
+    "sha": "52cc09a"
+  },
+  {
+    "url": "https://prototype-kh3suwm0f-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776236747855,
+    "sha": "8fa1252"
+  },
+  {
     "url": "https://prototype-kvxokz0ke-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 전환 시 IN_FLIGHT_IMAGE 로드 완료 후 진입",
     "createdAt": 1776236680195,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775479888554,
     "sha": "bd102d8"
-  },
-  {
-    "url": "https://prototype-pzarg1lug-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 비행기 페이드 wrapper 분리로 animation fill 충돌 해결, transition 1.8s/1.4s로 연장",
-    "createdAt": 1775479820896,
-    "sha": "f6c2bd0"
-  },
-  {
-    "url": "https://prototype-qjkcn3sjq-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775478811988,
-    "sha": "1b64c94"
   }
 ]
