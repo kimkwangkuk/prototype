@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-pxmutt2ri-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탁상모드 풍경 프레임 opacity 0 제거 — animation only로 단순화",
+    "createdAt": 1776218468808,
+    "sha": "2bb5006"
+  },
+  {
+    "url": "https://prototype-jltu0xoux-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776218150870,
+    "sha": "6b0792b"
+  },
+  {
     "url": "https://prototype-am5tehr87-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 이미지 로딩 게이트 제거 — 항상 loaded 상태로 표시",
     "createdAt": 1776218083560,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775199775202,
     "sha": "e71d76e"
-  },
-  {
-    "url": "https://prototype-d0wv5tjox-kimkwangkuks-projects.vercel.app",
-    "message": "design: 그룹 카드 하단 패딩 12px으로 조정",
-    "createdAt": 1775199707078,
-    "sha": "8d40e2a"
-  },
-  {
-    "url": "https://prototype-g1laj1ird-kimkwangkuks-projects.vercel.app",
-    "message": "design: 비행기 등장 딜레이 1.0s→2.0s, UI 슬라이드업 딜레이도 순차 조정",
-    "createdAt": 1775199658263,
-    "sha": "eeac7ba"
   }
 ]
