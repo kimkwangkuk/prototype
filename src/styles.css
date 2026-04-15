@@ -4645,6 +4645,11 @@ textarea {
   inset: 0;
   background: #000;
   overflow: hidden;
+  animation: study-fadein 0.4s ease both;
+}
+
+.study-table-mode.leaving {
+  animation: study-fadeout 0.4s ease both;
 }
 
 .study-table-inflight-bg {
@@ -4751,6 +4756,9 @@ textarea {
 
 .study-table-appbar {
   z-index: 2;
+  animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+.airplane-ready .study-table-appbar {
   animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
 }
 

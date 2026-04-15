@@ -35,6 +35,7 @@ export default function StudyView() {
   const [isExiting, setIsExiting] = useState(false);
   const [bgLoaded, setBgLoaded] = useState(false);
   const [viewMode, setViewMode] = useState('default');
+  const [isLeavingTable, setIsLeavingTable] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
   const [airplaneVisible, setAirplaneVisible] = useState(false);
@@ -111,8 +112,15 @@ export default function StudyView() {
   }
 
   function toggleViewMode() {
-    const goingToTable = viewMode === 'default';
-    setViewMode(goingToTable ? 'table' : 'default');
+    if (viewMode === 'default') {
+      setViewMode('table');
+    } else {
+      setIsLeavingTable(true);
+      setTimeout(() => {
+        setViewMode('default');
+        setIsLeavingTable(false);
+      }, 400);
+    }
   }
 
   const progress = Math.min(100, (elapsed / (25 * 60)) * 100);
@@ -259,7 +267,7 @@ export default function StudyView() {
         </>
       ) : (
         /* 테이블 모드 */
-        <div className="study-table-mode">
+        <div className={`study-table-mode${isLeavingTable ? ' leaving' : ''}`}>
           {/* 기내 배경 이미지 */}
           <img src={IN_FLIGHT_IMAGE} alt="" className="study-table-inflight-bg" />
           {/* 비행기 창문 프레임 영역 */}
