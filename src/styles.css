@@ -4663,7 +4663,7 @@ textarea {
   height: 100%;
   object-fit: cover;
   z-index: 1;
-  animation: study-fadein 0.8s ease both;
+  transition: opacity 0.8s ease;
 }
 
 /* 창문 프레임 영역 (정사각형, 중앙 정렬) */

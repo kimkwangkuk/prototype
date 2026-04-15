@@ -37,6 +37,7 @@ export default function StudyView() {
   const [viewMode, setViewMode] = useState('default');
   const [isLeavingTable, setIsLeavingTable] = useState(false);
   const [isLeavingDefault, setIsLeavingDefault] = useState(false);
+  const [inFlightVisible, setInFlightVisible] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
   const [airplaneVisible, setAirplaneVisible] = useState(false);
@@ -133,6 +134,7 @@ export default function StudyView() {
       let landscapeReady = landscapeLoadedRef.current;
       const trySwitch = () => {
         if (fadeoutDone && inFlightReady && landscapeReady) {
+          setInFlightVisible(false);
           setViewMode('table');
           setIsLeavingDefault(false);
         }
@@ -309,7 +311,13 @@ export default function StudyView() {
         /* 테이블 모드 */
         <div className={`study-table-mode${isLeavingTable ? ' leaving' : ''}`}>
           {/* 기내 배경 이미지 */}
-          <img src={IN_FLIGHT_IMAGE} alt="" className="study-table-inflight-bg" />
+          <img
+            src={IN_FLIGHT_IMAGE}
+            alt=""
+            className="study-table-inflight-bg"
+            style={{ opacity: inFlightVisible ? 1 : 0 }}
+            onLoad={() => setInFlightVisible(true)}
+          />
           {/* 비행기 창문 프레임 영역 */}
           <div className="study-table-frame-area">
             {/* 풍경 이미지 - 가로 무한 스크롤 */}
