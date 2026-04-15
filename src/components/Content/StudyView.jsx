@@ -138,8 +138,14 @@ export default function StudyView() {
     } else {
       setIsLeavingTable(true);
       setTimeout(() => {
+        setBgLoaded(false);
+        setAirplaneVisible(false);
+        setAirplaneReady(false);
+        airplaneTimerFiredRef.current = false;
+        airplaneStartedRef.current = false;
         setViewMode('default');
         setIsLeavingTable(false);
+        setTimeout(() => setBgLoaded(true), 50);
       }, 800);
     }
   }
