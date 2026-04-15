@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-duuw4y8r7-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탁상모드 진입 트랜지션 — IN_FLIGHT_IMAGE fadein 0.8s 적용",
+    "createdAt": 1776231459781,
+    "sha": "42ee501"
+  },
+  {
+    "url": "https://prototype-a6pwiq78d-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776231031935,
+    "sha": "823ea21"
+  },
+  {
     "url": "https://prototype-ogmzy0ge2-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 레이어 순서 수정 — 풍경 이미지를 기내 이미지 뒤로",
     "createdAt": 1776230963569,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775214822653,
     "sha": "e5ffbaf"
-  },
-  {
-    "url": "https://prototype-fuho3ibcz-kimkwangkuks-projects.vercel.app",
-    "message": "design: 비행기→타이머 등장 간격 단축 (2.4s→2.15s, 2.55s→2.3s)",
-    "createdAt": 1775214755684,
-    "sha": "8f11cb8"
-  },
-  {
-    "url": "https://prototype-kk4wg3j9u-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775207301367,
-    "sha": "72ba93c"
   }
 ]
