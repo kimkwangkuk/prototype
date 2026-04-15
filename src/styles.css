@@ -4645,7 +4645,6 @@ textarea {
   inset: 0;
   background: #000;
   overflow: hidden;
-  animation: study-fadein 0.4s ease both;
 }
 
 .study-table-mode.leaving {
@@ -4659,6 +4658,7 @@ textarea {
   height: 100%;
   object-fit: cover;
   z-index: 1;
+  animation: study-fadein 0.8s ease both;
 }
 
 /* 창문 프레임 영역 (정사각형, 중앙 정렬) */
