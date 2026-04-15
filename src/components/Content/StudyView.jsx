@@ -38,6 +38,7 @@ export default function StudyView() {
   const [isLeavingTable, setIsLeavingTable] = useState(false);
   const [isLeavingDefault, setIsLeavingDefault] = useState(false);
   const [inFlightVisible, setInFlightVisible] = useState(false);
+  const [tableUIReady, setTableUIReady] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
   const [airplaneVisible, setAirplaneVisible] = useState(false);
@@ -97,6 +98,13 @@ export default function StudyView() {
     landscapeImg.src = LANDSCAPE_IMAGE;
     if (landscapeImg.complete) landscapeLoadedRef.current = true;
   }, []);
+
+  // 기내 이미지 페이드인(0.8s) 완료 후 UI 표시
+  useEffect(() => {
+    if (!inFlightVisible) { setTableUIReady(false); return; }
+    const t = setTimeout(() => setTableUIReady(true), 800);
+    return () => clearTimeout(t);
+  }, [inFlightVisible]);
 
   // 10초마다 배경 이미지 순환 (입장 애니메이션 완료 후 시작)
   useEffect(() => {
@@ -335,16 +343,16 @@ export default function StudyView() {
           <div className="study-table-gradient-bottom" />
 
           {/* 앱바 */}
-          <div className="study-appbar study-table-appbar">
+          {tableUIReady && <div className="study-appbar study-table-appbar">
             <button className="study-appbar-btn" onClick={toggleViewMode}><HamburgerIcon /></button>
             <div className="study-appbar-icons" style={{ opacity: 0 }}>
               <button className="study-appbar-btn"><DotsIcon /></button>
               <button className="study-appbar-btn"><DotsIcon /></button>
             </div>
-          </div>
+          </div>}
 
           {/* 하단 컨텐츠 */}
-          <div className="study-table-bottom">
+          {tableUIReady && <div className="study-table-bottom">
             {/* 좌측: 타이머 */}
             <div className="study-table-time-left">
               <div className="study-table-time-main">
@@ -399,7 +407,7 @@ export default function StudyView() {
                 </button>
               </div>
             </div>
-          </div>
+          </div>}
         </div>
       )}
     </div>
