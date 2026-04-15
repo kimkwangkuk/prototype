@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-n30x4fhid-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 진입·이탈 트랜지션 0.8s로 통일",
+    "createdAt": 1776236500441,
+    "sha": "a4f6f0f"
+  },
+  {
+    "url": "https://prototype-oots2xw7j-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776236465133,
+    "sha": "bbe163b"
+  },
+  {
     "url": "https://prototype-k6u3qjldb-kimkwangkuks-projects.vercel.app",
     "message": "design: 공부→탁상 전환 시 fadeout 0.4s 추가",
     "createdAt": 1776236395417,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775453460744,
     "sha": "2547788"
-  },
-  {
-    "url": "https://prototype-6f071mphm-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 비행기 페이드 setTimeout으로 안정화, 전환 duration 연장 (1.2s/1.0s)",
-    "createdAt": 1775453391310,
-    "sha": "52bfea8"
-  },
-  {
-    "url": "https://prototype-j512gpawt-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775445624720,
-    "sha": "e746491"
   }
 ]
