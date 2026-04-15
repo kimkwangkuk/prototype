@@ -37,6 +37,7 @@ export default function StudyView() {
   const [viewMode, setViewMode] = useState('default');
   const [isLeavingTable, setIsLeavingTable] = useState(false);
   const [isLeavingDefault, setIsLeavingDefault] = useState(false);
+  const [wasInTableMode, setWasInTableMode] = useState(false);
   const [bgIndex, setBgIndex] = useState(0);
   const [bgFading, setBgFading] = useState(false);
   const [airplaneVisible, setAirplaneVisible] = useState(false);
@@ -138,6 +139,7 @@ export default function StudyView() {
     } else {
       setIsLeavingTable(true);
       setTimeout(() => {
+        setWasInTableMode(true);
         setViewMode('default');
         setIsLeavingTable(false);
       }, 800);
@@ -180,7 +182,7 @@ export default function StudyView() {
               className="study-view-airplane-wrap"
               style={airplaneReady ? { opacity: bgFading ? 0 : 1 } : undefined}
             >
-              <div className="study-view-airplane">
+              <div className={`study-view-airplane${wasInTableMode ? ' instant' : ''}`}>
                 <img src={AIRPLANE_IMAGE} alt="" />
               </div>
             </div>

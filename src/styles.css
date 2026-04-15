@@ -4863,6 +4863,11 @@ textarea {
   height: 100%;
   animation: study-airplane-slideup 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+.study-view-airplane.instant {
+  animation: none;
+  opacity: 1;
+  transform: none;
+}
 
 .study-view-airplane img {
   width: 100%;
