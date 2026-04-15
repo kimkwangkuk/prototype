@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-fgj18s6dn-kimkwangkuks-projects.vercel.app",
+    "message": "fix: 탁상모드 기내 이미지 onLoad 후 fadein — CSS animation → state transition",
+    "createdAt": 1776242546162,
+    "sha": "1f1987e"
+  },
+  {
+    "url": "https://prototype-q0v8mwc85-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776242401817,
+    "sha": "442b5fc"
+  },
+  {
     "url": "https://prototype-34udr8zzo-kimkwangkuks-projects.vercel.app",
     "message": "design: 탁상모드 UI를 기내 이미지 fadein(0.8s) 후 등장하도록 delay 추가",
     "createdAt": 1776242332558,
@@ -37,7 +49,7 @@
   },
   {
     "url": "https://prototype-4o69hjzba-kimkwangkuks-projects.vercel.app",
-    "message": "design: 공부화면 배경 페이드인 1.6s → 0.8s 통일",
+    "message": "design: 공부화면 배경 페��드인 1.6s → 0.8s 통일",
     "createdAt": 1776241868084,
     "sha": "c8e0306"
   },
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775547657165,
     "sha": "81ced06"
-  },
-  {
-    "url": "https://prototype-hkehsafgy-kimkwangkuks-projects.vercel.app",
-    "message": "fix: UI 애니메이션을 비행기 완료(airplaneReady) 후 순차 등장으로 변경",
-    "createdAt": 1775547588615,
-    "sha": "79ecf3c"
-  },
-  {
-    "url": "https://prototype-azipbeguk-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775546549526,
-    "sha": "81d4bb1"
   }
 ]
