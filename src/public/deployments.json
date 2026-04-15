@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-34udr8zzo-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 UI를 기내 이미지 fadein(0.8s) 후 등장하도록 delay 추가",
+    "createdAt": 1776242332558,
+    "sha": "563233d"
+  },
+  {
+    "url": "https://prototype-khm0dp3od-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776242323523,
+    "sha": "5cd3c0f"
+  },
+  {
     "url": "https://prototype-kmewm8ht3-kimkwangkuks-projects.vercel.app",
     "message": "fix: 탁상모드 진입 시 IN_FLIGHT + LANDSCAPE 모두 로드 후 전환",
     "createdAt": 1776242254130,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775546549526,
     "sha": "81d4bb1"
-  },
-  {
-    "url": "https://prototype-hhz52rzan-kimkwangkuks-projects.vercel.app",
-    "message": "fix: 비행기 슬라이드업 overflow:hidden 제거, 거리 60px·1.4s로 확대",
-    "createdAt": 1775546481186,
-    "sha": "b0a3467"
-  },
-  {
-    "url": "https://prototype-g68u0ig9i-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775536954258,
-    "sha": "6c0b6f8"
   }
 ]
