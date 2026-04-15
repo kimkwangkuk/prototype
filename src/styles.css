@@ -4583,7 +4583,7 @@ textarea {
   inset: 0;
 }
 .study-default-mode.leaving {
-  animation: study-fadeout 0.4s ease both;
+  animation: study-fadeout 0.8s ease both;
 }
 
 .study-view {
@@ -4653,7 +4653,7 @@ textarea {
 }
 
 .study-table-mode.leaving {
-  animation: study-fadeout 0.4s ease both;
+  animation: study-fadeout 0.8s ease both;
 }
 
 .study-table-inflight-bg {

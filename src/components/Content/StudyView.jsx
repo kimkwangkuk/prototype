@@ -118,13 +118,13 @@ export default function StudyView() {
       setTimeout(() => {
         setViewMode('table');
         setIsLeavingDefault(false);
-      }, 400);
+      }, 800);
     } else {
       setIsLeavingTable(true);
       setTimeout(() => {
         setViewMode('default');
         setIsLeavingTable(false);
-      }, 400);
+      }, 800);
     }
   }
 
