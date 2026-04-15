@@ -4761,6 +4761,7 @@ textarea {
 
 .study-table-appbar {
   z-index: 2;
+  animation: study-fadein 0.4s ease 0.8s both;
 }
 
 .study-table-bottom {
@@ -4774,7 +4775,7 @@ textarea {
   justify-content: space-between;
   padding: 0 20px;
   padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
-  animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+  animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both;
 }
 
 .study-table-time-left {
