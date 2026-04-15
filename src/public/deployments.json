@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-qi58gu80m-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 기내 배경이미지 추가 및 전환 오버레이 제거",
+    "createdAt": 1776217276208,
+    "sha": "e4ab05e"
+  },
+  {
+    "url": "https://prototype-gp7tx15as-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1775561464950,
+    "sha": "143700f"
+  },
+  {
     "url": "https://prototype-o2e57fpu6-kimkwangkuks-projects.vercel.app",
     "message": "design: 집중모드 전환 오버레이 페이드아웃 2.4s로 연장 (총 3s)",
     "createdAt": 1775561396981,
@@ -286,17 +298,5 @@
     "message": "design: 그룹 카드 남은 높이 채우도록 flex: 1 적용",
     "createdAt": 1775198912116,
     "sha": "6ada094"
-  },
-  {
-    "url": "https://prototype-h7lbmn18v-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775198804693,
-    "sha": "ca68833"
-  },
-  {
-    "url": "https://prototype-40m4tt4ve-kimkwangkuks-projects.vercel.app",
-    "message": "design: 타이머 텍스트에 text-shadow 0px 0px 4px rgba(0,0,0,0.3) 추가",
-    "createdAt": 1775198737161,
-    "sha": "0b366d2"
   }
 ]
