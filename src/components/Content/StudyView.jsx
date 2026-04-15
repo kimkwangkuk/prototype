@@ -279,8 +279,6 @@ export default function StudyView() {
                 <img src={LANDSCAPE_IMAGE} alt="" />
               </div>
             </div>
-            {/* 창문 프레임 (위에 올라감) */}
-            <img src={TABLE_FRAME_IMAGE} alt="" className="study-table-frame" />
           </div>
 
           {/* 상단 그라데이션 */}
