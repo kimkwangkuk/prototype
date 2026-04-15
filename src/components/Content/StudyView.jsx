@@ -319,7 +319,7 @@ export default function StudyView() {
             onLoad={() => setInFlightVisible(true)}
           />
           {/* 비행기 창문 프레임 영역 */}
-          <div className="study-table-frame-area">
+          <div className="study-table-frame-area" style={{ opacity: inFlightVisible ? 1 : 0 }}>
             {/* 풍경 이미지 - 가로 무한 스크롤 */}
             <div className="study-table-landscape-container">
               <div className="study-table-landscape-inner">

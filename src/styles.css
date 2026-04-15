@@ -4675,7 +4675,7 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;
-  animation: study-fadein 0.7s ease both;
+  transition: opacity 0.8s ease;
 }
 
 /* 풍경 이미지 - 창문 위치에 클리핑 */
