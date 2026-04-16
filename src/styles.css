@@ -4774,7 +4774,7 @@ textarea {
   justify-content: space-between;
   padding: 0 20px;
   padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
-  animation: study-slideup 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  animation: study-slideup 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
 .study-table-time-left {
@@ -4900,7 +4900,7 @@ textarea {
   opacity: 0;
 }
 .airplane-ready .study-time-section {
-  animation: study-slideup 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0s both;
+  animation: study-slideup 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0s both;
 }
 
 .study-time-left {
@@ -5090,7 +5090,7 @@ textarea {
   padding: 0 12px;
 }
 .airplane-ready .study-cards-wrapper {
-  animation: study-slideup 1.0s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  animation: study-slideup 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
 .study-glass-card {
