@@ -4761,7 +4761,6 @@ textarea {
 
 .study-table-appbar {
   z-index: 2;
-  animation: study-fadein 0.4s ease both;
 }
 
 .study-table-bottom {
