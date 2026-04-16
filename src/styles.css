@@ -4855,7 +4855,7 @@ textarea {
   width: 120px;
   height: 120px;
   z-index: 2;
-  transition: opacity 1.6s ease-in-out;
+  transition: opacity 0.8s ease-in-out;
 }
 
 /* 슬라이드업 애니메이션은 inner에만 */
