@@ -1,5 +1,17 @@
 [
   {
+    "url": "https://prototype-pysg62mxc-kimkwangkuks-projects.vercel.app",
+    "message": "design: 탁상모드 앱바 진입 트랜지션 제거",
+    "createdAt": 1776301982779,
+    "sha": "952d68c"
+  },
+  {
+    "url": "https://prototype-o1lrjeu8y-kimkwangkuks-projects.vercel.app",
+    "message": "chore: update deployments.json [skip ci]",
+    "createdAt": 1776299482532,
+    "sha": "d5e6d5d"
+  },
+  {
     "url": "https://prototype-gqmfmmiwi-kimkwangkuks-projects.vercel.app",
     "message": "design: 시간대 변경 시 비행기 페이드 속도 배경과 동일하게 0.8s로 통일",
     "createdAt": 1776299414073,
@@ -286,17 +298,5 @@
     "message": "chore: update deployments.json [skip ci]",
     "createdAt": 1775554784916,
     "sha": "e8c7f4b"
-  },
-  {
-    "url": "https://prototype-eyqtcnbsf-kimkwangkuks-projects.vercel.app",
-    "message": "design: 최초 등장 속도 개선 및 비행기 이미지 로드 후 애니메이션 시작",
-    "createdAt": 1775554716496,
-    "sha": "02f02be"
-  },
-  {
-    "url": "https://prototype-1gah99zkx-kimkwangkuks-projects.vercel.app",
-    "message": "chore: update deployments.json [skip ci]",
-    "createdAt": 1775549741481,
-    "sha": "f569890"
   }
 ]
